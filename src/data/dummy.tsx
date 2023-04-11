@@ -366,6 +366,9 @@ export const barCustomSeries = [
     },
   },
 ];
+
+
+
 export const colorMappingData = [
   [
     { x: "Jan", y: 6.96 },
@@ -386,25 +389,40 @@ export const colorMappingData = [
   ["#FF4040"],
 ];
 
-export const rangeColorMapping = [
-  { label: "1°C to 10°C", start: "1", end: "10", colors: colorMappingData[1] },
+
+type ColorMappingDataType={
+  label: string;
+    start: number;
+    end: number;
+    colors: string[] | undefined;
+}[]
+export const rangeColorMapping: ColorMappingDataType = [
+  { label: "1°C to 10°C", start: 1, end: 10, colors: [String(colorMappingData[1])] },
 
   {
     label: "11°C to 20°C",
-    start: "11",
-    end: "20",
-    colors: colorMappingData[2],
+    start: 11,
+    end: 20,
+    colors: [String(colorMappingData[2])],
   },
 
   {
     label: "21°C to 30°C",
-    start: "21",
-    end: "30",
-    colors: colorMappingData[3],
+    start: 21,
+    end: 30,
+    colors: [String(colorMappingData[3])],
   },
 ];
 
-export const ColorMappingPrimaryXAxis = {
+
+type ColorMappingXAxisType ={
+  valueType: ValueType| undefined;
+    majorGridLines: {
+        width: number;
+    };
+    title: string;
+}
+export const ColorMappingPrimaryXAxis: ColorMappingXAxisType = {
   valueType: "Category",
   majorGridLines: { width: 0 },
   title: "Months",

@@ -52,10 +52,6 @@ export const links: LinksType = [
     title: "Apps",
     links: [
       {
-        name: "calendar",
-        icon: <AiOutlineCalendar />,
-      },
-      {
         name: "kanban",
         icon: <BsKanban />,
       },

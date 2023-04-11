@@ -15,7 +15,6 @@ import {
   Bar,
   Pie,
   Financial,
-  ColorPicker,
   ColorMapping,
   Editor,
 } from "./pages";
@@ -133,7 +132,6 @@ function App() {
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />
                 <Route path="/editor" element={<Editor />} />
-                <Route path="/color-picker" element={<ColorPicker />} />
 
                 {/* charts  */}
                 <Route path="/line" element={<Line />} />

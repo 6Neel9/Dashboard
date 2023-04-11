@@ -2,7 +2,6 @@ export { default as Home } from "./Home";
 export { default as Kanban } from "./Kanban";
 export { default as Drivers } from "./Drivers";
 export { default as Editor } from "./Editor";
-export { default as ColorPicker } from "./ColorPicker";
 export { default as Area } from "./Charts/Area";
 export { default as Bar } from "./Charts/Bar";
 export { default as ColorMapping } from "./Charts/ColorMapping";

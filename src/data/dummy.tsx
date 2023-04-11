@@ -218,7 +218,13 @@ export const areaPrimaryYAxis: AreaYAxisType = {
   minorTickLines: { width: 0 },
   labelStyle: { color: "gray" },
 };
-export const barPrimaryXAxis = {
+
+type BarXAxisType ={
+  valueType: ValueType|undefined,
+  interval: number,
+  majorGridLines: { width: number }
+}
+export const barPrimaryXAxis: BarXAxisType = {
   valueType: "Category",
   interval: 1,
   majorGridLines: { width: 0 },

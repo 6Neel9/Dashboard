@@ -72,7 +72,7 @@ const Drivers = ({ data }: any) => {
     if (grid && args.item.id === "grid_excelexport") {
       const excelExportProperties: ExcelExportProperties = {
         fileName: "DriverDetails.xlsx",
-      };
+      };  
       grid.excelExport(excelExportProperties);
     }
   };
@@ -167,7 +167,7 @@ const Drivers = ({ data }: any) => {
         toolbar={toolbarOptions}
         filterSettings={filterOptions}
         allowExcelExport={true}
-        // toolbarClick={toolbarClick}
+        toolbarClick={toolbarClick}
         ref={g => grid = g}
       >
         <ColumnsDirective>

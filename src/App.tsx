@@ -22,7 +22,7 @@ import {
 } from "./pages";
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
-import { BrowserRouter,  Route , Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 // type DriverDataType = {
@@ -58,7 +58,12 @@ function App() {
     setThemeSettings,
   } = useStateContext();
 
+
+
   const [data, setData] = useState<any>([]);
+
+
+
   useEffect(() => {
     fetch("http://localhost:5000/test", {
       method: "GET",
@@ -68,6 +73,8 @@ function App() {
         setData(i.data);
       });
   }, []);
+
+
 
   useEffect(() => {
     const currentThemeColor = localStorage.getItem("colorMode");

@@ -1,6 +1,5 @@
 import { FiHome, FiEdit, FiPieChart } from "react-icons/fi";
 import {
-  AiOutlineCalendar,
   AiOutlineAreaChart,
   AiOutlineBarChart,
   AiOutlineStock,

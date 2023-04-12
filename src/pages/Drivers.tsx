@@ -24,7 +24,6 @@ import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 
 
-
 const Drivers = ({ data }: any) => {
 
   type DriverDataType = {

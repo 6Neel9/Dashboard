@@ -32,7 +32,7 @@ import { TiTick } from "react-icons/ti";
 import { GiLouvrePyramid } from "react-icons/gi";
 import { GrLocation } from "react-icons/gr";
 
-import { ChartRangePadding, EdgeLabelPlacement, IntervalType, ValueType } from "@syncfusion/ej2-react-charts";
+import { ChartRangePadding, EdgeLabelPlacement, IntervalType, LabelIntersectAction, ValueType } from "@syncfusion/ej2-react-charts";
 
 export const gridOrderImage = (props: any): JSX.Element => (
   <div>
@@ -1284,7 +1284,28 @@ export const stackedCustomSeries = [
   },
 ];
 
-export const stackedPrimaryXAxis = {
+
+type StackedPrimaryXAxisType={
+  majorGridLines: {
+      width: number;
+  };
+  minorGridLines: {
+      width: number;
+  };
+  majorTickLines: {
+      width: number;
+  };
+  minorTickLines: {
+      width: number;
+  };
+  interval: number;
+  lineStyle: {
+      width: number;
+  };
+  labelIntersectAction: LabelIntersectAction | undefined;
+  valueType: ValueType|undefined;
+}
+export const stackedPrimaryXAxis: StackedPrimaryXAxisType = {
   majorGridLines: { width: 0 },
   minorGridLines: { width: 0 },
   majorTickLines: { width: 0 },

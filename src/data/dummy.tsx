@@ -436,7 +436,19 @@ export const ColorMappingPrimaryYAxis = {
   title: "Temperature",
 };
 
-export const FinancialPrimaryXAxis = {
+
+type FinancialXAxisType = {
+  valueType: ValueType|undefined;
+  minimum: Date;
+  maximum: Date;
+  crosshairTooltip: {
+      enable: boolean;
+  };
+  majorGridLines: {
+      width: number;
+  };
+}
+export const FinancialPrimaryXAxis: FinancialXAxisType = {
   valueType: "DateTime",
   minimum: new Date("2016, 12, 31"),
   maximum: new Date("2017, 9, 30"),

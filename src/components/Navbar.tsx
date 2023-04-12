@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { FiShoppingCart } from "react-icons/fi";
-import { BsChatLeft } from "react-icons/bs";
-import { RiNotification3Line } from "react-icons/ri";
-import { MdKeyboardArrowDown } from "react-icons/md";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-
 import { useStateContext } from "../contexts/ContextProvider";
 
-const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
+type ButtonPropType={
+  title?: string,
+  customFunc: () => void| undefined,
+  icon?: JSX.Element,
+  color?: string,
+  dotColor?: string
+}
+
+const NavButton = ({ title, customFunc, icon, color, dotColor }: ButtonPropType) => (
   <TooltipComponent content={title} position="BottomCenter">
     <button
       type="button"
@@ -47,7 +50,7 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
-    if (screenSize <= 900) {
+    if (Number(screenSize) <= 900) {
       setActiveMenu(false);
     } else {
       setActiveMenu(true);

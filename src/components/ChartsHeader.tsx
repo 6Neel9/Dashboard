@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChartsHeader = ({ category, title }) => (
+const ChartsHeader = ({ category, title }: {category?:string, title?:string}) => (
   <div className=" mb-10">
     <div>
       <p className="text-lg text-gray-400">Chart</p>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
 import {
   GridComponent,
@@ -15,13 +16,54 @@ import {
   Grid,
   FilterSettingsModel,
   ToolbarItems,
-  ExcelExportProperties
+  ExcelExportProperties,
+
 } from "@syncfusion/ej2-react-grids";
+import CSS from 'csstype';
 
 // import { employeesData, employeesGrid } from "../data/dummy";
 import { driverGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
+
+
+// const dropdown: CSS.Properties = {
+//   position: 'relative',
+//   display: 'inline-block',
+// };
+
+// const dropbtn: CSS.Properties = {
+//   backgroundColor: "green",
+//   color: 'white',
+//   padding: '16px',
+//   fontSize: '16px',
+//   border: 'none',
+// };
+// const dropdowncontent: CSS.Properties = {
+//   display: "none",
+//   position: 'absolute',
+//   backgroundColor: 'white',
+//   minWidth: '160px',
+//   boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+//   zIndex: '1',
+// }
+// const dropdowncontenta: CSS.Properties = {
+//   color: "black",
+//   padding: "12px 16px",
+//   textDecoration: "none",
+//   display: "block",
+// }
+
+// const HoverButton = () => {
+//   return (<div style={dropdown}>
+//     <button style={dropbtn}>Dropdown</button>
+//     <div style={dropdowncontent}>
+//       <a href="#" style={dropdowncontenta}>Link 1</a>
+//       <a href="#" style={dropdowncontenta}>Link 2</a>
+//       <a href="#" style={dropdowncontenta}>Link 3</a>
+//     </div>
+//   </div>)
+// }
 
 
 const Drivers = ({ data }: any) => {
@@ -48,7 +90,7 @@ const Drivers = ({ data }: any) => {
         },
       },
     ],
-  
+
   };
   type DriverDataType2 = {
     srno?: Number,
@@ -59,9 +101,9 @@ const Drivers = ({ data }: any) => {
     working?: String,
     trips?: Number,
   }[];
-  
-  const toolbarOptions: ToolbarItems[] = ["Search", "ExcelExport"];
-  const editing: EditSettingsModel = { allowDeleting: true, allowEditing: true };
+
+  const toolbarOptions: ToolbarItems[] = ['Search', 'ExcelExport'];
+  const editing: EditSettingsModel = {  allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
   const [driverData, setDriverData] = useState<DriverDataType2>([]);
   const pageSettings: PageSettingsModel = { pageSize: 10, pageCount: 5 }
   const filterOptions: FilterSettingsModel = { type: "Menu" }
@@ -71,10 +113,20 @@ const Drivers = ({ data }: any) => {
     if (grid && args.item.id === "grid_excelexport") {
       const excelExportProperties: ExcelExportProperties = {
         fileName: "DriverDetails.xlsx",
-      };  
+      };
       grid.excelExport(excelExportProperties);
     }
   };
+
+  const rowSelected = () => {
+    if (grid) {
+      /** Get the selected row indexes */
+      const selectedrowindex: number[] = grid.getSelectedRowIndexes();
+      /** Get the selected records. */
+      const selectedrecords: object[] = grid.getSelectedRecords();
+      alert(selectedrowindex + " : " + JSON.stringify(selectedrecords));
+    }
+  }
 
   type tripType = {
     tid: Number,
@@ -130,6 +182,8 @@ const Drivers = ({ data }: any) => {
     return res;
   }
 
+
+
   useEffect(() => {
     var dvr_data: object[] = [];
     var srno: number = 1;
@@ -143,6 +197,7 @@ const Drivers = ({ data }: any) => {
         working: e.working ? "Working" : "Not Working",
         trips: TotalTrips(e.trips),
         revenue: "₹ " + numberFormat(String(TotalRevenue(e.trips))),
+
       };
       dvr_data.push(temp);
       srno += 1;
@@ -150,6 +205,8 @@ const Drivers = ({ data }: any) => {
     setDriverData(dvr_data);
     console.log(dvr_data);
   }, [data]);
+
+
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white dark:text-white dark:bg-secondary-dark-bg rounded-3xl">
@@ -167,10 +224,11 @@ const Drivers = ({ data }: any) => {
         filterSettings={filterOptions}
         allowExcelExport={true}
         toolbarClick={toolbarClick}
+        rowSelected={rowSelected}
         ref={g => grid = g}
       >
         <ColumnsDirective>
-          {driverGrid.map((item : dataGridType, index : any) => (
+          {driverGrid.map((item: dataGridType, index: any) => (
             <ColumnDirective key={index} {...item} />
           ))}
         </ColumnsDirective>

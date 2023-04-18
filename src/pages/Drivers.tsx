@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   GridComponent,
   Inject,
@@ -67,6 +68,7 @@ import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 
 
 const Drivers = ({ data }: any) => {
+  const navigate = useNavigate();
 
   type DriverDataType = {
     did: Number,
@@ -103,7 +105,7 @@ const Drivers = ({ data }: any) => {
   }[];
 
   const toolbarOptions: ToolbarItems[] = ['Search', 'ExcelExport'];
-  const editing: EditSettingsModel = {  allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
+  // const editing: EditSettingsModel = {  allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
   const [driverData, setDriverData] = useState<DriverDataType2>([]);
   const pageSettings: PageSettingsModel = { pageSize: 10, pageCount: 5 }
   const filterOptions: FilterSettingsModel = { type: "Menu" }
@@ -123,8 +125,14 @@ const Drivers = ({ data }: any) => {
       /** Get the selected row indexes */
       const selectedrowindex: number[] = grid.getSelectedRowIndexes();
       /** Get the selected records. */
-      const selectedrecords: object[] = grid.getSelectedRecords();
-      alert(selectedrowindex + " : " + JSON.stringify(selectedrecords));
+      const selectedrecords: any = grid.getSelectedRecords();
+
+      alert(JSON.stringify(selectedrecords[0]['did']))
+      const dr_id = Number(JSON.stringify(selectedrecords[0]['did']))
+      console.log(JSON.stringify(selectedrecords[0]['did']))
+      console.log(dr_id)
+      navigate("/driverView", {state:{dr_id :Number(JSON.stringify(selectedrecords[0]['did']))}})
+      // alert(selectedrowindex + " : " + JSON.stringify(selectedrecords));
     }
   }
 
@@ -203,7 +211,6 @@ const Drivers = ({ data }: any) => {
       srno += 1;
     });
     setDriverData(dvr_data);
-    console.log(dvr_data);
   }, [data]);
 
 
@@ -219,7 +226,7 @@ const Drivers = ({ data }: any) => {
         allowSorting={true}
         allowFiltering={true}
         pageSettings={pageSettings}
-        editSettings={editing}
+        // editSettings={editing}
         toolbar={toolbarOptions}
         filterSettings={filterOptions}
         allowExcelExport={true}

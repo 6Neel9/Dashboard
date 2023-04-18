@@ -21,6 +21,8 @@ import {
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import DriverUpdate from './pages/DiverUpdate/DriverUpdate';
+import ViewDriver from './pages/ViewDriver/ViewDriver';
 
 
 // type DriverDataType = {
@@ -128,6 +130,9 @@ function App() {
 
                 {/* pages  */}
                 <Route path="/driversList" element={<Drivers data={data} />} />
+                <Route path="/driverUpdate" element={<DriverUpdate  />} />
+                <Route path="/driverView" element={<ViewDriver data={data} />} />
+              
 
                 {/* apps  */}
                 <Route path="/kanban" element={<Kanban />} />

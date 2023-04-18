@@ -1,0 +1,101 @@
+.space{
+  margin-top: 2%; 
+}
+
+.upper{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  .myform{
+    width: 30%;
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 2%;
+  }
+
+  .details{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    
+    span{
+      font-weight: bolder;
+    }
+    .moreDetail{
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      .bold{
+        font-weight: bolder;
+      }
+      .right{
+        margin-left: 2%;
+      }
+    }
+  }
+}
+
+.mainWrapper{
+  position: absolute;
+  width:  800%;
+  margin-left: 10%;
+  border-radius: 12px;
+  overflow-x: hidden;
+  margin-top: 2%;
+  border: 5px solid gray;
+  padding: 1%;
+}
+
+
+.chartWrapper {
+  
+  position: relative;
+  overflow-x: auto;
+   left: 0;
+    top: 0;
+  // width: 80%;
+  // margin-left: 10%;
+  // border-radius: 8px;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+}
+
+.chartAreaWrapper {
+  width: 15000px;
+  overflow-x: auto;
+  
+}
+
+.chartAreaWrapper.chart {
+    position: absolute;
+   
+    pointer-events: none;
+  }
+
+
+// .overlap{
+//   width: 15000px;
+//     // background-color: blue;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     pointer-events: none;
+//     overflow-x: hidden;
+   
+// }
+
+
+// .hideme{
+//   width: 12000px;
+//   height: 400px;
+// }
+
+
+.updateBtn{
+  width: 10%;
+  height: 20%;
+  display: flex;
+}

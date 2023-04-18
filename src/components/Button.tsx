@@ -4,14 +4,14 @@ import { useStateContext } from '../contexts/ContextProvider';
 
 type props ={
   prop:{
-  icon: JSX.Element|undefined,
-  bgColor: string,
-  color: string, 
-  bgHoverColor: string,
-  size:string, 
-  text: string, 
-  borderRadius: string, 
-  width: number|undefined,
+  icon?: JSX.Element|undefined,
+  bgColor?: string,
+  color?: string, 
+  bgHoverColor?: string,
+  size?:string, 
+  text?: string, 
+  borderRadius?: string, 
+  width?: number|undefined,
   }
 }
 

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./driverDetails.scss";
+import { Button } from "../../components";
+import { useStateContext } from "../../contexts/ContextProvider";
 
 type DriverDataType = {
     _id: String;
@@ -41,6 +43,8 @@ type TempObjType = {
 };
 
 const ViewDriver = ({ data }: any) => {
+
+    const { currentColor, currentMode } = useStateContext();
     const navigate = useNavigate();
     const location = useLocation();
     // const [allData, setAllData] = useState([]);
@@ -72,22 +76,22 @@ const ViewDriver = ({ data }: any) => {
 
     const handleClick = () => {
         navigate("/driverUpdate", { state: updateData });
-        console.log("update");
+        // console.log("update");
     };
 
 
-     useEffect(() => {
-        console.log(dr_id)
+    useEffect(() => {
+        // console.log(dr_id)
         fetchData(dr_id);
         // setAllData(data);
     }, []);
 
-    const fetchData =(drid:number) => {
+    const fetchData = (drid: number) => {
         data.forEach((d: DriverDataType) => {
             // console.log(d)
-            console.log(drid)
+            // console.log(drid)
             if (d.did === Number(drid)) {
-                
+
                 var obj: TempObjType = {
                     id: d._id,
                     tripsArr: d.trips,
@@ -105,6 +109,24 @@ const ViewDriver = ({ data }: any) => {
             }
         });
     };
+
+    const buttonProps = {
+        color: "white",
+        bgColor: currentColor,
+        borderRadius: "10px",
+        icon: undefined,
+        bgHoverColor: "",
+        size: "",
+        width: undefined
+    }
+    const buttonProps1 = {
+        ...buttonProps,
+        text: "Update",
+    }
+    const buttonProps2 = {
+        ...buttonProps,
+        text: "Back",
+    }
 
 
     const TotalTrips = (trips: any) => {
@@ -127,59 +149,69 @@ const ViewDriver = ({ data }: any) => {
         <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
             <div className="details">
                 <h1 className="text-black font-extrabold text-4xl dark:text-white">Driver Info:</h1>
-
-                <div className="moreDetail">
-                    <div className="left">
-                        <table className="table table-striped">
+                <div className="flex flex-wrap  md:flex-wrap-reverse">
+                    <div className="m-8 p-3  rounded-3xl text-black dark:text-white">
+                        <table className="table-auto border-separate border-spacing-x-5 border-spacing-y-2 text-2xl">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
                             <tbody>
                                 <tr>
-                                    <td className="bold">First Name</td>
+                                    <td className="font-extrabold">First Name</td>
                                     <td>{drdata.fname}</td>
                                 </tr>
                                 <tr>
-                                    <td className="bold">Last Name</td>
+                                    <td className="font-extrabold ">Last Name</td>
                                     <td>{drdata.lname}</td>
                                 </tr>
                                 <tr>
-                                    <td className="bold">Driver Id</td>
+                                    <td className="font-extrabold">Driver Id</td>
                                     <td>{String(drdata.did)}</td>
                                 </tr>
                                 <tr>
-                                    <td className="bold">Licence No.</td>
+                                    <td className="font-extrabold">Licence No.</td>
                                     <td>{drdata.dlno}</td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="right">
-                        <table className="table table-striped">
-                            <tbody>
+
                                 <tr>
-                                    <td className="bold">Birth Date</td>
+                                    <td className="font-extrabold">Birth Date</td>
                                     <td>{drdata.bdate}</td>
                                 </tr>
                                 <tr>
-                                    <td className="bold">Work Status</td>
+                                    <td className="font-extrabold">Work Status</td>
                                     <td>{drdata.work}</td>
                                 </tr>
                                 <tr>
-                                    <td className="bold">Total Trips</td>
+                                    <td className="font-extrabold">Total Trips</td>
                                     <td>{drdata.trips}</td>
                                 </tr>
                                 <tr>
-                                    <td className="bold">Total Revenue</td>
+                                    <td className="font-extrabold">Total Revenue</td>
                                     <td>{drdata.revenue}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <button
-                        type="button"
-                        className="btn btn-primary space updateBtn"
-                        onClick={handleClick}
-                    >
-                        Update
-                    </button>
+
+
+                </div>
+                <div className="flex  justify-center">
+                    <div className=" flex  justify-items-center  justify-between w-60 ">
+                        <span onClick={handleClick}>
+                            <Button
+                                prop={buttonProps1}
+
+                            />
+                        </span>
+                        <span onClick={()=>navigate("/driversList")}>
+                            <Button
+                                prop={buttonProps2}
+                            />
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

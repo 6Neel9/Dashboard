@@ -122,17 +122,10 @@ const Drivers = ({ data }: any) => {
 
   const rowSelected = () => {
     if (grid) {
-      /** Get the selected row indexes */
       const selectedrowindex: number[] = grid.getSelectedRowIndexes();
-      /** Get the selected records. */
       const selectedrecords: any = grid.getSelectedRecords();
-
-      // alert(JSON.stringify(selectedrecords[0]['did']))
       const dr_id = Number(JSON.stringify(selectedrecords[0]['did']))
-      // console.log(JSON.stringify(selectedrecords[0]['did']))
-      // console.log(dr_id)
       navigate("/driverView", {state:{dr_id :Number(JSON.stringify(selectedrecords[0]['did']))}})
-      // alert(selectedrowindex + " : " + JSON.stringify(selectedrecords));
     }
   }
 

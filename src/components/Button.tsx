@@ -29,7 +29,7 @@ const Button = ({prop} : props) => {
       type="button"
       onClick={() => setIsClicked(initialState)}
       style = {styles}
-      className={` text-${prop.size} p-3 w-${prop.width} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor}`}
+      className={` text-${prop.size} p-3 w-${prop.width} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
     >
       {prop.icon} {prop.text}
     </button>

@@ -3,6 +3,7 @@ import "./driverUpdate.scss"
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
 import { useStateContext } from "../../contexts/ContextProvider";
+import { GrClose } from "react-icons/gr";
 
 const DriverUpdate = () => {
   const { currentColor, currentMode } = useStateContext();
@@ -17,7 +18,7 @@ const DriverUpdate = () => {
     const dlno = String(e.target.licenceNo.value);
     const bdate = new Date(e.target.bdate.value);
     const did = Number(e.target.driverId.value);
-    const work = Boolean(e.target.working.value==='true'? true: false);
+    const work = Boolean(e.target.working.value === 'true' ? true : false);
 
     await fetch("http://127.0.0.1:5000/updateDriverDetail", {
       method: "POST",
@@ -48,7 +49,7 @@ const DriverUpdate = () => {
     color: "white",
     bgColor: currentColor,
     icon: undefined,
-    
+
     width: undefined
   }
   const buttonProps1 = {
@@ -58,23 +59,21 @@ const DriverUpdate = () => {
     borderRadius: "10px",
     text: "Update",
   }
-  const buttonProps2 = {
-    ...buttonProps,
-    bgHoverColor: "bg-gray-400",
-    size: "xl",
-    borderRadius: "100%",
-    text: "X",
-  }
 
   console.log(id, tripsArr);
 
   return (
     <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
       <div className="flex float-right mb-4">
-        <span onClick={() => navigate("/driverView",{state:{dr_id :did}})}>
-          <Button
-            prop={buttonProps2}
-          />
+        <span onClick={() => navigate("/driverView", { state: { dr_id: did } })}>
+          <button
+            type="button"
+            title="Close"
+            style={{ color: "black", fontSize: "25px", borderRadius: "50%", fontWeight: "bold" }}
+            className="text-2xl p-3 hover:drop-shadow-xl hover:bg-gray-200"
+          >
+            <GrClose />
+          </button>
         </span>
       </div>
       <h1 className="text-black font-extrabold text-4xl dark:text-white">Update Driver Info:</h1>
@@ -113,7 +112,7 @@ const DriverUpdate = () => {
             <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2" htmlFor="Bdate" >
               Birth Date
             </label>
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
+            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"
               id="Bdate"
               placeholder="BirthDate"
               defaultValue={bdate}
@@ -129,7 +128,7 @@ const DriverUpdate = () => {
               id="DriverId"
               placeholder="Driver Id"
               defaultValue={did}
-              name="driverId" />
+              name="driverId" disabled/>
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
@@ -161,7 +160,7 @@ const DriverUpdate = () => {
           </div>
         </div>
         <button type="submit" name="submit" >
-          {<Button 
+          {<Button
             prop={buttonProps1}
           />}
         </button>

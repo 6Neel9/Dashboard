@@ -23,6 +23,9 @@ import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DriverUpdate from './pages/DiverUpdate/DriverUpdate';
 import ViewDriver from './pages/ViewDriver/ViewDriver';
+import AddNewDriver from './pages/AddNewDriver';
+import TripList from './pages/TripList';
+import ViewTrip from './pages/ViewTrip/ViewTrip';
 
 
 // type DriverDataType = {
@@ -128,10 +131,14 @@ function App() {
                 <Route path="/" element={<Home data={data} />} />
                 <Route path="/home" element={<Home data={data} />} />
 
+
                 {/* pages  */}
                 <Route path="/driversList" element={<Drivers data={data} />} />
                 <Route path="/driverUpdate" element={<DriverUpdate  />} />
                 <Route path="/driverView" element={<ViewDriver data={data} />} />
+                <Route path="/addNewDriver" element={<AddNewDriver />} />
+                <Route path="/tripList" element={<TripList data={data} />} />
+                <Route path="/tripView" element={<ViewTrip />} />
               
 
                 {/* apps  */}

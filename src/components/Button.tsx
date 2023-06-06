@@ -9,6 +9,7 @@ type props ={
   color?: string, 
   bgHoverColor?: string,
   size?:string, 
+  marginRight?:number, 
   text?: string, 
   borderRadius?: string, 
   width?: number|undefined,
@@ -29,7 +30,7 @@ const Button = ({prop} : props) => {
       type="button"
       onClick={() => setIsClicked(initialState)}
       style = {styles}
-      className={` text-${prop.size} p-3 w-${prop.width} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
+      className={` text-${prop.size} p-3 w-${prop.width} mr-${prop.marginRight} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
     >
       {prop.icon} {prop.text}
     </button>

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./driverDetails.scss";
 import { Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
+import {GrClose} from "react-icons/gr";
 
 type DriverDataType = {
     _id: string;
@@ -122,13 +123,6 @@ const ViewDriver = ({ data }: any) => {
         borderRadius: "10px",
         text: "Update",
     }
-    const buttonProps2 = {
-        ...buttonProps,
-        bgHoverColor: "bg-gray-400",
-        size: "xl",
-        borderRadius: "100%",
-        text: "X",
-    }
 
 
     const TotalTrips = (trips: any) => {
@@ -149,13 +143,16 @@ const ViewDriver = ({ data }: any) => {
 
     return (
         <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">
-
-
             <div className="flex float-right mb-2">
                 <span onClick={() => navigate("/driversList")}>
-                    <Button
-                        prop={buttonProps2}
-                    />
+                    <button
+                        type="button"
+                        title="Close"
+                        style={{ color: "black",fontSize: "25px", borderRadius: "50%", fontWeight: "bold" }}
+                        className="text-2xl p-3 hover:drop-shadow-xl hover:bg-gray-200"
+                    >
+                        <GrClose />
+                    </button>
                 </span>
             </div>
             <h1 className="text-black font-extrabold text-4xl dark:text-white">Update Driver Info:</h1>
@@ -166,7 +163,7 @@ const ViewDriver = ({ data }: any) => {
                 marginLeft: "auto",
                 marginRight: "auto",
                 marginTop: "1%",
-            }} className="w-full max-w-lg" >
+            }} className="w-full max-w-lg mt-5" >
                 <div className="flex flex-wrap -mx-3 mb-5">
                     <div className="w-full md:w-1/2 px-3 mb-5 md:mb-0">
                         <label className="block uppercase text-xl tracking-wide text-gray-700  font-bold mb-2" htmlFor="FirstName">
@@ -194,7 +191,7 @@ const ViewDriver = ({ data }: any) => {
                         <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2" htmlFor="Bdate" >
                             Birth Date
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
+                        <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"
                             id="Bdate"
                             placeholder="BirthDate"
                             defaultValue={drdata.bdate}

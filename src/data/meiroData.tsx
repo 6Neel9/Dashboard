@@ -1,4 +1,4 @@
-import { FiHome, FiEdit, FiPieChart } from "react-icons/fi";
+import { FiHome, FiEdit, FiPieChart,FiUserPlus } from "react-icons/fi";
 import {
   AiOutlineAreaChart,
   AiOutlineBarChart,
@@ -10,15 +10,21 @@ import {
   BsKanban,
   BsBarChart,
   BsCurrencyRupee,
+  BsGraphUpArrow,
+  BsCashCoin
 } from "react-icons/bs";
 import { GiLouvrePyramid } from "react-icons/gi";
-import { MdOutlineSupervisorAccount } from "react-icons/md";
+import { BiSupport } from "react-icons/bi";
+import { MdOutlineSupervisorAccount ,MdOutlineAnalytics,MdAppRegistration,MdPriceChange} from "react-icons/md";
 import { HiOutlineRefresh } from "react-icons/hi";
+import {FaClipboardList} from "react-icons/fa";
+import { Route } from 'react-router-dom';
 
 type LinksType={
   title: string,
   links:{
     name: string,
+    route: string,
     icon: JSX.Element,
   }[],
 }[]
@@ -29,6 +35,7 @@ export const links: LinksType = [
     links: [
       {
         name: "home",
+        route: "home",
         icon: <FiHome />,
       },
     ],
@@ -39,12 +46,66 @@ export const links: LinksType = [
     links: [
       {
         name: "driversList",
+        route: "driversList",
         icon: <IoMdContacts />,
       },
-      //   {
-      //     name: "customers",
-      //     icon: <RiContactsLine />,
-      //   },
+      {
+        name: "Add New Driver",
+        route: "addNewDriver",
+        icon : <FiUserPlus />,
+      },
+    ],
+  },
+  {
+    title: "Usage",
+    links: [
+      {
+        name: "Trip Analytics",
+        route: "tripAnalytics",
+        icon: <BsGraphUpArrow />,
+      },
+      {
+        name: "Revenue Analytics",
+        route: "revenueAnalytics",
+        icon: <BsCashCoin />,
+      },
+      {
+        name: "Driver Analytics",
+        route: "driverAnalytics",
+        icon: <MdOutlineAnalytics />,
+      },
+      {
+        name: "Trip List",
+        route: "tripList",
+        icon: <FaClipboardList />,
+      },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      {
+        name: "Issue Management",
+        route: "issueManagement",
+        icon: <BiSupport />,
+      },
+     
+    ],
+  },
+  {
+    title: "Global Settings",
+    links: [
+      {
+        name: "App Constants",
+        route: "appConstants",
+        icon: <MdAppRegistration />,
+      },
+      {
+        name: "Pricing",
+        route: "pricing",
+        icon: <MdPriceChange />,
+      },
+     
     ],
   },
   {
@@ -52,10 +113,12 @@ export const links: LinksType = [
     links: [
       {
         name: "kanban",
+        route: "kanban",
         icon: <BsKanban />,
       },
       {
         name: "editor",
+        route: "editor",
         icon: <FiEdit />,
       },
     ],
@@ -65,35 +128,43 @@ export const links: LinksType = [
     links: [
       {
         name: "line",
+        route: "line",
         icon: <AiOutlineStock />,
       },
       {
         name: "area",
+        route: "area",
         icon: <AiOutlineAreaChart />,
       },
 
       {
         name: "bar",
+        route: "bar",
         icon: <AiOutlineBarChart />,
       },
       {
         name: "pie",
+        route: "pie",
         icon: <FiPieChart />,
       },
       {
         name: "financial",
+        route: "financial",
         icon: <RiStockLine />,
       },
       {
         name: "color-mapping",
+        route: "color-mapping",
         icon: <BsBarChart />,
       },
       {
         name: "pyramid",
+        route: "pyramid",
         icon: <GiLouvrePyramid />,
       },
       {
         name: "stacked",
+        route: "stacked",
         icon: <AiOutlineBarChart />,
       },
     ],
@@ -200,3 +271,111 @@ export const driverGrid: DriverGridType = [
   },
   
 ];
+
+
+type TripGridType=({
+  field: string;
+  headerText: string;
+  width: string;
+  textAlign: string;
+  format?: undefined;
+} | {
+  field: string;
+  headerText: string;
+  width: string;
+  format: string;
+  textAlign: string;
+})[]
+export const tripGrid: TripGridType = [{ field: "srno", headerText: "Sr no.", width: "100", textAlign: "Center" },
+{ field: "tid", headerText: "Trip Id", width: "100", textAlign: "Center" },
+{
+  field: "stime",
+  headerText: "Start Time",
+  width: "120",
+  textAlign: "start",
+},
+{
+  field: "etime",
+  headerText: "End Time",
+  width: "120",
+  textAlign: "Center",
+},
+
+{
+  field: "sloc",
+  headerText: "Start Location",
+  width: "150",
+  textAlign: "Center",
+},
+
+{
+  field: "eloc",
+  headerText: "End Location",
+  width: "150",
+  textAlign: "Center",
+},
+
+{
+  field: "revenue",
+  headerText: "Revenue",
+  width: "120",
+  textAlign: "Center",
+},
+{
+  field: "city",
+  headerText: "City",
+  width: "120",
+  textAlign: "Center",
+},
+
+];
+
+
+type monthType = {month: string, value: number}[]
+export const Months :monthType =[
+  { month: "January", value: 1 },
+  { month: "February", value: 2 },
+  { month: "March", value: 3 },
+  { month: "April", value: 4 },
+  { month: "May", value: 5 },
+  { month: "June", value: 6 },
+  { month: "July", value: 7 },
+  { month: "August", value: 8 },
+  { month: "September", value: 9 },
+  { month: "October", value: 10 },
+  { month: "November", value: 11 },
+  { month: "December", value: 12 },
+]
+
+type stateType = {state: string, value: number}[]
+export const States :stateType =[
+  { state: "Andhra Pradesh", value: 1 },
+  { state: "Arunachal Pradesh", value: 2 },
+  { state: "Assam", value: 3 },
+  { state: "Bihar", value: 4 },
+  { state: "Chhattisgarh", value: 5 },
+  { state: "Goa", value: 6 },
+  { state: "Gujarat", value: 7 },
+  { state: "Haryana", value: 8 },
+  { state: "Himachal Pradesh", value: 9 },
+  { state: "Jharkhand", value: 10 },
+  { state: "Karnataka", value: 11 },
+  { state: "Kerala", value: 12 },
+  { state: "Madhya Pradesh", value: 13 },
+  { state: "Maharashtra", value: 14 },
+  { state: "Manipur", value: 15 },
+  { state: "Meghalaya", value: 16 },
+  { state: "Mizoram", value: 17 },
+  { state: "Nagaland", value: 18 },
+  { state: "Odisha", value: 19 },
+  { state: "Punjab", value: 20 },
+  { state: "Rajasthan", value: 21 },
+  { state: "Sikkim", value: 22 },
+  { state: "Tamil Nadu", value: 23 },
+  { state: "Telangana", value: 24 },
+  { state: "Tripura", value: 25 },
+  { state: "Uttar Pradesh", value: 26 },
+  { state: "Uttarakhand", value: 27 },
+  { state: "West Bengal", value: 28 }
+]
+

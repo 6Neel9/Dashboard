@@ -1,20 +1,20 @@
 import React from 'react';
-import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LineSeries, DateTime, Legend, Tooltip } from '@syncfusion/ej2-react-charts';
+import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LineSeries, DateTime, Legend, Tooltip, AxisModel } from '@syncfusion/ej2-react-charts';
 
 import { lineCustomSeries, LinePrimaryXAxis, LinePrimaryYAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 
-const LineChart = () => {
+const LineChart = ({primary_XAxis,primary_YAxis}: {primary_XAxis?:AxisModel | undefined ,primary_YAxis?:AxisModel | undefined}) => {
   const { currentMode } = useStateContext();
-  const primaryXAxis = {...LinePrimaryXAxis};
-  const primaryYAxis = {...LinePrimaryYAxis};
+  // const primaryXAxis = {...LinePrimaryXAxis};
+  // const primaryYAxis = {...LinePrimaryYAxis};
 
   return (
     <ChartComponent
       id="line-chart"
       height="420px"
-      primaryXAxis ={primaryXAxis }
-      primaryYAxis={primaryYAxis}
+      primaryXAxis ={primary_XAxis }
+      primaryYAxis={primary_YAxis}
       chartArea={{ border: { width: 0 } }}
       tooltip={{ enable: true }}
       background={currentMode === 'Dark' ? '#33373E' : '#fff'}

@@ -8,17 +8,18 @@ const LineChart = ({primary_XAxis,primary_YAxis}: {primary_XAxis?:AxisModel | un
   const { currentMode } = useStateContext();
   // const primaryXAxis = {...LinePrimaryXAxis};
   // const primaryYAxis = {...LinePrimaryYAxis};
+  
 
   return (
     <ChartComponent
       id="line-chart"
-      height="420px"
+      height="50%"
       primaryXAxis ={primary_XAxis }
       primaryYAxis={primary_YAxis}
       chartArea={{ border: { width: 0 } }}
       tooltip={{ enable: true }}
-      background={currentMode === 'Dark' ? '#33373E' : '#fff'}
-      legendSettings={{ background: 'white' }}
+      background={currentMode === 'Dark' ? '#2C1F39' : '#2C1F39'}
+      legendSettings={{ background: '#2C1F39' }}
     >
       <Inject services={[LineSeries, DateTime, Legend, Tooltip]} />
       <SeriesCollectionDirective>

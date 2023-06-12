@@ -5,7 +5,7 @@ import {
   ColumnSeries, Legend, DateTime, Tooltip, DataLabel, LineSeries,
 }
   from '@syncfusion/ej2-react-charts';
-import { Button, LineChart, Pie, SparkLine, Stacked } from "../components";
+import { Button, LineChart } from "../components";
 import {
   recentTransactions,
   dropdownData,
@@ -14,6 +14,13 @@ import { earningData } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
 import Filters from "../components/Filters";
 import Line from "./Charts/Line";
+import Pie from "./Charts/Pie";
+import Area from "./Charts/Area";
+import Bar from "./Charts/Bar";
+import MediumCard from "../components/Cards/MediumCard";
+import SmallCard from "../components/Cards/SmallCard";
+import CardWithChart from '../components/Cards/CardWithChart';
+import { SlArrowUp } from "react-icons/sl";
 
 
 
@@ -151,78 +158,66 @@ const Home = ({ data }: any) => {
     iconBg: string;
     pcColor: string;
   }
+  
+  type CardPropType={
+    title?: string,
+    duration?: string,
+    value?: string,
+    icon?: string,
+    percent?: string,
+  }
+
+  const MediumCardProps: CardPropType = {
+    title:"DRIVER REVENUE",
+    duration:"Last 7 days",
+    value:"₹ 5,000",
+    icon:"positive",
+    percent:"10",
+  }
+
+  const SmallCardOneProps : CardPropType = {
+    title:"DRIVER",
+    duration:"Current",
+    value:"1080",
+    icon:"positive",
+    percent:"5.45",
+  }
+  const SmallCardTwoProps : CardPropType = {
+    title:"ACTIVE USERS",
+    duration:"Last 7 days",
+    value:"945",
+    icon:"Negative",
+    percent:"3.75",
+  }
+
+  const CardWithChartProp1 : CardPropType = {
+    title: "DRIVER REVENUE",
+    duration: "Last 7 days",
+  }
+
+  const CardWithChartProp2 : CardPropType = {
+    title: "MRR",
+    duration: "Last 7 days",
+    value:"₹ 28,07,653",
+    icon:"positive",
+    percent:"7.35",
+  }
+
+  
 
   return (
-    <div className="mt-10">
+
+    <div className = "m-10 text-[#FEFEFA]">
       <Filters />
-      <div className="flex flex-wrap   lg:flex-nowrap  justify-center w-full">
-        <div className="flex m-3 flex-wrap justify-center  gap-1 items-center w-full">
-         
-          <div className=" flex justify-center w-full sm:flex-row">
-            {earningData.map((item: EarningDataType) => (
-              <div className=" bg-white dark:text-gray-200 dark:bg-secondary-dark-bg flex justify-evenly w-1/3 m-2 p-4 rounded-2xl">
-               
-                <div className="text-2xl lg:text-2xl mr-2 flex justify-center font-semibold">  <div className={`text-3xl lg:text-3xl mr-2`}  style={{color: currentColor}}>{item.icon}</div>{item.title}</div>
-                <div className="text-2xl lg:text-2xl mr-2">
-                  <span className="text-lg lg:text-3xl font-semibold">
-                    {item.title === "Total Drivers" && total_drivers}
-                    {item.title === "Total Revenue" &&
-                      "₹" + numberFormat(String(total_revenue))}
-                    {item.title === "Total Trips" && numberFormat(String(total_trips))}
-                  </span></div>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="main-container-1 flex text-left justify-between ">
+        <MediumCard props={MediumCardProps}/>
+        <SmallCard props={SmallCardOneProps}/>
+        <SmallCard props={SmallCardTwoProps}/>
       </div>
-
-      <div className="flex gap-10 flex-wrap justify-center ">
-        
+      <div className="main-container-2 flex text-left w-full ">
+        <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<LineChart />}/>
       </div>
-
-      <div className="flex gap-10 m-4 flex-wrap justify-center">
-        
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-        <div className="flex justify-between items-center gap-2 mb-10">
-            <p className="text-xl font-semibold">Revenue: </p>
-           
-          </div>
-          <div className="md:w-full overflow-auto">
-          <Stacked />
-          </div>
-        </div>
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-          <div className="flex justify-between items-center gap-2 mb-10">
-            <p className="text-xl font-semibold">Sales Overview</p>
-            <DropDown />
-          </div>
-          <div className="md:w-full overflow-auto">
-            
-          </div>
-        </div>
-      </div>
-      <div className="flex gap-10 m-4 flex-wrap justify-center">
-        
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-          <div className="flex justify-between items-center gap-2 mb-10">
-            <p className="text-xl font-semibold">Sales Overview</p>
-            <DropDown />
-          </div>
-          <div className="md:w-full overflow-auto">
-            <LineChart />
-          </div>
-        </div>
-        <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-          <div className="flex justify-between items-center gap-2 mb-10">
-            <p className="text-xl font-semibold">Sales Overview</p>
-            <DropDown />
-          </div>
-          <div className="md:w-full overflow-auto">
-            <Line />
-          </div>
-        </div>
-      </div>
-    </div>
+    </div >
   );
 };
 
@@ -230,5 +225,80 @@ const Home = ({ data }: any) => {
 
 
 export default Home;
+
+
+
+
+
+    // <div className="mt-10">
+    // <Filters />
+    //   <div className="flex flex-wrap   lg:flex-nowrap  justify-center w-full">
+    //     <div className="flex m-3 flex-wrap justify-center  gap-1 items-center w-full">
+         
+    //       <div className=" flex justify-center w-full sm:flex-row">
+    //         {earningData.map((item: EarningDataType) => (
+    //           <div className=" bg-white dark:text-gray-200 dark:bg-secondary-dark-bg flex justify-evenly w-1/3 m-2 p-4 rounded-2xl">
+               
+    //             <div className="text-2xl lg:text-2xl mr-2 flex justify-center font-semibold">  <div className={`text-3xl lg:text-3xl mr-2`}  style={{color: currentColor}}>{item.icon}</div>{item.title}</div>
+    //             <div className="text-2xl lg:text-2xl mr-2">
+    //               <span className="text-lg lg:text-3xl font-semibold">
+    //                 {item.title === "Total Drivers" && total_drivers}
+    //                 {item.title === "Total Revenue" &&
+    //                   "₹" + numberFormat(String(total_revenue))}
+    //                 {item.title === "Total Trips" && numberFormat(String(total_trips))}
+    //               </span></div>
+    //           </div>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+
+    //   <div className="flex gap-10 flex-wrap justify-center ">
+        
+    //   </div>
+
+    //   <div className="flex gap-10 m-4 flex-wrap justify-center">
+        
+    //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
+    //     <div className="flex justify-between items-center gap-2 mb-10">
+    //         <p className="text-xl font-semibold">Revenue: </p>
+           
+    //       </div>
+    //       <div className="md:w-full overflow-auto">
+    //       <Bar />
+    //       </div>
+    //     </div>
+    //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
+    //       <div className="flex justify-between items-center gap-2 mb-10">
+    //         <p className="text-xl font-semibold">Sales Overview</p>
+          
+    //       </div>
+    //       <div className="md:w-full overflow-auto">
+    //         <Pie />
+    //       </div>
+    //     </div>
+    //   </div>
+    //   <div className="flex gap-10 m-4 flex-wrap justify-center">
+        
+    //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
+    //       <div className="flex justify-between items-center gap-2 mb-10">
+    //         <p className="text-xl font-semibold">Sales Overview</p>
+          
+    //       </div>
+    //       <div className="md:w-full overflow-auto">
+    //         <Area />
+    //       </div>
+    //     </div>
+    //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
+    //       <div className="flex justify-between items-center gap-2 mb-10">
+    //         <p className="text-xl font-semibold">Sales Overview</p>
+    //       </div>
+    //       <div className="md:w-full overflow-auto">
+    //         <Line />
+    //       </div>
+    //     </div>
+    // </div>
+    //   </div>
+
 
 

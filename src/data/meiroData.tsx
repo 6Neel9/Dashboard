@@ -34,7 +34,7 @@ export const links: LinksType = [
     title: "Dashboard",
     links: [
       {
-        name: "home",
+        name: "Home",
         route: "home",
         icon: <FiHome />,
       },
@@ -45,7 +45,7 @@ export const links: LinksType = [
     title: "Driver",
     links: [
       {
-        name: "driversList",
+        name: "Drivers List",
         route: "driversList",
         icon: <IoMdContacts />,
       },
@@ -379,3 +379,14 @@ export const States :stateType =[
   { state: "West Bengal", value: 28 }
 ]
 
+type FilterDurationType = {duration: string, value: number}[]
+export const FilterDuration :FilterDurationType =[
+  { duration: "Today", value: 1 },
+  {duration: "Last 7 Days",value:7},
+  {duration: "This Week",value:7},
+  {duration: "This Month",value:30},
+  {duration: "This Quarter",value:90},
+  {duration: "This half year",value:180},
+  {duration: "This year",value:365},
+  {duration: "Till Date",value:0},
+]

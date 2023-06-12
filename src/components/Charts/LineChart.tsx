@@ -14,6 +14,7 @@ const LineChart = ({primary_XAxis,primary_YAxis}: {primary_XAxis?:AxisModel | un
     <ChartComponent
       id="line-chart"
       height="50%"
+      width='800vw'
       primaryXAxis ={primary_XAxis }
       primaryYAxis={primary_YAxis}
       chartArea={{ border: { width: 0 } }}

@@ -29,11 +29,11 @@ const CardWithChart = ({ prop1, prop2, chart }: any) => {
                 </div>
             </div>
             <div className="p1 ml-3 col-span-2">
-                <div className="flex-col justify-between ml-5">
+                <div className="flex justify-between ml-5">
                 <h1 className="text-2xl p-2 chart-name">{prop1.title}</h1>
-                <div className="values p-2 text-left" >
+                <h4 className="values p-2 text-right" >
                     {prop1.duration}
-                </div>
+                </h4>
                 </div>
 
                 <div className="chart text-2xl text-center ml-10 mt-5 flex justify-center">{chart}</div>

@@ -12,15 +12,7 @@ import {
 } from "../data/dummy";
 import { earningData } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
-import Filters from "../components/Filters";
-import Line from "./Charts/Line";
-import Pie from "./Charts/Pie";
-import Area from "./Charts/Area";
-import Bar from "./Charts/Bar";
-import MediumCard from "../components/Cards/MediumCard";
-import SmallCard from "../components/Cards/SmallCard";
-import CardWithChart from '../components/Cards/CardWithChart';
-import { SlArrowUp } from "react-icons/sl";
+import {MediumCard,SmallCard,CardWithChart, Filters} from '../components';
 
 
 
@@ -165,6 +157,7 @@ const Home = ({ data }: any) => {
     value?: string,
     icon?: string,
     percent?: string,
+    height?: string,
   }
 
   const MediumCardProps: CardPropType = {
@@ -207,7 +200,7 @@ const Home = ({ data }: any) => {
 
   return (
 
-    <div className = "m-10 text-[#FEFEFA]">
+    <div className = "m-2 text-[#FEFEFA]">
       <Filters />
       <div className="main-container-1 flex text-left justify-between ">
         <MediumCard props={MediumCardProps}/>

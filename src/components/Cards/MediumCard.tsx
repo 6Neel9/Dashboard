@@ -12,12 +12,13 @@ const MediumCard = ({ props }: any) => {
       <div className="time text-5xl p-2 font-medium">
         {props.value}
       </div>
-      <div className="per-change p-2">
-        {props.icon === "positive" ? 
-            <h1 className="inline-block bg-green text-green-600"><SlArrowUp className="inline-block"/> {props.percent}%</h1> :
-            <h1 className="inline-block bg-red text-red-600"><SlArrowDown className="inline-block"/> {props.percent}%</h1>
+      {props.icon && <div className="per-change p-2">
+
+        {props.icon === "positive" ?
+          <h1 className="inline-block bg-green text-green-600"><SlArrowUp className="inline-block" /> {props.percent}%</h1> :
+          <h1 className="inline-block bg-red text-red-600"><SlArrowDown className="inline-block" /> {props.percent}%</h1>
         }
-      </div>
+      </div>}
 
     </div>
   )

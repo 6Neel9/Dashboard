@@ -207,7 +207,7 @@ const Home = ({ data }: any) => {
         <SmallCard props={SmallCardOneProps}/>
         <SmallCard props={SmallCardTwoProps}/>
       </div>
-      <div className="main-container-2 flex text-left w-full ">
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
         <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<LineChart />}/>
       </div>
     </div >

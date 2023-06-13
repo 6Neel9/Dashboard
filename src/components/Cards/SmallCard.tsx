@@ -19,7 +19,6 @@ const SmallCard = ({ props }: any) => {
                 }
             </div>}
 
-
         </div>
     )
 }

@@ -5,7 +5,7 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 const CardWithChart = ({ prop1, prop2, chart }: any) => {
     return (
 
-        <div className="container activeTrip-Time bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl text-left justify-between grid grid-cols-3 divide-x w-full ">
+        <div className="container h-fit m-2.5 p-5 text-left justify-between grid grid-cols-3 divide-x w-full ">
 
             <div className="p2  mr-5">
                 <div className="flex justify-between mb-10">

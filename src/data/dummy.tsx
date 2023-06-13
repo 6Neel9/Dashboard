@@ -839,6 +839,14 @@ export const themeColors = [
     color: "#7352FF",
   },
   {
+    name: "flow_blue-theme",
+    color: "#2C1F39",
+  },
+  {
+    name: "periwinkle-theme",
+    color: "#D6CDE9",
+  },
+  {
     name: "red-theme",
     color: "#FF5C8E",
   },

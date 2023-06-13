@@ -29,15 +29,15 @@ const Filters = () => {
     }
 
     return (
-        <div className=" bg-flow_blue m-3 p-4   md:flex-wrap md:m-2 rounded-2xl border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]   ">
+        <div className=" bg-flow_blue m-3 p-3  md:flex-wrap md:m-2 rounded-2xl border-1 border-[#8b7da9] shadow-md shadow-[#8b7da9]   ">
             <div className="flex justify-end">
                 <div className="filter-container "> 
-                    <select id="filter-duration" className='mr-5 bg-flow_blue border-1 rounded-md p-2 border-[#D6CDE9]' placeholder='Period'>
+                    <select id="filter-duration" className='mr-5 bg-flow_blue border-1 rounded-md p-1 border-[#D6CDE9]' placeholder='Period'>
                         <option value="none">Period</option>
                         {FilterDuration.map((ele) => (<option value={ele.value}>{ele.duration}</option>))}
                     </select>
                     
-                    <select id="filter-state" className='mr-5 bg-flow_blue border-1 rounded-md p-2 border-[#D6CDE9]' placeholder='State'>
+                    <select id="filter-state" className='mr-5 bg-flow_blue border-1 rounded-md p-1 border-[#D6CDE9]' placeholder='State'>
                         <option value="none">State</option>
                         <option value="All">All</option>
                         {States.map((state) => (<option value={state.state}>{state.state}</option>))}

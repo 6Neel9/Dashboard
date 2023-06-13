@@ -209,7 +209,7 @@ const Drivers = ({ data }: any) => {
 
 
   return (
-    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white dark:text-white dark:bg-secondary-dark-bg rounded-3xl">
+    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white dark:text-white dark:bg-flow_blue rounded-3xl border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]">
       <Header title="Driver Details List" />
       <GridComponent
         id="grid"

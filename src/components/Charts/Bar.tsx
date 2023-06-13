@@ -7,7 +7,6 @@ const Bar = () => {
   const { currentMode } = useStateContext();
 
   return (
-   
       <div className=" w-full">
         <ChartComponent
           height='50%'
@@ -15,7 +14,7 @@ const Bar = () => {
           primaryYAxis={barPrimaryYAxis}
           chartArea={{ border: { width: 0 } }}
           tooltip={{ enable: true }}
-          background={currentMode === 'Dark' ? '#2C1F39' : '#2C1F39'}
+          background={'#2C1F39'}
           legendSettings={{ background: '#2C1F39' }}
         >
           <Inject services={[ColumnSeries, Legend, Tooltip, Category, DataLabel]} />
@@ -25,7 +24,6 @@ const Bar = () => {
           </SeriesCollectionDirective>
         </ChartComponent>
       </div>
-
   );
 };
 

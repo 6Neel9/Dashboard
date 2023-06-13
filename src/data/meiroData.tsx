@@ -390,3 +390,25 @@ export const FilterDuration :FilterDurationType =[
   {duration: "This year",value:365},
   {duration: "Till Date",value:0},
 ]
+
+
+
+export const themeColors = [
+  {
+    name: "flow_blue-theme",
+    color: "#2C1F39",
+  },
+  {
+    name: "periwinkle-theme",
+    color: "#D6CDE9",
+  },
+  {
+    name: "mellow_scarlet-theme",
+    color: "#FC3209",
+  },
+  {
+    name: "spring_green-theme",
+    color: "#6CE151",
+  }
+
+];

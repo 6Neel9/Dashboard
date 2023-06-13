@@ -1,6 +1,5 @@
 import React from 'react'
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
-import LineChart from '../Charts/LineChart';
 
 
 const CardWithChart = ({ prop1, prop2, chart }: any) => {

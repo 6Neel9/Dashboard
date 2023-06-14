@@ -27,6 +27,7 @@ import AddNewDriver from './pages/AddNewDriver';
 import TripList from './pages/TripList';
 import ViewTrip from './pages/ViewTrip/ViewTrip';
 import TripAnalytics from './pages/TripAnalytics';
+import RevenueAnalytics from './pages/RevenueAnalytics';
 
 
 // type DriverDataType = {
@@ -141,6 +142,7 @@ function App() {
                 <Route path="/tripList" element={<TripList data={data} />} />
                 <Route path="/tripView" element={<ViewTrip />} />
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
+                <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />
               
 
                 {/* apps  */}

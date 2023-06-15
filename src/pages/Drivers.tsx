@@ -20,7 +20,6 @@ import {
   ExcelExportProperties,
 
 } from "@syncfusion/ej2-react-grids";
-import CSS from 'csstype';
 
 // import { employeesData, employeesGrid } from "../data/dummy";
 import { driverGrid } from "../data/meiroData";
@@ -66,9 +65,27 @@ import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 //   </div>)
 // }
 
+type DataType = {
+  driverId: String,
+  firstName: String,
+  lastName: String,
+  licenceNumber: String,
+  dob: String,
+}
 
 const Drivers = ({ data }: any) => {
   const navigate = useNavigate();
+  const [driverTableData, setDriverTableData] = useState<DataType[]>([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/drivers/table", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((i) => {
+        setDriverTableData(i);
+      });
+  }, []);
+
 
   type DriverDataType = {
     did: Number,
@@ -125,7 +142,7 @@ const Drivers = ({ data }: any) => {
       const selectedrowindex: number[] = grid.getSelectedRowIndexes();
       const selectedrecords: any = grid.getSelectedRecords();
       const dr_id = Number(JSON.stringify(selectedrecords[0]['did']))
-      navigate("/driverView", {state:{dr_id :Number(JSON.stringify(selectedrecords[0]['did']))}})
+      navigate("/driverView", { state: { dr_id: Number(JSON.stringify(selectedrecords[0]['did'])) } })
     }
   }
 
@@ -188,19 +205,24 @@ const Drivers = ({ data }: any) => {
   useEffect(() => {
     var dvr_data: object[] = [];
     var srno: number = 1;
-    data.forEach((e: DriverDataType) => {
-      const temp: { srno: number, did: number, name: string, dlno: string, bdate: string, working: string, trips: number, revenue: string } = {
-        srno: srno,
-        did: Number(e.did),
-        name: e.fname + " " + e.lname,
-        dlno: String(e.dlno),
-        bdate: String(e.bdate).slice(0, 10),
-        working: e.working ? "Working" : "Not Working",
-        trips: TotalTrips(e.trips),
-        revenue: "₹ " + numberFormat(String(TotalRevenue(e.trips))),
+    // data.forEach((e: DriverDataType) => {
+    //   const temp: { srno: number, did: number, name: string, dlno: string, bdate: string, trips: number, revenue: string } = {
+    //     srno: srno,
+    //     did: Number(e.did),
+    //     name: e.fname + " " + e.lname,
+    //     dlno: String(e.dlno),
+    //     bdate: String(e.bdate).slice(0, 10),
+    //     trips: TotalTrips(e.trips),
+    //     revenue: "₹ " + numberFormat(String(TotalRevenue(e.trips))),
 
-      };
-      dvr_data.push(temp);
+    //   };
+    //   dvr_data.push(temp);
+    //   srno += 1;
+    // });
+    // setDriverData(dvr_data);
+    driverTableData.forEach((e: DataType) => {
+      
+      dvr_data.push({srno:srno, did: e.driverId, name: e.firstName, dlno: e.licenceNumber, bdate: e.dob, trips: 0, revenue: 0});
       srno += 1;
     });
     setDriverData(dvr_data);

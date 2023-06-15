@@ -17,7 +17,7 @@ import { GiLouvrePyramid } from "react-icons/gi";
 import { BiSupport } from "react-icons/bi";
 import { MdOutlineSupervisorAccount ,MdOutlineAnalytics,MdAppRegistration,MdPriceChange} from "react-icons/md";
 import { HiOutlineRefresh } from "react-icons/hi";
-import {FaClipboardList} from "react-icons/fa";
+import {FaClipboardList, FaRoute} from "react-icons/fa";
 import { Route } from 'react-router-dom';
 
 type LinksType={
@@ -73,6 +73,11 @@ export const links: LinksType = [
         name: "Driver Analytics",
         route: "driverAnalytics",
         icon: <MdOutlineAnalytics />,
+      },
+      {
+        name: "Tracking",
+        route: "tracking",
+        icon: <FaRoute />,
       },
       {
         name: "Trip List",
@@ -250,12 +255,12 @@ export const driverGrid: DriverGridType = [
     textAlign: "Center",
   },
 
-  {
-    field: "working",
-    headerText: "Work Status",
-    width: "120",
-    textAlign: "Center",
-  },
+  // {
+  //   field: "working",
+  //   headerText: "Work Status",
+  //   width: "120",
+  //   textAlign: "Center",
+  // },
 
   {
     field: "trips",

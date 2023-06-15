@@ -17,17 +17,19 @@ import {
   Financial,
   ColorMapping,
   Editor,
+  DriverUpdate,
+  ViewDriver,
+  AddNewDriver,
+  TripList,
+  ViewTrip,
+  TripAnalytics,
+  RevenueAnalytics,
+  Tracking,
 } from "./pages";
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DriverUpdate from './pages/DiverUpdate/DriverUpdate';
-import ViewDriver from './pages/ViewDriver/ViewDriver';
-import AddNewDriver from './pages/AddNewDriver';
-import TripList from './pages/TripList';
-import ViewTrip from './pages/ViewTrip/ViewTrip';
-import TripAnalytics from './pages/TripAnalytics';
-import RevenueAnalytics from './pages/RevenueAnalytics';
+
 
 
 // type DriverDataType = {
@@ -143,6 +145,8 @@ function App() {
                 <Route path="/tripView" element={<ViewTrip />} />
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
                 <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />
+                <Route path="/tracking" element={<Tracking />} />
+                
               
 
                 {/* apps  */}

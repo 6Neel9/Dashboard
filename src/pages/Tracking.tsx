@@ -7,7 +7,7 @@ import RoutingMap from '../components/Map/RoutingMap';
 const Tracking = () => {
   const position = [51.505, -0.09];
   return (
-    <div>
+    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white dark:text-white dark:bg-flow_blue rounded-3xl border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]">
       <MapContainer  zoom={13} style={{ height: "100vh" }}>
       <TileLayer
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

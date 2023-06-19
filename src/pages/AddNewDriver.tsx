@@ -52,7 +52,7 @@ const AddNewDriver = () => {
 
     const buttonProps = {
         color: "white",
-        bgColor: "periwinkle",
+        bgColor: "flow_blue",
         icon: undefined,
         width: undefined
     }
@@ -60,7 +60,8 @@ const AddNewDriver = () => {
         ...buttonProps,
         size: "",
         bgHoverColor: "",
-        bgColor: "periwinkle",
+        bgColor: "flow_blue",
+        
         borderRadius: "10px",
         text: "Add Driver",
     }

@@ -21,8 +21,8 @@ const Button = ({prop} : props) => {
   const { setIsClicked, initialState } = useStateContext();
 
   const styles : React.CSSProperties={
-    backgroundColor: prop.bgColor,
-    color: prop.color, 
+    // backgroundColor: prop.bgColor,
+    // color: prop.color, 
     borderRadius: prop.borderRadius,
   }
   return (
@@ -30,7 +30,7 @@ const Button = ({prop} : props) => {
       type="button"
       onClick={() => setIsClicked(initialState)}
       style = {styles}
-      className={` text-${prop.size} p-2 w-${prop.width} mr-${prop.marginRight} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
+      className={` text-${prop.size} bg-${prop.bgColor} text-${prop.color} dark:bg-periwinkle dark:text-black  p-2 w-${prop.width} mr-${prop.marginRight} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
     >
       {prop.icon} {prop.text}
     </button>

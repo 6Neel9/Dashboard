@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./driverDetails.scss";
 import { Button } from "../../components";
 import { useStateContext } from "../../contexts/ContextProvider";
-import {GrClose} from "react-icons/gr";
+import { GrClose } from "react-icons/gr";
 
 type DriverDataType = {
     _id: string;
@@ -31,16 +31,11 @@ type DriverDataType = {
 
 };
 type TempObjType = {
-    tripsArr: any;
-    fname: string;
-    lname: string;
-    dlno: string;
-    bdate: string;
-    did: number;
-    work: string;
-    trips: number;
-    revenue: string;
-    id: string,
+    driverId: String,
+    firstName: String,
+    lastName: String,
+    licenceNumber: String,
+    dob: String,
 };
 
 const ViewDriver = ({ data }: any) => {
@@ -50,29 +45,31 @@ const ViewDriver = ({ data }: any) => {
     const location = useLocation();
     // const [allData, setAllData] = useState([]);
     const { dr_id } = location.state;
+
+    useEffect(() => {
+        console.log(dr_id)
+
+        fetch(`http://localhost:5000/v1/yuja-api/drivers/${dr_id}`, {
+            method: "GET",
+        })
+            .then((res) => res.json())
+            .then((i) => {
+                setDrdata(i);
+            });
+    }, []);
     const [updateData, setUpdateData] = useState<TempObjType>({
-        tripsArr: undefined,
-        fname: '',
-        lname: '',
-        dlno: '',
-        bdate: '',
-        did: 0,
-        work: '',
-        trips: 0,
-        revenue: '',
-        id: '',
+        driverId: '',
+        firstName: '',
+        lastName: '',
+        licenceNumber: '',
+        dob: '',
     });
     const [drdata, setDrdata] = useState<TempObjType>({
-        tripsArr: undefined,
-        fname: '',
-        lname: '',
-        dlno: '',
-        bdate: '',
-        did: 0,
-        work: '',
-        trips: 0,
-        revenue: '',
-        id: '',
+        driverId: '',
+        firstName: '',
+        lastName: '',
+        licenceNumber: '',
+        dob: '',
     });
 
     const handleClick = () => {
@@ -80,35 +77,35 @@ const ViewDriver = ({ data }: any) => {
     };
 
 
-    useEffect(() => {
-        // console.log(dr_id)
-        fetchData(dr_id);
-        // setAllData(data);
-    }, []);
+    // useEffect(() => {
+    //     // console.log(dr_id)
+    //     fetchData(dr_id);
+    //     // setAllData(data);
+    // }, []);
 
-    const fetchData = (drid: number) => {
-        data.forEach((d: DriverDataType) => {
-            // console.log(d)
-            // console.log(drid)
-            if (d.did === Number(drid)) {
+    // const fetchData = (drid: number) => {
+    //     data.forEach((d: DriverDataType) => {
+    //         // console.log(d)
+    //         // console.log(drid)
+    //         if (d.did === Number(drid)) {
 
-                var obj: TempObjType = {
-                    id: d._id,
-                    tripsArr: d.trips,
-                    fname: d.fname,
-                    lname: d.lname,
-                    dlno: d.dlno,
-                    bdate: String(d.bdate).slice(0, 10),
-                    did: d.did,
-                    work: d.working ? "Working" : "Not Working",
-                    trips: TotalTrips(d.trips),
-                    revenue: "Rs. " + TotalRevenue(d.trips),
-                }
-                setDrdata(obj);
-                setUpdateData(obj);
-            }
-        });
-    };
+    //             var obj: TempObjType = {
+    //                 id: d._id,
+    //                 tripsArr: d.trips,
+    //                 fname: d.fname,
+    //                 lname: d.lname,
+    //                 dlno: d.dlno,
+    //                 bdate: String(d.bdate).slice(0, 10),
+    //                 did: d.did,
+    //                 work: d.working ? "Working" : "Not Working",
+    //                 trips: TotalTrips(d.trips),
+    //                 revenue: "Rs. " + TotalRevenue(d.trips),
+    //             }
+    //             setDrdata(obj);
+    //             setUpdateData(obj);
+    //         }
+    //     });
+    // };
 
     const buttonProps = {
         color: "white",
@@ -148,7 +145,7 @@ const ViewDriver = ({ data }: any) => {
                     <button
                         type="button"
                         title="Close"
-                        style={{ color: "black",fontSize: "25px", borderRadius: "50%", fontWeight: "bold" }}
+                        style={{ color: "black", fontSize: "25px", borderRadius: "50%", fontWeight: "bold" }}
                         className="text-2xl p-3 hover:drop-shadow-xl hover:bg-gray-200"
                     >
                         <GrClose />
@@ -172,7 +169,7 @@ const ViewDriver = ({ data }: any) => {
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text"
                             id="FirstName"
                             placeholder="First Name"
-                            value={drdata.fname}
+                            value={String(drdata.firstName).toUpperCase()}
                             name="fname" disabled />
                     </div>
                     <div className="w-full md:w-1/2 px-3">
@@ -182,7 +179,7 @@ const ViewDriver = ({ data }: any) => {
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
                             id="LastName"
                             placeholder="Last Name"
-                            defaultValue={drdata.lname}
+                            defaultValue={String(drdata.lastName).toUpperCase()}
                             name="lname" disabled />
                     </div>
                 </div>
@@ -194,9 +191,10 @@ const ViewDriver = ({ data }: any) => {
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="date"
                             id="Bdate"
                             placeholder="BirthDate"
-                            defaultValue={drdata.bdate}
+                            defaultValue={new Date(drdata.dob.slice(0,15)).getDate() + "-" + new Date(drdata.dob.slice(0,15)).getMonth() + "-" + new Date(drdata.dob.slice(0,15)).getFullYear()}
                             name="bdate" disabled />
                     </div>
+                   
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-5">
                     <div className="w-full px-3">
@@ -206,7 +204,7 @@ const ViewDriver = ({ data }: any) => {
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
                             id="DriverId"
                             placeholder="Driver Id"
-                            defaultValue={dr_id}
+                            defaultValue={String(drdata.driverId)}
                             name="driverId" disabled />
                     </div>
                 </div>
@@ -218,11 +216,11 @@ const ViewDriver = ({ data }: any) => {
                         <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
                             id="LicenceNo"
                             placeholder="Licence No."
-                            defaultValue={drdata.dlno}
+                            defaultValue={String(drdata.licenceNumber)}
                             name="licenceNo" disabled />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-5">
+                {/* <div className="flex flex-wrap -mx-3 mb-5">
                     <div className="w-full px-3">
                         <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2" htmlFor="workStatus" >
                             Work Status
@@ -232,8 +230,8 @@ const ViewDriver = ({ data }: any) => {
                             defaultValue={drdata.work}
                             name="licenceNo" disabled />
                     </div>
-                </div>
-                <div className="flex flex-wrap -mx-3 mb-5">
+                </div> */}
+                {/* <div className="flex flex-wrap -mx-3 mb-5">
                     <div className="w-full md:w-1/2 px-3 mb-5 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xl font-bold mb-2" htmlFor="totalTrips">
                             Total Trips
@@ -252,7 +250,7 @@ const ViewDriver = ({ data }: any) => {
                             defaultValue={drdata.revenue}
                             name="totalRevenue" disabled />
                     </div>
-                </div>
+                </div> */}
             </form>
             <div className="flex  justify-center">
 

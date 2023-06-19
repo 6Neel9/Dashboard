@@ -77,7 +77,7 @@ const Drivers = ({ data }: any) => {
   const navigate = useNavigate();
   const [driverTableData, setDriverTableData] = useState<DataType[]>([]);
   useEffect(() => {
-    fetch("http://localhost:5000/api/drivers/table", {
+    fetch("http://localhost:5000/v1/yuja-api/drivers-table", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -86,33 +86,7 @@ const Drivers = ({ data }: any) => {
       });
   }, []);
 
-
   type DriverDataType = {
-    did: Number,
-    fname: String,
-    lname: String,
-    bdate: Date,
-    dlno: String,
-    working: Boolean,
-    trips: [
-      {
-        tid: Number,
-        stime: Date,
-        etime: Date,
-        sloc: [],
-        eloc: [],
-        revenue: Number,
-        city: {
-          id: String,
-          name: String,
-          state: String,
-        },
-      },
-    ],
-
-  };
-  type DriverDataType2 = {
-    srno?: Number,
     did?: Number,
     name?: String,
     bdate?: String,
@@ -123,7 +97,7 @@ const Drivers = ({ data }: any) => {
 
   const toolbarOptions: ToolbarItems[] = ['Search', 'ExcelExport'];
   // const editing: EditSettingsModel = {  allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
-  const [driverData, setDriverData] = useState<DriverDataType2>([]);
+  const [driverData, setDriverData] = useState<DriverDataType>([]);
   const pageSettings: PageSettingsModel = { pageSize: 10, pageCount: 5 }
   const filterOptions: FilterSettingsModel = { type: "Menu" }
 
@@ -142,23 +116,23 @@ const Drivers = ({ data }: any) => {
       const selectedrowindex: number[] = grid.getSelectedRowIndexes();
       const selectedrecords: any = grid.getSelectedRecords();
       const dr_id = Number(JSON.stringify(selectedrecords[0]['did']))
-      navigate("/driverView", { state: { dr_id: Number(JSON.stringify(selectedrecords[0]['did'])) } })
+      navigate(`/driverView/${dr_id}`, { state: { dr_id: Number(JSON.stringify(selectedrecords[0]['did'])) } })
     }
   }
 
-  type tripType = {
-    tid: Number,
-    stime: Date,
-    etime: Date,
-    sloc: [],
-    eloc: [],
-    revenue: Number,
-    city: {
-      id: String,
-      name: String,
-      state: String,
-    },
-  }
+  // type tripType = {
+  //   tid: Number,
+  //   stime: Date,
+  //   etime: Date,
+  //   sloc: [],
+  //   eloc: [],
+  //   revenue: Number,
+  //   city: {
+  //     id: String,
+  //     name: String,
+  //     state: String,
+  //   },
+  // }
 
   type dataGridType = {
     field: string;
@@ -175,21 +149,21 @@ const Drivers = ({ data }: any) => {
   }
 
 
-  const TotalTrips = (trips: tripType[]) => {
-    var total = 0;
-    trips.forEach((element: tripType) => {
-      total += 1;
-    });
-    return total;
-  };
+  // const TotalTrips = (trips: tripType[]) => {
+  //   var total = 0;
+  //   trips.forEach((element: tripType) => {
+  //     total += 1;
+  //   });
+  //   return total;
+  // };
 
-  const TotalRevenue = (trips: tripType[]) => {
-    var total = 0;
-    trips.forEach((element: tripType) => {
-      total = total + Number(element.revenue);
-    });
-    return total;
-  };
+  // const TotalRevenue = (trips: tripType[]) => {
+  //   var total = 0;
+  //   trips.forEach((element: tripType) => {
+  //     total = total + Number(element.revenue);
+  //   });
+  //   return total;
+  // };
 
   function numberFormat(x: string) {
     x = x.toString();
@@ -204,7 +178,7 @@ const Drivers = ({ data }: any) => {
 
   useEffect(() => {
     var dvr_data: object[] = [];
-    var srno: number = 1;
+    // var srno: number = 1;
     // data.forEach((e: DriverDataType) => {
     //   const temp: { srno: number, did: number, name: string, dlno: string, bdate: string, trips: number, revenue: string } = {
     //     srno: srno,
@@ -221,9 +195,10 @@ const Drivers = ({ data }: any) => {
     // });
     // setDriverData(dvr_data);
     driverTableData.forEach((e: DataType) => {
-      
-      dvr_data.push({srno:srno, did: e.driverId, name: e.firstName, dlno: e.licenceNumber, bdate: e.dob, trips: 0, revenue: 0});
-      srno += 1;
+      var fullName = e.firstName + " " + e.lastName;
+      var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
+      dvr_data.push({ did: e.driverId, name: fullName.toUpperCase() , dlno: e.licenceNumber, bdate: bdate});
+      // srno += 1;
     });
     setDriverData(dvr_data);
   }, [data]);

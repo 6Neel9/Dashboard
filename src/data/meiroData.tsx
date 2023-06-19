@@ -231,7 +231,7 @@ type DriverGridType=({
 })[]
 
 export const driverGrid: DriverGridType = [
-  { field: "srno", headerText: "Sr no.", width: "100", textAlign: "Center" },
+  // { field: "srno", headerText: "Sr no.", width: "100", textAlign: "Center" },
 
   { field: "did", headerText: "Driver Id", width: "150", textAlign: "Center" },
   {
@@ -262,18 +262,18 @@ export const driverGrid: DriverGridType = [
   //   textAlign: "Center",
   // },
 
-  {
-    field: "trips",
-    headerText: "Total Trips",
-    width: "120",
-    textAlign: "Center",
-  },
-  {
-    field: "revenue",
-    headerText: "Total Revenue",
-    width: "120",
-    textAlign: "Center",
-  },
+  // {
+  //   field: "trips",
+  //   headerText: "Total Trips",
+  //   width: "120",
+  //   textAlign: "Center",
+  // },
+  // {
+  //   field: "revenue",
+  //   headerText: "Total Revenue",
+  //   width: "120",
+  //   textAlign: "Center",
+  // },
   
 ];
 

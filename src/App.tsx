@@ -139,7 +139,7 @@ function App() {
                 {/* pages  */}
                 <Route path="/driversList" element={<Drivers data={data} />} />
                 <Route path="/driverUpdate" element={<DriverUpdate  />} />
-                <Route path="/driverView" element={<ViewDriver data={data} />} />
+                <Route path="/driverView/:id" element={<ViewDriver data={data} />} />
                 <Route path="/addNewDriver" element={<AddNewDriver />} />
                 <Route path="/tripList" element={<TripList data={data} />} />
                 <Route path="/tripView" element={<ViewTrip />} />

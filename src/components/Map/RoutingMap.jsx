@@ -5,21 +5,29 @@ import "leaflet-routing-machine";
 import { useMap } from "react-leaflet";
 
 L.Marker.prototype.options.icon = L.icon({
-  iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png"
+  iconUrl: "https://unpkg.com/leaflet/dist/images/marker-icon.png"
 });
 
-export default function RoutingMap() {
+export default function Routing() {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
 
     const routingControl = L.Routing.control({
-      waypoints: [L.latLng(57.74, 11.94), L.latLng(57.6792, 11.949)],
-      routeWhileDragging: true
+      waypoints: [L.latLng(23.1566, 72.6654), L.latLng(23.1885, 72.6289)],
+      routeWhileDragging: true,
+      show: false
     }).addTo(map);
 
-    return () => map.removeControl(routingControl);
+    return () => {
+      if (routingControl && map.hasLayer(routingControl)) {
+        if (routingControl.getPlan()) {
+          routingControl.getPlan().setWaypoints([]); // Clear existing waypoints
+        }
+        map.removeLayer(routingControl);
+      }
+    };
   }, [map]);
 
   return null;

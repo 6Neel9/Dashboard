@@ -5,14 +5,15 @@ import {
   ColumnSeries, Legend, DateTime, Tooltip, DataLabel, LineSeries,
 }
   from '@syncfusion/ej2-react-charts';
-import { Button, LineChart } from "../components";
+import { Button, LineChart,Bar} from "../components";
 import {
   recentTransactions,
   dropdownData,
 } from "../data/dummy";
 import { earningData } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
-import {MediumCard,SmallCard,CardWithChart, Filters} from '../components';
+import {MediumCard,SmallCard,CardWithChart, Filters,ChartCard} from '../components';
+import Line from "./Charts/Line";
 
 
 
@@ -87,7 +88,7 @@ const Home = ({ data }: any) => {
     const primaryyAxis: AxisModel = { title: 'Sales Amount in millions(USD)' };
     // const zoomsettings: ZoomSettingsModel = { enableSelectionZooming: true, enableScrollbar: true };
 
-    return <ChartComponent id='charts'
+    return <ChartComponent 
       primaryXAxis={primaryxAxis}
       primaryYAxis={primaryyAxis}
       // zoomSettings={zoomsettings}
@@ -183,11 +184,82 @@ const Home = ({ data }: any) => {
     percent:"3.75",
   }
 
+  const AttritionedDrivers: CardPropType = {
+    title:"TOTAL ATTRITIONED DRIVERS",
+    duration:"Last 7 days",
+    value:"576",
+    icon:"Negative",
+    percent:"1.75",
+  }
+
+  const ActiveDrivers: CardPropType = {
+    title:"TOTAL ACTIVE DRIVERS",
+    duration:"Last 7 days",
+    value:"8990",
+    icon:"Positive",  
+    percent:"1.67",
+  }
+
+  const PercentActiveDrivers: CardPropType = {
+    title:"TOTAL ACTIVE DRIVERS",
+    duration:"Since Last Month",
+    value:"9.1%",
+    icon:"positive",  
+    percent:"1.69",
+  }
+  const VehiclePercent: CardPropType = {
+    title:"TOTAL VEHICLES",
+    duration:"Since Last Month",
+    value:"6.87%",
+    icon:"positive",  
+    percent:"1.69",
+  }
+
+  const UnactivatedDrivers: CardPropType = {
+    title:"TOTAL UNACTIVE DRIVERS",
+    duration:"Last 7 days",
+    value:"678",
+    icon:"positive",  
+    percent:"2.79",
+  }
+
+  const TotalVehicles: CardPropType = {
+    title:"TOTAL VEHICLES",
+    duration:"Last 7 days",
+    value:"1056",
+    icon:"positive",  
+    percent:"7.79",
+  }
   const CardWithChartProp1 : CardPropType = {
     title: "DRIVER REVENUE",
     duration: "Last 7 days",
   }
 
+  const ReveneMeiro : CardPropType = {
+    title: "CHANGE OVER MEIRO REVENUE",
+    duration: "Over last N months",
+  }
+
+  const ReveneDriver : CardPropType = {
+    title: "CHANGE OVER DRIVER REVENUE",
+    duration: "Over last N months",
+  }
+
+
+ 
+  const CashFreeUsers2 : CardPropType = {
+    title: "CASH FREE USERS",
+    duration: "Last 7 days",
+  }
+
+  const TotalDrivers : CardPropType = {
+    title: "TOTAL DRIVERS",
+    duration: "Last 7 days",
+  }
+  const TotalTripsChart : CardPropType = {
+    title: "TOTAL TRIPS",
+    duration: "Last 7 days",
+  }
   const CardWithChartProp2 : CardPropType = {
     title: "MRR",
     duration: "Last 7 days",
@@ -195,6 +267,126 @@ const Home = ({ data }: any) => {
     icon:"positive",
     percent:"7.35",
   }
+
+  const MeiroRevenuePercentChange : CardPropType = {
+    title: "CHANGE OVER MEIRO REVENUE",
+    duration: "Last Month",
+    value:"28%",
+    icon:"positive",
+    percent:"5.32",
+  }
+
+  const DriverRevenuePercentChange : CardPropType = {
+    title: "CHANGE OVER DRIVER REVENUE",
+    duration: "Last Month",
+    value:"17%",
+    icon:"positive",
+    percent:"1.52",
+  }
+
+  const NewDrivers : CardPropType = {
+    title: "TOTAL NEW DRIVERS",
+    duration: "Last 7 days",
+    value:"6458",
+    icon:"positive",
+    percent:"7.35",
+  }
+
+  const TotalTrips: CardPropType = {
+    title: "TOTAL TRIPS",
+    duration: "Last 7 days",
+    value:"65,332",
+    icon:"positive",
+    percent:"0.35",
+  }
+  
+  const TotalDownloads: CardPropType = {
+    title: "TOTAL DOWNLOADS",
+    duration: "Last 7 days",
+    value:"1,00,043",
+    icon:"positive",
+    percent:"0.31",
+  }
+
+  const TotalTripsAtTheTime: CardPropType = {
+    title: "TOTAL TRIPS",
+    duration: "For this particular day",
+    value:"1032",
+    icon:"negative",
+    percent:"0.12",
+  }
+
+  const LiveTrips: CardPropType = {
+    title: "LIVE TRIPS",
+    duration: "Currently",
+    value:"122",
+    icon:"positive",
+    percent:"0.11",
+  }
+
+  const DistanceCovered: CardPropType = {
+    title: "DISTANCE COVERED",
+    duration: "Last 7 Days",
+    value:"45,367 km",
+    icon:"positive",
+    percent:"0.71",
+  }
+
+  const AvgDistanceCovered: CardPropType = {
+    title: "AVG DISTANCE COVERED / TRIP",
+    duration: "Last 7 Days",
+    value:"2.9 km",
+    icon:"negative",
+    percent:"0.91",
+  }
+
+  const GrowthRateDrivers: CardPropType = {
+    title: "GROWTH RATE OF DRIVERS",
+    duration: "Last 7 Days",
+    value:"2.7%",
+    icon:"negative",
+    percent:"0.36",
+  }
+
+  const ComplementCashFreeUsers: CardPropType = {
+    title: "COMPLEMENT OF CASH FREE USERS",
+    duration: "Last 7 Days",
+    value: "25,997",
+    icon: "negative",
+    percent: "0.3",
+   
+
+}
+
+const ConversionRate: CardPropType = {
+  title: "ACTIVE DRIVERS AS AGAINST DOWNLOADS",
+  duration: "Last 7 Days",
+  value: "25,876",
+  icon: "positive",
+  percent: "2.46",
+ 
+
+}
+
+const TotalRevenueMeiro: CardPropType = {
+  title: "TOTAL REVENUE FOR MEIRO",
+  duration: "Last 7 Days",
+  value: "₹ 50,589",
+  icon: "positive",
+  percent: "2.46",
+ 
+
+}
+
+const AvgRevenuePerUser: CardPropType = {
+  title: "AVG REVENUE / USER",
+  duration: "Last 7 days",
+  value: "₹3489",
+  icon: "positive",
+  percent: "2.45",
+
+}
+  
 
   
 
@@ -210,7 +402,65 @@ const Home = ({ data }: any) => {
       <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
         <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<LineChart />}/>
       </div>
-    </div >
+
+
+      
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+        <CardWithChart prop1={TotalDrivers} prop2={NewDrivers} chart={<Bar />}/>
+      </div>
+
+      <div className="main-container-3 flex  text-left justify-between w-full">
+        <SmallCard props={AttritionedDrivers} />
+        <SmallCard props={ActiveDrivers} />
+        <SmallCard props={PercentActiveDrivers} />
+      </div>
+
+      <div className="main-container-3 flex  text-left justify-between w-full">
+        <SmallCard props={UnactivatedDrivers} />
+        <SmallCard props={TotalVehicles} />
+        <SmallCard props={VehiclePercent} />
+      </div>
+
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+        <CardWithChart prop1={TotalTripsChart} prop2={TotalTrips} chart={<LineChart />}/>
+      </div>
+
+      <div className="main-container-3 flex  text-left justify-between w-full">
+        <SmallCard props={TotalDownloads} />
+        <SmallCard props={TotalTripsAtTheTime} />
+        <SmallCard props={LiveTrips} />
+      </div>
+
+      <div className="main-container-3 flex  text-left justify-between w-full">
+        <SmallCard props={DistanceCovered} />
+        <SmallCard props={AvgDistanceCovered} />
+        <SmallCard props={GrowthRateDrivers} />
+      </div>
+
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+        <CardWithChart prop1={CashFreeUsers2} prop2={ComplementCashFreeUsers} chart={<LineChart />}/>
+      </div>
+
+      <div className="main-container-3 flex  text-left justify-between w-full">
+        <SmallCard props={ConversionRate} />
+        <SmallCard props={TotalRevenueMeiro} />
+        <SmallCard props={AvgRevenuePerUser} />
+      </div>
+
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+        <CardWithChart prop1={ReveneMeiro} prop2={MeiroRevenuePercentChange} chart={<Bar />}/>
+      </div>
+
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+        <CardWithChart prop1={ReveneDriver} prop2={DriverRevenuePercentChange} chart={<Bar />}/>
+      </div>
+
+
+
+
+     
+
+      </div >
   );
 };
 

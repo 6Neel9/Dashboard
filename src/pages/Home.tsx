@@ -241,8 +241,18 @@ const Home = ({ data }: any) => {
     duration: "Over last N months",
   }
 
+  const AvgDistPerUser : CardPropType = {
+    title: "AVG DISTANCE PER USER",
+    duration: "Over last N months",
+  }
+
   const ReveneDriver : CardPropType = {
     title: "CHANGE OVER DRIVER REVENUE",
+    duration: "Over last N months",
+  }
+
+  const AvgTripDuration : CardPropType = {
+    title: "AVG TRIP DURATION",
     duration: "Over last N months",
   }
 
@@ -334,7 +344,7 @@ const Home = ({ data }: any) => {
   }
 
   const AvgDistanceCovered: CardPropType = {
-    title: "AVG DISTANCE COVERED / TRIP",
+    title: "AVG TRIP LENGTH",
     duration: "Last 7 Days",
     value:"2.9 km",
     icon:"negative",
@@ -389,6 +399,9 @@ const AvgRevenuePerUser: CardPropType = {
 }
   
 
+
+  
+
   
 
   return (
@@ -416,13 +429,14 @@ const AvgRevenuePerUser: CardPropType = {
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />
         <SmallCard props={ActiveDrivers} />
-        <SmallCard props={PercentActiveDrivers} />
+        <SmallCard props={DistanceCovered} />
+        
       </div>
 
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={UnactivatedDrivers} />
         <SmallCard props={TotalVehicles} />
-        <SmallCard props={VehiclePercent} />
+        <SmallCard props={AvgDistanceCovered} />
       </div>
 
       <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
@@ -435,7 +449,7 @@ const AvgRevenuePerUser: CardPropType = {
         <SmallCard props={LiveTrips} />
       </div>
 
-      <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
+      <div className="main-container-3 flex  text-left justify-between w-full">
         <SmallCard props={DistanceCovered} />
         <SmallCard props={AvgDistanceCovered} />
         <SmallCard props={GrowthRateDrivers} />
@@ -451,13 +465,19 @@ const AvgRevenuePerUser: CardPropType = {
         <SmallCard props={AvgRevenuePerUser} />
       </div>
 
-      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
         <CardWithChart prop1={ReveneMeiro} prop2={MeiroRevenuePercentChange} chart={<Bar />}/>
       </div>
 
-      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
+      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
         <CardWithChart prop1={ReveneDriver} prop2={DriverRevenuePercentChange} chart={<Bar />}/>
       </div>
+
+
+
+
+     
+
       </div >
   );
 };

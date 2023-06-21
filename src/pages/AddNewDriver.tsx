@@ -61,7 +61,6 @@ const AddNewDriver = () => {
         size: "",
         bgHoverColor: "",
         bgColor: "flow_blue",
-        
         borderRadius: "10px",
         text: "Add Driver",
     }

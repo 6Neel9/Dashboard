@@ -1,0 +1,355 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* For all the containers common style */
+.container {
+  @apply bg-main-bg dark:bg-flow_blue  rounded-2xl border-1 border-[#2C1F39] shadow-[#2C1F39] dark:border-[#8b7da9] shadow-md dark:shadow-[#8b7da9];
+}
+
+.mainBackground {
+  @apply bg-main-bg dark:bg-flow_blue;
+}
+.secondaryBackground {
+  @apply bg-flow_blue dark:bg-periwinkle;
+}
+.mainText {
+  @apply text-gray-700 dark:text-white;
+}
+.secondaryText {
+  @apply text-white dark:text-gray-700;
+}
+.mainShadow {
+  @apply shadow-md shadow-[#2C1F39] dark:shadow-[#8b7da9];
+}
+.mainBorder {
+  @apply border-1 border-[#2C1F39] dark:border-[#8b7da9];
+}
+
+/* For containers with different margin and padding */
+.extraSmallMargin {
+  @apply m-2;
+}
+.smallMargin {
+  @apply m-2.5;
+}
+.averageMargin {
+  @apply m-3;
+}
+.mediumMargin {
+  @apply m-5;
+}
+.largeMargin {
+  @apply m-10;
+}
+.marginRightMedium {
+  @apply mr-5;
+}
+.marginLeftSmall {
+  @apply ml-3;
+}
+.marginLeftMedium {
+  @apply ml-5;
+}
+.marginRightLarge {
+  @apply mr-10;
+}
+.marginLeftLarge {
+  @apply ml-10;
+}
+.marginTopMedium {
+  @apply mt-5;
+}
+.marginBottomMedium {
+  @apply mb-5;
+}
+.marginTopLarge {
+  @apply mt-10;
+}
+.marginBottomLarge {
+  @apply mb-10;
+}
+
+.extraSmallPadding {
+  @apply p-1;
+}
+.smallPadding {
+  @apply p-2;
+}
+.averagePadding {
+  @apply p-3;
+}
+.mediumPadding {
+  @apply p-5;
+}
+.largePadding {
+  @apply p-10;
+}
+
+/* For the container with variable width */
+.smallContainer {
+  @apply w-2/5;
+}
+
+.mediumContainer {
+  @apply w-3/5;
+}
+
+.largeContainer {
+  @apply w-full;
+}
+
+/* For all the common text Styling */
+.textStyle {
+  @apply text-gray-700 dark:text-white;
+}
+
+/* For Text with variable sizing */
+.extraLargeText {
+  @apply text-6xl;
+}
+.largeText {
+  @apply text-5xl;
+}
+.mediumText {
+  @apply text-2xl;
+}
+.smallText {
+  @apply text-xl;
+}
+
+/* For all the text with variable weight*/
+.lightWeightText {
+  @apply font-light;
+}
+.mediumWeightText {
+  @apply font-medium;
+}
+.boldWeightText {
+  @apply font-bold;
+}
+
+/* For the percentage increase/decrease */
+.percent {
+  @apply inline-block;
+}
+.percentIcon {
+  @apply inline-block;
+}
+.percentIncrease {
+  @apply text-green-600;
+}
+.percentDecrease {
+  @apply text-red-600;
+}
+
+/* Flex */
+.displayFlex {
+  @apply flex;
+}
+.displayInlineBlock {
+  @apply inline-block;
+}
+.flexRow {
+  @apply flex-row;
+}
+.flexCol {
+  @apply flex-col;
+}
+.flexWrap {
+  @apply flex-wrap;
+}
+.flexJustifyCenter {
+  @apply justify-center;
+}
+.flexJustifyStart {
+  @apply justify-start;
+}
+.flexJustifyEnd {
+  @apply justify-end;
+}
+.flexJustifyBetween {
+  @apply justify-between;
+}
+.flexJustifyAround {
+  @apply justify-around;
+}
+.flexJustifyEvenly {
+  @apply justify-evenly;
+}
+.flexAlignCenter {
+  @apply items-center;
+}
+.flexAlignStart {
+  @apply items-start;
+}
+.flexAlignEnd {
+  @apply items-end;
+}
+.flexAlignStretch {
+  @apply items-stretch;
+}
+.flexAlignBaseline {
+  @apply items-baseline;
+}
+.flexGrow {
+  @apply flex-grow;
+}
+.flexShrink {
+  @apply flex-shrink;
+}
+.flexNoGrow {
+  @apply flex-grow-0;
+}
+.flexNoShrink {
+  @apply flex-shrink-0;
+}
+.flexOrderFirst {
+  @apply order-first;
+}
+.flexOrderLast {
+  @apply order-last;
+}
+.flexOrderNone {
+  @apply order-none;
+}
+
+/* For rounded curvature */
+.roundedSmall {
+  @apply rounded-sm;
+}
+.roundedMedium {
+  @apply rounded-md;
+}
+.roundedLarge {
+  @apply rounded-lg;
+}
+.roundedExtraLarge {
+  @apply rounded-xl;
+}
+.roundedExtraXLarge {
+  @apply rounded-2xl;
+}
+.roundedFull {
+  @apply rounded-full;
+}
+
+/* For Text color */
+.textWhite {
+  @apply text-white;
+}
+.textBlack {
+  @apply text-black;
+}
+.textGray {
+  @apply text-gray-700;
+}
+.textGrayLight {
+  @apply text-gray-400;
+}
+.textGrayDark {
+  @apply text-gray-900;
+}
+
+/* for text position */
+.textLeft {
+  @apply text-left;
+}
+.textRight {
+  @apply text-right;
+}
+.textCenter {
+  @apply text-center;
+}
+.textJustify {
+  @apply text-justify;
+}
+
+/* For Different Height  */
+.heightSmall {
+  @apply h-10;
+}
+.heightMedium {
+  @apply h-20;
+}
+.heightLarge {
+  @apply h-40;
+}
+.heightExtraLarge {
+  @apply h-60;
+}
+.heightExtraXLarge {
+  @apply h-80;
+}
+.heightFull {
+  @apply h-full;
+}
+.heightFitContent {
+  @apply h-fit;
+}
+
+/* For Different Width  */
+.widthSmall {
+  @apply w-10;
+}
+.widthMedium {
+  @apply w-20;
+}
+.widthLarge {
+  @apply w-40;
+}
+.widthExtraLarge {
+  @apply w-60;
+}
+.widthExtraXLarge {
+  @apply w-80;
+}
+.widthFull {
+  @apply w-full;
+}
+
+/* For grid */
+.displayGrid {
+  @apply grid;
+}
+.gridCols1 {
+  @apply grid-cols-1;
+}
+.gridCols2 {
+  @apply grid-cols-2;
+}
+.gridCols3 {
+  @apply grid-cols-3;
+}
+.gridCols4 {
+  @apply grid-cols-4;
+}
+.gridCols5 {
+  @apply grid-cols-5;
+}
+.gridCols6 {
+  @apply grid-cols-6;
+}
+.colSpan1 {
+  @apply col-span-1;
+}
+.colSpan2 {
+  @apply col-span-2;
+}
+.colSpan3 {
+  @apply col-span-3;
+}
+.colSpan4 {
+  @apply col-span-4;
+}
+
+/* divide */
+.divideXSmall {
+  @apply divide-x-1;
+}
+.divideXMedium {
+  @apply divide-x-2;
+}
+.divideXLarge {
+  @apply divide-x-4;
+}

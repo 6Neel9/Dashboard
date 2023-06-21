@@ -145,7 +145,9 @@ const RevenuePerTripwrtCityStates: CardPropType = {
 const RevenueAnalytics = () => {
     return (
         <div className="m-2 text-[#FEFEFA]">
+            <div className="flex">
             <Filters />
+            </div>
             <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl ">
                 <CardWithChart prop1={TotalRevenueForDriver} prop2={ChartForTotalRevenue} chart={<Bar />} />
             </div>

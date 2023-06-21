@@ -14,6 +14,7 @@ import { earningData } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
 import {MediumCard,SmallCard,CardWithChart, Filters,ChartCard} from '../components';
 import Line from "./Charts/Line";
+import "../Styles.css"
 
 
 
@@ -392,74 +393,71 @@ const AvgRevenuePerUser: CardPropType = {
 
   return (
 
-    <div className = "m-2 text-[#FEFEFA]">
+    <div className = "extraSmallMargin">
+      <div className="displayFlex">
       <Filters />
-      <div className="main-container-1 flex text-left justify-between ">
+      </div>
+      
+      <div className="displayFlex textLeft flexJustifyBetween ">
         <MediumCard props={MediumCardProps}/>
         <SmallCard props={SmallCardOneProps}/>
         <SmallCard props={SmallCardTwoProps}/>
       </div>
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className="displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium container widthFull">
         <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<LineChart />}/>
       </div>
 
 
-      
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+    
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container w-fit">
         <CardWithChart prop1={TotalDrivers} prop2={NewDrivers} chart={<Bar />}/>
       </div>
 
-      <div className="main-container-3 flex  text-left justify-between w-full">
+      <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />
         <SmallCard props={ActiveDrivers} />
         <SmallCard props={PercentActiveDrivers} />
       </div>
 
-      <div className="main-container-3 flex  text-left justify-between w-full">
+      <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={UnactivatedDrivers} />
         <SmallCard props={TotalVehicles} />
         <SmallCard props={VehiclePercent} />
       </div>
 
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
         <CardWithChart prop1={TotalTripsChart} prop2={TotalTrips} chart={<LineChart />}/>
       </div>
 
-      <div className="main-container-3 flex  text-left justify-between w-full">
+      <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={TotalDownloads} />
         <SmallCard props={TotalTripsAtTheTime} />
         <SmallCard props={LiveTrips} />
       </div>
 
-      <div className="main-container-3 flex  text-left justify-between w-full">
+      <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={DistanceCovered} />
         <SmallCard props={AvgDistanceCovered} />
         <SmallCard props={GrowthRateDrivers} />
       </div>
 
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
         <CardWithChart prop1={CashFreeUsers2} prop2={ComplementCashFreeUsers} chart={<LineChart />}/>
       </div>
 
-      <div className="main-container-3 flex  text-left justify-between w-full">
+      <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={ConversionRate} />
         <SmallCard props={TotalRevenueMeiro} />
         <SmallCard props={AvgRevenuePerUser} />
       </div>
 
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
         <CardWithChart prop1={ReveneMeiro} prop2={MeiroRevenuePercentChange} chart={<Bar />}/>
       </div>
 
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
         <CardWithChart prop1={ReveneDriver} prop2={DriverRevenuePercentChange} chart={<Bar />}/>
       </div>
-
-
-
-
-     
-
       </div >
   );
 };
@@ -475,14 +473,14 @@ export default Home;
 
     // <div className="mt-10">
     // <Filters />
-    //   <div className="flex flex-wrap   lg:flex-nowrap  justify-center w-full">
-    //     <div className="flex m-3 flex-wrap justify-center  gap-1 items-center w-full">
+    //   <div className="displayFlex displayFlex-wrap   lg:displayFlex-nowrap  justify-center widthFull">
+    //     <div className="displayFlex m-3 displayFlex-wrap justify-center  gap-1 items-center widthFull">
          
-    //       <div className=" flex justify-center w-full sm:flex-row">
+    //       <div className=" displayFlex justify-center widthFull sm:displayFlex-row">
     //         {earningData.map((item: EarningDataType) => (
-    //           <div className=" bg-white dark:text-gray-200 dark:bg-secondary-dark-bg flex justify-evenly w-1/3 m-2 p-4 rounded-2xl">
+    //           <div className=" bg-white dark:text-gray-200 dark:bg-secondary-dark-bg displayFlex justify-evenly w-1/3 m-2 p-4 rounded-2xl">
                
-    //             <div className="text-2xl lg:text-2xl mr-2 flex justify-center font-semibold">  <div className={`text-3xl lg:text-3xl mr-2`}  style={{color: currentColor}}>{item.icon}</div>{item.title}</div>
+    //             <div className="text-2xl lg:text-2xl mr-2 displayFlex justify-center font-semibold">  <div className={`text-3xl lg:text-3xl mr-2`}  style={{color: currentColor}}>{item.icon}</div>{item.title}</div>
     //             <div className="text-2xl lg:text-2xl mr-2">
     //               <span className="text-lg lg:text-3xl font-semibold">
     //                 {item.title === "Total Drivers" && total_drivers}
@@ -496,47 +494,47 @@ export default Home;
     //     </div>
     //   </div>
 
-    //   <div className="flex gap-10 flex-wrap justify-center ">
+    //   <div className="displayFlex gap-10 displayFlex-wrap justify-center ">
         
     //   </div>
 
-    //   <div className="flex gap-10 m-4 flex-wrap justify-center">
+    //   <div className="displayFlex gap-10 m-4 displayFlex-wrap justify-center">
         
     //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-    //     <div className="flex justify-between items-center gap-2 mb-10">
+    //     <div className="displayFlex flexJustifyBetween items-center gap-2 mb-10">
     //         <p className="text-xl font-semibold">Revenue: </p>
            
     //       </div>
-    //       <div className="md:w-full overflow-auto">
+    //       <div className="md:widthFull overflow-auto">
     //       <Bar />
     //       </div>
     //     </div>
     //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-    //       <div className="flex justify-between items-center gap-2 mb-10">
+    //       <div className="displayFlex flexJustifyBetween items-center gap-2 mb-10">
     //         <p className="text-xl font-semibold">Sales Overview</p>
           
     //       </div>
-    //       <div className="md:w-full overflow-auto">
+    //       <div className="md:widthFull overflow-auto">
     //         <Pie />
     //       </div>
     //     </div>
     //   </div>
-    //   <div className="flex gap-10 m-4 flex-wrap justify-center">
+    //   <div className="displayFlex gap-10 m-4 displayFlex-wrap justify-center">
         
     //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-    //       <div className="flex justify-between items-center gap-2 mb-10">
+    //       <div className="displayFlex flexJustifyBetween items-center gap-2 mb-10">
     //         <p className="text-xl font-semibold">Sales Overview</p>
           
     //       </div>
-    //       <div className="md:w-full overflow-auto">
+    //       <div className="md:widthFull overflow-auto">
     //         <Area />
     //       </div>
     //     </div>
     //     <div className="bg-white dark:text-gray-200 dark:bg-secondary-dark-bg p-6 rounded-2xl w-96 md:w-760">
-    //       <div className="flex justify-between items-center gap-2 mb-10">
+    //       <div className="displayFlex flexJustifyBetween items-center gap-2 mb-10">
     //         <p className="text-xl font-semibold">Sales Overview</p>
     //       </div>
-    //       <div className="md:w-full overflow-auto">
+    //       <div className="md:widthFull overflow-auto">
     //         <Line />
     //       </div>
     //     </div>

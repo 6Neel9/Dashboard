@@ -93,7 +93,9 @@ const ChartCardProps2: CardPropType = {
 const TripAnalytics = () => {
     return (
         <div className="m-2 text-[#FEFEFA]">
+            <div className="flex">
             <Filters />
+            </div>
             <div className="main-container-3 flex  text-left justify-between w-full">
 
                 <SmallCard props={SmallCardProps6} />

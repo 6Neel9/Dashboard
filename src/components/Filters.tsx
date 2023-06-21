@@ -2,13 +2,13 @@ import React from 'react'
 import Button from './Button';
 import { useStateContext } from "../contexts/ContextProvider";
 import { Months, States, FilterDuration } from '../data/meiroData';
-
+import "../Styles.css"
 
 
 const Filters = () => {
     const { currentColor, currentMode } = useStateContext();
 
-
+    
 
     const resetSortIcons = () => {
         var sortIcons = document.getElementsByClassName("sort-icon");
@@ -29,32 +29,28 @@ const Filters = () => {
     }
 
     return (
-        <div className=" bg-flow_blue m-3 p-3  md:flex-wrap md:m-2 rounded-2xl border-1 border-[#8b7da9] shadow-md shadow-[#8b7da9]   ">
-            <div className="flex justify-end">
-                <div className="filter-container "> 
-                    <select id="filter-duration" className='mr-5 bg-flow_blue border-1 rounded-md p-1 border-[#D6CDE9]' placeholder='Period'>
+        <div className="container averageMargin averagePadding  md:flexWrap md:extraSmallMargin ">
+            <div className="displayFlex flexJustifyEnd">
+                <div className=""> 
+                    <select id="filter-duration" className='marginRightMedium roundedMedium extraSmallPadding mainBackground mainText mainBorder' placeholder='Period'>
                         <option value="none">Period</option>
                         {FilterDuration.map((ele) => (<option value={ele.value}>{ele.duration}</option>))}
                     </select>
                     
-                    <select id="filter-state" className='mr-5 bg-flow_blue border-1 rounded-md p-1 border-[#D6CDE9]' placeholder='State'>
+                    <select id="filter-state" className='marginRightMedium roundedMedium extraSmallPadding mainBackground mainText mainBorder' placeholder='State'>
                         <option value="none">State</option>
                         <option value="All">All</option>
                         {States.map((state) => (<option value={state.state}>{state.state}</option>))}
                     </select>
                         <Button prop={{
-                            color: "#2C1F39",
                             borderRadius: "10px",
                             text: "Apply",
-                            bgColor: "#D6CDE9",
                             marginRight: 3,
                         }} />
                         {"   "}
                     <Button prop={{
-                        color: "#2C1F39",
                         borderRadius: "10px",
                         text: "Reset",
-                        bgColor: "#D6CDE9",
                     }} />
 
 
@@ -72,7 +68,7 @@ export default Filters
 
 
     /*
-     <div className="bg-white  dark:text-gray-200 dark:bg-secondary-dark-bg m-3 p-4 rounded-2xl  md:flex-wrap md:m-2   ">
+     <div className="bg-white  dark:text-gray-200 dark:bg-secondary-dark-bgaverageMargin p-4 rounded-2xl  md:flex-wrap md:m-2   ">
 <div className="flex justify-center">
     <div className="filter-container ">
         <label htmlFor="filter-start-date" className='mr-2 font-bold'>Start Date:</label>

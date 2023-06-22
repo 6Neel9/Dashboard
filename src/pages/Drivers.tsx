@@ -25,6 +25,7 @@ import {
 import { driverGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
+import "../Styles.css";
 
 
 // const dropdown: CSS.Properties = {
@@ -206,7 +207,7 @@ const Drivers = ({ data }: any) => {
 
 
   return (
-    <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white dark:text-white dark:bg-flow_blue rounded-3xl border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]">
+    <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">
       <Header title="Driver Details List" />
       <GridComponent
         id="grid"

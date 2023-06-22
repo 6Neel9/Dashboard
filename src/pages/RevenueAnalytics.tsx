@@ -1,6 +1,6 @@
 import React from 'react'
 import { Filters, SmallCard, CardWithChart, ChartCard, LineChart, Bar,Pie} from '../components'
-
+import "../Styles.css"
 
 type CardPropType = {
     title?: string,
@@ -144,37 +144,37 @@ const RevenuePerTripwrtCityStates: CardPropType = {
 
 const RevenueAnalytics = () => {
     return (
-        <div className="m-2 text-[#FEFEFA]">
-            <div className="flex">
+        <div className="extraSmallMargin">
+            <div className="displayFlex">
             <Filters />
             </div>
-            <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl ">
+            <div className=" displayFlex textLeft mainBackground  heightFitContent mediumMargin mediumPadding mainBorder mainShadow  roundedExtraXLarge ">
                 <CardWithChart prop1={TotalRevenueForDriver} prop2={ChartForTotalRevenue} chart={<Bar />} />
             </div>
             
 
-            <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl ">
+            <div className=" displayFlex textLeft mainBackground  heightFitContent mediumMargin mediumPadding mainBorder mainShadow  roundedExtraXLarge ">
                 <CardWithChart prop1={CompanyRevenueperTrip} prop2={CompanyRevenueperTripDetails} chart={<Bar />} />
             </div>
 
             
-            <div className="main-container-1 flex text-left justify-between w-full">
+            <div className=" displayFlex textLeft flexJustifyBetween widthFull">
                 <ChartCard prop={RevenuePerTripwrtTime} chart={<Bar />} />
                 <ChartCard prop={RevenuePerTripwrtCityStates} chart={<Bar />} />
             </div>
 
-            <div className="main-container-1 flex text-left justify-between w-full">
+            <div className=" displayFlex textLeft flexJustifyBetween widthFull">
                 <ChartCard prop={RevenuePerKmwrtTime} chart={<Bar />} />
                 <ChartCard prop={RevenuePerKmwrtStateCity} chart={<Bar />} />
             </div>
 
-            <div className="main-container-1 flex text-left justify-between w-full">
+            <div className=" displayFlex textLeft flexJustifyBetween widthFull">
                 <ChartCard prop={RevenuePerOperatingHourwrtTime} chart={<Bar />} />
                 <ChartCard prop={RevenuePerOperatingHourwrtCityState} chart={<Bar />} />
             </div>
 
 
-            <div className="main-container-3 flex  text-left justify-between w-full">
+            <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
 
                
                 <SmallCard props={AvgRevenuePerHour} />
@@ -183,14 +183,10 @@ const RevenueAnalytics = () => {
 
             </div>
             
-            <div className="main-container-3 flex  text-left justify-between w-full">
+            <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
                 <SmallCard props={SmallCardProps2} />
                 <SmallCard props={SmallCardProps3} />
                 <SmallCard props={AvgRevPerKm} />
-
-
-
-               
 
             </div>
 

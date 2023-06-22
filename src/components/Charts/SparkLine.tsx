@@ -17,7 +17,6 @@ const SparkLine = ({ id, height, width, color, data, type, currentColor }: PropT
 
   return (
     <SparklineComponent
-      id={id}
       height={height}
       width={width}
       lineWidth={1}

@@ -132,7 +132,6 @@ const Home = ({ data }: any) => {
   const DropDown = () => (
     <div className="w-28 border-1 border-color px-2 py-1 rounded-md">
       <DropDownListComponent
-        id="time"
         fields={{ text: "Time", value: "Id" }}
         style={{ border: "none", color: currentMode === "Dark" ? "white" : "" }}
         value="1"
@@ -399,11 +398,6 @@ const AvgRevenuePerUser: CardPropType = {
 }
   
 
-
-  
-
-  
-
   return (
 
     <div className = "extraSmallMargin">
@@ -416,13 +410,11 @@ const AvgRevenuePerUser: CardPropType = {
         <SmallCard props={SmallCardOneProps}/>
         <SmallCard props={SmallCardTwoProps}/>
       </div>
-      <div className="displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium container widthFull">
+      <div className="displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
         <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<LineChart />}/>
       </div>
-
-
     
-      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container w-fit">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge ">
         <CardWithChart prop1={TotalDrivers} prop2={NewDrivers} chart={<Bar />}/>
       </div>
 
@@ -439,7 +431,7 @@ const AvgRevenuePerUser: CardPropType = {
         <SmallCard props={AvgDistanceCovered} />
       </div>
 
-      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
         <CardWithChart prop1={TotalTripsChart} prop2={TotalTrips} chart={<LineChart />}/>
       </div>
 
@@ -449,13 +441,13 @@ const AvgRevenuePerUser: CardPropType = {
         <SmallCard props={LiveTrips} />
       </div>
 
-      <div className="main-container-3 flex  text-left justify-between w-full">
+      <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={DistanceCovered} />
         <SmallCard props={AvgDistanceCovered} />
         <SmallCard props={GrowthRateDrivers} />
       </div>
 
-      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium container">
+      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
         <CardWithChart prop1={CashFreeUsers2} prop2={ComplementCashFreeUsers} chart={<LineChart />}/>
       </div>
 
@@ -465,18 +457,13 @@ const AvgRevenuePerUser: CardPropType = {
         <SmallCard props={AvgRevenuePerUser} />
       </div>
 
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
         <CardWithChart prop1={ReveneMeiro} prop2={MeiroRevenuePercentChange} chart={<Bar />}/>
       </div>
 
-      <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-lg shadow-[#8b7da9]  rounded-2xl  ">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
         <CardWithChart prop1={ReveneDriver} prop2={DriverRevenuePercentChange} chart={<Bar />}/>
       </div>
-
-
-
-
-     
 
       </div >
   );

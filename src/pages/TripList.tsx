@@ -24,6 +24,8 @@ import {
 import { tripGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
+import "../Styles.css"
+
 
 const TripList = ({ data }: any) => {
     const navigate = useNavigate();
@@ -134,7 +136,7 @@ const TripList = ({ data }: any) => {
     }, [data]);
 
     return (
-        <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white dark:text-white dark:bg-secondary-dark-bg rounded-3xl">
+        <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">
             <Header title="Trip List" />
             <GridComponent
                 id="grid"

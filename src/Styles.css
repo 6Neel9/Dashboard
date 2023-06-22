@@ -7,6 +7,7 @@
   @apply bg-main-bg dark:bg-flow_blue  rounded-2xl border-1 border-[#2C1F39] shadow-[#2C1F39] dark:border-[#8b7da9] shadow-md dark:shadow-[#8b7da9];
 }
 
+
 .mainBackground {
   @apply bg-main-bg dark:bg-flow_blue;
 }
@@ -18,6 +19,10 @@
 }
 .secondaryText {
   @apply text-white dark:text-gray-700;
+}
+
+.MenuColor {
+  @apply text-[#2C1F39] dark:text-white;
 }
 .mainShadow {
   @apply shadow-md shadow-[#2C1F39] dark:shadow-[#8b7da9];
@@ -63,11 +68,20 @@
 .marginBottomMedium {
   @apply mb-5;
 }
+.marginBottomMediumLarge {
+  @apply mb-6;
+}
 .marginTopLarge {
   @apply mt-10;
 }
+.marginTopExtraLarge {
+  @apply mt-24;
+}
 .marginBottomLarge {
   @apply mb-10;
+}
+.neagativeMarginXSmall{
+  @apply -mx-3;
 }
 
 .extraSmallPadding {
@@ -84,6 +98,9 @@
 }
 .largePadding {
   @apply p-10;
+}
+.averageXPadding {
+  @apply px-3;
 }
 
 /* For the container with variable width */
@@ -111,6 +128,9 @@
 .largeText {
   @apply text-5xl;
 }
+.mediumLargeText {
+  @apply text-4xl;
+}
 .mediumText {
   @apply text-2xl;
 }
@@ -127,6 +147,9 @@
 }
 .boldWeightText {
   @apply font-bold;
+}
+.extraBoldWeightText {
+  @apply font-extrabold;
 }
 
 /* For the percentage increase/decrease */
@@ -213,6 +236,9 @@
 .flexOrderNone {
   @apply order-none;
 }
+.floatRight {
+  @apply float-right;
+}
 
 /* For rounded curvature */
 .roundedSmall {
@@ -229,6 +255,9 @@
 }
 .roundedExtraXLarge {
   @apply rounded-2xl;
+}
+.rounded3XLarge {
+  @apply rounded-3xl;
 }
 .roundedFull {
   @apply rounded-full;
@@ -307,6 +336,12 @@
 .widthFull {
   @apply w-full;
 }
+.maxWidthLarge {
+  @apply max-w-lg;
+}
+.halfWidth {
+  @apply w-1/2;
+}
 
 /* For grid */
 .displayGrid {
@@ -352,4 +387,13 @@
 }
 .divideXLarge {
   @apply divide-x-4;
+}
+
+
+/* Form input classes */
+.formLabel{
+  @apply block uppercase tracking-wide mb-2;
+}
+.formInput{
+  @apply appearance-none block focus:bg-white focus:text-black focus:outline-none py-3 px-4 mb-3 leading-tight 
 }

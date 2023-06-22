@@ -92,35 +92,34 @@ const ChartCardProps2: CardPropType = {
 
 const TripAnalytics = () => {
     return (
-        <div className="m-2 text-[#FEFEFA]">
-            <div className="flex">
+        <div className="extraSmallMargin">
+            <div className="displayFlex">
             <Filters />
             </div>
-            <div className="main-container-3 flex  text-left justify-between w-full">
+            <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
 
                 <SmallCard props={SmallCardProps6} />
                 <SmallCard props={SmallCardProps7} />
                 <SmallCard props={SmallCardProps8} />
-
             </div>
-            <div className="main-container-2 flex text-left bg-[#2C1F39] h-fit m-2.5 p-5 border-1 border-[#8b7da9] shadow-md shadow-[#8b7da9]  rounded-2xl ">
+            <div className=" displayFlex textLeft  heightFitContent smallMargin mediumPadding mainBackground mainBorder mainShadow roundedExtraXLarge  ">
                 <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<Bar />} />
             </div>
-            <div className="main-container-3 flex  text-left justify-between w-full">
+            <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
 
                 <SmallCard props={SmallCardProps2} />
                 <SmallCard props={SmallCardProps3} />
                 <SmallCard props={SmallCardProps4} />
 
             </div>
-            <div className="main-container-1 flex text-left justify-between w-full">
+            <div className="displayFlex textLeft flexJustifyBetween widthFull">
                 <ChartCard prop={ChartCardProps} chart={<Bar />} />
                 <SmallCard props={SmallCardProps1} />
             </div>
 
 
 
-            <div className="main-container-2 flex  text-left justify-between w-full">
+            <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
                 <SmallCard props={SmallCardProps5} />
                 <ChartCard prop={ChartCardProps2} chart={<Bar />} />
 

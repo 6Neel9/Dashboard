@@ -2,6 +2,7 @@ import React, { FormEvent } from "react";
 import Button from "../components/Button";
 import { useStateContext } from "../contexts/ContextProvider";
 import { GrClose } from "react-icons/gr";
+import "../Styles.css";
 
 
 const AddNewDriver = () => {
@@ -69,8 +70,8 @@ const AddNewDriver = () => {
 
 
     return (
-        <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-flow_blue rounded-3xl">
-            <div className="flex float-right mb-4">
+        <div className="largeMargin marginTopMedium largePadding mainBackground mainShadow mainBorder rounded3XLarge">
+            <div className="displayFlex floatRight marginBottomMedium">
                 {/* <span onClick={() => navigate("/driverView", { state: { dr_id: did } })}>
             <button
               type="button"
@@ -82,7 +83,7 @@ const AddNewDriver = () => {
             </button>
           </span> */}
             </div>
-            <h1 className="text-black font-extrabold text-4xl dark:text-white">Add New Driver:</h1>
+            <h1 className="mainText extraBoldWeightText mediumLargeText">Add New Driver:</h1>
             <form style={{
                 width: "100%",
                 display: "flex",
@@ -90,71 +91,71 @@ const AddNewDriver = () => {
                 marginLeft: "auto",
                 marginRight: "auto",
                 marginTop: "4%",
-            }} className="w-full max-w-lg" onSubmit={handleSubmit}>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block uppercase tracking-wide text-gray-200 text-xl font-bold mb-2" htmlFor="FirstName">
+            }} className="widthFull maxWidthLarge" onSubmit={handleSubmit}>
+                <div className="displayFlex flexWrap neagativeMarginXSmall marginBottomMediumLarge">
+                    <div className="halfWidth averageXPadding ">
+                        <label className="mainText formLabel smallText boldWeightText" htmlFor="FirstName">
                             First Name
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-600 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text"
+                        <input className="formInput widthFull secondaryBackground mainBorder roundedMedium " type="text"
                             id="FirstName"
                             placeholder="First Name"
                             name="fname" />
                     </div>
-                    <div className="w-full md:w-1/2 px-3">
-                        <label className="block uppercase tracking-wide text-gray-200 text-xl font-bold mb-2" htmlFor="LastName">
+                    <div className="widthFull halfWidth averageXPadding">
+                        <label className="mainText formLabel smallText boldWeightText" htmlFor="LastName">
                             Last Name
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
+                        <input className="formInput widthFull secondaryBackground mainBorder roundedMedium " type="text"
                             id="LastName"
                             placeholder="Last Name"
                             name="lname" />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-200 text-xl font-bold mb-2" htmlFor="Bdate" >
+                <div className="displayFlex flexWrap neagativeMarginXSmall marginBottomMediumLarge">
+                    <div className="widthFull averageXPadding">
+                        <label className="mainText formLabel smallText boldWeightText" htmlFor="Bdate" >
                             Birth Date
                         </label>
-                        <input type="date" className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                        <input type="date" className="formInput secondaryText widthFull secondaryBackground mainBorder roundedMedium"
                             id="Bdate"
                             placeholder="BirthDate"
                             name="bdate" />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-200 text-xl font-bold mb-2" htmlFor="DriverId" >
+                <div className="displayFlex flexWrap neagativeMarginXSmall marginBottomMediumLarge">
+                    <div className="widthFull averageXPadding">
+                        <label className="mainText formLabel smallText boldWeightText" htmlFor="DriverId" >
                             Driver Id
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
+                        <input className="formInput widthFull secondaryBackground mainBorder roundedMedium" type="text"
                             id="DriverId"
                             placeholder="Driver Id"
                             name="driverId" />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-200 text-xl font-bold mb-2" htmlFor="LicenceNo" >
+                <div className="displayFlex flexWrap neagativeMarginXSmall marginBottomMediumLarge">
+                    <div className="widthFull averageXPadding">
+                        <label className="mainText formLabel smallText boldWeightText" htmlFor="LicenceNo" >
                             Licence No.
                         </label>
-                        <input className="appearance-none block w-full bg-gray-200 text-gray-600 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text"
+                        <input className="formInput  widthFull secondaryBackground mainBorder roundedMedium" type="text"
                             id="LicenceNo"
                             placeholder="Licence No."
                             name="licenceNo" />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-3 mb-6">
-                    <div className="w-full px-3">
-                        <label className="block uppercase tracking-wide text-gray-200 text-xl font-bold mb-2" htmlFor="LicenceNo" >
+                <div className="displayFlex flexWrap neagativeMarginXSmall marginBottomMediumLarge">
+                    <div className="widthFull averageXPadding">
+                        <label className="mainText formLabel smallText boldWeightText" htmlFor="LicenceNo" >
                             Work Status
                         </label>
                         <div className="relative">
-                            <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-600 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-300" id="workStatus" name="working">
+                            <select className="formInput secondaryText widthFull secondaryBackground mainBorder roundedMedium" id="workStatus" name="working">
                                 <option value={"true"}>Working</option>
                                 <option value={"false"}>Not Working</option>
                             </select>
-                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-200">
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                                 <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                             </div>
                         </div>

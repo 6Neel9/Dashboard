@@ -2,18 +2,15 @@ import React, { useEffect, useState } from "react";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import {
   AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject,
-  ColumnSeries, Legend, DateTime, Tooltip, DataLabel, LineSeries,
+  ColumnSeries, Legend, DateTime, Tooltip, DataLabel, LineSeries, ValueType, IntervalType, EdgeLabelPlacement, ChartRangePadding,
 }
   from '@syncfusion/ej2-react-charts';
-import { Button, LineChart,Bar} from "../components";
+import { Bar, LineChart} from "../components";
 import {
-  recentTransactions,
   dropdownData,
 } from "../data/dummy";
-import { earningData } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
-import {MediumCard,SmallCard,CardWithChart, Filters,ChartCard} from '../components';
-import Line from "./Charts/Line";
+import {MediumCard,SmallCard,CardWithChart, Filters} from '../components';
 import "../Styles.css"
 
 
@@ -34,7 +31,8 @@ const Home = ({ data }: any) => {
   },[dispatch])
 
 
-  const total_drivers = data.length;
+  const [drivers, setDrivers] = useState<any[]>([]);
+  const [trips, setTrips] = useState<any[]>([]);
   var total_revenue = 0;
   function numberFormat(x: string) {
     x = x.toString();
@@ -127,19 +125,6 @@ const Home = ({ data }: any) => {
     width: undefined
   }
 
-  const buttonProps1 = {
-    ...buttonProps,
-    text: "Download Report",
-  }
-  const buttonProps2 = {
-    ...buttonProps,
-    text: "Add",
-  }
-
-  // const dropDownStyle: React.CSSProperties = {
-  //   border: "none",
-  //   color: currentMode === "Dark" ? "white" : ""
-  // }
 
 
   const DropDown = () => (
@@ -154,6 +139,64 @@ const Home = ({ data }: any) => {
       />
     </div>
   );
+
+
+  
+
+  useEffect(() => {
+    fetch("http://localhost:5000/yuja-sm/v1/drivers",{
+      method: "GET",
+    }).then((res) => res.json())
+    .then((data) => {
+      setDrivers(data);
+    }
+    )
+  }, [selectedDuration, selectedState]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/yuja-sm/v1/trips",{
+      method: "GET",
+    }).then((res) => res.json())
+    .then((e) => {
+      setTrips(e);
+    }
+    )
+  }, [selectedDuration, selectedState]);
+
+
+  const Revenue = (data: any)=>{
+    var temp =0;
+    data.forEach((element: any) => {
+      temp += element.tripFare;
+    });
+    return temp;
+  }
+
+  const DriverRevenueChart =()=>{
+    
+    const primaryxAxis: AxisModel = { valueType: 'Category' };
+    // const data: any[] = [
+    //   { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
+    //   { month: 'Mar', sales: 34 }, { month: 'Apr', sales: 32 },
+    //   { month: 'May', sales: 40 }, { month: 'Jun', sales: 32 },
+    //   { month: 'Jul', sales: 35 }, { month: 'Aug', sales: 55 },
+    //   { month: 'Sep', sales: 38 }, { month: 'Oct', sales: 30 },
+    //   { month: 'Nov', sales: 25 }, { month: 'Dec', sales: 32 }
+    // ]
+    var data : any[]=[]
+
+    drivers.forEach((driver)=>{
+      var totalRevenue=0
+      trips.forEach((trip)=>{
+        if(driver.driverId===trip.driverId){
+          totalRevenue+=trip.tripFare
+        }
+      })
+      data.push({Driver:driver.firstName,Revenue:totalRevenue})
+    })
+
+      return <LineChart primary_XAxis={primaryxAxis}  data={data} x_name='Driver' y_name='Revenue' chart_name='Driver Revenue'/>
+  }
 
   type EarningDataType = {
     icon: JSX.Element;
@@ -175,31 +218,31 @@ const Home = ({ data }: any) => {
   }
 
   const MediumCardProps: CardPropType = {
-    title:"DRIVER REVENUE",
-    duration:"Last 7 days",
-    value:"₹ 5,000",
+    title:"REVENUE",
+    duration:selectedDuration,
+    value:"₹ "+ numberFormat(String(Revenue(trips))),
     icon:"positive",
     percent:"10",
   }
 
   const SmallCardOneProps : CardPropType = {
-    title:"DRIVER",
-    duration:"Current",
-    value:"1080",
+    title:"DRIVERS",
+    duration:selectedDuration,
+    value:numberFormat(String(drivers.length)),
     icon:"positive",
     percent:"5.45",
   }
   const SmallCardTwoProps : CardPropType = {
     title:"ACTIVE USERS",
-    duration:"Last 7 days",
-    value:"945",
+    duration:selectedDuration,
+    value:numberFormat(String(drivers.length)),
     icon:"Negative",
     percent:"3.75",
   }
 
   const AttritionedDrivers: CardPropType = {
     title:"TOTAL ATTRITIONED DRIVERS",
-    duration:"Last 7 days",
+    duration:selectedDuration,
     value:"576",
     icon:"Negative",
     percent:"1.75",
@@ -207,7 +250,7 @@ const Home = ({ data }: any) => {
 
   const ActiveDrivers: CardPropType = {
     title:"TOTAL ACTIVE DRIVERS",
-    duration:"Last 7 days",
+    duration:selectedDuration,
     value:"8990",
     icon:"Positive",  
     percent:"1.67",
@@ -215,14 +258,14 @@ const Home = ({ data }: any) => {
 
   const PercentActiveDrivers: CardPropType = {
     title:"TOTAL ACTIVE DRIVERS",
-    duration:"Since Last Month",
+    duration:selectedDuration,
     value:"9.1%",
     icon:"positive",  
     percent:"1.69",
   }
   const VehiclePercent: CardPropType = {
     title:"TOTAL VEHICLES",
-    duration:"Since Last Month",
+    duration:selectedDuration,
     value:"6.87%",
     icon:"positive",  
     percent:"1.69",
@@ -230,7 +273,7 @@ const Home = ({ data }: any) => {
 
   const UnactivatedDrivers: CardPropType = {
     title:"TOTAL UNACTIVE DRIVERS",
-    duration:"Last 7 days",
+    duration:selectedDuration,
     value:"678",
     icon:"positive",  
     percent:"2.79",
@@ -238,54 +281,54 @@ const Home = ({ data }: any) => {
 
   const TotalVehicles: CardPropType = {
     title:"TOTAL VEHICLES",
-    duration:"Last 7 days",
+    duration:selectedDuration,
     value:"1056",
     icon:"positive",  
     percent:"7.79",
   }
   const CardWithChartProp1 : CardPropType = {
     title: "DRIVER REVENUE",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   }
 
   const ReveneMeiro : CardPropType = {
     title: "CHANGE OVER MEIRO REVENUE",
-    duration: "Over last N months",
+    duration: selectedDuration,
   }
 
   const AvgDistPerUser : CardPropType = {
     title: "AVG DISTANCE PER USER",
-    duration: "Over last N months",
+    duration: selectedDuration,
   }
 
   const ReveneDriver : CardPropType = {
     title: "CHANGE OVER DRIVER REVENUE",
-    duration: "Over last N months",
+    duration: selectedDuration,
   }
 
   const AvgTripDuration : CardPropType = {
     title: "AVG TRIP DURATION",
-    duration: "Over last N months",
+    duration: selectedDuration,
   }
 
 
  
   const CashFreeUsers2 : CardPropType = {
     title: "CASH FREE USERS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   }
 
   const TotalDrivers : CardPropType = {
     title: "TOTAL DRIVERS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   }
   const TotalTripsChart : CardPropType = {
     title: "TOTAL TRIPS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   }
   const CardWithChartProp2 : CardPropType = {
     title: "MRR",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value:"₹ 28,07,653",
     icon:"positive",
     percent:"7.35",
@@ -293,7 +336,7 @@ const Home = ({ data }: any) => {
 
   const MeiroRevenuePercentChange : CardPropType = {
     title: "CHANGE OVER MEIRO REVENUE",
-    duration: "Last Month",
+    duration: selectedDuration,
     value:"28%",
     icon:"positive",
     percent:"5.32",
@@ -301,7 +344,7 @@ const Home = ({ data }: any) => {
 
   const DriverRevenuePercentChange : CardPropType = {
     title: "CHANGE OVER DRIVER REVENUE",
-    duration: "Last Month",
+    duration: selectedDuration,
     value:"17%",
     icon:"positive",
     percent:"1.52",
@@ -309,7 +352,7 @@ const Home = ({ data }: any) => {
 
   const NewDrivers : CardPropType = {
     title: "TOTAL NEW DRIVERS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value:"6458",
     icon:"positive",
     percent:"7.35",
@@ -317,7 +360,7 @@ const Home = ({ data }: any) => {
 
   const TotalTrips: CardPropType = {
     title: "TOTAL TRIPS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value:"65,332",
     icon:"positive",
     percent:"0.35",
@@ -325,7 +368,7 @@ const Home = ({ data }: any) => {
   
   const TotalDownloads: CardPropType = {
     title: "TOTAL DOWNLOADS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value:"1,00,043",
     icon:"positive",
     percent:"0.31",
@@ -349,7 +392,7 @@ const Home = ({ data }: any) => {
 
   const DistanceCovered: CardPropType = {
     title: "DISTANCE COVERED",
-    duration: "Last 7 Days",
+    duration: selectedDuration,
     value:"45,367 km",
     icon:"positive",
     percent:"0.71",
@@ -357,7 +400,7 @@ const Home = ({ data }: any) => {
 
   const AvgDistanceCovered: CardPropType = {
     title: "AVG TRIP LENGTH",
-    duration: "Last 7 Days",
+    duration: selectedDuration,
     value:"2.9 km",
     icon:"negative",
     percent:"0.91",
@@ -365,7 +408,7 @@ const Home = ({ data }: any) => {
 
   const GrowthRateDrivers: CardPropType = {
     title: "GROWTH RATE OF DRIVERS",
-    duration: "Last 7 Days",
+    duration: selectedDuration,
     value:"2.7%",
     icon:"negative",
     percent:"0.36",
@@ -373,7 +416,7 @@ const Home = ({ data }: any) => {
 
   const ComplementCashFreeUsers: CardPropType = {
     title: "COMPLEMENT OF CASH FREE USERS",
-    duration: "Last 7 Days",
+    duration: selectedDuration,
     value: "25,997",
     icon: "negative",
     percent: "0.3",
@@ -383,7 +426,7 @@ const Home = ({ data }: any) => {
 
 const ConversionRate: CardPropType = {
   title: "ACTIVE DRIVERS AS AGAINST DOWNLOADS",
-  duration: "Last 7 Days",
+  duration: selectedDuration,
   value: "25,876",
   icon: "positive",
   percent: "2.46",
@@ -393,7 +436,7 @@ const ConversionRate: CardPropType = {
 
 const TotalRevenueMeiro: CardPropType = {
   title: "TOTAL REVENUE FOR MEIRO",
-  duration: "Last 7 Days",
+  duration: selectedDuration,
   value: "₹ 50,589",
   icon: "positive",
   percent: "2.46",
@@ -403,7 +446,7 @@ const TotalRevenueMeiro: CardPropType = {
 
 const AvgRevenuePerUser: CardPropType = {
   title: "AVG REVENUE / USER",
-  duration: "Last 7 days",
+  duration: selectedDuration,
   value: "₹3489",
   icon: "positive",
   percent: "2.45",
@@ -429,7 +472,7 @@ useEffect(() => {
         <SmallCard props={SmallCardTwoProps}/>
       </div>
       <div className="displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
-        <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<LineChart />}/>
+        <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<DriverRevenueChart />}/>
       </div>
     
       <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge ">
@@ -450,7 +493,7 @@ useEffect(() => {
       </div>
 
       <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
-        <CardWithChart prop1={TotalTripsChart} prop2={TotalTrips} chart={<LineChart />}/>
+        <CardWithChart prop1={TotalTripsChart} prop2={TotalTrips} chart={<DriverRevenueChart />}/>
       </div>
 
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
@@ -466,7 +509,7 @@ useEffect(() => {
       </div>
 
       <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
-        <CardWithChart prop1={CashFreeUsers2} prop2={ComplementCashFreeUsers} chart={<LineChart />}/>
+        <CardWithChart prop1={CashFreeUsers2} prop2={ComplementCashFreeUsers} chart={<DriverRevenueChart />}/>
       </div>
 
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">

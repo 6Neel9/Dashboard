@@ -29,7 +29,7 @@ const Filters = () => {
     }
 
     return (
-        <div className="container averageMargin averagePadding  md:flexWrap md:extraSmallMargin ">
+        <div className=" mainBackground mainText mainShadow mainBorder roundedExtraXLarge averageMargin averagePadding  flexWrap extraSmallMargin widthFull">
             <div className="displayFlex flexJustifyEnd">
                 <div className=""> 
                     <select id="filter-duration" className='marginRightMedium roundedMedium extraSmallPadding mainBackground mainText mainBorder' placeholder='Period'>
@@ -63,6 +63,7 @@ const Filters = () => {
 }
 
 export default Filters
+
 
 
 

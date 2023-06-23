@@ -25,12 +25,11 @@ import {
   TripAnalytics,
   RevenueAnalytics,
   Tracking,
+  DriverAnalytics
 } from "./pages";
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DriverAnalytics from './pages/DriverAnalytics';
-
 
 
 // type DriverDataType = {
@@ -69,7 +68,6 @@ function App() {
 
 
   const [data, setData] = useState<any>([]);
-
 
 
   useEffect(() => {

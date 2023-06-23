@@ -234,11 +234,33 @@ const ActiveHours: CardPropType = {
 }
 
 const ChartForTotalRevenue: CardPropType = {
-    title: "TOTAL REVENUE FOR DRIVERS",
+    title: "TOTAL REVENUE Drivers",
     duration: "LAST MONTH",
     value: "₹11426",
     icon: "positive",
     percent: "2.35",
+}
+
+const AvgTripPerDay: CardPropType = {
+    title: "Average Trip Per Day",
+    duration: "LAST MONTH",
+    value: "627",
+    icon: "positive",
+    percent: "2.35",
+}
+const AvgTimeBWTripsPerDriver: CardPropType = {
+    title: "Average Time B/W Trips",
+    duration: "LAST MONTH",
+    value: "18 Mins",
+    icon: "negative",
+    percent: "0.35",
+}
+const ActiveHoursPerDay: CardPropType = {
+    title: "Active Hours Per Day",
+    duration: "LAST MONTH",
+    value: "235 Mins",
+    icon: "postive",
+    percent: "1.35",
 }
 
 
@@ -263,7 +285,7 @@ const DriverAnalytics = () => {
            
             </div>
 
-            <div className="displayFlex textLeft mainBackground  heightFitContent mediumMargin mediumPadding mainBorder mainShadow  roundedExtraXLarge ">
+            <div className="displayFlex textLeft  heightFitContent smallMargin mediumPadding mainBackground mainBorder mainShadow roundedExtraXLarge">
                 <CardWithChart prop1={CrashFreeUsers2} prop2={ComplementCrashFreeUsers} chart={<LineChart />} />
             </div>
  
@@ -271,6 +293,12 @@ const DriverAnalytics = () => {
             <SmallCard props={TotalVehicles} />
             <SmallCard props={ChartForTotalRevenue} />
             <SmallCard props={TotalDownloads} />
+            </div>
+
+            <div className="displayFlex  textLeft flexJustifyBetween widthFull">
+            <SmallCard props={ActiveHoursPerDay} />
+            <SmallCard props={AvgTripPerDay} />
+            <SmallCard props={AvgTimeBWTripsPerDriver} />
             </div>
 
         </div>

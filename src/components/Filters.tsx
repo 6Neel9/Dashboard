@@ -41,7 +41,7 @@ const Filters = () => {
                     >
                         <option value="none">Period</option>
                         {FilterDuration.map((ele) => (
-                            <option key={ele.value} value={ele.value}>
+                            <option key={ele.value} value={ele.duration}>
                                 {ele.duration}
                             </option>
                         ))}

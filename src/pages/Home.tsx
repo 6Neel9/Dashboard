@@ -21,6 +21,8 @@ import "../Styles.css"
 const Home = ({ data }: any) => {
   const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
 
+  console.log(selectedDuration , selectedState)
+
   const total_drivers = data.length;
   var total_revenue = 0;
   function numberFormat(x: string) {

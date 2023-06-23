@@ -18,6 +18,8 @@ import "../Styles.css"
 const Home = ({ data }: any) => {
   const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
 
+  console.log(selectedDuration , selectedState)
+
   const [drivers, setDrivers] = useState<any[]>([]);
   const [trips, setTrips] = useState<any[]>([]);
   var total_revenue = 0;

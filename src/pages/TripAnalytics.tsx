@@ -94,6 +94,8 @@ const ChartCardProps2: CardPropType = {
 const TripAnalytics = () => {
     const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
 
+    console.log(selectedDuration ,selectedState)
+
     useEffect(() => {
         setSelectedDuration('none');
         setSelectedState('none');

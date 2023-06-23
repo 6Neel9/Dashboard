@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import {
   AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject,
@@ -19,7 +19,7 @@ import "../Styles.css"
 
 
 const Home = ({ data }: any) => {
-  const { currentColor, currentMode } = useStateContext();
+  const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
 
   const total_drivers = data.length;
   var total_revenue = 0;
@@ -396,7 +396,12 @@ const AvgRevenuePerUser: CardPropType = {
   percent: "2.45",
 
 }
-  
+
+useEffect(() => {
+  setSelectedDuration('none');
+  setSelectedState('none');
+},[]);
+
 
   return (
 

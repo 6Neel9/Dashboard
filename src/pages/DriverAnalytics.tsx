@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Filters, SmallCard, CardWithChart, ChartCard, LineChart, Bar,Pie} from '../components'
 import "../Styles.css"
+import { useStateContext } from '../contexts/ContextProvider'
 
 type CardPropType = {
     title?: string,
@@ -264,7 +265,14 @@ const ActiveHoursPerDay: CardPropType = {
 }
 
 
+
 const DriverAnalytics = () => {
+    const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
+
+    useEffect(() => {
+        setSelectedDuration('none');
+        setSelectedState('none');
+      },[]);
     return (
         <div className="extraSmallMargin">
             <div className='displayFlex'>

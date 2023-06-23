@@ -65,6 +65,9 @@
 .marginTopMedium {
   @apply mt-5;
 }
+.marginTopSmall {
+  @apply mt-3;
+}
 .marginBottomMedium {
   @apply mb-5;
 }

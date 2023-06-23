@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from "react";
 import { Filters, SmallCard, CardWithChart, ChartCard, LineChart, Bar } from '../components'
+import { useStateContext } from "../contexts/ContextProvider";
 
 
 type CardPropType = {
@@ -91,10 +92,16 @@ const ChartCardProps2: CardPropType = {
 
 
 const TripAnalytics = () => {
+    const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
+
+    useEffect(() => {
+        setSelectedDuration('none');
+        setSelectedState('none');
+    }, []);
     return (
         <div className="extraSmallMargin">
             <div className="displayFlex">
-            <Filters />
+                <Filters />
             </div>
             <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
 

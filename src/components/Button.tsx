@@ -11,12 +11,13 @@ type props ={
   text?: string, 
   borderRadius?: string, 
   width?: number|undefined,
+  onclick?: () => void,
   }
 }
 
 // icon, bgColor, color, bgHoverColor, size, text, borderRadius, width 
 const Button = ({prop} : props) => {
-  const { setIsClicked, initialState } = useStateContext();
+  // const { setIsClicked, initialState } = useStateContext();
 
   // const styles : React.CSSProperties={
   //   borderRadius: prop.borderRadius,
@@ -25,7 +26,7 @@ const Button = ({prop} : props) => {
   return (
     <button
       type="button"
-      onClick={() => setIsClicked(initialState)}
+      onClick={() => prop.onclick}
       className={` text-${prop.size} secondaryBackground secondaryText mainBorder roundedLarge smallPadding w-${prop.width} mr-${prop.marginRight} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
     >
       {prop.icon} {prop.text}

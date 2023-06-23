@@ -1,7 +1,6 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import Button from "../components/Button";
 import { useStateContext } from "../contexts/ContextProvider";
-import { GrClose } from "react-icons/gr";
 import "../Styles.css";
 
 
@@ -67,10 +66,8 @@ const AddNewDriver = () => {
     }
 
 
-
-
     return (
-        <div className="largeMargin marginTopMedium largePadding mainBackground mainShadow mainBorder rounded3XLarge">
+        <div className="largeMargin marginTopSmall largePadding mainBackground mainShadow mainBorder rounded3XLarge">
             <div className="displayFlex floatRight marginBottomMedium">
                 {/* <span onClick={() => navigate("/driverView", { state: { dr_id: did } })}>
             <button

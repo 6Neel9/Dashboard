@@ -31,6 +31,12 @@ type MyContextType = {
     handleClick: (clicked: string) => void,
     setMode: (e: any) => void,
     setColor: (color: string) => void
+    selectedDuration: string,
+    setSelectedDuration: React.Dispatch<React.SetStateAction<string>>,
+    selectedState: string,
+    setSelectedState: React.Dispatch<React.SetStateAction<string>>,
+    handleDurationChange: (event: any) => void,
+    handleStateChange: (event: any) => void,
 }
 
 const Context = React.createContext<MyContextType>({} as MyContextType)
@@ -46,6 +52,17 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
     const [themeSettings, setThemeSettings] = useState<boolean>(false);
     const [activeMenu, setActiveMenu] = useState<boolean>(true);
     const [isClicked, setIsClicked] = useState<MyInitialStateType>(initialState);
+    const [selectedDuration, setSelectedDuration] = useState<string>('none');
+    const [selectedState, setSelectedState] = useState<string>('none');
+
+
+     const handleDurationChange = (event: any) => {
+        setSelectedDuration(event.target.value);
+    };
+
+    const handleStateChange = (event: any) => {
+        setSelectedState(event.target.value);
+    };
 
     const setMode = (e : any) => {
         setCurrentMode(e.target.value);
@@ -77,7 +94,13 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
                 setMode,
                 setColor,
                 themeSettings,
-                setThemeSettings
+                setThemeSettings,
+                selectedDuration,
+                setSelectedDuration,
+                selectedState,
+                setSelectedState,
+                handleDurationChange,
+                handleStateChange
             }}
         >
             {children}

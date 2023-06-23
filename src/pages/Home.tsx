@@ -17,11 +17,22 @@ import Line from "./Charts/Line";
 import "../Styles.css"
 
 
+import { useSelector,useDispatch } from "react-redux";
+import { fetchDrivers } from "../store/driverSlice";
+
+
 
 const Home = ({ data }: any) => {
   const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
 
   console.log(selectedDuration , selectedState)
+  //Redux dispatch call
+  const dispatch:any = useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchDrivers())
+  },[dispatch])
+
 
   const total_drivers = data.length;
   var total_revenue = 0;

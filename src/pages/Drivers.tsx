@@ -27,6 +27,11 @@ import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 import "../Styles.css";
 
+//redux
+import { useSelector,useDispatch } from "react-redux"
+
+
+
 
 // const dropdown: CSS.Properties = {
 //   position: 'relative',
@@ -75,6 +80,10 @@ type DataType = {
 }
 
 const Drivers = ({ data }: any) => {
+
+  const drivers:any = useSelector((state:any)=>state.drivers);
+  console.log(drivers)
+
   const navigate = useNavigate();
   const [driverTableData, setDriverTableData] = useState<DataType[]>([]);
   useEffect(() => {
@@ -86,6 +95,9 @@ const Drivers = ({ data }: any) => {
         setDriverTableData(i);
       });
   }, []);
+
+
+  
 
   type DriverDataType = {
     did?: Number,

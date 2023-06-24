@@ -28,7 +28,7 @@ import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 import "../Styles.css";
 
 //redux
-import { useSelector,useDispatch } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 
 
 
@@ -81,23 +81,39 @@ type DataType = {
 
 const Drivers = ({ data }: any) => {
 
-  const drivers:any = useSelector((state:any)=>state.drivers);
-  console.log(drivers)
+  const [driverTableData, setDriverTableData] = useState<DataType[]>([]);
+
+
+  // const [driverData, setDriverData] = useState<any[]>([]);
+  // const drivers:any = useSelector((state:any)=>state.drivers);
+  // var dvr_data: object[] = [];
+
+  // drivers.forEach((e:any) => {
+  //     var fullName = e.firstName + " " + e.lastName;
+  //     var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
+  //     dvr_data.push({ did: e.driverId, name: fullName.toUpperCase() , dlno: e.licenceNumber, bdate: bdate});
+  //     // srno += 1;
+  //   });
+  //   setDriverData(dvr_data);
+  //   console.log(dvr_data)
+
 
   const navigate = useNavigate();
-  const [driverTableData, setDriverTableData] = useState<DataType[]>([]);
   useEffect(() => {
-    fetch("http://localhost:5000/v1/yuja-api/drivers-table", {
+    fetch("http://localhost:5000/yuja-sm/v1/drivers", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((i) => {
         setDriverTableData(i);
+      }).then(() => {
+        setDataFunction();
       });
+
+
   }, []);
 
 
-  
 
   type DriverDataType = {
     did?: Number,
@@ -133,19 +149,7 @@ const Drivers = ({ data }: any) => {
     }
   }
 
-  // type tripType = {
-  //   tid: Number,
-  //   stime: Date,
-  //   etime: Date,
-  //   sloc: [],
-  //   eloc: [],
-  //   revenue: Number,
-  //   city: {
-  //     id: String,
-  //     name: String,
-  //     state: String,
-  //   },
-  // }
+
 
   type dataGridType = {
     field: string;
@@ -207,14 +211,31 @@ const Drivers = ({ data }: any) => {
     //   srno += 1;
     // });
     // setDriverData(dvr_data);
-    driverTableData.forEach((e: DataType) => {
+
+    // driverTableData.forEach((e:any) => {
+    //   var fullName = e.firstName + " " + e.lastName;
+    //   // var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
+    //   dvr_data.push({ did: e.driverId, name: fullName.toUpperCase() , dlno: e.licenceNumber, bdate: null});
+    //   // srno += 1;
+    // });
+    // setDriverData(dvr_data);
+    // console.log(dvr_data)
+  }, [data]);
+
+
+
+  const setDataFunction = () => {
+    var dvr_data: object[] = [];
+
+    driverTableData.forEach((e: any) => {
       var fullName = e.firstName + " " + e.lastName;
       var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
-      dvr_data.push({ did: e.driverId, name: fullName.toUpperCase() , dlno: e.licenceNumber, bdate: bdate});
+      dvr_data.push({ did: e.driverId, name: fullName.toUpperCase(), dlno: e.licenceNumber, bdate: bdate });
       // srno += 1;
     });
     setDriverData(dvr_data);
-  }, [data]);
+  }
+
 
 
 

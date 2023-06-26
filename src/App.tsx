@@ -141,7 +141,7 @@ function App() {
                 <Route path="/driverView/:id" element={<ViewDriver data={data} />} />
                 <Route path="/addNewDriver" element={<AddNewDriver />} />
                 <Route path="/tripList" element={<TripList data={data} />} />
-                <Route path="/tripView" element={<ViewTrip />} />
+                <Route path="/tripView:id" element={<ViewTrip />} />
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
                 <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />
                 <Route path="/tracking" element={<Tracking />} />

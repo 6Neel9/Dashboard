@@ -4,7 +4,7 @@
 
 /* For all the containers common style */
 .container {
-  @apply bg-main-bg dark:bg-flow_blue  rounded-2xl border-1 border-[#2C1F39] shadow-[#2C1F39] dark:border-[#8b7da9] shadow-md dark:shadow-[#8b7da9];
+  @apply bg-main-bg dark:bg-flow_blue  rounded-xl border-1 border-[#2C1F39] shadow-[#2C1F39] dark:border-[#8b7da9] shadow-md dark:shadow-[#8b7da9];
 }
 
 
@@ -84,6 +84,9 @@
 .marginTopExtraLarge {
   @apply mt-24;
 }
+.marginTopExtraLarges {
+  @apply mt-36;
+}
 .marginBottomLarge {
   @apply mb-10;
 }
@@ -93,18 +96,24 @@
 .neagativeMarginXSmall{
   @apply -mx-3;
 }
+.fonExtralight{
+  @apply font-extralight;
+}
 
 .extraSmallPadding {
   @apply p-1;
 }
 .smallPadding {
-  @apply p-2;
+  @apply p-1;
 }
 .averagePadding {
   @apply p-3;
 }
 .mediumPadding {
   @apply p-5;
+}
+.averageMediumPadding {
+  @apply p-4;
 }
 .largePadding {
   @apply p-10;
@@ -142,19 +151,22 @@
 
 /* For Text with variable sizing */
 .extraLargeText {
-  @apply text-6xl;
+  @apply text-5xl;
 }
 .largeText {
-  @apply text-5xl;
+  @apply text-4xl;
 }
 .mediumLargeText {
   @apply text-4xl;
 }
 .mediumText {
-  @apply text-2xl;
+  @apply text-xl;
 }
 .smallText {
   @apply text-xl;
+}
+.extraSmallText{
+  @apply text-sm;
 }
 
 /* For all the text with variable weight*/
@@ -167,6 +179,7 @@
 .boldWeightText {
   @apply font-bold;
 }
+
 .extraBoldWeightText {
   @apply font-extrabold;
 }
@@ -446,4 +459,3 @@
 .gapMedium{
   @apply gap-5;
 }
-

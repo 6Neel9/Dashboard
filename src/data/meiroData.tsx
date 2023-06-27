@@ -113,67 +113,67 @@ export const links: LinksType = [
      
     ],
   },
-  {
-    title: "Apps",
-    links: [
-      {
-        name: "kanban",
-        route: "kanban",
-        icon: <BsKanban />,
-      },
-      {
-        name: "editor",
-        route: "editor",
-        icon: <FiEdit />,
-      },
-    ],
-  },
-  {
-    title: "Charts",
-    links: [
-      {
-        name: "line",
-        route: "line",
-        icon: <AiOutlineStock />,
-      },
-      {
-        name: "area",
-        route: "area",
-        icon: <AiOutlineAreaChart />,
-      },
+  // {
+  //   title: "Apps",
+  //   links: [
+  //     {
+  //       name: "kanban",
+  //       route: "kanban",
+  //       icon: <BsKanban />,
+  //     },
+  //     {
+  //       name: "editor",
+  //       route: "editor",
+  //       icon: <FiEdit />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "Charts",
+  //   links: [
+  //     {
+  //       name: "line",
+  //       route: "line",
+  //       icon: <AiOutlineStock />,
+  //     },
+  //     {
+  //       name: "area",
+  //       route: "area",
+  //       icon: <AiOutlineAreaChart />,
+  //     },
 
-      {
-        name: "bar",
-        route: "bar",
-        icon: <AiOutlineBarChart />,
-      },
-      {
-        name: "pie",
-        route: "pie",
-        icon: <FiPieChart />,
-      },
-      {
-        name: "financial",
-        route: "financial",
-        icon: <RiStockLine />,
-      },
-      {
-        name: "color-mapping",
-        route: "color-mapping",
-        icon: <BsBarChart />,
-      },
-      {
-        name: "pyramid",
-        route: "pyramid",
-        icon: <GiLouvrePyramid />,
-      },
-      {
-        name: "stacked",
-        route: "stacked",
-        icon: <AiOutlineBarChart />,
-      },
-    ],
-  },
+  //     {
+  //       name: "bar",
+  //       route: "bar",
+  //       icon: <AiOutlineBarChart />,
+  //     },
+  //     {
+  //       name: "pie",
+  //       route: "pie",
+  //       icon: <FiPieChart />,
+  //     },
+  //     {
+  //       name: "financial",
+  //       route: "financial",
+  //       icon: <RiStockLine />,
+  //     },
+  //     {
+  //       name: "color-mapping",
+  //       route: "color-mapping",
+  //       icon: <BsBarChart />,
+  //     },
+  //     {
+  //       name: "pyramid",
+  //       route: "pyramid",
+  //       icon: <GiLouvrePyramid />,
+  //     },
+  //     {
+  //       name: "stacked",
+  //       route: "stacked",
+  //       icon: <AiOutlineBarChart />,
+  //     },
+  //   ],
+  // },
 ];
 
 type EarningDataType ={

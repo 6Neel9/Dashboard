@@ -8,7 +8,7 @@ const SmallCard = ({ props }: any) => {
         <div className={`container smallContainer smallMargin mediumPadding h-${props.height}`}>
             <h1 className="textStyle mediumText smallPadding">{props.title.toUpperCase()}</h1>
             <div className="textStyle smallPadding">
-                {props.duration.toUpperCase()}
+                {props.duration.toLowerCase()}
             </div>
             <div className="largeText textStyle smallPadding mediumWeightText">
                 {props.value.toUpperCase()}

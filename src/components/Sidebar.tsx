@@ -6,6 +6,7 @@ import Logo_Light from "../data/assets/meiro_dark_logo.png";
 import Logo_Dark from "../data/assets/meiro_no_bg_for_dark - Tight Crop.png";
 import { links } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
+import  smartCity  from "../data/assets/smartCity.png"
 
 const Sidebar = () => {
   const { currentColor, activeMenu, setActiveMenu, screenSize, currentMode } =
@@ -16,6 +17,7 @@ const Sidebar = () => {
       setActiveMenu(false);
     }
   };
+
 
   const activeLink =
     "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge  textWhite  textMedium extraSmallMargin mainShadow mainBorder ";
@@ -33,7 +35,7 @@ const Sidebar = () => {
               className="flexAlignCenter gap-3 marginLeftSmall mt-4 displayFlex text-xl font-extrabold tracking-tight dark:textWhite text-slate-900"
             >
               {
-                currentMode === "Dark" ? (<span><img src={Logo_Dark} alt="Logo" className="h-14 w-auto" /></span>):(<span><img src={Logo_Light} alt="Logo" className="h-14 w-auto"/></span>)
+                currentMode === "Dark" ? (<span><img src={smartCity} alt="Logo" className="h-10 w-24" /></span>):(<span><img src={Logo_Light} alt="Logo" className="h-14 w-auto"/></span>)
               }
               
             </Link>
@@ -77,6 +79,7 @@ const Sidebar = () => {
           </div>
         </>
       )}
+      <img src={Logo_Dark} className="h-14 w-auto"/>
     </div>
   );
 };

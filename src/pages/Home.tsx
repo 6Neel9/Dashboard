@@ -78,7 +78,7 @@ const Home = ({ data }: any) => {
   
   
   // Filter function
-function filterDates(arr: string[]): { dataFiltered?: string[] } {
+function filterDates(arr: string[]): {currentDate?:string[] , lastSevenDays?: string[], lastSixMonths?: string[] ,lastYear?: string[], tillDate?: string[] } {
   const currentDate = new Date();
   const lastSevenDays = new Date(currentDate.getTime() - 7 * 24 * 60 * 60 * 1000); // Subtract 7 days in milliseconds
   const lastSixMonths = new Date(currentDate.getFullYear(), currentDate.getMonth() - 6, currentDate.getDate());
@@ -112,16 +112,16 @@ function filterDates(arr: string[]): { dataFiltered?: string[] } {
   });
 
   if(selectedDuration==="Today"){
-    return {dataFiltered: datescurrentDate};
+    return {currentDate: datescurrentDate};
   }else if(selectedDuration==="Last 7 Days" || selectedDuration==="This Week"){
-    return {dataFiltered: datesLastSevenDays};
+    return {lastSevenDays: datesLastSevenDays};
   }else if(selectedDuration==="Last 6 Months"){
-    return {dataFiltered: datesLastSixMonths};
+    return {lastSixMonths: datesLastSixMonths};
   }else if(selectedDuration==="Last Year"){
-    return {dataFiltered: datesLastYear};
+    return {lastYear: datesLastYear};
   }else{
     return {
-      dataFiltered: datesTillDate,
+      tillDate: datesTillDate,
     }
   }
   // return {
@@ -130,6 +130,11 @@ function filterDates(arr: string[]): { dataFiltered?: string[] } {
   //   lastYear: datesLastYear
   // };
 }
+
+const filteredDates = filterDates(trips);
+console.log("Dates from the last 7 days:", filteredDates.lastSevenDays);
+console.log("Dates from the last 6 months:", filteredDates.lastSixMonths);
+console.log("Dates from the last year:", filteredDates.lastYear);
 
   var total_revenue = 0;
   function numberFormat(x: string) {
@@ -278,6 +283,12 @@ function filterDates(arr: string[]): { dataFiltered?: string[] } {
     return temp;
   }
 
+
+  console.log(typeof trips , typeof filteredDates.lastSixMonths)
+  console.log(trips,filteredDates.lastSixMonths);
+
+
+
   const DriverRevenueChart =()=>{
     
     const primaryxAxis: AxisModel = { valueType: 'Category' };
@@ -326,7 +337,7 @@ function filterDates(arr: string[]): { dataFiltered?: string[] } {
   const MediumCardProps: CardPropType = {
     title:"REVENUE",
     duration:selectedDuration,
-    value:"₹ "+ numberFormat(String(Revenue(trips))),
+    value:"₹ "+ numberFormat(String(Math.round(Revenue(trips)))),
     icon:"positive",
     percent:"10",
   }
@@ -565,6 +576,9 @@ useEffect(() => {
 },[]);
 
 
+
+
+
   return (
 
     <div className = "extraSmallMargin">
@@ -714,6 +728,3 @@ export default Home;
     //     </div>
     // </div>
     //   </div>
-
-
-

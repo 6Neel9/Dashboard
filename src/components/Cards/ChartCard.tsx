@@ -5,7 +5,7 @@ const ChartCard = ({prop, chart}:any) => {
     <div className="container smallMargin averageMediumPadding  textLeft  flexJustifyBetween widthFull ">
     <div >
                 <div className="displayFlex flexJustifyBetween marginLeftMedium">
-                <h1 className="smallText mainText">{prop.title.toUpperCase()}</h1>
+                <h1 className="smallText mainText extraSmallText">{prop.title.toUpperCase()}</h1>
                 <h4 className=" textRight mainText" >
                     {prop.duration.toLowerCase()}
                 </h4>

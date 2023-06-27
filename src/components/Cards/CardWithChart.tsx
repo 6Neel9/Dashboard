@@ -8,21 +8,21 @@ const CardWithChart = ({ prop1, prop2, chart }: any) => {
             <div className="marginRightMedium">
                 <div className='displayFlex flexJustifyBetween flexCol'>
                     <div className="displayFlex flexJustifyBetween ">
-                        <div className="mediumText textLeft textStyle" >
+                        <div className="mediumText textLeft textStyle extraSmallText" >
                             {prop2.title}
                         </div>
 
                         <div className="smallPadding textLeft textStyle" >
-                            {prop2.duration}
+                            {prop2.duration.toLowerCase()}
                         </div>
                     </div>
-                    <div className=" largeText smallPadding mediumWeightText textStyle marginTopExtraLarges" >
+                    <div className=" largeText smallPadding mediumWeightText textStyle marginTopExtraLarges  extraBoldWeightText" >
                         {prop2.value}
                     </div>
                     <div >
                         {prop2.icon === "positive" ?
-                            <h1 className="displayInlineBlock percentIncrease"><SlArrowUp className="displayInlineBlock" /> {prop2.percent}%</h1> :
-                            <h1 className="displayInlineBlock percentDecrease"><SlArrowDown className="displayInlineBlock" /> {prop2.percent}%</h1>
+                            <h1 className="displayInlineBlock paddingTopSmall percentIncrease"><SlArrowUp className="displayInlineBlock" /> {prop2.percent}%</h1> :
+                            <h1 className="displayInlineBlock paddingTopSmall percentDecrease"><SlArrowDown className="displayInlineBlock" /> {prop2.percent}%</h1>
                         }
                     </div>
                 </div>

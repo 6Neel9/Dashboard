@@ -25,7 +25,7 @@
   @apply text-[#2C1F39] dark:text-white;
 }
 .mainShadow {
-  @apply shadow-md shadow-[#2C1F39] dark:shadow-[#8b7da9];
+  @apply shadow-sm shadow-[#2C1F39] dark:shadow-[#D6CDE9];
 }
 .mainBorder {
   @apply border-1 border-[#2C1F39] dark:border-[#8b7da9];
@@ -99,6 +99,9 @@
 .fonExtralight{
   @apply font-extralight;
 }
+.paddingTopSmall{
+  @apply pt-4
+}
 
 .extraSmallPadding {
   @apply p-1;
@@ -162,6 +165,9 @@
 .mediumText {
   @apply text-xl;
 }
+.normalText{
+  @apply text-lg;
+}
 .smallText {
   @apply text-xl;
 }
@@ -192,10 +198,10 @@
   @apply inline-block;
 }
 .percentIncrease {
-  @apply text-green-600;
+  @apply text-[#6CE151];
 }
 .percentDecrease {
-  @apply text-red-600;
+  @apply text-[#FC3209];
 }
 
 /* Flex */

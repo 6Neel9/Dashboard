@@ -15,3 +15,6 @@
 - Editor
 - Drivers
 - AddnewDriver
+- ChartHeader
+- Footer
+- Header

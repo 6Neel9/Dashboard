@@ -1,8 +1,9 @@
 import React from 'react';
+import "../Styles.css"
 
 const Footer = () => (
-  <div className="mt-24">
-    <p className="dark:text-gray-200 text-gray-700 text-center m-20">
+  <div className="marginTopExtraLarge">
+    <p className="mainText textCenter extraLargeMargin">
       © 2023 All rights reserved by Meiro Mobility
     </p>
   </div>

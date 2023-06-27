@@ -47,6 +47,9 @@
 .largeMargin {
   @apply m-10;
 }
+.extraLargeMargin {
+  @apply m-20;
+}
 .marginRightMedium {
   @apply mr-5;
 }
@@ -65,6 +68,7 @@
 .marginTopMedium {
   @apply mt-5;
 }
+
 .marginTopSmall {
   @apply mt-3;
 }
@@ -82,6 +86,9 @@
 }
 .marginBottomLarge {
   @apply mb-10;
+}
+.marginBottomXS {
+  @apply mb-2;
 }
 .neagativeMarginXSmall{
   @apply -mx-3;
@@ -104,6 +111,15 @@
 }
 .averageXPadding {
   @apply px-3;
+}
+.paddingLeftMedium {
+  @apply pl-4;
+}
+.paddingTopSmall {
+  @apply pt-3;
+}
+.paddingBottomSmall {
+  @apply pb-2.5;
 }
 
 /* For the container with variable width */
@@ -276,7 +292,7 @@
 .textGray {
   @apply text-gray-700;
 }
-.textGrayLight {
+.textLarge {
   @apply text-gray-400;
 }
 .textGrayDark {
@@ -295,6 +311,25 @@
 }
 .textJustify {
   @apply text-justify;
+}
+
+.textLarge {
+  @apply text-lg;
+}
+/* .textMedium {
+  @apply text-md;
+} */
+.textSmall {
+  @apply text-sm;
+}
+.textExtraSmall {
+  @apply text-xs;
+}
+.textXLarge {
+  @apply text-xl;
+}
+.text3XLarge {
+  @apply text-3xl;
 }
 
 /* For Different Height  */
@@ -318,6 +353,9 @@
 }
 .heightFitContent {
   @apply h-fit;
+}
+.heightScreen {
+  @apply h-screen;
 }
 
 /* For Different Width  */
@@ -400,3 +438,12 @@
 .formInput{
   @apply appearance-none block focus:bg-white focus:text-black focus:outline-none py-3 px-4 mb-3 leading-tight 
 }
+
+.trackingTight{
+  @apply tracking-tight;
+}
+
+.gapMedium{
+  @apply gap-5;
+}
+

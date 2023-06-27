@@ -106,9 +106,16 @@ const Drivers = ({ data }: any) => {
       .then((res) => res.json())
       .then((i) => {
         setDriverTableData(i);
-      }).then(() => {
-        setDataFunction();
-      });
+        var dvr_data: object[] = [];
+        driverTableData.forEach((e: any) => {
+          var fullName = e.firstName + " " + e.lastName;
+          var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
+          dvr_data.push({ driverId: e.driverId, name: fullName.toUpperCase(), licenceNumber: e.licenceNumber, dob: bdate });
+        });
+        console.log(dvr_data)
+        setDriverData(dvr_data);
+      })
+      
 
 
   }, []);
@@ -224,17 +231,17 @@ const Drivers = ({ data }: any) => {
 
 
 
-  const setDataFunction = () => {
-    var dvr_data: object[] = [];
+  // const setDataFunction = () => {
+  //   var dvr_data: object[] = [];
 
-    driverTableData.forEach((e: any) => {
-      var fullName = e.firstName + " " + e.lastName;
-      var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
-      dvr_data.push({ did: e.driverId, name: fullName.toUpperCase(), dlno: e.licenceNumber, bdate: bdate });
-      // srno += 1;
-    });
-    setDriverData(dvr_data);
-  }
+  //   driverTableData.forEach((e: any) => {
+  //     var fullName = e.firstName + " " + e.lastName;
+  //     var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
+  //     dvr_data.push({ driverId: e.driverId, name: fullName.toUpperCase(), licenceNumber: e.licenceNumber, dob: bdate });
+  //     // srno += 1;
+  //   });
+  //   setDriverData(dvr_data);
+  // }
 
 
 

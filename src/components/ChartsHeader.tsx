@@ -1,12 +1,13 @@
 import React from 'react';
+import "../Styles.css"
 
 const ChartsHeader = ({ category, title }: {category?:string, title?:string}) => (
-  <div className=" mb-10">
+  <div className="marginBottomLarge">
     <div>
-      <p className="text-lg text-gray-400">Chart</p>
-      <p className="text-3xl font-extrabold tracking-tight dark:text-gray-200 text-slate-900">{category}</p>
+      <p className="textLarge textLarge">Chart</p>
+      <p className="text3XLarge extraBoldWeightText trackingTight mainText">{category}</p>
     </div>
-    <p className="text-center dark:text-gray-200 text-xl mb-2 mt-3">{title}</p>
+    <p className="textCenter mainText textXLarge marginBottomXS marginTopSmall">{title}</p>
   </div>
 );
 

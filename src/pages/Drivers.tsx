@@ -106,15 +106,18 @@ const Drivers = ({ data }: any) => {
       .then((res) => res.json())
       .then((i) => {
         setDriverTableData(i);
-        var dvr_data: object[] = [];
-        driverTableData.forEach((e: any) => {
-          var fullName = e.firstName + " " + e.lastName;
-          var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
-          dvr_data.push({ driverId: e.driverId, name: fullName.toUpperCase(), licenceNumber: e.licenceNumber, dob: bdate });
-        });
-        console.log(dvr_data)
-        setDriverData(dvr_data);
+       setDriverData(i);
       })
+      // .then(() => {
+      //   var dvr_data: object[] = [];
+      //   driverTableData.forEach((e: any) => {
+      //     var fullName = e.firstName + " " + e.lastName;
+      //     var bdate= e.dob.slice(4,10) + " ," + e.dob.slice(11,15);
+      //     dvr_data.push({ driverId: e.driverId, name: fullName.toUpperCase(), licenceNumber: e.licenceNumber, dob: bdate });
+      //   });
+      //   // console.log(dvr_data)
+      //   setDriverData(dvr_data);
+      // })
       
 
 

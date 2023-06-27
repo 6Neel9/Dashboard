@@ -235,12 +235,17 @@ export const driverGrid: DriverGridType = [
 
   { field: "driverId", headerText: "Driver Id", width: "150", textAlign: "Center" },
   {
-    field: "name",
-    headerText: "Name",
-    width: "120",
+    field: "firstName",
+    headerText: "First Name",
+    width: "80",
     textAlign: "start",
   },
-  
+  {
+    field: "lastName",
+    headerText: "Last Name",
+    width: "80",
+    textAlign: "start",
+  },
   {
     field: "licenceNumber",
     headerText: "License No.",

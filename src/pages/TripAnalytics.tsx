@@ -111,7 +111,7 @@ const TripAnalytics = () => {
                 <SmallCard props={SmallCardProps7} />
                 <SmallCard props={SmallCardProps8} />
             </div>
-            <div className=" displayFlex textLeft  heightFitContent smallMargin mediumPadding mainBackground mainBorder roundedExtraXLarge  ">
+            <div >
                 <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<Bar />} />
             </div>
             <div className=" displayFlex  textLeft flexJustifyBetween widthFull">

@@ -158,12 +158,12 @@ useEffect(() => {
             <div className="displayFlex">
             <Filters />
             </div>
-            <div className=" displayFlex textLeft mainBackground  heightFitContent mediumMargin mediumPadding mainBorder  roundedExtraXLarge ">
+            <div >
                 <CardWithChart prop1={TotalRevenueForDriver} prop2={ChartForTotalRevenue} chart={<Bar />} />
             </div>
             
 
-            <div className=" displayFlex textLeft mainBackground  heightFitContent mediumMargin mediumPadding mainBorder  roundedExtraXLarge ">
+            <div >
                 <CardWithChart prop1={CompanyRevenueperTrip} prop2={CompanyRevenueperTripDetails} chart={<Bar />} />
             </div>
 

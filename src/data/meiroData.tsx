@@ -308,47 +308,53 @@ type TripGridType=({
   format: string;
   textAlign: string;
 })[]
-export const tripGrid: TripGridType = [{ field: "srno", headerText: "Sr no.", width: "100", textAlign: "Center" },
-{ field: "tid", headerText: "Trip Id", width: "100", textAlign: "Center" },
+export const tripGrid: TripGridType = [
+{ field: "tripID", headerText: "Trip Id", width: "120", textAlign: "Center" },
 {
-  field: "stime",
+  field: "driverId",
+  headerText: "Driver Id",
+  width: "120",
+  textAlign: "start",
+},
+{
+  field: "startTime",
   headerText: "Start Time",
   width: "120",
   textAlign: "start",
 },
 {
-  field: "etime",
+  field: "endTime",
   headerText: "End Time",
   width: "120",
   textAlign: "Center",
 },
 
 {
-  field: "sloc",
+  field: "startLocation",
   headerText: "Start Location",
   width: "150",
   textAlign: "Center",
 },
 
 {
-  field: "eloc",
+  field: "endLocation",
   headerText: "End Location",
   width: "150",
   textAlign: "Center",
 },
 
 {
-  field: "revenue",
+  field: "tripFare",
   headerText: "Revenue",
   width: "120",
   textAlign: "Center",
 },
-{
-  field: "city",
-  headerText: "City",
-  width: "120",
-  textAlign: "Center",
-},
+// {
+//   field: "city",
+//   headerText: "City",
+//   width: "120",
+//   textAlign: "Center",
+// },
 
 ];
 

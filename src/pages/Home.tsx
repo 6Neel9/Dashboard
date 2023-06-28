@@ -591,11 +591,11 @@ useEffect(() => {
         <SmallCard props={SmallCardOneProps}/>
         <SmallCard props={SmallCardTwoProps}/>
       </div>
-      <div className="displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
+      <div className="displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge">
         <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<DriverRevenueChart />}/>
       </div>
     
-      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge ">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge ">
         <CardWithChart prop1={TotalDrivers} prop2={NewDrivers} chart={<Bar />}/>
       </div>
 
@@ -612,7 +612,7 @@ useEffect(() => {
         <SmallCard props={AvgDistanceCovered} />
       </div>
 
-      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge">
         <CardWithChart prop1={TotalTripsChart} prop2={TotalTrips} chart={<DriverRevenueChart />}/>
       </div>
 
@@ -628,7 +628,7 @@ useEffect(() => {
         <SmallCard props={GrowthRateDrivers} />
       </div>
 
-      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
+      <div className=" displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge">
         <CardWithChart prop1={CashFreeUsers2} prop2={ComplementCashFreeUsers} chart={<DriverRevenueChart />}/>
       </div>
 
@@ -638,11 +638,11 @@ useEffect(() => {
         <SmallCard props={AvgRevenuePerUser} />
       </div>
 
-      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge">
         <CardWithChart prop1={ReveneMeiro} prop2={MeiroRevenuePercentChange} chart={<Bar />}/>
       </div>
 
-      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder mainShadow roundedExtraXLarge">
+      <div className="displayFlex textLeft heightFitContent smallMargin mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge">
         <CardWithChart prop1={ReveneDriver} prop2={DriverRevenuePercentChange} chart={<Bar />}/>
       </div>
 

@@ -293,7 +293,7 @@ const DriverAnalytics = () => {
            
             </div>
 
-            <div className="displayFlex textLeft  heightFitContent smallMargin mediumPadding mainBackground mainBorder mainShadow roundedExtraXLarge">
+            <div className="displayFlex textLeft  heightFitContent smallMargin mediumPadding mainBackground mainBorder roundedExtraXLarge">
                 <CardWithChart prop1={CrashFreeUsers2} prop2={ComplementCrashFreeUsers} chart={<LineChart />} />
             </div>
  

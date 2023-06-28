@@ -4,7 +4,7 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 const MediumCard = ({ props }: any) => {
   return (
-    <div className="container mediumContainer smallMargin mediumPadding">
+    <div className="container mediumContainer smallMargin mediumPadding mainShadow">
       <h1 className=" textStyle normalText smallPadding extraSmallText">{props.title.toUpperCase()}</h1>
       <div className="textStyle smallPadding ">
         {props.duration.toLowerCase()}

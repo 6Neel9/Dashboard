@@ -4,7 +4,7 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 const CardWithChart = ({ prop1, prop2, chart }: any) => {
     return (
-        <div className=" heightFitContent   textLeft flexJustifyBetween displayGrid gridCols3 divideXSmall widthFull ">
+        <div className=" heightFitContent   textLeft flexJustifyBetween displayGrid gridCols3 divideXSmall widthFull mainShadow ">
             <div className="marginRightMedium">
                 <div className='displayFlex flexJustifyBetween flexCol'>
                     <div className="displayFlex flexJustifyBetween ">
@@ -29,8 +29,8 @@ const CardWithChart = ({ prop1, prop2, chart }: any) => {
             </div>
             <div className="marginLeftSmall colSpan2">
                 <div className="displayFlex flexJustifyBetween marginLeftMedium">
-                    <h1 className="mediumText textStyle">{prop1.title}</h1>
-                    <h4 className="text-right textStyle" >
+                    <h1 className="mediumText textStyle extraSmallText">{prop1.title}</h1>
+                    <h4 className="text-right textStyle " >
                         {prop1.duration.toLowerCase()}
                     </h4>
                 </div>

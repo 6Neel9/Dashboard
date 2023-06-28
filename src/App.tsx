@@ -25,7 +25,8 @@ import {
   TripAnalytics,
   RevenueAnalytics,
   Tracking,
-  DriverAnalytics
+  DriverAnalytics,
+  Parking
 } from "./pages";
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
@@ -145,6 +146,7 @@ function App() {
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
                 <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />
                 <Route path="/tracking" element={<Tracking />} />
+                <Route path="/parking" element={<Parking />} />
                 <Route path="/driverAnalytics" element={<DriverAnalytics />} />
                 
               

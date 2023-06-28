@@ -5,7 +5,7 @@ import {
   AiOutlineStock,
 } from "react-icons/ai";
 import { IoMdContacts } from "react-icons/io";
-import { RiStockLine } from "react-icons/ri";
+import { RiStockLine , RiParkingBoxFill} from "react-icons/ri";
 import {
   BsKanban,
   BsBarChart,
@@ -78,6 +78,11 @@ export const links: LinksType = [
         name: "Tracking",
         route: "tracking",
         icon: <FaRoute />,
+      },
+      {
+        name: "Parking",
+        route: "parking",
+        icon: <RiParkingBoxFill />,
       },
       {
         name: "Trip List",

@@ -19,3 +19,5 @@ export { default as TripAnalytics } from "./TripAnalytics";
 export { default as RevenueAnalytics } from "./RevenueAnalytics";
 export { default as Tracking } from "./Tracking";
 export { default as DriverAnalytics } from "./DriverAnalytics";
+export { default as Parking } from "./Parking";
+

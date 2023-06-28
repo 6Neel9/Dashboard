@@ -573,10 +573,10 @@ const AvgRevenuePerUser: CardPropType = {
 
 }
 
-useEffect(() => {
-  setSelectedDuration('none');
-  setSelectedState('none');
-},[]);
+// useEffect(() => {
+//   setSelectedDuration('Till Date');
+//   setSelectedState('All');
+// },[]);
 
 
 

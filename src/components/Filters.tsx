@@ -43,7 +43,7 @@ const Filters = () => {
             value={selectedDuration}
             onChange={handleDurationChange}
           >
-            <option value="none">Period</option>
+            
             {FilterDuration.map((ele, index) => (
               <option key={`duration-${index}`} value={ele.duration}>
                 {ele.duration}
@@ -57,7 +57,6 @@ const Filters = () => {
             value={selectedState}
             onChange={handleStateChange}
           >
-            <option value="none">State</option>
             <option value="All">All</option>
             {States.map((state, index) => (
               <option key={`state-${index}`} value={state.state}>

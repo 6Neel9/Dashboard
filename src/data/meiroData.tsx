@@ -309,7 +309,7 @@ type TripGridType=({
   textAlign: string;
 })[]
 export const tripGrid: TripGridType = [
-{ field: "tripID", headerText: "Trip Id", width: "120", textAlign: "Center" },
+{ field: "tripId", headerText: "Trip Id", width: "120", textAlign: "Center" },
 {
   field: "driverId",
   headerText: "Driver Id",

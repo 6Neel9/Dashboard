@@ -8,14 +8,14 @@ L.Marker.prototype.options.icon = L.icon({
   iconUrl: "https://unpkg.com/leaflet/dist/images/marker-icon.png"
 });
 
-export default function Routing() {
+export default function Routing({start, end}) {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
 
     const routingControl = L.Routing.control({
-      waypoints: [L.latLng(23.1566, 72.6654), L.latLng(23.1885, 72.6289)],
+      waypoints: [L.latLng(start.lat, start.lng), L.latLng(end.lat,end.lng)],
       routeWhileDragging: true,
       show: false
     }).addTo(map);

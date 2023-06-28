@@ -6,7 +6,7 @@ type Component ={
 }
 
 const Header = ({ category, title }: Component) => (
-  <div className="marginBottomLarge">
+  <div className="marginBottomMediumLarge">
     <p className="textLarge mainText">{category}</p>
     <p className="text-3xl extraBoldWeightText trackingTight mainText">
       {title}

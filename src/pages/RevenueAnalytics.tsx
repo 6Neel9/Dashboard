@@ -150,8 +150,8 @@ const RevenueAnalytics = () => {
     const { currentColor, currentMode,  selectedDuration, selectedState, setSelectedDuration, setSelectedState } = useStateContext();
 
 useEffect(() => {
-    setSelectedDuration('none');
-    setSelectedState('none');
+    setSelectedDuration('Till Date');
+    setSelectedState('All');
   },[]);
     return (
         <div className="extraSmallMargin">

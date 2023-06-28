@@ -97,8 +97,8 @@ const TripAnalytics = () => {
     console.log(selectedDuration ,selectedState)
 
     useEffect(() => {
-        setSelectedDuration('none');
-        setSelectedState('none');
+        setSelectedDuration('Till Date');
+        setSelectedState('All');
     }, []);
     return (
         <div className="extraSmallMargin">

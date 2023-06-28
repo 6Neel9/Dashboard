@@ -567,7 +567,7 @@ const TotalRevenueMeiro: CardPropType = {
 const AvgRevenuePerUser: CardPropType = {
   title: "AVG REVENUE / USER",
   duration: selectedDuration,
-  value: "₹3489",
+  value: "₹ 3489",
   icon: "positive",
   percent: "2.45",
 

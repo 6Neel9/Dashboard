@@ -20,7 +20,7 @@ const Sidebar = () => {
 
 
   const activeLink =
-    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge  textWhite  textMedium extraSmallMargin mainShadow mainBorder ";
+    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium extraSmallMargin mainShadow mainBorder text-gray-700 bg-light-gray";
   const normalLink =
     "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium mainText dark:hover:text-black hover:bg-light-gray extraSmallMargin";
 
@@ -64,9 +64,10 @@ const Sidebar = () => {
                     to={`/${link.route}`}
                     key={link.name}
                     onClick={handleCloseSideBar}
-                    style={({ isActive }) => ({
-                      backgroundColor: isActive ? currentColor : "",
-                    })}
+                    // style={({ isActive }) => ({
+                    //   backgroundColor: isActive ? currentColor : "",
+                    // })}
+                    
                     className={({ isActive }) =>
                       isActive ? activeLink : normalLink
                     }

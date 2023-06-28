@@ -8,6 +8,8 @@ import "../Styles.css"
 import { Header } from '../components';
 import L, { divIcon } from 'leaflet';
 import customMarkerIcon from '../components/Map/images/custom-marker-icon.png';
+import future from '../components/Map/images/future.png';
+import treo from '../components/Map/images/mahindraTreo.png';
 
 
 
@@ -42,10 +44,10 @@ const locations = [
     driver: "Ruchit",
     autoNo: "GJ 18 8907"
   }
-];
+]
 const customIcon = L.icon({
-  iconUrl:customMarkerIcon,
-  iconSize: [32, 32],
+  iconUrl:future,
+  iconSize: [38, 38],
   iconAnchor: [16, 32],
   popupAnchor: [0, -32]
 });

@@ -2,6 +2,7 @@ import React from 'react'
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 
+
 const CardWithChart = ({ prop1, prop2, chart }: any) => {
     return (
         <div className='displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge'>

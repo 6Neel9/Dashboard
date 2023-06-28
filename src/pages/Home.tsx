@@ -17,6 +17,9 @@ import "../Styles.css"
 import { useSelector,useDispatch } from "react-redux";
 import { fetchDrivers } from "../store/driverSlice";
 
+//
+import AreaCharts from "../components/Charts/AreaCharts";
+
 
 
 const Home = ({ data }: any) => {

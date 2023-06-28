@@ -258,11 +258,17 @@ export const driverGrid: DriverGridType = [
     textAlign: "Center",
   },
 
+  // {
+  //   field: "dob",
+  //   headerText: "Birth Date",
+  //   width: "200",
+  //   format: "yMd",
+  //   textAlign: "Center",
+  // },
   {
-    field: "dob",
-    headerText: "Birth Date",
-    width: "200",
-    format: "yMd",
+    field: "vehicleNumber",
+    headerText: "Vehicle Number",
+    width: "80",
     textAlign: "Center",
   },
 

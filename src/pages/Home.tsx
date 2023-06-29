@@ -692,7 +692,7 @@ const Home = ({ data }: any) => {
         <SmallCard props={AvgRevenuePerUser} />
       </div>
 
-      <div>
+      {/* <div>
         <CardWithChart
           prop1={ReveneMeiro}
           prop2={MeiroRevenuePercentChange}
@@ -706,7 +706,7 @@ const Home = ({ data }: any) => {
           prop2={DriverRevenuePercentChange}
           chart={<Bar />}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

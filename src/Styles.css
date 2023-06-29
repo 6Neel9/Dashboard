@@ -481,3 +481,14 @@
 .grayText{
   color: grey;
 }
+
+.inputElem{
+  color: black;
+  background-color: white;
+}
+.input{
+  text-align: center;
+}
+.widths{
+  width: 30%;
+}

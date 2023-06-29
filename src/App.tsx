@@ -25,7 +25,8 @@ import {
   RevenueAnalytics,
   Tracking,
   DriverAnalytics,
-  Parking
+  Parking,
+  Pricing
 } from "./pages";
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
@@ -150,6 +151,7 @@ function App() {
                 <Route path="/parking" element={<Parking />} />
                 <Route path="/driverAnalytics" element={<DriverAnalytics />} />
                 <Route path='/issueManagement' element={<IssueManagement />} />
+                <Route path='/pricing' element={<Pricing />} />
                 
               
 

@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import driversReducer from "./driverSlice"; 
+import tripReducer from "./tripSlice";
 
 
 const store = configureStore({
     reducer:{
         drivers: driversReducer,
+        trips:tripReducer
     }
 })
 

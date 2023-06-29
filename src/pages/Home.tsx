@@ -32,6 +32,7 @@ import "../Styles.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDrivers } from "../store/driverSlice";
+import { fetchTrips } from "../store/tripSlice";
 
 //
 import AreaCharts from "../components/Charts/AreaCharts";
@@ -49,13 +50,14 @@ const Home = ({ data }: any) => {
   const [drivers, setDrivers] = useState<any[]>([]);
   const [trips, setTrips] = useState<any[]>([]);
 
-  console.log(selectedDuration, selectedState);
+  // console.log(selectedDuration, selectedState);
   //Redux dispatch call
   const dispatch: any = useDispatch();
 
   useEffect(() => {
     dispatch(fetchDrivers());
-  }, [dispatch]);
+    dispatch(fetchTrips())
+  }, []);
 
   // function getDateOfTimeframe(inputDate: Date, timeframe: string): Date {
   //   switch (timeframe) {
@@ -99,6 +101,14 @@ const Home = ({ data }: any) => {
   // console.log(thisQuarter);
   // console.log(thisHalfYear);
   // console.log(thisYear);
+
+  //Getting redux data
+    const driverData:any = useSelector((state:any)=>state.drivers);
+    const tripData:any = useSelector((state:any)=>state.trips);
+    console.log(driverData)
+    console.log(tripData)
+
+
 
   // Filter function
   function filterDates(arr: string[]): {
@@ -172,9 +182,9 @@ const Home = ({ data }: any) => {
   }
 
   const filteredDates = filterDates(trips);
-  console.log("Dates from the last 7 days:", filteredDates.lastSevenDays);
-  console.log("Dates from the last 6 months:", filteredDates.lastSixMonths);
-  console.log("Dates from the last year:", filteredDates.lastYear);
+  // console.log("Dates from the last 7 days:", filteredDates.lastSevenDays);
+  // console.log("Dates from the last 6 months:", filteredDates.lastSixMonths);
+  // console.log("Dates from the last year:", filteredDates.lastYear);
 
   var total_revenue = 0;
   function numberFormat(x: string) {
@@ -334,8 +344,8 @@ const Home = ({ data }: any) => {
     return temp;
   };
 
-  console.log(typeof trips, typeof filteredDates.lastSixMonths);
-  console.log(trips, filteredDates.lastSixMonths);
+  // console.log(typeof trips, typeof filteredDates.lastSixMonths);
+  // console.log(trips, filteredDates.lastSixMonths);
 
   const DriverRevenueChart = () => {
     const primaryxAxis: AxisModel = { valueType: "Category" };

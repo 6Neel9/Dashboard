@@ -135,6 +135,9 @@
 }
 
 /* For the container with variable width */
+.extraXSmallContainer {
+  @apply w-1/5;
+}
 .extraSmallContainer {
   @apply w-1/3;
 }

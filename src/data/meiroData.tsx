@@ -19,6 +19,7 @@ import { MdOutlineSupervisorAccount ,MdOutlineAnalytics,MdAppRegistration,MdPric
 import { HiOutlineRefresh } from "react-icons/hi";
 import {FaClipboardList, FaRoute} from "react-icons/fa";
 import { Route } from 'react-router-dom';
+import { GridColumn } from "@syncfusion/ej2-react-grids";
 
 type LinksType={
   title: string,
@@ -373,17 +374,50 @@ export const tripGrid: TripGridType = [
   width: "0",
   textAlign: "Center",
 },
+]
+
+export const IssueManagementGrid: TripGridType = [
+  {
+    field: "ticketId",
+    headerText: "Ticket Id",
+    width: "80",
+    textAlign: "Center",
+  },
+  {
+    field: "ticketDate",
+    headerText: "Ticket Date",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
+    field: "driverName",
+    headerText: "Driver Name",
+    width: "120",
+    textAlign: "start",
+  },
+  {
+    field: "vehicleNumber",
+    headerText: "Vehicle Number",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
+    field: "query",
+    headerText: "Query",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
+    field: "status",
+    headerText: "Status",
+    width: "120",
+    textAlign: "Center",
+  },
+  
+]
 
 
 
-// {
-//   field: "city",
-//   headerText: "City",
-//   width: "120",
-//   textAlign: "Center",
-// },
-
-];
 
 
 type monthType = {month: string, value: number}[]

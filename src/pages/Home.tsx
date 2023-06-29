@@ -17,7 +17,7 @@ import {
   EdgeLabelPlacement,
   ChartRangePadding,
 } from "@syncfusion/ej2-react-charts";
-import { Bar, LineChart } from "../components";
+import { Bar, LineChart ,Pie } from "../components";
 import { dropdownData } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import {
@@ -26,6 +26,7 @@ import {
   CardWithChart,
   Filters,
   ChartCard,
+  SmallCardWithChart,
 } from "../components";
 import "../Styles.css";
 
@@ -644,6 +645,14 @@ const Home = ({ data }: any) => {
     duration: "Last 7 days",
 }
 
+const PaymentType : CardPropType = {
+  title: "ACTIVE / INACTIVE",
+  duration: "",
+}
+
+const PieChartData = [
+  { x: 'Online', y: 75, text: 'Online' }, { x: 'Offline', y: 25, text: 'Offline' },
+];
   // useEffect(() => {
   //   setSelectedDuration('Till Date');
   //   setSelectedState('All');
@@ -684,7 +693,7 @@ const Home = ({ data }: any) => {
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AvgDistanceCovered} />
         <SmallCard props={DistanceCovered} />
-        <SmallCard props={LiveTrips} />
+        <SmallCardWithChart props={PaymentType} chart={<Pie h='30%' w='30%' data={PieChartData} />} />
       </div>
       <div className=" displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={TopDrivers} chart={<Bar />} />

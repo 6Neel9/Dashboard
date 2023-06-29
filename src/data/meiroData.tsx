@@ -317,7 +317,7 @@ export const tripGrid: TripGridType = [
 },
 {
   field: "paymentStatus",
-  headerText: "Payment Type",
+  headerText: "Payment Status",
   width: "80",
   textAlign: "Center",
 },

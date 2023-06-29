@@ -20,7 +20,13 @@ import {
 import { Bar, LineChart } from "../components";
 import { dropdownData } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
-import { MediumCard, SmallCard, CardWithChart, Filters } from "../components";
+import {
+  MediumCard,
+  SmallCard,
+  CardWithChart,
+  Filters,
+  ChartCard,
+} from "../components";
 import "../Styles.css";
 
 import { useSelector, useDispatch } from "react-redux";
@@ -28,6 +34,7 @@ import { fetchDrivers } from "../store/driverSlice";
 
 //
 import AreaCharts from "../components/Charts/AreaCharts";
+import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
 
 const Home = ({ data }: any) => {
   const {
@@ -608,6 +615,35 @@ const Home = ({ data }: any) => {
     percent: "2.45",
   };
 
+  const TopDrivers: CardPropType = {
+    title: "TOP 10 DRIVERS",
+    value: "₹25",
+    duration: "Last 7 days",
+    icon: "positive",
+    percent: "1.65",
+  };
+
+  const SmallCardProps6: CardPropType = {
+    title: "Avg trips / hour",
+    duration: "",
+    value: "642",
+  };
+  const SmallCardProps7: CardPropType = {
+    title: "Morning peak",
+    duration: "1075 average trips per hour",
+    value: "10:12 AM",
+  };
+  const SmallCardProps8: CardPropType = {
+    title: "Evening peak",
+    duration: "1075 average trips per hour",
+    value: "7:13 PM",
+  };
+
+  const ChartCardProps: CardPropType = {
+    title: "TRIP DURARION",
+    duration: "Last 7 days",
+}
+
   // useEffect(() => {
   //   setSelectedDuration('Till Date');
   //   setSelectedState('All');
@@ -650,7 +686,21 @@ const Home = ({ data }: any) => {
         <SmallCard props={DistanceCovered} />
         <SmallCard props={LiveTrips} />
       </div>
-      <div className="displayFlex  textLeft flexJustifyBetween widthFull">
+      <div className=" displayFlex textLeft flexJustifyCenter widthFull">
+        <ChartCard prop={TopDrivers} chart={<Bar />} />
+      </div>
+      <br />
+      <hr />
+      <br />
+      <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
+        <SmallCardFormatter props={SmallCardProps8} />
+        <SmallCardFormatter props={SmallCardProps7} />
+        <SmallCardFormatter props={SmallCardProps6} />
+      </div>
+      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+                <ChartCard prop={ChartCardProps} chart={<DriverRevenueChart />} />
+            </div>
+      {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />
         <SmallCard props={ActiveDrivers} />
         <SmallCard props={DistanceCovered} />
@@ -706,7 +756,7 @@ const Home = ({ data }: any) => {
           prop2={DriverRevenuePercentChange}
           chart={<Bar />}
         />
-      </div>
+      </div> */}
     </div>
   );
 };

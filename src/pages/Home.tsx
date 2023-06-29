@@ -17,7 +17,7 @@ import {
   EdgeLabelPlacement,
   ChartRangePadding,
 } from "@syncfusion/ej2-react-charts";
-import { Bar, LineChart ,Pie } from "../components";
+import { Bar, LineChart, Pie } from "../components";
 import { dropdownData } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import {
@@ -641,18 +641,19 @@ const Home = ({ data }: any) => {
   };
 
   const ChartCardProps: CardPropType = {
-    title: "TRIP DURARION",
+    title: "TRIP DURATION",
     duration: "Last 7 days",
-}
+  };
 
-const PaymentType : CardPropType = {
-  title: "ACTIVE / INACTIVE",
-  duration: "",
-}
+  const PaymentType: CardPropType = {
+    title: "ACTIVE / INACTIVE",
+    duration: "",
+  };
 
-const PieChartData = [
-  { x: 'Online', y: 75, text: 'Online' }, { x: 'Offline', y: 25, text: 'Offline' },
-];
+  const PieChartData = [
+    { x: "Online", y: 75, text: "Online" },
+    { x: "Offline", y: 25, text: "Offline" },
+  ];
   // useEffect(() => {
   //   setSelectedDuration('Till Date');
   //   setSelectedState('All');
@@ -663,7 +664,9 @@ const PieChartData = [
       <div className="displayFlex">
         <Filters />
       </div>
-
+      <div className=" marginLeftSmall">
+        <p className="text-2xl extraBoldWeightText  mainText grayText">Overview</p>
+      </div>
       <div className="displayFlex textLeft flexJustifyBetween ">
         <SmallCard props={SmallCardOneProps} />
         {/* <SmallCard props={SmallCardTwoProps}/> */}
@@ -687,28 +690,35 @@ const PieChartData = [
           chart={<Bar />}
         />
       </div>
-      <br />
-      <hr />
-      <br />
+      <hr/>
+      <br/>
+      <div className=" marginLeftSmall">
+        <p className="text-2xl extraBoldWeightText  mainText grayText">Fleet Performance</p>
+      </div>
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AvgDistanceCovered} />
         <SmallCard props={DistanceCovered} />
-        <SmallCardWithChart props={PaymentType} chart={<Pie h='30%' w='30%' data={PieChartData} />} />
+        <SmallCardWithChart
+          props={PaymentType}
+          chart={<Pie h="30%" w="30%" data={PieChartData} />}
+        />
       </div>
       <div className=" displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={TopDrivers} chart={<Bar />} />
       </div>
-      <br />
-      <hr />
-      <br />
+      <hr/>
+      <br/>
+      <div className=" marginLeftSmall">
+        <p className="text-2xl extraBoldWeightText  mainText grayText">Demand</p>
+      </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCardFormatter props={SmallCardProps8} />
         <SmallCardFormatter props={SmallCardProps7} />
         <SmallCardFormatter props={SmallCardProps6} />
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
-                <ChartCard prop={ChartCardProps} chart={<DriverRevenueChart />} />
-            </div>
+        <ChartCard prop={ChartCardProps} chart={<DriverRevenueChart />} />
+      </div>
       {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />
         <SmallCard props={ActiveDrivers} />

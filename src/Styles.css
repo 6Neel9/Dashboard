@@ -155,6 +155,8 @@
   @apply text-gray-700 dark:text-white;
 }
 
+
+
 /* For Text with variable sizing */
 .extraLargeText {
   @apply text-5xl;
@@ -467,4 +469,8 @@
 
 .gapMedium{
   @apply gap-5;
+}
+
+.grayText{
+  color: grey;
 }

@@ -25,7 +25,7 @@ import {
   RevenueAnalytics,
   Tracking,
   DriverAnalytics,
-  Parking
+  Parking,
   Trips,
   Pricing,
   IssueManagement

@@ -14,7 +14,7 @@ const SmallCard = ({ props }: any) => {
             </div>
             <div>
             <div className="largeText textStyle paddingTopSmall  extraBoldWeightText">
-                {props.value.toUpperCase()}
+                {props.value}
             </div>
             {props.icon && <div >
                 {props.icon === "positive" ?

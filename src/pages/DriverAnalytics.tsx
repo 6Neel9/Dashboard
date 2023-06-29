@@ -10,6 +10,8 @@ import {
 } from "../components";
 import "../Styles.css";
 import { useStateContext } from "../contexts/ContextProvider";
+import { select } from "@syncfusion/ej2-base";
+import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
 
 type CardPropType = {
   title?: string;
@@ -191,13 +193,7 @@ const TotalDownloads: CardPropType = {
   percent: "0.31",
 };
 
-const ComplementCrashFreeUsers: CardPropType = {
-  title: "COMPLEMENT OF CRASH FREE USERS",
-  duration: "Last 7 Days",
-  value: "25,997",
-  icon: "negative",
-  percent: "0.3",
-};
+
 
 const TotalTrips: CardPropType = {
   title: "TOTAL TRIPS",
@@ -207,10 +203,7 @@ const TotalTrips: CardPropType = {
   percent: "0.35",
 };
 
-const CrashFreeUsers2: CardPropType = {
-  title: "CRASH FREE USERS",
-  duration: "Last 7 days",
-};
+
 
 const ActiveHours: CardPropType = {
   title: "ACTIVE HOURS PER DAY",
@@ -250,6 +243,8 @@ const ActiveHoursPerDay: CardPropType = {
   percent: "1.35",
 };
 
+
+
 const DriverAnalytics = () => {
   const {
     currentColor,
@@ -260,10 +255,71 @@ const DriverAnalytics = () => {
     setSelectedState,
   } = useStateContext();
 
+  const TotalDrivers: CardPropType = {
+    title: "TOTAL DRIVERS",
+    duration: selectedDuration,
+    value: "10,000",
+    icon: "positive",
+    percent: "1.65",
+  }
+
+  const ActiveInactive : CardPropType = {
+    title: "ACTIVE / INACTIVE DRIVERS",
+    duration: selectedDuration,
+  }
+
+  const PieChartData = [
+    { x: 'Active', y: 75, text: 'Active' }, { x: 'Inactive', y: 25, text: 'Inactive' },
+  ];
+
+  const PendingApproval: CardPropType = {
+    title: "PENDING APPROVAL",
+    duration: selectedDuration,
+    value: "35",
+  }
+
+  const ActiveHoursPerDay: CardPropType = {
+    title: "ACTIVE HOURS PER DAY",
+    duration: "24 Hrs",
+  };
+
+  const ActiveHoursPerDay2: CardPropType = {
+    title: "ACTIVE HOURS PER DAY",
+    duration: "24 Hrs",
+    value: "6.5 Hrs",
+    icon: "positive",
+    percent: "0.3",
+  };
+  const TripsPerDay: CardPropType = {
+    title: "TRIPS PER DAY",
+    duration: "24 Hrs",
+  };
+
+  const TripsPerDay2: CardPropType = {
+    title: "TRIPS PER DAY",
+    duration: "24 Hrs",
+    value: "405",
+    icon: "positive",
+    percent: "3.5",
+  };
+  const TimeBetweenTrips: CardPropType = {
+    title: "TIME BETWEEN TRIPS",
+    duration: selectedDuration,
+  };
+
+  const TimeBetweenTrips2: CardPropType = {
+    title: "TIME BETWEEN TRIPS",
+    duration: selectedDuration,
+    value: "16 min",
+    icon: "negative",
+    percent: "0.3",
+  };
+
   useEffect(() => {
-    setSelectedDuration("Till Date");
+  setSelectedDuration("Till Date");
     setSelectedState("All");
   }, []);
+  
   return (
     <div className="extraSmallMargin">
       <div className="displayFlex">
@@ -271,24 +327,44 @@ const DriverAnalytics = () => {
       </div>
 
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
-        <SmallCard props={DriverRange} />
-        <SmallCard props={NewDrivers} />
-        <SmallCard props={AttritionedDrivers} />
+        <SmallCard props={TotalDrivers} />
+        <SmallCardWithChart props={ActiveInactive} chart={<Pie h='30%' w='30%' data={PieChartData} />} />
+        <SmallCard props={PendingApproval} />
       </div>
 
-      <div className="displayFlex  textLeft flexJustifyBetween widthFull">
+      <div className=" displayFlex textLeft flexJustifyBetween widthFull">
+        <ChartCard prop={RevenuePerTripwrtTime} chart={<Bar />} />
+      </div>
+
+      <div>
+        <CardWithChart
+          prop1={ActiveHoursPerDay}
+          prop2={ActiveHoursPerDay2}
+          chart={<Bar />}
+        />
+      </div>
+      <div>
+        <CardWithChart
+          prop1={TripsPerDay}
+          prop2={TripsPerDay2}
+          chart={<Bar />}
+        />
+      </div>
+      <div>
+        <CardWithChart
+          prop1={TimeBetweenTrips}
+          prop2={TimeBetweenTrips2}
+          chart={<Bar />}
+        />
+      </div>
+
+      {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={ActiveDrivers} />
         <SmallCard props={UnactivatedDrivers} />
         <SmallCard props={TotalTrips} />
       </div>
 
-      <div>
-        <CardWithChart
-          prop1={CrashFreeUsers2}
-          prop2={ComplementCrashFreeUsers}
-          chart={<LineChart />}
-        />
-      </div>
+     
 
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={TotalVehicles} />
@@ -301,9 +377,7 @@ const DriverAnalytics = () => {
         <SmallCard props={AvgTripPerDay} />
         <SmallCard props={AvgTimeBWTripsPerDriver} />
       </div>
-      <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={RevenuePerTripwrtTime} chart={<Bar />} />
-      </div>
+      */}
     </div>
   );
 };

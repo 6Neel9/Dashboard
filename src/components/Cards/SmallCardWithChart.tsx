@@ -4,7 +4,7 @@ import "../../Styles.css";
 function SmallCardWithChart({ props, chart }: any) {
   return (
     <div
-      className={`container smallContainer smallMargin mediumPadding h-${props.height} displayFlex flexCol flexJustifyBetween mainShadow`}
+      className={`container extraSmallContainer smallMargin mediumPadding  displayFlex flexCol flexJustifyBetween mainShadow `}
     >
       <div>
         <h1 className="textStyle normalText smallPadding extraSmallText">

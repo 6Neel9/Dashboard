@@ -72,6 +72,9 @@
 .marginTopSmall {
   @apply mt-3;
 }
+.marginTopMoreMedium {
+  @apply mt-4;
+}
 .marginBottomMedium {
   @apply mb-5;
 }

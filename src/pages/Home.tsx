@@ -690,9 +690,7 @@ const Home = ({ data }: any) => {
           chart={<Bar />}
         />
       </div>
-      <hr/>
-      <br/>
-      <div className=" marginLeftSmall">
+      <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">Fleet Performance</p>
       </div>
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
@@ -706,9 +704,8 @@ const Home = ({ data }: any) => {
       <div className=" displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={TopDrivers} chart={<Bar />} />
       </div>
-      <hr/>
-      <br/>
-      <div className=" marginLeftSmall">
+
+      <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">Demand</p>
       </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">

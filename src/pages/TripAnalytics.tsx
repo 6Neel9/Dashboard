@@ -149,9 +149,8 @@ const TripAnalytics = () => {
         <ChartCard prop={ChartCardProps} chart={<Bar />} />
         <SmallCard props={SmallCardProps1} />
       </div> */}
-      <hr />
-      <br />
-      <div className=" marginLeftSmall">
+
+      <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">
           Trip Statistics
         </p>
@@ -165,9 +164,7 @@ const TripAnalytics = () => {
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<Bar />} />
       </div>
-      <hr />
-      <br />
-      <div className=" marginLeftSmall">
+      <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">
           Spatial Patterns
         </p>

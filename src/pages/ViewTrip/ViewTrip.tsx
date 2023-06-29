@@ -13,9 +13,7 @@ const ViewTrip = () => {
     const { selectedrecords } = location.state;
    
     useEffect(() => {
-      
-      console.log(selectedrecords);
-      setTripData(selectedrecords);
+         setTripData(selectedrecords);
       
     },[])
     const [tripData, setTripData] = useState({
@@ -43,7 +41,7 @@ const ViewTrip = () => {
   return (
     <div className="largeMargin marginTopMedium largePadding mainBackground rounded3XLarge mainBorder mainShadow">
        <div className="flex float-right mb-2">
-                <span onClick={() => navigate("/tripList")}>
+                <span onClick={() => navigate("/trips")}>
                     <button
                         type="button"
                         title="Close"

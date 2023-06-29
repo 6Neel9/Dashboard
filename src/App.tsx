@@ -31,6 +31,7 @@ import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import IssueManagement from './pages/IssueManagement';
+import Trips from './pages/Trips';
 
 
 // type DriverDataType = {
@@ -137,11 +138,11 @@ function App() {
 
 
                 {/* pages  */}
-                <Route path="/driversList" element={<Drivers data={data} />} />
+                <Route path="/drivers" element={<Drivers data={data} />} />
                 <Route path="/driverUpdate" element={<DriverUpdate  />} />
                 <Route path="/driverView/:id" element={<ViewDriver data={data} />} />
                 <Route path="/addNewDriver" element={<AddNewDriver />} />
-                <Route path="/tripList" element={<TripList data={data} />} />
+                <Route path="/trips" element={<Trips data={data} />} />
                 <Route path="/tripView/:id" element={<ViewTrip />} />
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
                 <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />

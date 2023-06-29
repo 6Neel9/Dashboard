@@ -12,7 +12,7 @@ export { default as Stacked } from "./Charts/Stacked";
 export { default as DriverUpdate } from "./DiverUpdate/DriverUpdate";
 export { default as ViewDriver } from "./ViewDriver/ViewDriver";
 export { default as AddNewDriver } from "./AddNewDriver";
-export { default as TripList } from "./TripList";
+export { default as TripList } from "./Trips";
 export { default as ViewTrip } from "./ViewTrip/ViewTrip";
 export { default as TripAnalytics } from "./TripAnalytics";
 export { default as RevenueAnalytics } from "./RevenueAnalytics";

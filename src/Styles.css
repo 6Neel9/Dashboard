@@ -73,7 +73,8 @@
   @apply mt-3;
 }
 .marginTopMoreMedium {
-  @apply mt-4;
+  @apply mb-4;
+  @apply mt-1;
 }
 .marginBottomMedium {
   @apply mb-5;

@@ -316,6 +316,12 @@ export const tripGrid: TripGridType = [
   textAlign: "Center",
 },
 {
+  field: "paymentStatus",
+  headerText: "Payment Type",
+  width: "80",
+  textAlign: "Center",
+},
+{
   field: "startTime",
   headerText: "Start Time",
   width: "0",

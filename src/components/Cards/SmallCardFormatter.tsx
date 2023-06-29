@@ -16,7 +16,7 @@ function SmallCardFormatter({ props }: any) {
         <div className="largeText textStyle paddingTopSmall  extraBoldWeightText">
           {props.value.toUpperCase()}
         </div>
-        <div className="textStyle smallPadding">
+        <div className="textStyle  marginTopMedium">
           {props.duration.toLowerCase()}
         </div>
       </div>

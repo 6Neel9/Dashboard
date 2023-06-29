@@ -20,7 +20,7 @@ const Sidebar = () => {
 
 
   const activeLink =
-    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium extraSmallMargin text-gray-700 bg-light-gray";
+    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium extraSmallMargin dark:text-gray-700 dark:bg-light-gray bg-black text-white ";
   const normalLink =
     "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium mainText dark:hover:text-black hover:bg-light-gray extraSmallMargin";
 

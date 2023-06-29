@@ -7,6 +7,7 @@ import {
   LineChart,
   Bar,
   Pie,
+  SmallCardWithChart,
 } from "../components";
 import "../Styles.css";
 import { useStateContext } from "../contexts/ContextProvider";
@@ -147,6 +148,58 @@ const RevenueAnalytics = () => {
     setSelectedState,
   } = useStateContext();
 
+
+  const DriverRevenue: CardPropType = {
+    title: "DRIVER REVENUE",
+    duration: selectedDuration,
+    value: "₹ 34,800",
+    icon: "positive",
+    percent: "1.65",
+  }
+  
+  const PaymentType : CardPropType = {
+    title: "PAYMENT MODE",
+    duration: selectedDuration,
+  }
+
+  const PieChartData = [
+    { x: 'Online', y: 75, text: 'Online' }, { x: 'Offline', y: 25, text: 'Offline' },
+  ];
+
+  const AvgDriverRevenue: CardPropType = {
+    title: "AVG DRIVER REVENUE / TRIP",
+    duration: selectedDuration,
+    value: "₹ 115",
+    icon: "positive",
+    percent: "0.4",
+  }
+
+  const RevenuePerTrips: CardPropType = {
+    title: "REVENUE PER TRIP",
+    duration: selectedDuration,
+  };
+
+  const RevenuePerTrips2: CardPropType = {
+    title: "REVENUE PER TRIP",
+    duration: selectedDuration,
+    value: "₹ 78",
+    icon: "positive",
+    percent: "1.5",
+  };
+
+  const RevenuePerOperatingHour: CardPropType = {
+    title: "REVENUE PER OPERATING HOUR",
+    duration: selectedDuration,
+  };
+
+  const RevenuePerOperatingHour2: CardPropType = {
+    title: "REVENUE PER OPERATING HOUR",
+    duration: selectedDuration,
+    value: "₹ 8,300",
+    icon: "positive",
+    percent: "0.6",
+  };
+
   useEffect(() => {
     setSelectedDuration("Till Date");
     setSelectedState("All");
@@ -156,7 +209,29 @@ const RevenueAnalytics = () => {
       <div className="displayFlex">
         <Filters />
       </div>
+
+      <div className="displayFlex  textLeft flexJustifyBetween widthFull">
+        <SmallCard props={DriverRevenue} />
+        <SmallCardWithChart props={PaymentType} chart={<Pie h='30%' w='30%' data={PieChartData} />} />
+        <SmallCard props={AvgDriverRevenue} />
+      </div>
       <div>
+        <CardWithChart
+          prop1={RevenuePerTrips}
+          prop2={RevenuePerTrips2}
+          chart={<Bar />}
+        />
+      </div>
+      <div>
+        <CardWithChart
+          prop1={RevenuePerOperatingHour}
+          prop2={RevenuePerOperatingHour2}
+          chart={<Bar />}
+        />
+      </div>
+
+
+      {/* <div>
         <CardWithChart
           prop1={TotalRevenueForDriver}
           prop2={ChartForTotalRevenue}
@@ -197,7 +272,7 @@ const RevenueAnalytics = () => {
         <SmallCard props={SmallCardProps2} />
         <SmallCard props={SmallCardProps3} />
         <SmallCard props={AvgRevPerKm} />
-      </div>
+      </div> */}
     </div>
   );
 };

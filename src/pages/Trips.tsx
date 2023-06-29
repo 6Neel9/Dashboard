@@ -27,7 +27,7 @@ import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 import "../Styles.css"
 
 
-const TripList = ({ data }: any) => {
+const Trips = ({ data }: any) => {
     const navigate = useNavigate();
 
     // type DriverDataType = {
@@ -154,7 +154,7 @@ const TripList = ({ data }: any) => {
 
     return (
         <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">
-            <Header title="Trip List" />
+            <Header title="Trips" />
             <GridComponent
                 dataSource={tripData}
                 width="auto"
@@ -180,7 +180,7 @@ const TripList = ({ data }: any) => {
     )
 }
 
-export default TripList
+export default Trips
 
 
 

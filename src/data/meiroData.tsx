@@ -46,8 +46,8 @@ export const links: LinksType = [
     title: "Driver",
     links: [
       {
-        name: "Drivers List",
-        route: "driversList",
+        name: "Drivers",
+        route: "drivers",
         icon: <IoMdContacts />,
       },
       {
@@ -86,8 +86,8 @@ export const links: LinksType = [
         icon: <RiParkingBoxFill />,
       },
       {
-        name: "Trip List",
-        route: "tripList",
+        name: "Trips",
+        route: "trips",
         icon: <FaClipboardList />,
       },
     ],
@@ -239,7 +239,7 @@ type DriverGridType=({
 export const driverGrid: DriverGridType = [
   // { field: "srno", headerText: "Sr no.", width: "100", textAlign: "Center" },
 
-  { field: "driverId", headerText: "Driver Id", width: "150", textAlign: "Center" },
+  { field: "driverId", headerText: "Driver Id", width: "50", textAlign: "Center" },
   {
     field: "firstName",
     headerText: "First Name",
@@ -253,45 +253,31 @@ export const driverGrid: DriverGridType = [
     textAlign: "start",
   },
   {
+    field: "vehicleNumber",
+    headerText: "Vehicle No.",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
+    field: "mobile",
+    headerText: "Mobile No.",
+    width: "120",
+    textAlign: "Center",
+  },
+  {
     field: "licenceNumber",
     headerText: "License No.",
     width: "150",
     textAlign: "Center",
   },
-
-  // {
-  //   field: "dob",
-  //   headerText: "Birth Date",
-  //   width: "200",
-  //   format: "yMd",
-  //   textAlign: "Center",
-  // },
   {
-    field: "vehicleNumber",
-    headerText: "Vehicle Number",
-    width: "80",
+    field: "signedUpDate",
+    headerText: "Signed Up Date",
+    width: "150",
     textAlign: "Center",
   },
 
-  // {
-  //   field: "working",
-  //   headerText: "Work Status",
-  //   width: "120",
-  //   textAlign: "Center",
-  // },
 
-  // {
-  //   field: "trips",
-  //   headerText: "Total Trips",
-  //   width: "120",
-  //   textAlign: "Center",
-  // },
-  // {
-  //   field: "revenue",
-  //   headerText: "Total Revenue",
-  //   width: "120",
-  //   textAlign: "Center",
-  // },
   
 ];
 
@@ -310,23 +296,35 @@ type TripGridType=({
   textAlign: string;
 })[]
 export const tripGrid: TripGridType = [
-{ field: "tripId", headerText: "Trip Id", width: "120", textAlign: "Center" },
+{ field: "tripId", headerText: "Trip Id", width: "80", textAlign: "Center" },
 {
   field: "driverId",
   headerText: "Driver Id",
-  width: "120",
+  width: "80",
   textAlign: "start",
+},
+{
+  field: "tripFare",
+  headerText: "Revenue",
+  width: "80",
+  textAlign: "Center",
+},
+{
+  field: "paymentType",
+  headerText: "Payment Type",
+  width: "80",
+  textAlign: "Center",
 },
 {
   field: "startTime",
   headerText: "Start Time",
-  width: "120",
+  width: "0",
   textAlign: "start",
 },
 {
   field: "endTime",
   headerText: "End Time",
-  width: "120",
+  width: "0",
   textAlign: "Center",
 },
 
@@ -334,22 +332,17 @@ export const tripGrid: TripGridType = [
   field: "startLocation",
   headerText: "Start Location",
   width: "150",
-  textAlign: "Center",
+  textAlign: "start",
 },
 
 {
   field: "endLocation",
   headerText: "End Location",
   width: "150",
-  textAlign: "Center",
+  textAlign: "start",
 },
 
-{
-  field: "tripFare",
-  headerText: "Revenue",
-  width: "120",
-  textAlign: "Center",
-},
+
 {
   field: "tripDistance",
   headerText: "",
@@ -368,12 +361,7 @@ export const tripGrid: TripGridType = [
   width: "0",
   textAlign: "Center",
 },
-{
-  field: "paymentType",
-  headerText: "",
-  width: "0",
-  textAlign: "Center",
-},
+
 ]
 
 export const IssueManagementGrid: TripGridType = [

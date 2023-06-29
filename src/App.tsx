@@ -25,7 +25,7 @@ import {
   RevenueAnalytics,
   Tracking,
   DriverAnalytics,
-  Parking,
+  Parking
   Trips,
   Pricing,
   IssueManagement
@@ -152,7 +152,6 @@ function App() {
                 <Route path="/parking" element={<Parking />} />
                 <Route path="/driverAnalytics" element={<DriverAnalytics />} />
                 <Route path='/issueManagement' element={<IssueManagement />} />
-                <Route path="/pricing" element={<Pricing />} />
                 
               
 

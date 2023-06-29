@@ -251,7 +251,7 @@ const Drivers = ({ data }: any) => {
 
   return (
     <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">
-      <Header title="Driver Details List" />
+      <Header title="Drivers" />
       <GridComponent
         id="grid"
         dataSource={driverData}

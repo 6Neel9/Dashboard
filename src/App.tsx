@@ -25,13 +25,15 @@ import {
   RevenueAnalytics,
   Tracking,
   DriverAnalytics,
-  Parking
+  Parking,
+  Trips,
+  Pricing,
+  IssueManagement
 } from "./pages";
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import IssueManagement from './pages/IssueManagement';
-import Trips from './pages/Trips';
+
 
 
 // type DriverDataType = {
@@ -150,6 +152,7 @@ function App() {
                 <Route path="/parking" element={<Parking />} />
                 <Route path="/driverAnalytics" element={<DriverAnalytics />} />
                 <Route path='/issueManagement' element={<IssueManagement />} />
+                <Route path="/pricing" element={<Pricing />} />
                 
               
 

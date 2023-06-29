@@ -35,7 +35,7 @@ const Sidebar = () => {
               className="flexAlignCenter gap-3 marginLeftSmall mt-4 displayFlex text-xl font-extrabold tracking-tight dark:textWhite text-slate-900"
             >
               {
-                currentMode === "Dark" ? (<span><img src={smartCity} alt="Logo" className="h-24 w-32 mr-12" /></span>) : (<span><img src={Logo_Light} alt="Logo" className="h-14 w-auto" /></span>)
+                currentMode === "Dark" ? (<span><img src={smartCity} alt="Logo" className="h-24 w-32 mr-12" /></span>) : (<span><img src={smartCity} alt="Logo" className="h-24 w-32 mr-12" /></span>)
               }
 
             </Link>

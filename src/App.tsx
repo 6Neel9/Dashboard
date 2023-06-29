@@ -30,6 +30,7 @@ import {
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import IssueManagement from './pages/IssueManagement';
 
 
 // type DriverDataType = {
@@ -147,21 +148,23 @@ function App() {
                 <Route path="/tracking" element={<Tracking />} />
                 <Route path="/parking" element={<Parking />} />
                 <Route path="/driverAnalytics" element={<DriverAnalytics />} />
+                <Route path='/issueManagement' element={<IssueManagement />} />
                 
               
 
+
                 {/* apps  */}
-                <Route path="/kanban" element={<Kanban />} />
-                <Route path="/editor" element={<Editor />} />
+                {/* <Route path="/kanban" element={<Kanban />} />
+                <Route path="/editor" element={<Editor />} /> */}
 
                 {/* charts  */}
-                <Route path="/line" element={<Line />} />
+                {/* <Route path="/line" element={<Line />} />
                 <Route path="/area" element={<Area />} />
                 <Route path="/bar" element={<Bar />} />
                 <Route path="/financial" element={<Financial />} />
                 <Route path="/color-mapping" element={<ColorMapping />} />
                 <Route path="/pyramid" element={<Pyramid />} />
-                <Route path="/stacked" element={<Stacked />} />
+                <Route path="/stacked" element={<Stacked />} /> */}
               </Routes>
             </div>
             <Footer />

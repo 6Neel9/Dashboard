@@ -18,5 +18,6 @@ export { default as MediumCard } from './Cards/MediumCard';
 export {default as ChartCard} from './Cards/ChartCard';
 export {default as SmallCardWithChart} from './Cards/SmallCardWithChart';
 export {default as Pie} from './Charts/Pie';
+export {default as ExtraSmallCard} from './Cards/ExtraSmallCard';
 
 

@@ -131,7 +131,10 @@ const TripList = ({ data }: any) => {
             // const selectedrowindex: number[] = grid.getSelectedRowIndexes();
             const selectedrecords: any = grid.getSelectedRecords();
             const SelectedTripData = JSON.stringify(selectedrecords[0])
-            navigate("/tripView", { state: { SelectedTripData: SelectedTripData } })
+            const tripId = JSON.stringify(selectedrecords[0]['tripId'])
+            const driverId = JSON.stringify(selectedrecords[0]['driverId'])
+            navigate(`/tripView/${tripId}`, { state: { selectedrecords: selectedrecords[0]} })
+           
         }
     }
 
@@ -153,7 +156,6 @@ const TripList = ({ data }: any) => {
         <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">
             <Header title="Trip List" />
             <GridComponent
-                id="grid"
                 dataSource={tripData}
                 width="auto"
                 allowPaging={true}
@@ -182,4 +184,8 @@ export default TripList
 
 
 
+
+function driverId(this: any, key: string, value: any) {
+    throw new Error("Function not implemented.");
+}
 

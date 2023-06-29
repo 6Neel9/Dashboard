@@ -1,34 +1,59 @@
-import React from 'react'
+import React, { useState,useEffect } from 'react'
 import { MapContainer, TileLayer } from "react-leaflet";
 import RoutingMap from '../../components/Map/RoutingMap';
 import { Header } from '../../components';
 import "../../Styles.css"
+import { useLocation, useNavigate } from 'react-router-dom';
+import { GrClose } from 'react-icons/gr';
 
 const ViewTrip = () => {
 
-  
-  const tripData = {
-    "driverId": 1,
-    "tripID": 0,
-    "startTime": "2023-04-01T17:06:00",
-    "startLocation": [
-      22.985913,
-      72.553724
-    ],
-    "tripDistance": 9.1,
-    "tripSpeed": 39.46,
-    "tripDuration": 14,
-    "endLocation": [
-      23.052786,
-      72.604619
-    ],
-    "tripFare": 97,
-    "paymentType": "upi",
-    "endTime": "2023-04-01T17:19:00"
-  }
+  const location = useLocation();
+  const navigate = useNavigate();
+    const { selectedrecords } = location.state;
+   
+    useEffect(() => {
+      
+      console.log(selectedrecords);
+      setTripData(selectedrecords);
+      
+    },[])
+    const [tripData, setTripData] = useState({
+      "driverId": 1,
+      "tripId": 0,
+      "startTime": "2023-04-01T17:06:00",
+      "startLocation": [
+        22.985913,
+        72.553724
+      ],
+      "tripDistance": 9.1,
+      "tripSpeed": 39.46,
+      "tripDuration": 14,
+      "endLocation": [
+        23.052786,
+        72.604619
+      ],
+      "tripFare": 97,
+      "paymentType": "upi",
+      "endTime": "2023-04-01T17:19:00"
+    });
+
+
 
   return (
     <div className="largeMargin marginTopMedium largePadding mainBackground rounded3XLarge mainBorder mainShadow">
+       <div className="flex float-right mb-2">
+                <span onClick={() => navigate("/tripList")}>
+                    <button
+                        type="button"
+                        title="Close"
+                        style={{ color: "black", fontSize: "25px", borderRadius: "50%", fontWeight: "bold" }}
+                        className="text-2xl p-3 hover:drop-shadow-xl hover:bg-gray-200"
+                    >
+                        <GrClose />
+                    </button>
+                </span>
+            </div>
       <Header title="Trip Info:" />
       <MapContainer zoom={15} style={{ height: "45vh", borderRadius: "10px" }}>
         <TileLayer
@@ -43,7 +68,7 @@ const ViewTrip = () => {
           <dl className="divide-y divide-gray-400">
             <div className="px-4 py-3 grid grid-cols-4 gap-10">
               <dt className="text-sm font-extrabold leading-6 mainText col-span-2">Trip Id</dt>
-              <dd className=" text-sm leading-6 mainText col-span-2">{tripData.tripID}</dd>
+              <dd className=" text-sm leading-6 mainText col-span-2">{tripData.tripId}</dd>
             </div>
             <div className="px-4 py-3 grid grid-cols-4 gap-10">
               <dt className="text-sm font-extrabold leading-6 mainText col-span-2">Start Time</dt>

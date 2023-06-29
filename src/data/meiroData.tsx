@@ -349,6 +349,33 @@ export const tripGrid: TripGridType = [
   width: "120",
   textAlign: "Center",
 },
+{
+  field: "tripDistance",
+  headerText: "",
+  width: "0",
+  textAlign: "Center",
+},
+{
+  field: "tripSpeed",
+  headerText: "",
+  width: "0",
+  textAlign: "Center",
+},
+{
+  field: "tripDuration",
+  headerText: "",
+  width: "0",
+  textAlign: "Center",
+},
+{
+  field: "paymentType",
+  headerText: "",
+  width: "0",
+  textAlign: "Center",
+},
+
+
+
 // {
 //   field: "city",
 //   headerText: "City",

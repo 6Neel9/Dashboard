@@ -9,7 +9,6 @@ import {
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 
-
 type CardPropType = {
   title?: string;
   duration?: string;
@@ -84,7 +83,7 @@ const CardWithChartProp2: CardPropType = {
 };
 
 const ChartCardProps: CardPropType = {
-  title: "TRIP DURARION",
+  title: "TRIP DURATION",
   duration: "Last 7 days",
 };
 const ChartCardProps4: CardPropType = {
@@ -124,6 +123,11 @@ const TripAnalytics = () => {
                 <SmallCard props={SmallCardProps7} />
                 <SmallCard props={SmallCardProps8} />
             </div> */}
+      <div className=" marginLeftSmall">
+        <p className="text-2xl extraBoldWeightText  mainText grayText">
+          Overview
+        </p>
+      </div>
       <div>
         <CardWithChart
           prop1={CardWithChartProp1}
@@ -145,6 +149,13 @@ const TripAnalytics = () => {
         <ChartCard prop={ChartCardProps} chart={<Bar />} />
         <SmallCard props={SmallCardProps1} />
       </div> */}
+      <hr />
+      <br />
+      <div className=" marginLeftSmall">
+        <p className="text-2xl extraBoldWeightText  mainText grayText">
+          Trip Statistics
+        </p>
+      </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps2} chart={<Bar />} />
       </div>
@@ -154,7 +165,13 @@ const TripAnalytics = () => {
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<Bar />} />
       </div>
-
+      <hr />
+      <br />
+      <div className=" marginLeftSmall">
+        <p className="text-2xl extraBoldWeightText  mainText grayText">
+          Spatial Patterns
+        </p>
+      </div>
 
       {/* <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={SmallCardProps5} />

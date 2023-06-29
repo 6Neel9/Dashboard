@@ -105,87 +105,174 @@ const Home = ({ data }: any) => {
   //Getting redux data
     const driverData:any = useSelector((state:any)=>state.drivers);
     const tripData:any = useSelector((state:any)=>state.trips);
-    console.log(driverData)
-    console.log(tripData)
+    // console.log(driverData)
+    // console.log(tripData)
 
 
 
   // Filter function
-  function filterDates(arr: string[]): {
-    currentDate?: string[];
-    lastSevenDays?: string[];
-    lastSixMonths?: string[];
-    lastYear?: string[];
-    tillDate?: string[];
-  } {
-    const currentDate = new Date();
-    const lastSevenDays = new Date(
-      currentDate.getTime() - 7 * 24 * 60 * 60 * 1000
-    ); // Subtract 7 days in milliseconds
-    const lastSixMonths = new Date(
-      currentDate.getFullYear(),
-      currentDate.getMonth() - 6,
-      currentDate.getDate()
-    );
-    const lastYear = new Date(
-      currentDate.getFullYear() - 1,
-      currentDate.getMonth(),
-      currentDate.getDate()
-    );
+  // function filterDates(arr: string[]): {
+  //   currentDate?: string[];
+  //   lastSevenDays?: string[];
+  //   lastSixMonths?: string[];
+  //   lastYear?: string[];
+  //   lastThirtyDays?: string[];
+  //   tillDate?: string[];
+  // } {
+  //   const currentDate = new Date();
+  //   const lastSevenDays = new Date(
+  //     currentDate.getTime() - 7 * 24 * 60 * 60 * 1000
+  //   ); // Subtract 7 days in milliseconds
+  //   const lastSixMonths = new Date(
+  //     currentDate.getFullYear(),
+  //     currentDate.getMonth() - 6,
+  //     currentDate.getDate()
+  //   );
+  //   const lastYear = new Date(
+  //     currentDate.getFullYear() - 1,
+  //     currentDate.getMonth(),
+  //     currentDate.getDate()
+  //   );
+  //   const lastThirtyDays = new Date(
+  //     currentDate.getTime() - 30 * 24 * 60 * 60 * 1000
+  //   ); // Subtract 30 days in milliseconds
+  
+  //   const datesLastSevenDays = trips.filter((item) => {
+  //     const date = new Date(item.startTime);
+  //     return date >= lastSevenDays && date <= currentDate;
+  //   });
+  
+  //   const datesLastSixMonths = trips.filter((item) => {
+  //     const date = new Date(item.startTime);
+  //     return date >= lastSixMonths && date <= currentDate;
+  //   });
+  
+  //   const datesLastYear = trips.filter((dateStr) => {
+  //     const date = new Date(dateStr.startTime);
+  //     return date >= lastYear && date <= currentDate;
+  //   });
+  
+  //   const datesLastThirtyDays = trips.filter((dateStr) => {
+  //     const date = new Date(dateStr.startTime);
+  //     return date >= lastThirtyDays && date <= currentDate;
+  //   });
+  
+  //   const datescurrentDate = trips.filter((dateStr) => {
+  //     const date = new Date(dateStr.startTime);
+  //     return date >= currentDate && date <= currentDate;
+  //   });
+  
+  //   const datesTillDate = trips.filter((dateStr) => {
+  //     const date = new Date(dateStr.startTime);
+  //     return date <= currentDate;
+  //   });
+  
+  //   if (selectedDuration === "Today") {
+  //     return { currentDate: datescurrentDate };
+  //   } else if (
+  //     selectedDuration === "Last 7 Days" ||
+  //     selectedDuration === "This Week"
+  //   ) {
+  //     return { lastSevenDays: datesLastSevenDays };
+  //   } else if (selectedDuration === "Last 6 Months") {
+  //     return { lastSixMonths: datesLastSixMonths };
+  //   } else if (selectedDuration === "Last Year") {
+  //     return { lastYear: datesLastYear };
+  //   } else if (selectedDuration === "Last 30 Days") {
+  //     return { lastThirtyDays: datesLastThirtyDays };
+  //   } else if (selectedDuration === "Till Date") {
+  //     return { tillDate: datesTillDate };
+  //   } else {
+  //     return {
+  //       tillDate: datesTillDate,
+  //     };
+  //   }
+  // }
+  
+  
 
-    const datesLastSevenDays = trips.filter((item) => {
-      const date = new Date(item.startTime);
-      return date >= lastSevenDays && date <= currentDate;
-    });
-
-    const datesLastSixMonths = trips.filter((item) => {
-      const date = new Date(item.startTime);
-      return date >= lastSixMonths && date <= currentDate;
-    });
-
-    const datesLastYear = trips.filter((dateStr) => {
-      const date = new Date(dateStr.startTime);
-      return date >= lastYear && date <= currentDate;
-    });
-
-    const datescurrentDate = trips.filter((dateStr) => {
-      const date = new Date(dateStr.startTime);
-      return date >= currentDate && date <= currentDate;
-    });
-
-    const datesTillDate = trips.filter((dateStr) => {
-      const date = new Date(dateStr.startTime);
-      return date <= currentDate;
-    });
-
-    if (selectedDuration === "Today") {
-      return { currentDate: datescurrentDate };
-    } else if (
-      selectedDuration === "Last 7 Days" ||
-      selectedDuration === "This Week"
-    ) {
-      return { lastSevenDays: datesLastSevenDays };
-    } else if (selectedDuration === "Last 6 Months") {
-      return { lastSixMonths: datesLastSixMonths };
-    } else if (selectedDuration === "Last Year") {
-      return { lastYear: datesLastYear };
-    } else {
-      return {
-        tillDate: datesTillDate,
-      };
-    }
-    // return {
-    //   lastSevenDays: datesLastSevenDays,
-    //   lastSixMonths: datesLastSixMonths,
-    //   lastYear: datesLastYear
-    // };
-  }
-
-  const filteredDates = filterDates(trips);
+  // const filteredDates = filterDates(trips);
+  // console.log("Dates from till date:", filteredDates.tillDate);
   // console.log("Dates from the last 7 days:", filteredDates.lastSevenDays);
   // console.log("Dates from the last 6 months:", filteredDates.lastSixMonths);
   // console.log("Dates from the last year:", filteredDates.lastYear);
+  // console.log("Dates from the last 30 days:", filteredDates.lastThirtyDays);
+  // console.log("Dates from today:", filteredDates.currentDate);
 
+  //
+  interface DataObject {
+    driverId: number;
+    tripId: number;
+    startLocation: [number, number];
+    tripDistance: number;
+    tripSpeed: number;
+    tripDuration: number;
+    endLocation: [number, number];
+    startTime: string;
+    tripFare: number;
+    paymentType: string;
+    endTime: string;
+  }
+  
+  interface FilterDurationType {
+    duration: string;
+    value: number;
+  }
+  
+  const filterData = (data: DataObject[], filterDuration: number): DataObject[] => {
+    const filteredObjects = data.filter((obj) => {
+      const startTime = new Date(obj.startTime);
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0); // Set current date to midnight to ignore the time part
+  
+      const startDate = new Date(currentDate.getTime() - filterDuration * 24 * 60 * 60 * 1000);
+  
+      if (filterDuration === 0) {
+        // For "Till Date", return all objects
+        return true;
+      } else if (filterDuration === 1) {
+        // For "Today", compare date and time
+        return startTime >= currentDate;
+      } else {
+        // For other durations, compare only dates
+        return startTime >= startDate && startTime <= currentDate;
+      }
+    });
+  
+    return filteredObjects;
+  };
+
+
+  let duration:any;
+  if(selectedDuration === "Till Date"){
+    duration = 0
+  }else if(selectedDuration === "Today"){
+    duration = 1
+  }else if(selectedDuration === "Last 7 Days"){
+    duration = 7
+  }else if(selectedDuration === "Last 30 Days"){
+    duration = 30
+  }else if(selectedDuration === "Last 6 Months"){
+    duration = 180
+  }else if(selectedDuration === "Last Year"){
+    duration = 365
+  }
+
+  const filteredData = filterData(data, duration); // Example: Filtering for the "Last 7 Days"
+  console.log("Filtered Data:", filteredData);
+  
+  // Total trips for "Last 7 Days" and "Till Date"
+  const totalTripsLast7Days = filteredData.length;
+  const totalTripsTillDate = filterData(data, 0).length;
+  
+  console.log("Total Trips (Last 7 Days):", totalTripsLast7Days);
+  console.log("Total Trips (Till Date):", totalTripsTillDate);
+  
+  
+  // const filteredData = filterData(trips, duration);
+  // console.log(filteredData);
+  
+//
   var total_revenue = 0;
   function numberFormat(x: string) {
     x = x.toString();

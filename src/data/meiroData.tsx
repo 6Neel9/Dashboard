@@ -468,6 +468,7 @@ export const FilterDuration :FilterDurationType =[
   { duration: "Today", value: 1 },
   {duration: "Last 7 Days",value:7},
   // {duration: "This Month",value:30},
+  {duration: "Last 30 Days",value:30},
   // {duration: "This Quarter",value:90},
   {duration: "Last 6 Months",value:180},
   {duration: "Last Year",value:365},

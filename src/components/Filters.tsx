@@ -29,8 +29,8 @@ const Filters = () => {
   const handleApplyFilters = () => {};
 
   const handleResetFilters = () => {
-    setSelectedDuration("none");
-    setSelectedState("none");
+    setSelectedDuration("Till Date");
+    setSelectedState("All");
   };
 
   return (

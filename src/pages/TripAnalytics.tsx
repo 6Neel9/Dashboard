@@ -96,6 +96,42 @@ const ChartCardProps2: CardPropType = {
   duration: "Last 7 days",
 };
 
+  const CardWithChartProps: CardPropType = {
+    title: "TRIP DURATION",
+    duration: "Last 7 days",
+    value: "1126",
+    icon: "positive",
+    percent: "2.35",
+  };
+  const CardWithChartProps4: CardPropType = {
+    title: "TRIP LENGTH",
+    duration: "Last 7 days",
+    value: "60",
+    icon: "positive",
+    percent: "2.35",
+  };
+  const CardWithChartProps2: CardPropType = {
+    title: "TRIP SPEED",
+    duration: "Last 7 days",
+    value: "112",
+    icon: "positive",
+    percent: "2.35",
+  };
+
+
+// const CardWithChartProp1: CardPropType = {
+//     title: "TOTAL TRIPS",
+//     duration: "Last 7 days",
+//   };
+  
+//   const CardWithChartProp2: CardPropType = {
+//     title: "TOTAL TRIPS",
+//     duration: "Last 7 days",
+//     value: "1126",
+//     icon: "positive",
+//     percent: "2.35",
+//   };
+
 const TripAnalytics = () => {
   const {
     currentColor,
@@ -155,14 +191,26 @@ const TripAnalytics = () => {
           Trip Statistics
         </p>
       </div>
-      <div className="displayFlex textLeft flexJustifyCenter widthFull">
-        <ChartCard prop={ChartCardProps2} chart={<Bar />} />
+      <div>
+        <CardWithChart
+          prop1={ChartCardProps2}
+          prop2={CardWithChartProps}
+          chart={<Bar />}
+        />
       </div>
-      <div className="displayFlex textLeft flexJustifyCenter widthFull">
-        <ChartCard prop={ChartCardProps4} chart={<Bar />} />
+      <div>
+        <CardWithChart
+          prop1={ChartCardProps4}
+          prop2={CardWithChartProps4}
+          chart={<Bar />}
+        />
       </div>
-      <div className="displayFlex textLeft flexJustifyCenter widthFull">
-        <ChartCard prop={ChartCardProps} chart={<Bar />} />
+      <div>
+        <CardWithChart
+          prop1={ChartCardProps}
+          prop2={CardWithChartProps2}
+          chart={<Bar />}
+        />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">

@@ -278,7 +278,6 @@ const Home = ({ data }: any) => {
 
     } else if (selectedDuration === "Last Year") {
       totalTrips = filterTripsByPeriod(trips, 365);
-
     }
     return totalTrips;
 
@@ -513,7 +512,7 @@ const Home = ({ data }: any) => {
   const TotalTrips: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
-    value: "65,332",
+    value: numberFormat(String(filteredTrips().length)),
     icon: "positive",
     percent: "0.35",
   };

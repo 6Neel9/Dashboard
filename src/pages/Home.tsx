@@ -284,7 +284,7 @@ const Home = ({ data }: any) => {
 
   }
 
-  console.log(filteredTrips())
+
   let allFilteredTrips = filteredTrips()
   // console.log(filterTripsByPeriod(trips, 0))
 
@@ -295,6 +295,24 @@ const Home = ({ data }: any) => {
     });
     return temp;
   };
+
+  //All new drivers
+  function filterNewDriver(trips: any[]): any[] {
+    const filterEnd = new Date();
+
+    let filterStart = new Date();
+    filterStart = new Date(filterEnd.getTime() - 7 * 24 * 60 * 60 * 1000);
+
+    const todayTrips = trips.filter((trip) => {
+      const startTime = new Date(trip.signedUpDate);
+      return startTime >= filterStart && startTime <= filterEnd;
+    });
+
+    return todayTrips;
+  }
+
+  let newDriverLength = filterNewDriver(drivers).length;
+
 
   // console.log(typeof trips, typeof filteredDates.lastSixMonths);
   // console.log(trips, filteredDates.lastSixMonths);
@@ -321,6 +339,8 @@ const Home = ({ data }: any) => {
       data.push({ Driver: driver.firstName, Revenue: totalRevenue });
     });
 
+
+
     return (
       <LineChart
         primary_XAxis={primaryxAxis}
@@ -345,7 +365,7 @@ const Home = ({ data }: any) => {
   type CardPropType = {
     title?: string;
     duration?: string;
-    value?: string;
+    value?: any;
     icon?: string;
     percent?: string;
     height?: string;
@@ -484,8 +504,8 @@ const Home = ({ data }: any) => {
 
   const NewDrivers: CardPropType = {
     title: "TOTAL NEW DRIVERS",
-    duration: selectedDuration,
-    value: "6458",
+    duration: "Last 7 Days",
+    value: newDriverLength,
     icon: "positive",
     percent: "7.35",
   };

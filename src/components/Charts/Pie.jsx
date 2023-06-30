@@ -1,16 +1,18 @@
 
 import * as React from 'react';
 import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, Inject , AccumulationDataLabel   } from '@syncfusion/ej2-react-charts';
-
+import "../../Styles.css"
+import { useStateContext } from '../../contexts/ContextProvider';
 
 const Pie = ({h, w, data}) => {
+  const {currentMode} = useStateContext();
   
-  const datalabel = { visible: true, name: 'text', position: 'Outside' };
+  const datalabel = { visible: true, name: 'text', position: 'Outside',font: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" } };
   return (
-    <AccumulationChartComponent height={h} width={w} >
+    <AccumulationChartComponent height={h} width={w} className='mainText'>
       <Inject services={[AccumulationDataLabel]}/>
-      <AccumulationSeriesCollectionDirective>
-        <AccumulationSeriesDirective dataSource={data} xName='x' yName='y' radius='100%'  pointColorMapping='fill' dataLabel={datalabel} />
+      <AccumulationSeriesCollectionDirective >
+        <AccumulationSeriesDirective dataSource={data} xName='x' yName='y' radius='100%'  pointColorMapping='fill' dataLabel={datalabel}  />
       </AccumulationSeriesCollectionDirective>
     </AccumulationChartComponent>)
 }

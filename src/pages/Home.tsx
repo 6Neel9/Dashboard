@@ -231,13 +231,6 @@ const Home = ({ data }: any) => {
     })
       .then((res) => res.json())
       .then((e) => {
-        // var temp: any[] =[];
-        // e.forEach((element: any) => {
-        //   const end_time = new Date(element.endTime);
-        //   if(end_time > thisYear){
-        //     temp.push(element);
-        //   }
-        //  });
         setTrips(e);
       });
   }, [selectedDuration, selectedState]);

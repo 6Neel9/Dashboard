@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Filters,
   SmallCard,
@@ -139,6 +139,7 @@ const RevenuePerTripwrtCityStates: CardPropType = {
 };
 
 const RevenueAnalytics = () => {
+
   const {
     currentColor,
     currentMode,
@@ -148,28 +149,133 @@ const RevenueAnalytics = () => {
     setSelectedState,
   } = useStateContext();
 
+  interface Trip {
+    _id: string;
+    driverId: number;
+    tripId: number;
+    startLocation: string;
+    tripDistance: number;
+    tripSpeed: number;
+    tripDuration: number;
+    endLocation: string;
+    startTime: string;
+    tripFare: number;
+    paymentType: string;
+    endTime: string;
+  }
+  const [trips, setTrips] = useState<Trip[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/yuja-sm/v1/trips", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((e) => {
+        setTrips(e);
+      });
+  }, [selectedDuration, selectedState]);
+
+  function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
+    const filterEnd = new Date();
+
+    let filterStart = new Date();
+    if (period === 0) {
+      filterStart.setHours(0, 0, 0, 0);
+    } else {
+      filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
+    }
+
+    const todayTrips = trips.filter((trip) => {
+      const startTime = new Date(trip.startTime);
+      return startTime >= filterStart && startTime <= filterEnd;
+    });
+
+    return todayTrips;
+  }
+
+  function filteredTrips() {
+    let totalTrips: any[] = trips
+    if (selectedDuration === "Today") {
+      totalTrips = filterTripsByPeriod(trips, 0);
+    } else if (selectedDuration === "Till Date") {
+      totalTrips = trips
+    } else if (selectedDuration === "Last 7 Days") {
+      totalTrips = filterTripsByPeriod(trips, 7);
+
+    } else if (selectedDuration === "Last 30 Days") {
+      totalTrips = filterTripsByPeriod(trips, 30);
+
+    } else if (selectedDuration === "Last 6 Months") {
+      totalTrips = filterTripsByPeriod(trips, 180);
+
+    } else if (selectedDuration === "Last Year") {
+      totalTrips = filterTripsByPeriod(trips, 365);
+    }
+    return totalTrips;
+
+  }
+
+  function numberFormat(x: string) {
+    x = x.toString();
+    var lastThree = x.substring(x.length - 3);
+    var otherNumbers = x.substring(0, x.length - 3);
+    if (otherNumbers !== "") lastThree = "," + lastThree;
+    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    return res;
+  }
+  const Revenue = (data: any) => {
+    var temp = 0;
+    data.forEach((element: any) => {
+      temp += element.tripFare;
+    });
+    return temp;
+  };
+
+  const PaymentModeCalculate = () => {
+    var online = 0;
+    var offline = 0;
+    filteredTrips().forEach((element: any) => {
+      if (element.paymentType === "cash") {
+        offline += 1;
+      }
+      else {
+        online += 1;
+      }
+    });
+    const pt = { online, offline }
+    return pt;
+  }
 
   const DriverRevenue: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
-    value: "₹ 34,800",
+    value: "₹ " + numberFormat(String(Math.round(Revenue(filteredTrips())))),
     icon: "positive",
     percent: "1.65",
   }
-  
-  const PaymentType : CardPropType = {
+
+  const PaymentType: CardPropType = {
     title: "PAYMENT MODE",
     duration: selectedDuration,
   }
 
   const PieChartData = [
-    { x: 'Online', y: 75, text: 'Online' }, { x: 'Offline', y: 25, text: 'Offline' },
+    {
+      x: 'Online',
+      y: PaymentModeCalculate().online,
+      text: `Online (${Math.round(PaymentModeCalculate().online / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)} %)`
+    },
+    {
+      x: 'Offline',
+      y: PaymentModeCalculate().offline,
+      text: `Offline (${Math.round(PaymentModeCalculate().offline / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)} %)`
+    },
   ];
 
   const AvgDriverRevenue: CardPropType = {
     title: "AVG DRIVER REVENUE / TRIP",
     duration: selectedDuration,
-    value: "₹ 115",
+    value: "₹ " + numberFormat(String(Math.round(Revenue(filteredTrips()) / filteredTrips().length))),
     icon: "positive",
     percent: "0.4",
   }
@@ -182,7 +288,7 @@ const RevenueAnalytics = () => {
   const RevenuePerTrips2: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
-    value: "₹ 78",
+    value: "₹ " + numberFormat(String(Math.round(Revenue(filteredTrips()) / filteredTrips().length))),
     icon: "positive",
     percent: "1.5",
   };

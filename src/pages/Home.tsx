@@ -517,7 +517,7 @@ const Home = ({ data }: any) => {
   const NewDrivers: CardPropType = {
     title: "TOTAL NEW DRIVERS",
     duration: "Last 7 Days",
-    value: newDriverLength,
+    value: "143",
     icon: "positive",
     percent: "7.35",
   };
@@ -621,7 +621,7 @@ const Home = ({ data }: any) => {
   const SmallCardProps6: CardPropType = {
     title: "Avg trips / hour",
     duration: "",
-    value: "642",
+    value: "5032",
   };
   const SmallCardProps7: CardPropType = {
     title: "Morning peak",
@@ -703,8 +703,8 @@ const Home = ({ data }: any) => {
         <p className="text-2xl extraBoldWeightText  mainText grayText">Demand</p>
       </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
-        <SmallCardFormatter props={SmallCardProps8} />
         <SmallCardFormatter props={SmallCardProps7} />
+        <SmallCardFormatter props={SmallCardProps8} />
         <SmallCardFormatter props={SmallCardProps6} />
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">

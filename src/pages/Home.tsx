@@ -310,6 +310,7 @@ const Home = ({ data }: any) => {
     return todayTrips;
   }
 
+  let filteredDriver = filterNewDriver(drivers)
   let newDriverLength = filterNewDriver(drivers).length;
 
   //Avg Trip Length
@@ -331,25 +332,36 @@ const Home = ({ data }: any) => {
 
   const DriverRevenueChart = () => {
     const primaryxAxis: AxisModel = { valueType: "Category" };
-    // const data: any[] = [
-    //   { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
-    //   { month: 'Mar', sales: 34 }, { month: 'Apr', sales: 32 },
-    //   { month: 'May', sales: 40 }, { month: 'Jun', sales: 32 },
-    //   { month: 'Jul', sales: 35 }, { month: 'Aug', sales: 55 },
-    //   { month: 'Sep', sales: 38 }, { month: 'Oct', sales: 30 },
-    //   { month: 'Nov', sales: 25 }, { month: 'Dec', sales: 32 }
-    // ]
+    function getLast7DaysArray() {
+      const today = new Date();
+      const last7DaysArray = [];
+    
+      for (let i = 6; i >= 0; i--) {
+        const currentDate = new Date(today);
+        currentDate.setDate(today.getDate() - i);
+        last7DaysArray.push(currentDate.toISOString().split('T')[0]);
+      }
+    
+      return last7DaysArray;
+    }
+    
+    const last7Days = getLast7DaysArray();
+
+
+    
     var data: any[] = [];
 
-    drivers.forEach((driver) => {
+    allFilteredTrips.forEach((driver) => {
       var totalRevenue = 0;
-      trips.forEach((trip) => {
-        if (driver.driverId === trip.driverId) {
+      allFilteredTrips.forEach((trip) => {
+        if (last7Days.includes(driver.startTime.split("T")[0])) {
           totalRevenue += trip.tripFare;
         }
       });
-      data.push({ Driver: driver.firstName, Revenue: totalRevenue });
+      data.push({ Date: driver.startTime.split("T")[0], Revenue: driver.tripFare });
     });
+
+
 
 
 
@@ -357,7 +369,7 @@ const Home = ({ data }: any) => {
       <LineChart
         primary_XAxis={primaryxAxis}
         data={data}
-        x_name="Driver"
+        x_name="Date"
         y_name="Revenue"
         chart_name="Driver Revenue"
       />

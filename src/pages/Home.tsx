@@ -312,9 +312,22 @@ const Home = ({ data }: any) => {
 
   let newDriverLength = filterNewDriver(drivers).length;
 
+  //Avg Trip Length
+  let totalFilteredTripLength = 0;
+  allFilteredTrips.forEach(element => {
+    totalFilteredTripLength += element.tripDistance
+  });
+  var averageTripLength = String(Math.round(totalFilteredTripLength/allFilteredTrips.length))
+  
 
-  // console.log(typeof trips, typeof filteredDates.lastSixMonths);
-  // console.log(trips, filteredDates.lastSixMonths);
+  //Distance Covered
+  let totalDistance = 0;
+  allFilteredTrips.forEach(elem=>{
+    totalDistance += Math.round(elem.tripDistance)
+  })
+
+
+
 
   const DriverRevenueChart = () => {
     const primaryxAxis: AxisModel = { valueType: "Category" };
@@ -544,7 +557,7 @@ const Home = ({ data }: any) => {
   const DistanceCovered: CardPropType = {
     title: "DISTANCE COVERED",
     duration: selectedDuration,
-    value: "45,367 km",
+    value: `${String(totalDistance)} km`,
     icon: "positive",
     percent: "0.71",
   };
@@ -552,7 +565,7 @@ const Home = ({ data }: any) => {
   const AvgDistanceCovered: CardPropType = {
     title: "AVG TRIP LENGTH",
     duration: selectedDuration,
-    value: "2.9 km",
+    value: averageTripLength,
     icon: "negative",
     percent: "0.91",
   };

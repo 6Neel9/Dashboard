@@ -9,7 +9,7 @@ import {
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
-import heatMap from "../data/assets/heatMap.jpg";
+import heatMap from "../data/assets/heatMap.png";
 
 
 
@@ -350,9 +350,11 @@ const TripAnalytics = () => {
         <ChartCard prop={ChartCardProps2} chart={<Bar />} />
       </div> */}
       {/* <ColoredMap /> */}
-      <div className="container mediumContainer smallMargin mediumPadding mainShadow" style={{ width: "98%" }}>
-        <img src={heatMap} alt="heatMap" style={{ width: "650vw", height: "50vh" }} />
+      <div className="flex justify-center">
+      <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
+        <img src={heatMap} alt="heatMap" style={{  height: "50vh" }} />
 
+      </div>
       </div>
     </div>
   );

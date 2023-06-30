@@ -264,11 +264,13 @@ const RevenueAnalytics = () => {
       x: 'Online',
       y: PaymentModeCalculate().online,
       text: `Online (${Math.round(PaymentModeCalculate().online / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)} %)`
+      ,fill: "#D6CDE9"
     },
     {
       x: 'Offline',
       y: PaymentModeCalculate().offline,
       text: `Offline (${Math.round(PaymentModeCalculate().offline / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)} %)`
+      , fill: "#F7F7F7"
     },
   ];
 
@@ -306,6 +308,35 @@ const RevenueAnalytics = () => {
     percent: "0.6",
   };
 
+  const RevenuePerTripChart = [
+    { months: 'January', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'February', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'March', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'April', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'May', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'June', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'July', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'August', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'September', revenuePerTrip: getRandomNumber(50, 160) },
+    { months: 'October', revenuePerTrip: getRandomNumber(50, 160) }
+  ];
+  const RevenuePerHourChart = [
+    { states: 'Maharashtra', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Uttar Pradesh', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Karnataka', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Gujarat', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Tamil Nadu', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Rajasthan', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'West Bengal', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Punjab', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Madhya Pradesh', revenuePerHour: getRandomNumber(5000, 16000) },
+    { states: 'Bihar', revenuePerHour: getRandomNumber(5000, 16000) }
+  ];
+    
+  function getRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
   useEffect(() => {
     setSelectedDuration("Till Date");
     setSelectedState("All");
@@ -325,14 +356,14 @@ const RevenueAnalytics = () => {
         <CardWithChart
           prop1={RevenuePerTrips}
           prop2={RevenuePerTrips2}
-          chart={<Bar />}
+          chart={<Bar columnData={RevenuePerTripChart} xTitle="months" yTitle="revenuePerTrip"/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={RevenuePerOperatingHour}
           prop2={RevenuePerOperatingHour2}
-          chart={<Bar />}
+          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" />}
         />
       </div>
 

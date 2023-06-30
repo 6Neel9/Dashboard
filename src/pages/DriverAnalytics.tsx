@@ -277,7 +277,7 @@ const DriverAnalytics = () => {
   }
 
   const PieChartData = [
-    { x: 'Active', y: 75, text: 'Active' }, { x: 'Inactive', y: 25, text: 'Inactive' },
+    { x: 'Active', y: 75, text: 'Active', fill:"#D6CDE9" }, { x: 'Inactive', y: 25, text: 'Inactive', fill:"#F7F7F7" },
   ];
 
   const PendingApproval: CardPropType = {
@@ -322,6 +322,63 @@ const DriverAnalytics = () => {
     icon: "negative",
     percent: "0.3",
   };
+  const TopTenDriversChartData = [
+    { driver: 'Rajesh', revenue: 35000 },
+    { driver: 'Amit', revenue: 34000 },
+    { driver: 'Suresh', revenue: 33000 },
+    { driver: 'Vikram', revenue: 32000 },
+    { driver: 'Deepak', revenue: 31000 },
+    { driver: 'Rohit', revenue: 30000 },
+    { driver: 'Neha', revenue: 29000 },
+    { driver: 'Priya', revenue: 28000 },
+    { driver: 'Manish', revenue: 27500 },
+    { driver: 'Pooja', revenue: 27000 }
+  ];
+  
+  
+
+   const ActiveHoursChartData = [
+    { states: 'Maharashtra', activeHours: getRandomNumber(2,12) },
+    { states: 'Uttar Pradesh', activeHours: getRandomNumber(2,12) },
+    { states: 'Karnataka', activeHours: getRandomNumber(2,12) },
+    { states: 'Gujarat', activeHours: getRandomNumber(2,12) },
+    { states: 'Tamil Nadu', activeHours: getRandomNumber(2,12) },
+    { states: 'Rajasthan', activeHours: getRandomNumber(2,12) },
+    { states: 'West Bengal', activeHours: getRandomNumber(2,12) },
+    { states: 'Punjab', activeHours: getRandomNumber(2,12) },
+    { states: 'Madhya Pradesh', activeHours: getRandomNumber(2,12) },
+    { states: 'Bihar', activeHours: getRandomNumber(2,12) }
+  ];
+   const TripsPerDayChartData = [
+    { states: 'Maharashtra', trips: getRandomNumber(1000,12000) },
+    { states: 'Uttar Pradesh', trips: getRandomNumber(1000,12000) },
+    { states: 'Karnataka', trips: getRandomNumber(1000,12000) },
+    { states: 'Gujarat', trips: getRandomNumber(1000,12000) },
+    { states: 'Tamil Nadu', trips: getRandomNumber(1000,12000) },
+    { states: 'Rajasthan', trips: getRandomNumber(1000,12000) },
+    { states: 'West Bengal', trips: getRandomNumber(1000,12000) },
+    { states: 'Punjab', trips: getRandomNumber(1000,12000) },
+    { states: 'Madhya Pradesh', trips: getRandomNumber(1000,12000) },
+    { states: 'Bihar', trips: getRandomNumber(1000,12000) }
+  ];
+
+  const TimeBetweenTripsChartData  = [
+    { TimeBwtTrips: 'Short', trips: getRandomNumber(500,1200) },
+    { TimeBwtTrips: 'Medium', trips: getRandomNumber(500,1200) },
+    { TimeBwtTrips: 'Average', trips: getRandomNumber(500,1200) },
+    { TimeBwtTrips: 'Long', trips: getRandomNumber(500,1200) },
+    { TimeBwtTrips: 'Extended', trips: getRandomNumber(500,1200) },
+    // { TimeBwtTrips: 'Very Long', trips: getRandomNumber(500,1200) },
+    // { TimeBwtTrips: 'Extra Long', trips: getRandomNumber(500,1200) },
+    // { TimeBwtTrips: 'Super Long', trips: getRandomNumber(500,1200) },
+    // { TimeBwtTrips: 'Ultra Long', trips: getRandomNumber(500,1200) },
+    // { TimeBwtTrips: 'Mega Long', trips: getRandomNumber(500,1200) }
+  ];
+  
+  function getRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  
 
   useEffect(() => {
   setSelectedDuration("Till Date");
@@ -341,28 +398,28 @@ const DriverAnalytics = () => {
       </div>
 
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar />} />
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={TopTenDriversChartData} xTitle="driver" yTitle="revenue" />} />
       </div>
 
       <div>
         <CardWithChart
           prop1={ActiveHoursPerDay}
           prop2={ActiveHoursPerDay2}
-          chart={<Bar />}
+          chart={<Bar  columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" />}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TripsPerDay}
           prop2={TripsPerDay2}
-          chart={<Bar />}
+          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips"/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TimeBetweenTrips}
           prop2={TimeBetweenTrips2}
-          chart={<Bar />}
+          chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips"/>}
         />
       </div>
 

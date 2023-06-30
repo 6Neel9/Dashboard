@@ -311,12 +311,12 @@ const Home = ({ data }: any) => {
   allFilteredTrips.forEach(element => {
     totalFilteredTripLength += element.tripDistance
   });
-  var averageTripLength = String(Math.round(totalFilteredTripLength/allFilteredTrips.length))
-  
+  var averageTripLength = String(Math.round(totalFilteredTripLength / allFilteredTrips.length))
+
 
   //Distance Covered
   let totalDistance = 0;
-  allFilteredTrips.forEach(elem=>{
+  allFilteredTrips.forEach(elem => {
     totalDistance += Math.round(elem.tripDistance)
   })
 
@@ -324,37 +324,50 @@ const Home = ({ data }: any) => {
 
 
   const DriverRevenueChart = () => {
-    const primaryxAxis: AxisModel = { valueType: "Category" };
-    function getLast7DaysArray() {
-      const today = new Date();
-      const last7DaysArray = [];
-    
-      for (let i = 6; i >= 0; i--) {
-        const currentDate = new Date(today);
-        currentDate.setDate(today.getDate() - i);
-        last7DaysArray.push(currentDate.toISOString().split('T')[0]);
-      }
-    
-      return last7DaysArray;
-    }
-    
-    const last7Days = getLast7DaysArray();
+    const primaryxAxis: AxisModel = { valueType: "DateTime" };
+    // function getLast7DaysArray() {
+    //   const today = new Date();
+    //   const last7DaysArray = [];
+
+    //   for (let i = 6; i >= 0; i--) {
+    //     const currentDate = new Date(today);
+    //     currentDate.setDate(today.getDate() - i);
+    //     last7DaysArray.push(currentDate.toISOString().split('T')[0]);
+    //   }
+
+    //   return last7DaysArray;
+    // }
+
+    // const last7Days = getLast7DaysArray();
 
 
-    
-    var data: any[] = [];
 
-    allFilteredTrips.forEach((driver) => {
-      var totalRevenue = 0;
-      allFilteredTrips.forEach((trip) => {
-        if (last7Days.includes(driver.startTime.split("T")[0])) {
-          totalRevenue += trip.tripFare;
-        }
-      });
-      data.push({ Date: driver.startTime.split("T")[0], Revenue: driver.tripFare });
-    });
+    // var data: any[] = [];
+
+    // allFilteredTrips.forEach((driver) => {
+    //   var totalRevenue = 0;
+    //   allFilteredTrips.forEach((trip) => {
+    //     if (last7Days.includes(driver.startTime.split("T")[0])) {
+    //       totalRevenue += trip.tripFare;
+    //     }
+    //   });
+    //   data.push({ Date: driver.startTime.split("T")[0], Revenue: driver.tripFare });
+    // });
 
 
+
+    const data = [
+      { "Date": "2023-06-01", "Revenue": 2500 },
+      { "Date": "2023-06-02", "Revenue": 1800 },
+      { "Date": "2023-06-03", "Revenue": 3500 },
+      { "Date": "2023-06-04", "Revenue": 4100 },
+      { "Date": "2023-06-05", "Revenue": 2900 },
+      { "Date": "2023-06-06", "Revenue": 2200 },
+      { "Date": "2023-06-07", "Revenue": 3800 },
+      { "Date": "2023-06-08", "Revenue": 2700 },
+      { "Date": "2023-06-09", "Revenue": 3100 },
+      { "Date": "2023-06-10", "Revenue": 3900 }
+    ]
 
 
 
@@ -368,6 +381,34 @@ const Home = ({ data }: any) => {
       />
     );
   };
+
+  const TripDurationChart = () => {
+    const primaryxAxis: AxisModel = { valueType: "DateTime" };
+    const data = [
+      { "Date": "2023-06-01", "Time": 17 },
+      { "Date": "2023-06-02", "Time": 15 },
+      { "Date": "2023-06-03", "Time": 19 },
+      { "Date": "2023-06-04", "Time": 21 },
+      { "Date": "2023-06-05", "Time": 18 },
+      { "Date": "2023-06-06", "Time": 14 },
+      { "Date": "2023-06-07", "Time": 20 },
+      { "Date": "2023-06-08", "Time": 16 },
+      { "Date": "2023-06-09", "Time": 18 },
+      { "Date": "2023-06-10", "Time": 20 }
+    ]
+
+
+
+    return (
+      <LineChart
+        primary_XAxis={primaryxAxis}
+        data={data}
+        x_name="Date"
+        y_name="Time"
+        chart_name="Driver Revenue"
+      />
+    );
+  }
 
   type EarningDataType = {
     icon: JSX.Element;
@@ -650,13 +691,47 @@ const Home = ({ data }: any) => {
   };
 
   const PieChartData = [
-    { x: "Online", y: 75, text: "Online" },
-    { x: "Offline", y: 25, text: "Offline" },
+    { x: "Online", y: 75, text: "Online", fill:"#D6CDE9" },
+    { x: "Offline", y: 25, text: "Offline" , fill:"#F7F7F7"},
   ];
   // useEffect(() => {
   //   setSelectedDuration('Till Date');
   //   setSelectedState('All');
   // },[]);
+
+  const columnTotalDriver = [
+
+    { state: 'Maharashtra', drivers: 65000 },
+    { state: 'Uttar Pradesh', drivers: 48000 },
+    { state: 'Karnataka', drivers: 75000 },
+    { state: 'Gujarat', drivers: 58000 },
+    { state: 'Tamil Nadu', drivers: 68000 },
+    { state: 'Rajasthan', drivers: 52000 },
+    { state: 'West Bengal', drivers: 45000 }
+  ];
+  const TopTenDriversChartData = [
+    { driver: 'Rajesh', revenue: 35000 },
+    { driver: 'Amit', revenue: 34000 },
+    { driver: 'Suresh', revenue: 33000 },
+    { driver: 'Vikram', revenue: 32000 },
+    { driver: 'Deepak', revenue: 31000 },
+    { driver: 'Rohit', revenue: 30000 },
+    { driver: 'Neha', revenue: 29000 },
+    { driver: 'Priya', revenue: 28000 },
+    { driver: 'Manish', revenue: 27500 },
+    { driver: 'Pooja', revenue: 27000 }
+  ];
+  
+  
+  const TopTenDrivers: CardPropType = {
+    title: "TOP 10 DRIVERS",
+    value: "₹25",
+    duration: "Last 7 days",
+    icon: "positive",
+    percent: "1.65",
+  };
+
+
 
   return (
     <div className="extraSmallMargin">
@@ -679,14 +754,12 @@ const Home = ({ data }: any) => {
           chart={<DriverRevenueChart />}
         />
       </div>
-      {/* <div >
-        <CardWithChart prop1={CardWithChartProp1} prop2={CardWithChartProp2} chart={<DriverRevenueChart />}/>
-      </div> */}
+    
       <div>
         <CardWithChart
           prop1={TotalDrivers}
           prop2={NewDrivers}
-          chart={<Bar />}
+          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" />}
         />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">
@@ -700,9 +773,10 @@ const Home = ({ data }: any) => {
           chart={<Pie h="30%" w="30%" data={PieChartData} />}
         />
       </div>
-      <div className=" displayFlex textLeft flexJustifyCenter widthFull">
-        <ChartCard prop={TopDrivers} chart={<Bar />} />
+      <div className=" displayFlex textLeft flexJustifyBetween widthFull">
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={TopTenDriversChartData} xTitle="driver" yTitle="revenue" />} />
       </div>
+
 
       <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">Demand</p>
@@ -713,7 +787,7 @@ const Home = ({ data }: any) => {
         <SmallCardFormatter props={SmallCardProps6} />
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
-        <ChartCard prop={ChartCardProps} chart={<DriverRevenueChart />} />
+        <ChartCard prop={ChartCardProps} chart={<TripDurationChart />} />
       </div>
       {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />

@@ -56,7 +56,7 @@ const IssueManagement = () => {
         {
           "ticketId": "MEI001",
           "ticketDate": "2023-06-27",
-          "driverName": "Michael Brown",
+          "driverName": "Bhola Joshi",
           "vehicleNumber": "PQR9876",
           "query": "I haven't received my weekly payment statement from Meiro.",
           "status": "Open"
@@ -64,7 +64,7 @@ const IssueManagement = () => {
         {
           "ticketId": "MEI002",
           "ticketDate": "2023-06-26",
-          "driverName": "Sarah Davis",
+          "driverName": "Vasim Patel",
           "vehicleNumber": "LMN5432",
           "query": "The Meiro driver app is not accurately calculating my earnings.",
           "status": "Open"
@@ -72,7 +72,7 @@ const IssueManagement = () => {
         {
           "ticketId": "MEI003",
           "ticketDate": "2023-06-25",
-          "driverName": "Robert Wilson",
+          "driverName": "Pranav Shah",
           "vehicleNumber": "JKL1234",
           "query": "I encountered a bug in the Meiro app that prevents me from accepting ride requests.",
           "status": "Open"
@@ -80,7 +80,7 @@ const IssueManagement = () => {
         {
           "ticketId": "MEI004",
           "ticketDate": "2023-06-24",
-          "driverName": "Emma Taylor",
+          "driverName": "Shivam Patel",
           "vehicleNumber": "DEF4567",
           "query": "I've been experiencing frequent GPS inaccuracies while using the Meiro driver app.",
           "status": "Open"
@@ -88,7 +88,7 @@ const IssueManagement = () => {
         {
           "ticketId": "MEI005",
           "ticketDate": "2023-06-23",
-          "driverName": "David Anderson",
+          "driverName": "Dhruv Shah",
           "vehicleNumber": "GHI7890",
           "query": "The Meiro driver app is not displaying surge pricing information correctly.",
           "status": "Open"

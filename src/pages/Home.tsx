@@ -85,23 +85,7 @@ const Home = ({ data }: any) => {
     endTime: string;
   }
 
-  function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
-    const filterEnd = new Date();
 
-    let filterStart = new Date();
-    if (period === 0) {
-      filterStart.setHours(0, 0, 0, 0);
-    } else {
-      filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
-    }
-
-    const todayTrips = trips.filter((trip) => {
-      const startTime = new Date(trip.startTime);
-      return startTime >= filterStart && startTime <= filterEnd;
-    });
-
-    return todayTrips;
-  }
 
 
 
@@ -121,40 +105,12 @@ const Home = ({ data }: any) => {
 
   var total_trips = 0;
 
-  async function totalRevenue() {
-    let totalTrips: any[] = trips
-    if (selectedDuration === "Today") {
-      totalTrips = filterTripsByPeriod(trips, 0);
-    } else if (selectedDuration === "TillDate") {
-      totalTrips = trips
-    } else if (selectedDuration === "Last 7 Days") {
-      totalTrips = filterTripsByPeriod(trips, 7);
 
-    } else if (selectedDuration === "Last 30 Days") {
-      totalTrips = filterTripsByPeriod(trips, 30);
+  // useEffect(() => {
+  //   // totalRevenue()
+  //   console.log(filterTripsByPeriod(trips, 7))
 
-    } else if (selectedDuration === "Last 6 Months") {
-      totalTrips = filterTripsByPeriod(trips, 180);
-
-    } else if (selectedDuration === "Last Year") {
-      totalTrips = filterTripsByPeriod(trips, 365);
-
-    }
-    console.log(totalTrips)
-    totalTrips.forEach((element: any) => {
-      const temp = element.trips;
-      temp.forEach((e: any) => {
-        total_revenue = total_revenue + Number(e.revenue);
-        total_trips += 1;
-      });
-    });
-
-  }
-  useEffect(() => {
-    totalRevenue()
-    console.log(filterTripsByPeriod(trips, 7))
-
-  }, [selectedDuration,trips])
+  // }, [selectedDuration, trips])
 
   const RevTimeChart = () => {
     var new_dateTimeData: any[] = [];
@@ -286,6 +242,51 @@ const Home = ({ data }: any) => {
       });
   }, [selectedDuration, selectedState]);
   // console.log(trips);
+  //Filter func 
+
+  function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
+    const filterEnd = new Date();
+
+    let filterStart = new Date();
+    if (period === 0) {
+      filterStart.setHours(0, 0, 0, 0);
+    } else {
+      filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
+    }
+
+    const todayTrips = trips.filter((trip) => {
+      const startTime = new Date(trip.startTime);
+      return startTime >= filterStart && startTime <= filterEnd;
+    });
+
+    return todayTrips;
+  }
+  function filteredTrips() {
+    let totalTrips: any[] = trips
+    if (selectedDuration === "Today") {
+      totalTrips = filterTripsByPeriod(trips, 0);
+    } else if (selectedDuration === "Till Date") {
+      totalTrips = trips
+    } else if (selectedDuration === "Last 7 Days") {
+      totalTrips = filterTripsByPeriod(trips, 7);
+
+    } else if (selectedDuration === "Last 30 Days") {
+      totalTrips = filterTripsByPeriod(trips, 30);
+
+    } else if (selectedDuration === "Last 6 Months") {
+      totalTrips = filterTripsByPeriod(trips, 180);
+
+    } else if (selectedDuration === "Last Year") {
+      totalTrips = filterTripsByPeriod(trips, 365);
+
+    }
+    return totalTrips;
+
+  }
+
+  console.log(filteredTrips())
+  let allFilteredTrips = filteredTrips()
+  // console.log(filterTripsByPeriod(trips, 0))
 
   const Revenue = (data: any) => {
     var temp = 0;
@@ -353,7 +354,7 @@ const Home = ({ data }: any) => {
   const MediumCardProps: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(trips)))),
+    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
     icon: "positive",
     percent: "10",
   };

@@ -464,8 +464,8 @@ export const States :stateType =[
 
 type FilterDurationType = {duration: string, value: number}[]
 export const FilterDuration :FilterDurationType =[
-  {duration: "Till Date",value:0},
-  { duration: "Today", value: 1 },
+  {duration: "Till Date",value:0},  // should be -1
+  { duration: "Today", value: 1 },  // should be 0
   {duration: "Last 7 Days",value:7},
   // {duration: "This Month",value:30},
   {duration: "Last 30 Days",value:30},

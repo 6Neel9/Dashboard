@@ -59,48 +59,7 @@ const Home = ({ data }: any) => {
     dispatch(fetchTrips())
   }, []);
 
-  // function getDateOfTimeframe(inputDate: Date, timeframe: string): Date {
-  //   switch (timeframe) {
-  //     case 'today':
-  //       return new Date(inputDate.getFullYear(), inputDate.getMonth(), inputDate.getDate());
-  //     case 'thisWeek':
-  //       const firstDayOfWeek = inputDate.getDate() - inputDate.getDay();
-  //       return new Date(inputDate.getFullYear(), inputDate.getMonth(), firstDayOfWeek);
-  //     case 'last7Days':
-  //       const last7DaysTimestamp = inputDate.getTime() - 7 * 24 * 60 * 60 * 1000;
-  //       return new Date(last7DaysTimestamp);
-  //     case 'thisMonth':
-  //       return new Date(inputDate.getFullYear(), inputDate.getMonth(), 1);
-  //     case 'thisQuarter':
-  //       const quarterMonth = Math.floor(inputDate.getMonth() / 3) * 3;
-  //       return new Date(inputDate.getFullYear(), quarterMonth, 1);
-  //     case 'thisHalfYear':
-  //       const halfYearMonth = inputDate.getMonth() < 6 ? 0 : 6;
-  //       return new Date(inputDate.getFullYear(), halfYearMonth, 1);
-  //     case 'thisYear':
-  //       return new Date(inputDate.getFullYear(), 0, 1);
-  //     default:
-  //       throw new Error('Invalid timeframe specified.');
-  //   }
-  // }
 
-  // // Example usage
-  // const inputDate = new Date(); // Use the current date as input
-  // const today = getDateOfTimeframe(inputDate, 'today');
-  // const thisWeek = getDateOfTimeframe(inputDate, 'thisWeek');
-  // const last7Days = getDateOfTimeframe(inputDate, 'last7Days');
-  // const thisMonth = getDateOfTimeframe(inputDate, 'thisMonth');
-  // const thisQuarter = getDateOfTimeframe(inputDate, 'thisQuarter');
-  // const thisHalfYear = getDateOfTimeframe(inputDate, 'thisHalfYear');
-  // const thisYear = getDateOfTimeframe(inputDate, 'thisYear');
-
-  // console.log(today);
-  // console.log(thisWeek);
-  // console.log(last7Days);
-  // console.log(thisMonth);
-  // console.log(thisQuarter);
-  // console.log(thisHalfYear);
-  // console.log(thisYear);
 
   //Getting redux data
   const driverData: any = useSelector((state: any) => state.drivers);
@@ -144,80 +103,8 @@ const Home = ({ data }: any) => {
     return todayTrips;
   }
 
-  const todayTrips = filterTripsByPeriod(trips, 180);
-  console.log(todayTrips);
-  //
-  interface DataObject {
-    driverId: number;
-    tripId: number;
-    startLocation: [number, number];
-    tripDistance: number;
-    tripSpeed: number;
-    tripDuration: number;
-    endLocation: [number, number];
-    startTime: string;
-    tripFare: number;
-    paymentType: string;
-    endTime: string;
-  }
-
-  interface FilterDurationType {
-    duration: string;
-    value: number;
-  }
-
-  const filterData = (data: DataObject[], filterDuration: number): DataObject[] => {
-    const filteredObjects = data.filter((obj) => {
-      const startTime = new Date(obj.startTime);
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0); // Set current date to midnight to ignore the time part
-
-      const startDate = new Date(currentDate.getTime() - filterDuration * 24 * 60 * 60 * 1000);
-
-      if (filterDuration === 0) {
-        // For "Till Date", return all objects
-        return true;
-      } else if (filterDuration === 1) {
-        // For "Today", compare date and time
-        return startTime >= currentDate;
-      } else {
-        // For other durations, compare only dates
-        return startTime >= startDate && startTime <= currentDate;
-      }
-    });
-
-    return filteredObjects;
-  };
 
 
-  let duration: any;
-  if (selectedDuration === "Till Date") {
-    duration = 0
-  } else if (selectedDuration === "Today") {
-    duration = 1
-  } else if (selectedDuration === "Last 7 Days") {
-    duration = 7
-  } else if (selectedDuration === "Last 30 Days") {
-    duration = 30
-  } else if (selectedDuration === "Last 6 Months") {
-    duration = 180
-  } else if (selectedDuration === "Last Year") {
-    duration = 365
-  }
-
-  const filteredData = filterData(data, duration); // Example: Filtering for the "Last 7 Days"
-  console.log("Filtered Data:", filteredData);
-
-  // Total trips for "Last 7 Days" and "Till Date"
-  const totalTripsLast7Days = filteredData.length;
-  const totalTripsTillDate = filterData(data, 0).length;
-
-  console.log("Total Trips (Last 7 Days):", totalTripsLast7Days);
-  console.log("Total Trips (Till Date):", totalTripsTillDate);
-
-
-  // const filteredData = filterData(trips, duration);
-  // console.log(filteredData);
 
   //
   var total_revenue = 0;
@@ -230,14 +117,44 @@ const Home = ({ data }: any) => {
     return res;
   }
 
+
+
   var total_trips = 0;
-  data.forEach((element: any) => {
-    const temp = element.trips;
-    temp.forEach((e: any) => {
-      total_revenue = total_revenue + Number(e.revenue);
-      total_trips += 1;
+
+  async function totalRevenue() {
+    let totalTrips: any[] = trips
+    if (selectedDuration === "Today") {
+      totalTrips = filterTripsByPeriod(trips, 0);
+    } else if (selectedDuration === "TillDate") {
+      totalTrips = trips
+    } else if (selectedDuration === "Last 7 Days") {
+      totalTrips = filterTripsByPeriod(trips, 7);
+
+    } else if (selectedDuration === "Last 30 Days") {
+      totalTrips = filterTripsByPeriod(trips, 30);
+
+    } else if (selectedDuration === "Last 6 Months") {
+      totalTrips = filterTripsByPeriod(trips, 180);
+
+    } else if (selectedDuration === "Last Year") {
+      totalTrips = filterTripsByPeriod(trips, 365);
+
+    }
+    console.log(totalTrips)
+    totalTrips.forEach((element: any) => {
+      const temp = element.trips;
+      temp.forEach((e: any) => {
+        total_revenue = total_revenue + Number(e.revenue);
+        total_trips += 1;
+      });
     });
-  });
+
+  }
+  useEffect(() => {
+    totalRevenue()
+    console.log(filterTripsByPeriod(trips, 7))
+
+  }, [selectedDuration,trips])
 
   const RevTimeChart = () => {
     var new_dateTimeData: any[] = [];

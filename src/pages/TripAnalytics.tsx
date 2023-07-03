@@ -115,6 +115,16 @@ const TripAnalytics = () => {
 
   var allFilteredTrips = filteredTrips();
 
+  //number format function
+  function numberFormat(x: string) {
+    x = x.toString();
+    var lastThree = x.substring(x.length - 3);
+    var otherNumbers = x.substring(0, x.length - 3);
+    if (otherNumbers !== "") lastThree = "," + lastThree;
+    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    return res;
+  }
+
   const SmallCardProps1: CardPropType = {
     title: "AVERAGE TRIP DURATION",
     duration: "Last 7 days",
@@ -174,7 +184,7 @@ const TripAnalytics = () => {
   const CardWithChartProp2: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
-    value: String(allFilteredTrips.length),
+    value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
     percent: "2.35",
   };

@@ -13,7 +13,7 @@ const SmallCard = ({ props }: any) => {
             </div>
             </div>
             <div>
-            <div className="largeText textStyle paddingTopSmall  extraBoldWeightText">
+            <div className="paddingTopSmall   smallCardValueText">
                 {props.value}
             </div>
             {props.icon && <div >

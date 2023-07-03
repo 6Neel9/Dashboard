@@ -603,7 +603,7 @@ const Home = ({ data }: any) => {
   const DistanceCovered: CardPropType = {
     title: "DISTANCE COVERED",
     duration: selectedDuration,
-    value: `${String(totalDistance)} km`,
+    value: `${numberFormat(String(totalDistance))} km`,
     icon: "positive",
     percent: "0.71",
   };
@@ -691,8 +691,8 @@ const Home = ({ data }: any) => {
   };
 
   const PieChartData = [
-    { x: "Online", y: 75, text: "Online", fill:"#D6CDE9" },
-    { x: "Offline", y: 25, text: "Offline" , fill:"#F7F7F7"},
+    { x: "Online", y: 75, text: "Online", fill: "#D6CDE9" },
+    { x: "Offline", y: 25, text: "Offline", fill: "#F7F7F7" },
   ];
   // useEffect(() => {
   //   setSelectedDuration('Till Date');
@@ -721,8 +721,8 @@ const Home = ({ data }: any) => {
     { driver: 'Manish', revenue: 27500 },
     { driver: 'Pooja', revenue: 27000 }
   ];
-  
-  
+
+
   const TopTenDrivers: CardPropType = {
     title: "TOP 10 DRIVERS",
     value: "₹25",
@@ -754,7 +754,7 @@ const Home = ({ data }: any) => {
           chart={<DriverRevenueChart />}
         />
       </div>
-    
+
       <div>
         <CardWithChart
           prop1={TotalDrivers}
@@ -776,6 +776,8 @@ const Home = ({ data }: any) => {
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
         <ChartCard prop={TopTenDrivers} chart={<Bar columnData={TopTenDriversChartData} xTitle="driver" yTitle="revenue" />} />
       </div>
+
+
 
 
       <div className=" marginLeftSmall marginTopMoreMedium">

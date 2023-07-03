@@ -1,5 +1,5 @@
 import React from 'react';
-import "../Styles.css"
+import "../Styles.scss"
 
 const ChartsHeader = ({ category, title }: {category?:string, title?:string}) => (
   <div className="marginBottomLarge">

@@ -2,7 +2,7 @@ import { world_map } from './world_map';
 import { uncountries } from './data'
 import * as React from "react";
 import { MapsComponent, LayersDirective, LayerDirective, Inject, Legend } from '@syncfusion/ej2-react-maps';
-import '../../Styles.css'
+import '../../Styles.scss'
 
 export function ColoredMap() {
     return(

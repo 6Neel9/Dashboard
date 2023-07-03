@@ -1,5 +1,6 @@
 import React from 'react'
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
+import "../../Styles.scss"
 
 
 const MediumCard = ({ props }: any) => {

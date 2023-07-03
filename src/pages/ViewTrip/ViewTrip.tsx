@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { MapContainer, TileLayer } from "react-leaflet";
 import RoutingMap from '../../components/Map/RoutingMap';
 import { Header } from '../../components';
-import "../../Styles.css"
+import "../../Styles.scss"
 import { useLocation, useNavigate } from 'react-router-dom';
 import { GrClose } from 'react-icons/gr';
 

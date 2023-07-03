@@ -1,6 +1,6 @@
 import React from 'react'
 import { Header } from '../components'
-import "../Styles.css"
+import "../Styles.scss"
 
 const Pricing = () => {
   return (

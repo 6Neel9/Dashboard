@@ -3,7 +3,7 @@ import { KanbanComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/
 
 import { kanbanData, kanbanGrid } from '../data/dummy';
 import { Header } from '../components';
-import "../Styles.css"
+import "../Styles.scss"
 
 const Kanban = () => (
   <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">

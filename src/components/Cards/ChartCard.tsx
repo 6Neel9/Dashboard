@@ -1,16 +1,17 @@
-import React from 'react'
+import React from 'react';
+import "../../Styles.scss"
 
 const ChartCard = ({prop, chart}:any) => {
   return (
-    <div className="container smallMargin averageMediumPadding  textLeft  flexJustifyBetween widthFull mainShadow ">
+    <div className="chartCardPrimaryContainer">
     <div >
-                <div className="displayFlex flexJustifyBetween marginLeftMedium">
-                <h1 className="smallText mainText extraSmallText">{prop.title.toUpperCase()}</h1>
-                <h4 className=" textRight mainText" >
+                <div className="chartCardSecondaryContainer">
+                <h1 className="chartCardTitleText">{prop.title.toUpperCase()}</h1>
+                <h4 className="chartCardDurationText" >
                     {prop.duration.toLowerCase()}
                 </h4>
                 </div>
-                <div className="mediumText textCenter marginLeftLarge displayFlex flexJustifyCenter">{chart}</div>
+                <div className="ChartCardChartContainer">{chart}</div>
             </div>
     </div>
   )

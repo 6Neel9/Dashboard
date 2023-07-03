@@ -1,6 +1,6 @@
 import React from 'react'
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
-import "../../Styles.css"
+import "../../Styles.scss"
 
 
 const ExtraSmallCard = ({ props }: any) => {

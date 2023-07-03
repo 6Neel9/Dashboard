@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { registerLicense } from "@syncfusion/ej2-base";
+import "./Styles.scss"
 
 import ContextProvider from "./contexts/ContextProvider";
 

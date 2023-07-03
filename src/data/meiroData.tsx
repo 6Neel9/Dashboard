@@ -39,27 +39,6 @@ export const links: LinksType = [
         route: "home",
         icon: <FiHome />,
       },
-    ],
-  },
-
-  {
-    title: "Driver",
-    links: [
-      {
-        name: "Drivers",
-        route: "drivers",
-        icon: <IoMdContacts />,
-      },
-      {
-        name: "Add New Driver",
-        route: "addNewDriver",
-        icon : <FiUserPlus />,
-      },
-    ],
-  },
-  {
-    title: "Usage",
-    links: [
       {
         name: "Trip Analytics",
         route: "tripAnalytics",
@@ -75,6 +54,27 @@ export const links: LinksType = [
         route: "driverAnalytics",
         icon: <MdOutlineAnalytics />,
       },
+    ],
+  },
+
+  {
+    title: "Monitoring",
+    links: [
+      {
+        name: "Drivers",
+        route: "drivers",
+        icon: <IoMdContacts />,
+      },
+      {
+        name: "Trips",
+        route: "trips",
+        icon: <FaClipboardList />,
+      },
+      {
+        name: "Add New Driver",
+        route: "addNewDriver",
+        icon : <FiUserPlus />,
+      },
       {
         name: "Tracking",
         route: "tracking",
@@ -85,11 +85,7 @@ export const links: LinksType = [
         route: "parking",
         icon: <RiParkingBoxFill />,
       },
-      {
-        name: "Trips",
-        route: "trips",
-        icon: <FaClipboardList />,
-      },
+     
     ],
   },
   {

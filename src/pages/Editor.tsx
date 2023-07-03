@@ -3,6 +3,7 @@ import { HtmlEditor, Image, Inject, Link, QuickToolbar, RichTextEditorComponent,
 
 import { Header } from '../components';
 import { EditorData } from '../data/dummy';
+import '../Styles.scss';
 
 const Editor = () => (
   <div className="largeMargin marginTopLarge largePadding mainBackground rounded3XLarge mainBorder mainShadow">

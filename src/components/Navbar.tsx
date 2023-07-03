@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { useStateContext } from "../contexts/ContextProvider";
-import "../Styles.css"
+import "../Styles.scss"
 
 type ButtonPropType={
   title?: string,

@@ -6,41 +6,42 @@ import "../../Styles.scss"
 
 const CardWithChart = ({ prop1, prop2, chart }: any) => {
     return (
-        <div className='displayFlex textLeft heightFitContent smallMargin  mediumPadding marginBottomMedium mainBackground mainBorder  roundedExtraXLarge'>
-            <div className=" heightFitContent   textLeft flexJustifyBetween displayGrid gridCols3 divideXSmall widthFull ">
+        <div className='cardWithChartContainer'>
+            <div className="cardWithChartSecondaryContainer">
                 <div className="marginRightMedium">
-                    <div className='displayFlex flexJustifyBetween flexCol'>
-                        <div className="displayFlex flexJustifyBetween ">
-                            <div className="mediumText textLeft textStyle extraSmallText" >
+                    <div className='cardWithChartTertiaryContainer'>
+                        <div className="cardWithChartQuaternaryContainer">
+                            <div className="cardWithChartTitleText" >
                                 {prop2.title}
                             </div>
-
-                            <div className="smallPadding textLeft textStyle" >
+                            <div className="cardWithChartDurationText" >
                                 {prop2.duration.toLowerCase()}
                             </div>
                         </div>
-                        <div className=" largeText smallPadding mediumWeightText textStyle marginTopExtraLarges  extraBoldWeightText" >
+                        <div className="cardWithChartValueText" >
                             {prop2.value}
                         </div>
                         <div >
-                            {prop2.icon === "positive" ?
-                                <h1 className="displayInlineBlock paddingTopSmall percentIncrease"><SlArrowUp className="displayInlineBlock" /> {prop2.percent}%</h1> :
-                                <h1 className="displayInlineBlock paddingTopSmall percentDecrease"><SlArrowDown className="displayInlineBlock" /> {prop2.percent}%</h1>
-                            }
+                            {prop2.percent && <div>
+                                {Number(prop2.percent) === 0 ? <h1 className="smallCardNeutral">0%</h1> : prop2.percent > 0 ?
+                                    <h1 className="smallCardPositive"><SlArrowUp className="percentIcon" /> {prop2.percent}%</h1> :
+                                    <h1 className="smallCardNegative"><SlArrowDown className="percentIcon" /> {prop2.percent}%</h1>
+                                }
+
+                            </div>}
                         </div>
                     </div>
                 </div>
-                <div className="marginLeftSmall colSpan2">
-                    <div className="displayFlex flexJustifyBetween marginLeftMedium">
-                        <h1 className="mediumText textStyle extraSmallText">{prop1.title}</h1>
-                        <h4 className="text-right textStyle " >
+                <div className="cardWithChartPrimaryContainer">
+                    <div className="cardWithChartSecondaryChartContainer">
+                        <h1 className="cardWithChartChartTitleText">{prop1.title}</h1>
+                        <h4 className="cardWithChartChartDurationText" >
                             {prop1.duration.toLowerCase()}
                         </h4>
                     </div>
 
-                    <div className="textCenter marginLeftLarge  displayFlex flexJustifyCenter">{chart}</div>
+                    <div className="cardWithChartChart">{chart}</div>
                 </div>
-
 
             </div>
         </div>

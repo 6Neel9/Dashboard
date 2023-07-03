@@ -514,7 +514,7 @@
   @extend .smallPadding;
 }
 /* Small card main div outer style */
-.smallCardMainDiv{
+.smallCardContainer{
   @extend .container ;
   @extend .smallContainer ;
   @extend .smallMargin ;
@@ -541,4 +541,98 @@
   @extend .percent ;
   @extend .paddingTopSmall ;
   @extend .primaryTextColor;
+}
+
+/* card with chart main div outer style */
+.cardWithChartContainer{
+  @extend .displayFlex ;
+  @extend .textLeft ;
+  @extend .heightFitContent ;
+  @extend .smallMargin ;
+  @extend .mediumPadding ;
+  @extend .marginBottomMedium ;
+  @extend .mainBackground ;
+  @extend .mainBorder ;
+  @extend .roundedExtraXLarge ;
+}
+
+/* card with chart secondary div outer style */
+.cardWithChartSecondaryContainer{
+  @extend .heightFitContent ;
+  @extend .textLeft ;
+  @extend .flexJustifyBetween ;
+  @extend .displayGrid ;
+  @extend .gridCols3 ;
+  @extend .divideXSmall ;
+  @extend .widthFull ;
+}
+
+/* card with chart tertiary div inner style */
+.cardWithChartTertiaryContainer{
+  @extend .displayFlex ;
+  @extend .flexJustifyBetween ;
+  @extend .flexCol ;
+}
+/* card with chartQuaternary div inner style */
+.cardWithChartQuaternaryContainer{
+  @extend .displayFlex ;
+  @extend .flexJustifyBetween ;
+}
+
+/* card with chart title div inner style */
+.cardWithChartTitleText{
+  @extend .mediumText ;
+  @extend .textLeft ;
+  @extend .textStyle ;
+  @extend .extraSmallText ;
+}
+
+/* card with chart duration div inner style */
+.cardWithChartDurationText{
+  @extend .smallPadding ;
+  @extend .textLeft ;
+  @extend .textStyle ;
+}
+
+/* card with chart value div inner style */
+.cardWithChartValueText{
+  @extend .largeText ;
+  @extend .smallPadding ;
+  @extend .mediumWeightText ;
+  @extend .textStyle ;
+  @extend .marginTopExtraLarges ;
+  @extend .extraBoldWeightText ;
+}
+
+/* card with chart chart primary div inner style */
+.cardWithChartPrimaryContainer{
+  @extend .marginLeftSmall ;
+  @extend .colSpan2 ;
+}
+
+/* card with chart chart secondary div inner style */
+.cardWithChartSecondaryChartContainer{
+  @extend .displayFlex ;
+  @extend .flexJustifyBetween ;
+  @extend .marginLeftMedium ;
+}
+
+/* card with chart chart title */
+.cardWithChartChartTitleText{
+  @extend .mediumText ;
+  @extend .textStyle ;
+  @extend .extraSmallText ;
+}
+
+.cardWithChartChartDurationText{
+  @extend .textRight ;
+  @extend .textStyle ;
+}
+
+/* card with chart chart  */
+.cardWithChartChart{
+  @extend .textCenter ;
+  @extend .marginLeftLarge ;
+  @extend .displayFlex ;
+  @extend .flexJustifyCenter ;
 }

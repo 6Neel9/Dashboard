@@ -5,7 +5,7 @@ import "../../Styles.scss"
 
 const SmallCard = ({ props }: any) => {
     return (
-        <div className={`smallCardMainDiv h-${props.height} `}>
+        <div className={`smallCardContainer h-${props.height} `}>
             <div>
                 <h1 className="smallCardTitleText">{props.title.toUpperCase()}</h1>
                 <div className="smallCardDurationText">

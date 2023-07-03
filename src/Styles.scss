@@ -636,3 +636,37 @@
   @extend .displayFlex ;
   @extend .flexJustifyCenter ;
 }
+
+.chartCardPrimaryContainer{
+  @extend .container;
+  @extend .smallMargin;
+  @extend .averageMediumPadding;
+  @extend .textLeft;
+  @extend .flexJustifyBetween;
+  @extend .widthFull;
+  @extend .mainShadow;
+}
+
+.chartCardSecondaryContainer{
+  @extend .displayFlex;
+  @extend .flexJustifyBetween;
+  @extend .marginLeftMedium
+}
+
+.chartCardTitleText{
+  @extend .primaryTextColor;
+  @extend .extraSmallText;
+}
+
+.chartCardDurationText{
+  @extend .textRight;
+  @extend .primaryTextColor;
+}
+
+.ChartCardChartContainer{
+  @extend .mediumText;
+  @extend .textCenter;
+  @extend .displayFlex;
+  @extend .flexJustifyCenter;
+  @extend .marginLeftLarge;
+}

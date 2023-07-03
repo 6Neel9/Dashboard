@@ -492,3 +492,9 @@
 .widths{
   width: 30%;
 }
+/* Small card value inner text style */
+.smallCardValueText{
+  @apply font-extrabold;
+  @apply text-4xl;
+  @apply text-gray-700 dark:text-white;
+}

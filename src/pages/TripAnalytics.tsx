@@ -10,6 +10,8 @@ import {
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
 import heatMap from "../data/assets/heatMap.png";
+import { filterTripsByPeriod,filteredTrips } from "../functions/homePageFunc";
+
 
 
 

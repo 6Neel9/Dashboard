@@ -37,6 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
+import { filterTripsByPeriod, filteredTrips, calculateRevenueChange,filteredRevenueUpDown } from "../functions/homePageFunc";
 
 const Home = ({ data }: any) => {
   const {
@@ -51,14 +52,14 @@ const Home = ({ data }: any) => {
   const [trips, setTrips] = useState<any[]>([]);
 
   // console.log(selectedDuration, selectedState);
+
   //Redux dispatch call
   const dispatch: any = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchDrivers());
-    dispatch(fetchTrips())
-  }, []);
-
+  // useEffect(() => {
+  //   dispatch(fetchDrivers());
+  //   dispatch(fetchTrips())
+  // }, []);
 
 
   //Getting redux data
@@ -70,20 +71,20 @@ const Home = ({ data }: any) => {
 
 
   // Filter function
-  interface Trip {
-    _id: string;
-    driverId: number;
-    tripId: number;
-    startLocation: string;
-    tripDistance: number;
-    tripSpeed: number;
-    tripDuration: number;
-    endLocation: string;
-    startTime: string;
-    tripFare: number;
-    paymentType: string;
-    endTime: string;
-  }
+  // interface Trip {
+  //   _id: string;
+  //   driverId: number;
+  //   tripId: number;
+  //   startLocation: string;
+  //   tripDistance: number;
+  //   tripSpeed: number;
+  //   tripDuration: number;
+  //   endLocation: string;
+  //   startTime: string;
+  //   tripFare: number;
+  //   paymentType: string;
+  //   endTime: string;
+  // }
 
 
 
@@ -237,47 +238,51 @@ const Home = ({ data }: any) => {
   // console.log(trips);
   //Filter func 
 
-  function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
-    const filterEnd = new Date();
+  // function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
+  //   const filterEnd = new Date();
 
-    let filterStart = new Date();
-    if (period === 0) {
-      filterStart.setHours(0, 0, 0, 0);
-    } else {
-      filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
-    }
+  //   let filterStart = new Date();
+  //   if (period === 0) {
+  //     filterStart.setHours(0, 0, 0, 0);
+  //   } else {
+  //     filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
+  //   }
 
-    const todayTrips = trips.filter((trip) => {
-      const startTime = new Date(trip.startTime);
-      return startTime >= filterStart && startTime <= filterEnd;
-    });
+  //   const todayTrips = trips.filter((trip) => {
+  //     const startTime = new Date(trip.startTime);
+  //     return startTime >= filterStart && startTime <= filterEnd;
+  //   });
 
-    return todayTrips;
-  }
-  function filteredTrips() {
-    let totalTrips: any[] = trips
-    if (selectedDuration === "Today") {
-      totalTrips = filterTripsByPeriod(trips, 0);
-    } else if (selectedDuration === "Till Date") {
-      totalTrips = trips
-    } else if (selectedDuration === "Last 7 Days") {
-      totalTrips = filterTripsByPeriod(trips, 7);
+  //   return todayTrips;
+  // }
+  // function filteredTrips() {
+  //   let totalTrips: any[] = trips
+  //   if (selectedDuration === "Today") {
+  //     totalTrips = filterTripsByPeriod(trips, 0);
+  //   } else if (selectedDuration === "Till Date") {
+  //     totalTrips = trips
+  //   } else if (selectedDuration === "Last 7 Days") {
+  //     totalTrips = filterTripsByPeriod(trips, 7);
 
-    } else if (selectedDuration === "Last 30 Days") {
-      totalTrips = filterTripsByPeriod(trips, 30);
+  //   } else if (selectedDuration === "Last 30 Days") {
+  //     totalTrips = filterTripsByPeriod(trips, 30);
 
-    } else if (selectedDuration === "Last 6 Months") {
-      totalTrips = filterTripsByPeriod(trips, 180);
+  //   } else if (selectedDuration === "Last 6 Months") {
+  //     totalTrips = filterTripsByPeriod(trips, 180);
 
-    } else if (selectedDuration === "Last Year") {
-      totalTrips = filterTripsByPeriod(trips, 365);
-    }
-    return totalTrips;
+  //   } else if (selectedDuration === "Last Year") {
+  //     totalTrips = filterTripsByPeriod(trips, 365);
+  //   }
+  //   return totalTrips;
 
-  }
+  // }
 
 
-  let allFilteredTrips = filteredTrips()
+  let allFilteredTrips = filteredTrips(selectedDuration, trips);
+  //revenue updown
+  let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
+  console.log(allFilterRevenueUpDown)
+  // console.log(calculateRevenueChange(trips,50))
   // console.log(filterTripsByPeriod(trips, 0))
 
   const Revenue = (data: any) => {
@@ -571,7 +576,7 @@ const Home = ({ data }: any) => {
   const TotalTrips: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
-    value: numberFormat(String(filteredTrips().length)),
+    value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
     percent: "0.35",
   };
@@ -730,6 +735,7 @@ const Home = ({ data }: any) => {
     icon: "positive",
     percent: "1.65",
   };
+
 
 
 

@@ -10,6 +10,7 @@ import {
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
 import heatMap from "../data/assets/heatMap.png";
+import { filterTripsByPeriod,filteredTrips } from "../functions/homePageFunc";
 
 
 
@@ -74,46 +75,46 @@ const TripAnalytics = () => {
 
   //Filter func 
 
-  function filterTripsByPeriod(trips: any[], period: number): any[] {
-    const filterEnd = new Date();
+  // function filterTripsByPeriod(trips: any[], period: number): any[] {
+  //   const filterEnd = new Date();
 
-    let filterStart = new Date();
-    if (period === 0) {
-      filterStart.setHours(0, 0, 0, 0);
-    } else {
-      filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
-    }
+  //   let filterStart = new Date();
+  //   if (period === 0) {
+  //     filterStart.setHours(0, 0, 0, 0);
+  //   } else {
+  //     filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
+  //   }
 
-    const todayTrips = trips.filter((trip) => {
-      const startTime = new Date(trip.startTime);
-      return startTime >= filterStart && startTime <= filterEnd;
-    });
+  //   const todayTrips = trips.filter((trip) => {
+  //     const startTime = new Date(trip.startTime);
+  //     return startTime >= filterStart && startTime <= filterEnd;
+  //   });
 
-    return todayTrips;
-  }
-  function filteredTrips() {
-    let totalTrips: any[] = trips
-    if (selectedDuration === "Today") {
-      totalTrips = filterTripsByPeriod(trips, 0);
-    } else if (selectedDuration === "Till Date") {
-      totalTrips = trips
-    } else if (selectedDuration === "Last 7 Days") {
-      totalTrips = filterTripsByPeriod(trips, 7);
+  //   return todayTrips;
+  // }
+  // function filteredTrips() {
+  //   let totalTrips: any[] = trips
+  //   if (selectedDuration === "Today") {
+  //     totalTrips = filterTripsByPeriod(trips, 0);
+  //   } else if (selectedDuration === "Till Date") {
+  //     totalTrips = trips
+  //   } else if (selectedDuration === "Last 7 Days") {
+  //     totalTrips = filterTripsByPeriod(trips, 7);
 
-    } else if (selectedDuration === "Last 30 Days") {
-      totalTrips = filterTripsByPeriod(trips, 30);
+  //   } else if (selectedDuration === "Last 30 Days") {
+  //     totalTrips = filterTripsByPeriod(trips, 30);
 
-    } else if (selectedDuration === "Last 6 Months") {
-      totalTrips = filterTripsByPeriod(trips, 180);
+  //   } else if (selectedDuration === "Last 6 Months") {
+  //     totalTrips = filterTripsByPeriod(trips, 180);
 
-    } else if (selectedDuration === "Last Year") {
-      totalTrips = filterTripsByPeriod(trips, 365);
-    }
-    return totalTrips;
+  //   } else if (selectedDuration === "Last Year") {
+  //     totalTrips = filterTripsByPeriod(trips, 365);
+  //   }
+  //   return totalTrips;
 
-  }
+  // }
 
-  var allFilteredTrips = filteredTrips();
+  var allFilteredTrips = filteredTrips(selectedDuration,trips);
 
   //number format function
   function numberFormat(x: string) {
@@ -281,10 +282,10 @@ const TripAnalytics = () => {
 
 
 
-  useEffect(() => {
-    setSelectedDuration("Till Date");
-    setSelectedState("All");
-  }, []);
+  // useEffect(() => {
+  //   setSelectedDuration("Till Date");
+  //   setSelectedState("All");
+  // }, []);
   return (
     <div className="extraSmallMargin">
       <div className="displayFlex">

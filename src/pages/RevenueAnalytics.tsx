@@ -11,6 +11,7 @@ import {
 } from "../components";
 import "../Styles.css";
 import { useStateContext } from "../contexts/ContextProvider";
+import { filterTripsByPeriod,filteredTrips } from "../functions/homePageFunc";
 
 type CardPropType = {
   title?: string;
@@ -175,45 +176,49 @@ const RevenueAnalytics = () => {
       });
   }, [selectedDuration, selectedState]);
 
-  function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
-    const filterEnd = new Date();
+  // function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
+  //   const filterEnd = new Date();
 
-    let filterStart = new Date();
-    if (period === 0) {
-      filterStart.setHours(0, 0, 0, 0);
-    } else {
-      filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
-    }
+  //   let filterStart = new Date();
+  //   if (period === 0) {
+  //     filterStart.setHours(0, 0, 0, 0);
+  //   } else {
+  //     filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
+  //   }
 
-    const todayTrips = trips.filter((trip) => {
-      const startTime = new Date(trip.startTime);
-      return startTime >= filterStart && startTime <= filterEnd;
-    });
+  //   const todayTrips = trips.filter((trip) => {
+  //     const startTime = new Date(trip.startTime);
+  //     return startTime >= filterStart && startTime <= filterEnd;
+  //   });
 
-    return todayTrips;
-  }
+  //   return todayTrips;
+  // }
 
-  function filteredTrips() {
-    let totalTrips: any[] = trips
-    if (selectedDuration === "Today") {
-      totalTrips = filterTripsByPeriod(trips, 0);
-    } else if (selectedDuration === "Till Date") {
-      totalTrips = trips
-    } else if (selectedDuration === "Last 7 Days") {
-      totalTrips = filterTripsByPeriod(trips, 7);
+  // function filteredTrips() {
+  //   let totalTrips: any[] = trips
+  //   if (selectedDuration === "Today") {
+  //     totalTrips = filterTripsByPeriod(trips, 0);
+  //   } else if (selectedDuration === "Till Date") {
+  //     totalTrips = trips
+  //   } else if (selectedDuration === "Last 7 Days") {
+  //     totalTrips = filterTripsByPeriod(trips, 7);
 
-    } else if (selectedDuration === "Last 30 Days") {
-      totalTrips = filterTripsByPeriod(trips, 30);
+  //   } else if (selectedDuration === "Last 30 Days") {
+  //     totalTrips = filterTripsByPeriod(trips, 30);
 
-    } else if (selectedDuration === "Last 6 Months") {
-      totalTrips = filterTripsByPeriod(trips, 180);
+  //   } else if (selectedDuration === "Last 6 Months") {
+  //     totalTrips = filterTripsByPeriod(trips, 180);
 
-    } else if (selectedDuration === "Last Year") {
-      totalTrips = filterTripsByPeriod(trips, 365);
-    }
-    return totalTrips;
+  //   } else if (selectedDuration === "Last Year") {
+  //     totalTrips = filterTripsByPeriod(trips, 365);
+  //   }
+  //   return totalTrips;
 
-  }
+  // }
+
+  //Filter Function
+  var allFilteredTrips = filteredTrips(selectedDuration,trips);
+
 
   function numberFormat(x: string) {
     x = x.toString();
@@ -234,7 +239,7 @@ const RevenueAnalytics = () => {
   const PaymentModeCalculate = () => {
     var online = 0;
     var offline = 0;
-    filteredTrips().forEach((element: any) => {
+    allFilteredTrips.forEach((element: any) => {
       if (element.paymentType === "cash") {
         offline += 1;
       }
@@ -249,7 +254,7 @@ const RevenueAnalytics = () => {
   const DriverRevenue: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(filteredTrips())))),
+    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
     icon: "positive",
     percent: "1.65",
   }
@@ -277,7 +282,7 @@ const RevenueAnalytics = () => {
   const AvgDriverRevenue: CardPropType = {
     title: "AVG DRIVER REVENUE / TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(filteredTrips()) / filteredTrips().length))),
+    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips) / allFilteredTrips.length))),
     icon: "positive",
     percent: "0.4",
   }
@@ -290,7 +295,7 @@ const RevenueAnalytics = () => {
   const RevenuePerTrips2: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(filteredTrips()) / filteredTrips().length))),
+    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips) / allFilteredTrips.length))),
     icon: "positive",
     percent: "1.5",
   };
@@ -337,10 +342,10 @@ const RevenueAnalytics = () => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  useEffect(() => {
-    setSelectedDuration("Till Date");
-    setSelectedState("All");
-  }, []);
+  // useEffect(() => {
+  //   setSelectedDuration("Till Date");
+  //   setSelectedState("All");
+  // }, []);
   return (
     <div className="extraSmallMargin">
       <div className="displayFlex">

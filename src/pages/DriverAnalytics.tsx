@@ -12,6 +12,7 @@ import "../Styles.css";
 import { useStateContext } from "../contexts/ContextProvider";
 import { select } from "@syncfusion/ej2-base";
 import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
+import { filterTripsByPeriod,filteredTrips } from "../functions/homePageFunc";
 
 type CardPropType = {
   title?: string;
@@ -380,10 +381,10 @@ const DriverAnalytics = () => {
   }
   
 
-  useEffect(() => {
-  setSelectedDuration("Till Date");
-    setSelectedState("All");
-  }, []);
+  // useEffect(() => {
+  // setSelectedDuration("Till Date");
+  //   setSelectedState("All");
+  // }, []);
   
   return (
     <div className="extraSmallMargin">

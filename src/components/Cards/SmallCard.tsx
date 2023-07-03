@@ -1,30 +1,29 @@
 import React from 'react'
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
-import "../../Styles.css"
+import "../../Styles.scss"
 
 
 const SmallCard = ({ props }: any) => {
     return (
-        <div className={`container smallContainer smallMargin mediumPadding h-${props.height} displayFlex flexCol flexJustifyBetween mainShadow`}>
+        <div className={`smallCardMainDiv h-${props.height} `}>
             <div>
-            <h1 className="textStyle normalText smallPadding extraSmallText">{props.title.toUpperCase()}</h1>
-            <div className="textStyle smallPadding">
-                {props.duration.toLowerCase()}
-            </div>
+                <h1 className="smallCardTitleText">{props.title.toUpperCase()}</h1>
+                <div className="smallCardDurationText">
+                    {props.duration.toLowerCase()}
+                </div>
             </div>
             <div>
-            <div className="paddingTopSmall   smallCardValueText">
-                {props.value}
-            </div>
-            {props.icon && <div >
-                {props.icon === "positive" ?
-          <h1 className="percent paddingTopSmall percentIncrease"><SlArrowUp className="percentIcon" /> {props.percent}%</h1> :
-          <h1 className="percent paddingTopSmall percentDecrease"><SlArrowDown className="percentIcon" /> {props.percent}%</h1>
-                }
-            </div>}
-            </div>
+                <div className="smallCardValueText">
+                    {props.value}
+                </div>
+                {props.percent && <div>
+                    {Number(props.percent) === 0 ? <h1 className="smallCardNeutral">0%</h1> : props.percent > 0 ?
+                        <h1 className="smallCardPositive"><SlArrowUp className="percentIcon" /> {props.percent}%</h1> :
+                        <h1 className="smallCardNegative"><SlArrowDown className="percentIcon" /> {props.percent}%</h1>
+                    }
 
-
+                </div>}
+            </div>
         </div>
     )
 }

@@ -8,10 +8,10 @@ import {
   Bar,
   Pie,
 } from "../components";
-import "../Styles.css";
 import { useStateContext } from "../contexts/ContextProvider";
 import { select } from "@syncfusion/ej2-base";
 import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
+import "../Styles.scss"
 
 type CardPropType = {
   title?: string;

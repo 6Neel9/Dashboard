@@ -17,6 +17,9 @@
 .mainText {
   @apply text-gray-700 dark:text-white;
 }
+.primaryTextColor {
+  @apply text-gray-700 dark:text-white;
+}
 .secondaryText {
   @apply text-white dark:text-gray-700;
 }
@@ -494,7 +497,48 @@
 }
 /* Small card value inner text style */
 .smallCardValueText{
-  @apply font-extrabold;
-  @apply text-4xl;
-  @apply text-gray-700 dark:text-white;
+  @extend .primaryTextColor ;
+  @extend .extraBoldWeightText;
+  @extend .largeText;
+}
+/* Small card title inner text style */
+.smallCardTitleText{
+  @extend .textStyle ;
+  @extend .normalText;
+  @extend .smallPadding;
+  @extend .extraSmallText;
+}
+/* Small card duration inner text style */
+.smallCardDurationText{
+  @extend .textStyle ;
+  @extend .smallPadding;
+}
+/* Small card main div outer style */
+.smallCardMainDiv{
+  @extend .container ;
+  @extend .smallContainer ;
+  @extend .smallMargin ;
+  @extend .mediumPadding ;
+  @extend .displayFlex ;
+  @extend .flexCol ;
+  @extend .flexJustifyBetween ;
+  @extend .mainShadow ;
+}
+/* Small card possitive style */
+.smallCardPositive{
+  @extend .percent ;
+  @extend .paddingTopSmall ;
+  @extend .percentIncrease;
+}
+/* Small card negative style */
+.smallCardNegative{
+  @extend .percent ;
+  @extend .paddingTopSmall ;
+  @extend .percentDecrease;
+}
+/* Small card neutral style */
+.smallCardNeutral{
+  @extend .percent ;
+  @extend .paddingTopSmall ;
+  @extend .primaryTextColor;
 }

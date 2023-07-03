@@ -2,7 +2,7 @@ import React from 'react';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, Legend, Category, Tooltip, ColumnSeries, DataLabel, AxisModel, Zoom, Crosshair, Selection } from '@syncfusion/ej2-react-charts';
 import { barCustomSeries, barPrimaryXAxis, barPrimaryYAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
-import "../../Styles.css"
+import "../../Styles.scss"
 
 
 

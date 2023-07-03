@@ -9,7 +9,7 @@ import {
   Pie,
   SmallCardWithChart,
 } from "../components";
-import "../Styles.css";
+import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
 
 type CardPropType = {

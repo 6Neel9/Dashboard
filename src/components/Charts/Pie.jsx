@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, Inject , AccumulationDataLabel   } from '@syncfusion/ej2-react-charts';
-import "../../Styles.css"
+import "../../Styles.scss"
 import { useStateContext } from '../../contexts/ContextProvider';
 
 const Pie = ({h, w, data}) => {

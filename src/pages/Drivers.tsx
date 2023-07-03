@@ -25,7 +25,7 @@ import {
 import { driverGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
-import "../Styles.css";
+import "../Styles.scss";
 
 //redux
 import { useSelector, useDispatch } from "react-redux"

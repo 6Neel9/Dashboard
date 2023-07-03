@@ -3,7 +3,7 @@ import React from 'react'
 import "leaflet/dist/leaflet.css";
 
 import MultipleLocationMap from '../components/Map/MultipleLocationMap';
-import "../Styles.css"
+import "../Styles.scss"
 import { Header } from '../components';
 import L, { divIcon } from 'leaflet';
 import customMarkerIcon from '../components/Map/images/custom-marker-icon.png';

@@ -4,7 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer } from "react-leaflet";
 import RoutingMap from '../components/Map/RoutingMap';
 import MultipleLocationMap from '../components/Map/MultipleLocationMap';
-import "../Styles.css"
+import "../Styles.scss"
 import { Header } from '../components';
 import L, { divIcon } from 'leaflet';
 import customMarkerIcon from '../components/Map/images/dot-inside-a-circle.png';

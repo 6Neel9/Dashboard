@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStateContext } from '../contexts/ContextProvider';
-import "../Styles.css"
+import "../Styles.scss"
 
 type props ={
   prop:{

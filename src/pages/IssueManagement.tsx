@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import "../Styles.css"
+import "../Styles.scss"
 import { ExtraSmallCard } from '../components'
 import {
     GridComponent,

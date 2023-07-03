@@ -28,7 +28,7 @@ import {
   ChartCard,
   SmallCardWithChart,
 } from "../components";
-import "../Styles.css";
+import "../Styles.scss";
 
 import { useSelector, useDispatch } from "react-redux";
 import { fetchDrivers } from "../store/driverSlice";

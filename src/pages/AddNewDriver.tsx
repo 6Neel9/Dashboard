@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../components/Button";
 import { useStateContext } from "../contexts/ContextProvider";
-import "../Styles.css";
+import "../Styles.scss";
 
 
 const AddNewDriver = () => {

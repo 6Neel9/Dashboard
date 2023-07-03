@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "./Button";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Months, States, FilterDuration } from "../data/meiroData";
-import "../Styles.css";
+import "../Styles.scss";
 
 const Filters = () => {
   const {

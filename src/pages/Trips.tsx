@@ -24,7 +24,7 @@ import {
 import { tripGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
-import "../Styles.css"
+import "../Styles.scss"
 
 
 const Trips = ({ data }: any) => {

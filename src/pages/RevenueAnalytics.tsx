@@ -11,7 +11,7 @@ import {
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
-import { filterTripsByPeriod,filteredTrips } from "../functions/homePageFunc";
+import { filterTripsByPeriod,filteredTrips } from "../Utils/FilteringFunctions";
 
 type CardPropType = {
   title?: string;

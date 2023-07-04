@@ -733,3 +733,46 @@
 .smallCardWithChartChartContainer{
   @extend .mediumText ,.textCenter ,.marginLeftLarge ,.displayFlex ,.flexJustifyCenter;
 }
+
+/*Button */
+.buttonContainer{
+  @extend .secondaryBackground ,.secondaryText,.mainBorder,.roundedLarge, .smallPadding;
+  @apply hover:drop-shadow-xl;
+}
+
+/*ChartHeaders*/
+.chartHeadersContainer{
+  @extend .marginBottomLarge;
+}
+.chartHeadersTitleText{
+  @extend .textCenter ,.mainText ,.textXLarge ,.marginBottomXS ,.marginTopSmall;
+}
+.chartHeadersCategoryText{
+  @extend .text3XLarge ,.extraBoldWeightText ,.trackingTight ,.mainText;
+}
+.chartHeadersChartTitle{
+  @extend .largeText;
+}
+
+/* Filters */
+.filtersContainer{
+  @extend .mainBackground ,.primaryTextColor ,.mainShadow ,.mainBorder ,.roundedExtraXLarge ,.averageMargin ,.averagePadding ,.flexWrap ,.extraSmallMargin ,.widthFull;
+}
+.filtersSecondaryContainer{
+  @extend .displayFlex ,.flexJustifyEnd ;
+}
+.filtersSelectContainer{
+  @extend .marginRightMedium ,.roundedMedium ,.extraSmallPadding ,.mainBackground ,.mainText ,.mainBorder;
+}
+.filtersButton{
+  @extend .secondaryBackground ,.secondaryText ,.mainBorder ,.roundedLarge ,.smallPadding;
+  @apply hover:drop-shadow-xl;
+}
+
+/*Footer  */
+.footerContainer{
+  @extend .marginTopExtraLarge;
+}
+.footerText{
+  @extend .textCenter ,.mainText ,.extraLargeMargin;
+}

@@ -4,19 +4,19 @@ import "../../Styles.scss";
 function SmallCardFormatter({ props }: any) {
   return (
     <div
-      className={`container smallContainer smallMargin mediumPadding h-${props.height} displayFlex flexCol flexJustifyBetween mainShadow`}
+      className={` h-${props.height} smallCardFormatterContainer`}
     >
       <div>
-        <h1 className="textStyle normalText smallPadding extraSmallText">
+        <h1 className="smallCardFormatterTitleText">
           {props.title.toUpperCase()}
         </h1>
 
       </div>
       <div>
-        <div className="largeText textStyle paddingTopSmall  extraBoldWeightText">
+        <div className="smallCardFormatterValueText">
           {props.value.toUpperCase()}
         </div>
-        <div className="textStyle  marginTopMedium">
+        <div className="smallCardFormatterDurationText">
           {props.duration.toLowerCase()}
         </div>
       </div>

@@ -704,3 +704,19 @@
 .mediumCardNeutral{
   @extend .percent, .paddingTopSmall, .primaryTextColor;
 }
+
+/* smallCardFormatter */
+.smallCardFormatterContainer{
+  @extend .smallCardContainer;
+}
+.smallCardFormatterTitleText{
+  @extend .smallCardTitleText;
+}
+.smallCardFormatterValueText{
+  @extend .smallCardValueText;
+  @extend .paddingTopSmall;
+}
+.smallCardFormatterDurationText{
+  @extend .primaryTextColor, .marginTopMedium;
+
+}

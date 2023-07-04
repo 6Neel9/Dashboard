@@ -6,11 +6,15 @@ import {
   ChartCard,
   LineChart,
   Bar,
+  Histogram,
+  HistogramLine
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
 import heatMap from "../data/assets/heatMap.png";
 import { filterTripsByPeriod,filteredTrips } from "../functions/homePageFunc";
+
+import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
 
 
 
@@ -364,10 +368,13 @@ const TripAnalytics = () => {
       {/* <ColoredMap /> */}
       <div className="flex justify-center">
       <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
+        
         <img src={heatMap} alt="heatMap" style={{  height: "50vh" }} />
-
       </div>
+      {/* <MapWithHeatmap />   */}
       </div>
+      <Histogram />
+      <HistogramLine />
     </div>
   );
 };

@@ -17,7 +17,7 @@ import {
   EdgeLabelPlacement,
   ChartRangePadding,
 } from "@syncfusion/ej2-react-charts";
-import { Bar, LineChart, Pie } from "../components";
+import { Bar, Histogram, HistogramLine, LineChart, Pie } from "../components";
 import { dropdownData } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import {
@@ -796,6 +796,12 @@ const Home = ({ data }: any) => {
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<TripDurationChart />} />
+      </div>
+      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+        <ChartCard prop={ChartCardProps} chart={<Histogram />} />
+      </div>
+      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+        <ChartCard prop={ChartCardProps} chart={<HistogramLine />} />
       </div>
       {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />

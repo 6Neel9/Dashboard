@@ -718,5 +718,18 @@
 }
 .smallCardFormatterDurationText{
   @extend .primaryTextColor, .marginTopMedium;
+}
 
+/* smallCardWithChart */
+.smallCardWithChartContainer{
+  @extend .container ,.extraSmallContainer ,.smallMargin ,.mediumPadding  ,.displayFlex ,.flexCol ,.flexJustifyBetween ,.mainShadow;
+}
+.smallCardWithChartTitleText{
+  @extend .textStyle ,.normalText ,.smallPadding ,.extraSmallText;
+}
+.smallCardWithChartDurationText{
+  @extend .textStyle ,.smallPadding;
+}
+.smallCardWithChartChartContainer{
+  @extend .mediumText ,.textCenter ,.marginLeftLarge ,.displayFlex ,.flexJustifyCenter;
 }

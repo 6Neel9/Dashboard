@@ -681,3 +681,26 @@
 .extraSmallCardValueText{
   @extend .smallCardValueText;
 }
+
+/*medium */
+.mediumCardContainer{
+  @extend .container, .mediumContainer, .smallMargin, .mediumPadding, .mainShadow;
+}
+.mediumCardTitleText{
+  @extend .textStyle, .normalText, .smallPadding, .extraSmallText;
+}
+.mediumCardDurationText{
+  @extend .textStyle, .smallPadding;
+}
+.mediumCardValueText{
+  @extend .largeText ,.textStyle, .paddingTopSmall, .mediumWeightText ,.extraBoldWeightText;
+}
+.mediumCardPositive{
+  @extend .percent, .paddingTopSmall, .percentIncrease;
+}
+.mediumCardNegative{
+  @extend .percent, .paddingTopSmall, .percentDecrease;
+}
+.mediumCardNeutral{
+  @extend .percent, .paddingTopSmall, .primaryTextColor;
+}

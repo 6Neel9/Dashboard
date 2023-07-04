@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useCallback } from "react";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import {
   AxisModel,
@@ -37,7 +37,8 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculateRevenueChange,filteredRevenueUpDown } from "../functions/homePageFunc";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChange,filteredRevenueUpDown } from "../Utils/FilteringFunctions";
+import { mapOfPeriods } from "../Utils/Constants";
 
 const Home = ({ data }: any) => {
   const {
@@ -280,9 +281,10 @@ const Home = ({ data }: any) => {
 
   let allFilteredTrips = filteredTrips(selectedDuration, trips);
   //revenue updown
-  let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
-  console.log(allFilterRevenueUpDown)
-  // console.log(calculateRevenueChange(trips,50))
+  // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
+  // console.log(allFilterRevenueUpDown)
+  let revenueChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), "tripFare");
+  console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
 
   const Revenue = (data: any) => {

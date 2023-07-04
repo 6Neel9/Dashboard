@@ -670,3 +670,14 @@
   @extend .flexJustifyCenter;
   @extend .marginLeftLarge;
 }
+
+/* ExtraSmall  */
+.extraSmallCardContainer{
+  @extend .smallCardContainer;
+}
+.extraSmallCardTitleText{
+  @extend .smallCardTitleText;
+}
+.extraSmallCardValueText{
+  @extend .smallCardValueText;
+}

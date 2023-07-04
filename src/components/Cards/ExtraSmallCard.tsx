@@ -5,10 +5,10 @@ import "../../Styles.scss"
 
 const ExtraSmallCard = ({ props }: any) => {
     return (
-        <div className={`container extraXSmallContainer smallMargin mediumPadding h-${props.height} displayFlex flexCol flexJustifyBetween mainShadow`}>
+        <div className={` h-${props.height} extraSmallCardContainer`}>
 
-            <h1 className="textStyle normalText smallPadding extraSmallText">{props.title.toUpperCase()}</h1>
-            <div className="largeText textStyle paddingTopSmall  extraBoldWeightText">
+            <h1 className="extraSmallCardTitleText">{props.title.toUpperCase()}</h1>
+            <div className="extraSmallCardValueText">
                 {props.value}
             </div>
 

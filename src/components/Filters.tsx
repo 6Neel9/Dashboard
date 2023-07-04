@@ -34,12 +34,11 @@ const Filters = () => {
   };
 
   return (
-    <div className="mainBackground mainText mainShadow mainBorder roundedExtraXLarge averageMargin averagePadding flexWrap extraSmallMargin widthFull">
-      <div className="displayFlex flexJustifyEnd">
+    <div className="filtersContainer">
+      <div className="filtersSecondaryContainer">
         <div className="">
           <select
-            id="filter-duration"
-            className="marginRightMedium roundedMedium extraSmallPadding mainBackground mainText mainBorder"
+            className="filtersSelectContainer"
             value={selectedDuration}
             onChange={handleDurationChange}
           >
@@ -52,8 +51,7 @@ const Filters = () => {
           </select>
 
           <select
-            id="filter-state"
-            className="marginRightMedium roundedMedium extraSmallPadding mainBackground mainText mainBorder"
+            className="filtersSelectContainer"
             value={selectedState}
             onChange={handleStateChange}
           >
@@ -68,7 +66,7 @@ const Filters = () => {
           <button
             type="button"
             onClick={handleApplyFilters}
-            className={`secondaryBackground secondaryText mainBorder roundedLarge smallPadding  mr-3 hover:drop-shadow-xl  `}
+            className={`filtersButton`}
           >
             Apply
           </button>
@@ -76,7 +74,7 @@ const Filters = () => {
           <button
             type="button"
             onClick={handleResetFilters}
-            className={`secondaryBackground secondaryText mainBorder roundedLarge smallPadding  mr-3 hover:drop-shadow-xl  `}
+            className={`filtersButton`}
           >
             Reset
           </button>

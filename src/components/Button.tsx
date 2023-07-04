@@ -27,7 +27,7 @@ const Button = ({prop} : props) => {
     <button
       type="button"
       onClick={() => prop.onclick}
-      className={` text-${prop.size} secondaryBackground secondaryText mainBorder roundedLarge smallPadding w-${prop.width} mr-${prop.marginRight} hover:drop-shadow-xl hover:bg-${prop.bgHoverColor} `}
+      className={` text-${prop.size}  w-${prop.width} mr-${prop.marginRight}  hover:bg-${prop.bgHoverColor} buttonContainer`}
     >
       {prop.icon} {prop.text}
     </button>

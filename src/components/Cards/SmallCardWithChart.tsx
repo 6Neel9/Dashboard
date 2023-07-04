@@ -4,18 +4,18 @@ import "../../Styles.scss";
 function SmallCardWithChart({ props, chart }: any) {
   return (
     <div
-      className={`container extraSmallContainer smallMargin mediumPadding  displayFlex flexCol flexJustifyBetween mainShadow `}
+      className={`smallCardWithChartContainer`}
     >
       <div>
-        <h1 className="textStyle normalText smallPadding extraSmallText">
+        <h1 className="smallCardWithChartTitleText">
           {props.title.toUpperCase()}
         </h1>
-        <div className="textStyle smallPadding">
+        <div className="smallCardWithChartDurationText">
           {props.duration.toLowerCase()}
         </div>
       </div>
       <div>
-        <div className="mediumText textCenter marginLeftLarge displayFlex flexJustifyCenter">
+        <div className="smallCardWithChartChartContainer">
           {chart}
         </div>
       </div>

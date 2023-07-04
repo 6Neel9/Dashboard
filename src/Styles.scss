@@ -670,3 +670,109 @@
   @extend .flexJustifyCenter;
   @extend .marginLeftLarge;
 }
+
+/* ExtraSmall  */
+.extraSmallCardContainer{
+  @extend .smallCardContainer;
+}
+.extraSmallCardTitleText{
+  @extend .smallCardTitleText;
+}
+.extraSmallCardValueText{
+  @extend .smallCardValueText;
+}
+
+/*medium */
+.mediumCardContainer{
+  @extend .container, .mediumContainer, .smallMargin, .mediumPadding, .mainShadow;
+}
+.mediumCardTitleText{
+  @extend .textStyle, .normalText, .smallPadding, .extraSmallText;
+}
+.mediumCardDurationText{
+  @extend .textStyle, .smallPadding;
+}
+.mediumCardValueText{
+  @extend .largeText ,.textStyle, .paddingTopSmall, .mediumWeightText ,.extraBoldWeightText;
+}
+.mediumCardPositive{
+  @extend .percent, .paddingTopSmall, .percentIncrease;
+}
+.mediumCardNegative{
+  @extend .percent, .paddingTopSmall, .percentDecrease;
+}
+.mediumCardNeutral{
+  @extend .percent, .paddingTopSmall, .primaryTextColor;
+}
+
+/* smallCardFormatter */
+.smallCardFormatterContainer{
+  @extend .smallCardContainer;
+}
+.smallCardFormatterTitleText{
+  @extend .smallCardTitleText;
+}
+.smallCardFormatterValueText{
+  @extend .smallCardValueText;
+  @extend .paddingTopSmall;
+}
+.smallCardFormatterDurationText{
+  @extend .primaryTextColor, .marginTopMedium;
+}
+
+/* smallCardWithChart */
+.smallCardWithChartContainer{
+  @extend .container ,.extraSmallContainer ,.smallMargin ,.mediumPadding  ,.displayFlex ,.flexCol ,.flexJustifyBetween ,.mainShadow;
+}
+.smallCardWithChartTitleText{
+  @extend .textStyle ,.normalText ,.smallPadding ,.extraSmallText;
+}
+.smallCardWithChartDurationText{
+  @extend .textStyle ,.smallPadding;
+}
+.smallCardWithChartChartContainer{
+  @extend .mediumText ,.textCenter ,.marginLeftLarge ,.displayFlex ,.flexJustifyCenter;
+}
+
+/*Button */
+.buttonContainer{
+  @extend .secondaryBackground ,.secondaryText,.mainBorder,.roundedLarge, .smallPadding;
+  @apply hover:drop-shadow-xl;
+}
+
+/*ChartHeaders*/
+.chartHeadersContainer{
+  @extend .marginBottomLarge;
+}
+.chartHeadersTitleText{
+  @extend .textCenter ,.mainText ,.textXLarge ,.marginBottomXS ,.marginTopSmall;
+}
+.chartHeadersCategoryText{
+  @extend .text3XLarge ,.extraBoldWeightText ,.trackingTight ,.mainText;
+}
+.chartHeadersChartTitle{
+  @extend .largeText;
+}
+
+/* Filters */
+.filtersContainer{
+  @extend .mainBackground ,.primaryTextColor ,.mainShadow ,.mainBorder ,.roundedExtraXLarge ,.averageMargin ,.averagePadding ,.flexWrap ,.extraSmallMargin ,.widthFull;
+}
+.filtersSecondaryContainer{
+  @extend .displayFlex ,.flexJustifyEnd ;
+}
+.filtersSelectContainer{
+  @extend .marginRightMedium ,.roundedMedium ,.extraSmallPadding ,.mainBackground ,.mainText ,.mainBorder;
+}
+.filtersButton{
+  @extend .secondaryBackground ,.secondaryText ,.mainBorder ,.roundedLarge ,.smallPadding;
+  @apply hover:drop-shadow-xl;
+}
+
+/*Footer  */
+.footerContainer{
+  @extend .marginTopExtraLarge;
+}
+.footerText{
+  @extend .textCenter ,.mainText ,.extraLargeMargin;
+}

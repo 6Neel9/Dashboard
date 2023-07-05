@@ -253,10 +253,10 @@ const Home = ({ data }: any) => {
   //revenue updown
   // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
   // console.log(allFilterRevenueUpDown)
-  let revenueChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), "tripFare");
+  let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
-  let tripChange = filterTripsByPeriod(trips,new Date('04/07/2023'),0, 'previous');
+  let tripChange = filterTripsByPeriod(tripData,new Date('04/07/2023'),0, 'previous');
 
   
 

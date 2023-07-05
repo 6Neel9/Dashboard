@@ -11,7 +11,10 @@ import {
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
-import { filterTripsByPeriod,filteredTrips } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage } from "../Utils/FilteringFunctions";
+import { mapOfPeriods } from "../Utils/Constants";
+import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
+
 
 type CardPropType = {
   title?: string;
@@ -152,6 +155,8 @@ const RevenueAnalytics = () => {
     driverData
   } = useStateContext();
 
+  const CalvulatedValues = AnalyticsCalculation();
+
   interface Trip {
     _id: string;
     driverId: number;
@@ -219,16 +224,22 @@ const RevenueAnalytics = () => {
   // }
 
   //Filter Function
-  var allFilteredTrips = filteredTrips(selectedDuration,tripData);
+ 
 
-
-  function numberFormat(x: string) {
-    x = x.toString();
-    var lastThree = x.substring(x.length - 3);
-    var otherNumbers = x.substring(0, x.length - 3);
-    if (otherNumbers !== "") lastThree = "," + lastThree;
-    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    return res;
+  function numberFormat(x: string | number): string {
+    if (typeof x === 'number') {
+      return x.toLocaleString(undefined, { maximumFractionDigits: 1 });
+    }
+    if (typeof x === 'string') {
+      const parts = x.split('.');
+      const formattedInteger = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      if (parts.length === 2) {
+        const decimalPart = parts[1].substring(0, 1); // Limit decimal to 1 digit
+        return `${formattedInteger}.${decimalPart}`;
+      }
+      return formattedInteger;
+    }
+    return '';
   }
   const Revenue = (data: any) => {
     var temp = 0;
@@ -241,7 +252,7 @@ const RevenueAnalytics = () => {
   const PaymentModeCalculate = () => {
     var online = 0;
     var offline = 0;
-    allFilteredTrips.forEach((element: any) => {
+    CalvulatedValues.allFilteredTrips.forEach((element: any) => {
       if (element.paymentType === "cash") {
         offline += 1;
       }
@@ -256,9 +267,9 @@ const RevenueAnalytics = () => {
   const DriverRevenue: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
+    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips))),
     icon: "positive",
-    percent: "1.65",
+    percent: String(CalvulatedValues.driverRevenueChange),
   }
 
   const PaymentType: CardPropType = {
@@ -284,9 +295,9 @@ const RevenueAnalytics = () => {
   const AvgDriverRevenue: CardPropType = {
     title: "AVG DRIVER REVENUE / TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips) / allFilteredTrips.length))),
+    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length*mapOfPeriods.get(selectedDuration))),
     icon: "positive",
-    percent: "0.4",
+    percent: String(CalvulatedValues.avgRevenuePerTrip),
   }
 
   const RevenuePerTrips: CardPropType = {
@@ -297,7 +308,7 @@ const RevenueAnalytics = () => {
   const RevenuePerTrips2: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips) / allFilteredTrips.length))),
+    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: "1.5",
   };

@@ -24,8 +24,8 @@ const CardWithChart = ({ prop1, prop2, chart }: any) => {
                         <div >
                             {prop2.percent && <div>
                                 {Number(prop2.percent) === 0 ? <h1 className="smallCardNeutral">0%</h1> : prop2.percent > 0 ?
-                                    <h1 className="smallCardPositive"><SlArrowUp className="percentIcon" /> {prop2.percent}%</h1> :
-                                    <h1 className="smallCardNegative"><SlArrowDown className="percentIcon" /> {prop2.percent}%</h1>
+                                    <h1 className="smallCardPositive"><SlArrowUp className="percentIcon" /> {Number(prop2.percent).toFixed(2)}%</h1> :
+                                    <h1 className="smallCardNegative"><SlArrowDown className="percentIcon" /> {String(Number(prop2.percent).toFixed(2)).slice(1)}%</h1>
                                 }
 
                             </div>}

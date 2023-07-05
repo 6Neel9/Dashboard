@@ -284,8 +284,10 @@ const Home = ({ data }: any) => {
   // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
   // console.log(allFilterRevenueUpDown)
   let revenueChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), "tripFare");
-  console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
+  let tripChange = filterTripsByPeriod(trips,new Date('04/07/2023'),0, 'previous');
+
+  
 
   const Revenue = (data: any) => {
     var temp = 0;
@@ -441,7 +443,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
     icon: "positive",
-    percent: "10",
+    percent: ''+String(revenueChange),
   };
 
   const SmallCardOneProps: CardPropType = {
@@ -580,7 +582,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
-    percent: "0.35",
+    percent: ""+ String(tripChange),
   };
 
   const TotalDownloads: CardPropType = {

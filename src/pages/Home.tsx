@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChange, filteredRevenueUpDown } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 
 const Home = ({ data }: any) => {
@@ -253,13 +253,15 @@ const Home = ({ data }: any) => {
   //revenue updown
   // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
   // console.log(allFilterRevenueUpDown)
-  let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
+  let revenueChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   // console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
-  let tripChange = filterTripsByPeriod(tripData,new Date('04/07/2023'),0, 'previous');
+  let tripChange = calculatePercentChangeUsingCount(tripData,mapOfPeriods.get(selectedDuration))
 
-  let DriverChange = calculatePercentChange(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
-  let tripLengthChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
+  let DriverChange = calculatePercentChangeUsingValue(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
+  let averageTripLengthChange = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
+  let distanceCovered = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
+  let averageTripsPerHour =(allFilteredTrips.length)/24
 
   
 
@@ -503,7 +505,7 @@ const Home = ({ data }: any) => {
 
   const AvgTripDuration: CardPropType = {
     title: "AVG TRIP DURATION",
-    duration: selectedDuration,
+    duration: `${selectedDuration} km`,
   };
 
   const CashFreeUsers2: CardPropType = {
@@ -588,15 +590,15 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: `${numberFormat(String(totalDistance))} km`,
     icon: "positive",
-    percent: "0.71",
+    percent: String(distanceCovered),
   };
 
-  const AvgDistanceCovered: CardPropType = {
+  const AvgTripLength: CardPropType = {
     title: "AVG TRIP LENGTH",
     duration: selectedDuration,
     value: averageTripLength,
     icon: "negative",
-    percent: String(tripLengthChange),
+    percent: String(averageTripLengthChange),
   };
 
   const GrowthRateDrivers: CardPropType = {
@@ -650,7 +652,7 @@ const Home = ({ data }: any) => {
   const SmallCardProps6: CardPropType = {
     title: "Avg trips / hour",
     duration: "",
-    value: "5032",
+    value: String(averageTripsPerHour),
   };
   const SmallCardProps7: CardPropType = {
     title: "Morning peak",
@@ -750,7 +752,7 @@ const Home = ({ data }: any) => {
         <p className="text-2xl extraBoldWeightText  mainText grayText">Fleet Performance</p>
       </div>
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
-        <SmallCard props={AvgDistanceCovered} />
+        <SmallCard props={AvgTripLength} />
         <SmallCard props={DistanceCovered} />
         <SmallCardWithChart
           props={PaymentType}

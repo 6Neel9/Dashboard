@@ -1,4 +1,4 @@
-import {periodTypes , tripElements} from './Constants';
+import { periodTypes, tripElements } from './Constants';
 
 interface Trip {
     _id: string;
@@ -32,7 +32,7 @@ function filterTripsByPeriod(trips: Trip[], filterEnd: Date, filterDuration: num
     switch (period) {
         case "current":
             if (filterDuration === -1) {
-                filterStart = new Date(1970,1,1,0,0,0);
+                filterStart = new Date(1970, 1, 1, 0, 0, 0);
             } else {
                 filterStart.setDate(filterEnd.getDate() - filterDuration);
             }
@@ -43,7 +43,7 @@ function filterTripsByPeriod(trips: Trip[], filterEnd: Date, filterDuration: num
             if (filterDuration === 0) {
                 filterStart.setDate(filterEnd.getDate() - 1);
             } else if (filterDuration === -1) {
-                filterStart = new Date(1970,1,1,0,0,0);
+                filterStart = new Date(1970, 1, 1, 0, 0, 0);
             } else {
                 filterStart.setDate(filterEnd.getDate() - filterDuration);
             }
@@ -94,7 +94,7 @@ function filteredTrips(selectedDuration: string, trips: any[]) {
  * 
  * @param trips
  *  */
-function calculatePercentChange(trips: Trip[], period: number,tripElement:string): number {
+function calculatePercentChangeUsingValue(trips: Trip[], period: number, tripElement: string): number {
     const currentDate = new Date();
     const previousDate = new Date();
     previousDate.setDate(currentDate.getDate() - period);
@@ -104,7 +104,7 @@ function calculatePercentChange(trips: Trip[], period: number,tripElement:string
     // const currentRevenue = calculateTotalRevenue(trips, currentDate, period, "current");
     const currentRevenue = calculateTotalValue(trips, currentDate, period, periodTypes.CURRENT, tripElement);
     // const previousRevenue = calculateTotalRevenue(trips, previousDate, period, "previous");
-    const previousRevenue = calculateTotalValue(trips, previousDate, period, "previous", tripElement);
+    const previousRevenue = calculateTotalValue(trips, previousDate, period, periodTypes.PREVIOUS, tripElement);
 
     if (previousRevenue != 0) {
         return ((currentRevenue - previousRevenue) / Math.abs(previousRevenue)) * 100;
@@ -114,6 +114,7 @@ function calculatePercentChange(trips: Trip[], period: number,tripElement:string
         // Infinity should be handled in the component
     }
 }
+
 
 
 // function calculateTotalRevenue(trips: Trip[], endDate: Date, filterDuration: number, period: String): number {
@@ -148,23 +149,76 @@ function calculateTotalValue(trips: Trip[], endDate: Date, filterDuration: numbe
 function filteredRevenueUpDown(selectedDuration: string, trips: any[]) {
     let totalRevenueUpDown: number = 0;
     if (selectedDuration === "Today") {
-        totalRevenueUpDown = calculatePercentChange(trips, 0 , "tripFare");
+        totalRevenueUpDown = calculatePercentChangeUsingValue(trips, 0, "tripFare");
     } else if (selectedDuration === "Till Date") {
-        totalRevenueUpDown = calculatePercentChange(trips, -1 , "tripFare")
+        totalRevenueUpDown = calculatePercentChangeUsingValue(trips, -1, "tripFare")
     } else if (selectedDuration === "Last 7 Days") {
-        totalRevenueUpDown = calculatePercentChange(trips, 7 , "tripFare");
+        totalRevenueUpDown = calculatePercentChangeUsingValue(trips, 7, "tripFare");
 
     } else if (selectedDuration === "Last 30 Days") {
-        totalRevenueUpDown = calculatePercentChange(trips, 30 , "tripFare");
+        totalRevenueUpDown = calculatePercentChangeUsingValue(trips, 30, "tripFare");
 
     } else if (selectedDuration === "Last 6 Months") {
-        totalRevenueUpDown = calculatePercentChange(trips, 180 , "tripFare");
+        totalRevenueUpDown = calculatePercentChangeUsingValue(trips, 180, "tripFare");
 
     } else if (selectedDuration === "Last Year") {
-        totalRevenueUpDown = calculatePercentChange(trips, 365 , "tripFare");
+        totalRevenueUpDown = calculatePercentChangeUsingValue(trips, 365, "tripFare");
     }
     return totalRevenueUpDown;
 
+}
+
+// 5.07.2023 //
+//Trip Length and averages function
+function calculatePercentChangeUsingCount(trips: Trip[], period: number): number {
+    const currentDate = new Date();
+    const previousDate = new Date();
+    previousDate.setDate(currentDate.getDate() - period);
+    previousDate.setHours(0, 0, 0, 0)
+
+
+    // const currentRevenue = calculateTotalRevenue(trips, currentDate, period, "current");
+    const currentCount = filterTripsByPeriod(trips, currentDate, period, periodTypes.CURRENT).length;
+    // const previousRevenue = calculateTotalRevenue(trips, previousDate, period, "previous");
+    const previousCount = filterTripsByPeriod(trips, previousDate, period, periodTypes.PREVIOUS).length;
+
+    if (previousCount != 0) {
+        return ((currentCount - previousCount) / Math.abs(previousCount)) * 100;
+
+    } else {
+        return currentCount != 0 ? Infinity : 0
+        // Infinity should be handled in the component
+    }
+}
+
+//Trip Length and averages function
+function calculatePercentChangeOfAverage(trips: Trip[], period: number, tripElement: string): number {
+    const currentDate = new Date();
+    const previousDate = new Date();
+    previousDate.setDate(currentDate.getDate() - period);
+    previousDate.setHours(0, 0, 0, 0)
+
+
+    // const currentRevenue = calculateTotalRevenue(trips, currentDate, period, "current");
+    const currentCount = calculateAverageUsingValue(trips, currentDate, period, periodTypes.CURRENT, tripElement);
+    // const previousRevenue = calculateTotalRevenue(trips, previousDate, period, "previous");
+    const previousCount = calculateAverageUsingValue(trips, previousDate, period, periodTypes.PREVIOUS, tripElement);
+
+    if (previousCount != 0) {
+        return ((currentCount - previousCount) / Math.abs(previousCount)) * 100;
+
+    } else {
+        return currentCount != 0 ? Infinity : 0
+        // Infinity should be handled in the component
+    }
+}
+
+function calculateAverageUsingValue(trips: Trip[], endDate: Date, filterDuration: number, period: String, tripElement: string): number {
+    const filteredTrips = filterTripsByPeriod(trips, endDate, filterDuration, period);
+    const averageValue = filteredTrips.reduce((acc, trip) => {
+        return acc + Number(trip[tripElement as keyof Trip]);
+    }, 0) / filteredTrips.length;
+    return averageValue;
 }
 
 
@@ -176,4 +230,5 @@ function filteredRevenueUpDown(selectedDuration: string, trips: any[]) {
 
 
 
-export { filterTripsByPeriod, filteredTrips, calculatePercentChange, filteredRevenueUpDown  }
+
+export { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage }

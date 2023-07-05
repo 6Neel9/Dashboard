@@ -17,7 +17,7 @@ import {
   EdgeLabelPlacement,
   ChartRangePadding,
 } from "@syncfusion/ej2-react-charts";
-import { Bar, LineChart, Pie } from "../components";
+import { Bar, Histogram, HistogramLine, LineChart, Pie } from "../components";
 import { dropdownData } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import {
@@ -253,9 +253,12 @@ const Home = ({ data }: any) => {
   //revenue updown
   // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
   // console.log(allFilterRevenueUpDown)
-  let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
+  let revenueChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), "tripFare");
   console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
+  let tripChange = filterTripsByPeriod(trips,new Date('04/07/2023'),0, 'previous');
+
+  
 
   const Revenue = (data: any) => {
     var temp = 0;
@@ -411,7 +414,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
     icon: "positive",
-    percent: "10",
+    percent: ''+String(revenueChange),
   };
 
   const SmallCardOneProps: CardPropType = {
@@ -550,7 +553,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
-    percent: "0.35",
+    percent: ""+ String(tripChange),
   };
 
   const TotalDownloads: CardPropType = {
@@ -768,6 +771,12 @@ const Home = ({ data }: any) => {
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<TripDurationChart />} />
+      </div>
+      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+        <ChartCard prop={ChartCardProps} chart={<Histogram />} />
+      </div>
+      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+        <ChartCard prop={ChartCardProps} chart={<HistogramLine />} />
       </div>
       {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />

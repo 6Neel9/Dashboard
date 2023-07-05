@@ -774,5 +774,20 @@
   @extend .marginTopExtraLarge;
 }
 .footerText{
-  @extend .textCenter ,.mainText ,.extraLargeMargin;
+  @extend .textCenter ,.primaryTextColor ,.extraLargeMargin;
 }
+
+/*Header */
+.headerContainer{
+  @extend .marginBottomMediumLarge;
+}
+.headerCategory{
+  @extend .textLarge, .primaryTextColor;
+}
+.headerTitle{
+  @extend .extraBoldWeightText ,.trackingTight ,.primaryTextColor;
+  @apply text-3xl;
+}
+
+
+/* Navbar */

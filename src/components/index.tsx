@@ -20,4 +20,7 @@ export {default as SmallCardWithChart} from './Cards/SmallCardWithChart';
 export {default as Pie} from './Charts/Pie';
 export {default as ExtraSmallCard} from './Cards/ExtraSmallCard';
 
+export {default as Histogram} from './Charts/Histogram';
+export {default as HistogramLine} from './Charts/HistogramLine';
+
 

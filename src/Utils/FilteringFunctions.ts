@@ -33,7 +33,6 @@ function filterTripsByPeriod(trips: Trip[], filterEnd: Date, filterDuration: num
         case "current":
             if (filterDuration === -1) {
                 filterStart = new Date(1970,1,1,0,0,0);
-                console.log("current: " + filterStart);
             } else {
                 filterStart.setDate(filterEnd.getDate() - filterDuration);
             }
@@ -45,7 +44,6 @@ function filterTripsByPeriod(trips: Trip[], filterEnd: Date, filterDuration: num
                 filterStart.setDate(filterEnd.getDate() - 1);
             } else if (filterDuration === -1) {
                 filterStart = new Date(1970,1,1,0,0,0);
-                console.log("previous: " + filterStart);
             } else {
                 filterStart.setDate(filterEnd.getDate() - filterDuration);
             }

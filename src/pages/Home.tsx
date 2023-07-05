@@ -249,14 +249,15 @@ const Home = ({ data }: any) => {
 
 
   let allFilteredTrips = filteredTrips(selectedDuration, tripData);
-  console.log(allFilteredTrips)
+  // console.log(allFilteredTrips)
   //revenue updown
   // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
   // console.log(allFilterRevenueUpDown)
   let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
-  console.log(revenueChange);
+  // console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
   let tripChange = filterTripsByPeriod(tripData,new Date('04/07/2023'),0, 'previous');
+  console.log(tripChange)
 
   
 

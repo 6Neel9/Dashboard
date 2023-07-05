@@ -19,6 +19,8 @@ import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
 
 
 
+
+
 // const CardWithChartProp1: CardPropType = {
 //     title: "TOTAL TRIPS",
 //     duration: "Last 7 days",
@@ -40,6 +42,8 @@ const TripAnalytics = () => {
     selectedState,
     setSelectedDuration,
     setSelectedState,
+    tripData,
+    driverData
   } = useStateContext();
   type CardPropType = {
     title?: string;
@@ -49,24 +53,24 @@ const TripAnalytics = () => {
     percent?: string;
     height?: string;
   };
-  const [drivers, setDrivers] = useState<any[]>([]);
-  const [trips, setTrips] = useState<any[]>([]);
-  useEffect(() => {
-    fetch("http://localhost:5000/yuja-sm/v1/drivers", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setDrivers(data);
-      });
-  }, [selectedDuration, selectedState]);
+  // const [driverData, setDrivers] = useState<any[]>([]);
+  // const [tripData, setTrips] = useState<any[]>([]);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/yuja-sm/v1/drivers", {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setDrivers(data);
+  //     });
+  // }, [selectedDuration, selectedState]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/yuja-sm/v1/trips", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((e) => {
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/yuja-sm/v1/trips", {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((e) => {
         // var temp: any[] =[];
         // e.forEach((element: any) => {
         //   const end_time = new Date(element.endTime);
@@ -74,9 +78,9 @@ const TripAnalytics = () => {
         //     temp.push(element);
         //   }
         //  });
-        setTrips(e);
-      });
-  }, [selectedDuration, selectedState]);
+  //       setTrips(e);
+  //     });
+  // }, [selectedDuration, selectedState]);
 
   //Filter func 
 
@@ -119,7 +123,7 @@ const TripAnalytics = () => {
 
   // }
 
-  var allFilteredTrips = filteredTrips(selectedDuration,trips);
+  var allFilteredTrips = filteredTrips(selectedDuration,tripData);
 
   //number format function
   function numberFormat(x: string) {

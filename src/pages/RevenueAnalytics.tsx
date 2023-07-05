@@ -148,6 +148,8 @@ const RevenueAnalytics = () => {
     selectedState,
     setSelectedDuration,
     setSelectedState,
+    tripData,
+    driverData
   } = useStateContext();
 
   interface Trip {
@@ -164,17 +166,17 @@ const RevenueAnalytics = () => {
     paymentType: string;
     endTime: string;
   }
-  const [trips, setTrips] = useState<Trip[]>([]);
+  // const [tripData, setTrips] = useState<Trip[]>([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/yuja-sm/v1/trips", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((e) => {
-        setTrips(e);
-      });
-  }, [selectedDuration, selectedState]);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/yuja-sm/v1/trips", {
+  //     method: "GET",
+  //   })
+  //     .then((res) => res.json())
+  //     .then((e) => {
+  //       setTrips(e);
+  //     });
+  // }, [selectedDuration, selectedState]);
 
   // function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
   //   const filterEnd = new Date();
@@ -217,7 +219,7 @@ const RevenueAnalytics = () => {
   // }
 
   //Filter Function
-  var allFilteredTrips = filteredTrips(selectedDuration,trips);
+  var allFilteredTrips = filteredTrips(selectedDuration,tripData);
 
 
   function numberFormat(x: string) {

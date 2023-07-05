@@ -24,7 +24,9 @@ import {
 import { tripGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
-import "../Styles.scss"
+import "../Styles.scss";
+import { useStateContext } from "../contexts/ContextProvider";
+
 
 
 const Trips = ({ data }: any) => {
@@ -69,9 +71,14 @@ const Trips = ({ data }: any) => {
     //         },
 
     //     }[];
+    const {
+
+        tripData,
+
+      } = useStateContext();
 
     const toolbarOptions: ToolbarItems[] = ['Search', 'ExcelExport'];
-    const [tripData, setTripData] = useState<any[]>([]);
+    // const [tripData, setTripData] = useState<any[]>([]);
     const pageSettings: PageSettingsModel = { pageSize: 10, pageCount: 5 }
     const filterOptions: FilterSettingsModel = { type: "Menu" }
 
@@ -116,16 +123,16 @@ const Trips = ({ data }: any) => {
 
 
         
-        useEffect(() => {
-          fetch("http://localhost:5000/yuja-sm/v1/trips", {
-            method: "GET",
-          })
-            .then((res) => res.json())
-            .then((i) => {
-              setTripData(i);
-              console.log(i);
-            })
-        }, []);
+        // useEffect(() => {
+        //   fetch("http://localhost:5000/yuja-sm/v1/trips", {
+        //     method: "GET",
+        //   })
+        //     .then((res) => res.json())
+        //     .then((i) => {
+        //       setTripData(i);
+        //       console.log(i);
+        //     })
+        // }, []);
     const rowSelected = () => {
         if (grid) {
             // const selectedrowindex: number[] = grid.getSelectedRowIndexes();

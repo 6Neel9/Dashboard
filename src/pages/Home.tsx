@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { DropDownListComponent } from "@syncfusion/ej2-react-dropdowns";
 import {
   AxisModel,
@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChange,filteredRevenueUpDown } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChange, filteredRevenueUpDown } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 
 const Home = ({ data }: any) => {
@@ -48,11 +48,19 @@ const Home = ({ data }: any) => {
     selectedState,
     setSelectedDuration,
     setSelectedState,
+    // handleTripData,
+    setTripData,
+    tripData,
+    driverData,
+    setDriverData
   } = useStateContext();
-  const [drivers, setDrivers] = useState<any[]>([]);
-  const [trips, setTrips] = useState<any[]>([]);
+  // const [driverData, setDrivers] = useState<any[]>([]);
+  // const [tripData, setTrips] = useState<any[]>([]);
 
-  // console.log(selectedDuration, selectedState);
+
+  // useEffect(()=>{
+  //   setTripData(trips)
+  // },[])
 
   //Redux dispatch call
   const dispatch: any = useDispatch();
@@ -64,8 +72,8 @@ const Home = ({ data }: any) => {
 
 
   //Getting redux data
-  const driverData: any = useSelector((state: any) => state.drivers);
-  const tripData: any = useSelector((state: any) => state.trips);
+  // const driverData: any = useSelector((state: any) => state.drivers);
+  // const tripData: any = useSelector((state: any) => state.trips);
   // console.log(driverData)
   // console.log(tripData)
 
@@ -92,7 +100,7 @@ const Home = ({ data }: any) => {
 
 
 
-  //
+  // todo : Check wheather its working for all numbers or not(large numbers).
   var total_revenue = 0;
   function numberFormat(x: string) {
     x = x.toString();
@@ -217,73 +225,35 @@ const Home = ({ data }: any) => {
     </div>
   );
 
+
+
   useEffect(() => {
     fetch("http://localhost:5000/yuja-sm/v1/drivers", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => {
-        setDrivers(data);
+        // setDrivers(data);
+        setDriverData(data);
       });
-  }, [selectedDuration, selectedState]);
-
-  useEffect(() => {
     fetch("http://localhost:5000/yuja-sm/v1/trips", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((e) => {
-        setTrips(e);
+        // setTrips(e);
+        setTripData(e)
+
       });
-  }, [selectedDuration, selectedState]);
-  // console.log(trips);
-  //Filter func 
-
-  // function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
-  //   const filterEnd = new Date();
-
-  //   let filterStart = new Date();
-  //   if (period === 0) {
-  //     filterStart.setHours(0, 0, 0, 0);
-  //   } else {
-  //     filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
-  //   }
-
-  //   const todayTrips = trips.filter((trip) => {
-  //     const startTime = new Date(trip.startTime);
-  //     return startTime >= filterStart && startTime <= filterEnd;
-  //   });
-
-  //   return todayTrips;
-  // }
-  // function filteredTrips() {
-  //   let totalTrips: any[] = trips
-  //   if (selectedDuration === "Today") {
-  //     totalTrips = filterTripsByPeriod(trips, 0);
-  //   } else if (selectedDuration === "Till Date") {
-  //     totalTrips = trips
-  //   } else if (selectedDuration === "Last 7 Days") {
-  //     totalTrips = filterTripsByPeriod(trips, 7);
-
-  //   } else if (selectedDuration === "Last 30 Days") {
-  //     totalTrips = filterTripsByPeriod(trips, 30);
-
-  //   } else if (selectedDuration === "Last 6 Months") {
-  //     totalTrips = filterTripsByPeriod(trips, 180);
-
-  //   } else if (selectedDuration === "Last Year") {
-  //     totalTrips = filterTripsByPeriod(trips, 365);
-  //   }
-  //   return totalTrips;
-
-  // }
+  }, []);
 
 
-  let allFilteredTrips = filteredTrips(selectedDuration, trips);
+  let allFilteredTrips = filteredTrips(selectedDuration, tripData);
+  console.log(allFilteredTrips)
   //revenue updown
   // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
   // console.log(allFilterRevenueUpDown)
-  let revenueChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), "tripFare");
+  let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
 
@@ -310,8 +280,8 @@ const Home = ({ data }: any) => {
     return todayTrips;
   }
 
-  let filteredDriver = filterNewDriver(drivers)
-  let newDriverLength = filterNewDriver(drivers).length;
+  let filteredDriver = filterNewDriver(driverData)
+  let newDriverLength = filterNewDriver(driverData).length;
 
   //Avg Trip Length
   let totalFilteredTripLength = 0;
@@ -447,14 +417,14 @@ const Home = ({ data }: any) => {
   const SmallCardOneProps: CardPropType = {
     title: "DRIVERS",
     duration: selectedDuration,
-    value: numberFormat(String(drivers.length)),
+    value: numberFormat(String(driverData.length)),
     icon: "positive",
     percent: "5.45",
   };
   const SmallCardTwoProps: CardPropType = {
     title: "ACTIVE USERS",
     duration: selectedDuration,
-    value: numberFormat(String(drivers.length)),
+    value: numberFormat(String(driverData.length)),
     icon: "Negative",
     percent: "3.75",
   };

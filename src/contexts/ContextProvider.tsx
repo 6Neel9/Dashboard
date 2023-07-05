@@ -14,6 +14,22 @@ const initialState: MyInitialStateType = {
     notification: false,
 }
 
+interface Trip {
+    _id: string;
+    driverId: number;
+    tripId: number;
+    startLocation: string;
+    tripDistance: number;
+    tripSpeed: number;
+    tripDuration: number;
+    endLocation: string;
+    startTime: string;
+    tripFare: number;
+    paymentType: string;
+    endTime: string;
+}
+
+
 type MyContextType = {
     initialState: MyInitialStateType,
     screenSize: number | undefined,
@@ -37,6 +53,10 @@ type MyContextType = {
     setSelectedState: React.Dispatch<React.SetStateAction<string>>,
     handleDurationChange: (event: any) => void,
     handleStateChange: (event: any) => void,
+    setTripData: React.Dispatch<React.SetStateAction<Trip[]>>,
+    tripData:any[],
+    setDriverData: React.Dispatch<React.SetStateAction<any[]>>,
+    driverData: any[]
 }
 
 const Context = React.createContext<MyContextType>({} as MyContextType)
@@ -46,14 +66,16 @@ interface Props {
   }
 
 const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
-    const [screenSize, setScreenSize] = useState<number | undefined>(undefined);
-    const [currentColor, setCurrentColor] = useState<string>('#2C1F39');
+    const [screenSize, setScreenSize] = useState<number | undefined>(undefined);    const [currentColor, setCurrentColor] = useState<string>('#2C1F39');
     const [currentMode, setCurrentMode] = useState<string>('Dark');
     const [themeSettings, setThemeSettings] = useState<boolean>(false);
     const [activeMenu, setActiveMenu] = useState<boolean>(true);
     const [isClicked, setIsClicked] = useState<MyInitialStateType>(initialState);
     const [selectedDuration, setSelectedDuration] = useState<string>('Till Date');
     const [selectedState, setSelectedState] = useState<string>('All');
+    const [tripData, setTripData] = useState<Trip[]>([]);    
+    const [driverData, setDriverData] = useState<any[]>([]);
+
 
 
      const handleDurationChange = (event: any) => {
@@ -100,7 +122,11 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
                 selectedState,
                 setSelectedState,
                 handleDurationChange,
-                handleStateChange
+                handleStateChange,
+                setTripData,
+                tripData,
+                setDriverData,
+                driverData
             }}
         >
             {children}

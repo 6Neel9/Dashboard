@@ -257,7 +257,9 @@ const Home = ({ data }: any) => {
   // console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
   let tripChange = filterTripsByPeriod(tripData,new Date('04/07/2023'),0, 'previous');
-  console.log(tripChange)
+
+  let DriverChange = calculatePercentChange(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
+  let tripLengthChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
 
   
 
@@ -415,7 +417,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
     icon: "positive",
-    percent: ''+String(revenueChange),
+    percent: String(revenueChange),
   };
 
   const SmallCardOneProps: CardPropType = {
@@ -423,7 +425,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: numberFormat(String(driverData.length)),
     icon: "positive",
-    percent: "5.45",
+    percent: String(DriverChange),
   };
   const SmallCardTwoProps: CardPropType = {
     title: "ACTIVE USERS",
@@ -594,7 +596,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: averageTripLength,
     icon: "negative",
-    percent: "0.91",
+    percent: String(tripLengthChange),
   };
 
   const GrowthRateDrivers: CardPropType = {
@@ -773,12 +775,12 @@ const Home = ({ data }: any) => {
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<TripDurationChart />} />
       </div>
-      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+      {/* <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<Histogram />} />
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<HistogramLine />} />
-      </div>
+      </div> */}
       {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />
         <SmallCard props={ActiveDrivers} />

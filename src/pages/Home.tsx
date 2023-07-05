@@ -256,7 +256,7 @@ const Home = ({ data }: any) => {
   let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
-  let tripChange = filterTripsByPeriod(tripData,new Date('04/07/2023'),0, 'previous');
+  let tripChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), 'tripId');
 
   let DriverChange = calculatePercentChange(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
   let tripLengthChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
@@ -775,12 +775,12 @@ const Home = ({ data }: any) => {
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<TripDurationChart />} />
       </div>
-      <div className="displayFlex textLeft flexJustifyCenter widthFull">
+      {/* <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<Histogram />} />
       </div>
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<HistogramLine />} />
-      </div>
+      </div> */}
       {/* <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={AttritionedDrivers} />
         <SmallCard props={ActiveDrivers} />

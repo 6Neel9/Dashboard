@@ -373,8 +373,8 @@ const TripAnalytics = () => {
       </div>
       {/* <MapWithHeatmap />   */}
       </div>
-      <Histogram />
-      <HistogramLine />
+      {/* <Histogram />
+      <HistogramLine /> */}
     </div>
   );
 };

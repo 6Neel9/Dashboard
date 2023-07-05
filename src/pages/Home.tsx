@@ -567,7 +567,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
-    percent: ""+ String(tripChange),
+    percent: String(tripChange),
   };
 
   const TotalDownloads: CardPropType = {

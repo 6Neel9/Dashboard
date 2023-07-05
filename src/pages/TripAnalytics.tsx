@@ -12,10 +12,10 @@ import {
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
 import heatMap from "../data/assets/heatMap.png";
-import { filterTripsByPeriod,filteredTrips } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue } from "../Utils/FilteringFunctions";
+import { mapOfPeriods } from "../Utils/Constants";
 
 import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
-
 
 
 
@@ -43,7 +43,7 @@ const TripAnalytics = () => {
     setSelectedDuration,
     setSelectedState,
     tripData,
-    driverData
+    driverData,
   } = useStateContext();
   type CardPropType = {
     title?: string;
@@ -71,13 +71,13 @@ const TripAnalytics = () => {
   //   })
   //     .then((res) => res.json())
   //     .then((e) => {
-        // var temp: any[] =[];
-        // e.forEach((element: any) => {
-        //   const end_time = new Date(element.endTime);
-        //   if(end_time > thisYear){
-        //     temp.push(element);
-        //   }
-        //  });
+  // var temp: any[] =[];
+  // e.forEach((element: any) => {
+  //   const end_time = new Date(element.endTime);
+  //   if(end_time > thisYear){
+  //     temp.push(element);
+  //   }
+  //  });
   //       setTrips(e);
   //     });
   // }, [selectedDuration, selectedState]);
@@ -123,7 +123,7 @@ const TripAnalytics = () => {
 
   // }
 
-  var allFilteredTrips = filteredTrips(selectedDuration,tripData);
+  var allFilteredTrips = filteredTrips(selectedDuration, tripData);
 
   //number format function
   function numberFormat(x: string) {
@@ -134,6 +134,14 @@ const TripAnalytics = () => {
     var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
     return res;
   }
+
+  let tripChange = calculatePercentChangeUsingCount(tripData, mapOfPeriods.get(selectedDuration))
+  let tripDurationChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDuration")
+  let tripDurationValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDuration")
+  let tripLengthValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDistance")
+  let tripLengthChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDistance")
+  let tripSpeedValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripSpeed")
+  let tripSpeedChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripSpeed")
 
   const SmallCardProps1: CardPropType = {
     title: "AVERAGE TRIP DURATION",
@@ -196,7 +204,7 @@ const TripAnalytics = () => {
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
-    percent: "2.35",
+    percent: String(tripChange),
   };
 
   const ChartCardProps: CardPropType = {
@@ -215,24 +223,24 @@ const TripAnalytics = () => {
 
   const CardWithChartProps: CardPropType = {
     title: "TRIP DURATION",
-    duration: "Last 7 days",
-    value: "1126",
+    duration: selectedDuration,
+    value: numberFormat(String(tripDurationValue)),
     icon: "positive",
-    percent: "2.35",
+    percent: String(tripDurationChange),
   };
   const CardWithChartProps4: CardPropType = {
     title: "TRIP LENGTH",
-    duration: "Last 7 days",
-    value: "60",
+    duration: selectedDuration,
+    value: numberFormat(String(Math.round(tripLengthValue))),
     icon: "positive",
-    percent: "2.35",
+    percent: String(tripLengthChange),
   };
   const CardWithChartProps2: CardPropType = {
     title: "TRIP SPEED",
-    duration: "Last 7 days",
-    value: "112",
+    duration: selectedDuration,
+    value: numberFormat(String(Math.round(tripSpeedValue))),
     icon: "positive",
-    percent: "2.35",
+    percent: String(tripSpeedChange),
   };
 
 
@@ -287,6 +295,7 @@ const TripAnalytics = () => {
     // { TripDuration: 'Ultra Long', trips: 99000 },
     // { TripDuration: 'Mega Long', trips: 78000 }
   ];
+
 
 
 
@@ -371,11 +380,11 @@ const TripAnalytics = () => {
       </div> */}
       {/* <ColoredMap /> */}
       <div className="flex justify-center">
-      <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
-        
-        <img src={heatMap} alt="heatMap" style={{  height: "50vh" }} />
-      </div>
-      {/* <MapWithHeatmap />   */}
+        <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
+
+          <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} />
+        </div>
+        {/* <MapWithHeatmap />   */}
       </div>
       {/* <Histogram />
       <HistogramLine /> */}

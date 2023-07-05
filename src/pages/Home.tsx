@@ -256,10 +256,10 @@ const Home = ({ data }: any) => {
   let revenueChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
-  let tripChange = filterTripsByPeriod(trips,new Date('04/07/2023'),0, 'previous');
+  let tripChange = filterTripsByPeriod(tripData,new Date('04/07/2023'),0, 'previous');
 
-  let DriverChange = calculatePercentChange(drivers, mapOfPeriods.get(selectedDuration), 'driverId');
-  let tripLengthChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), 'tripDistance');
+  let DriverChange = calculatePercentChange(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
+  let tripLengthChange = calculatePercentChange(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
 
   
 

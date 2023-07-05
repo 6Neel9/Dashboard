@@ -285,7 +285,10 @@ const Home = ({ data }: any) => {
   // console.log(allFilterRevenueUpDown)
   let revenueChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), "tripFare");
   // console.log(filterTripsByPeriod(trips, 0))
-  let tripChange = filterTripsByPeriod(trips,new Date('04/07/2023'),0, 'previous');
+  let tripChange = calculatePercentChange(trips,mapOfPeriods.get(selectedDuration), 'tripId');
+
+  let DriverChange = calculatePercentChange(drivers, mapOfPeriods.get(selectedDuration), 'driverId');
+  let tripLengthChange = calculatePercentChange(trips, mapOfPeriods.get(selectedDuration), 'tripDistance');
 
   
 
@@ -443,7 +446,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Math.round(Revenue(allFilteredTrips)))),
     icon: "positive",
-    percent: ''+String(revenueChange),
+    percent: String(revenueChange),
   };
 
   const SmallCardOneProps: CardPropType = {
@@ -451,7 +454,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: numberFormat(String(drivers.length)),
     icon: "positive",
-    percent: "5.45",
+    percent: String(DriverChange),
   };
   const SmallCardTwoProps: CardPropType = {
     title: "ACTIVE USERS",
@@ -622,7 +625,7 @@ const Home = ({ data }: any) => {
     duration: selectedDuration,
     value: averageTripLength,
     icon: "negative",
-    percent: "0.91",
+    percent: String(tripLengthChange),
   };
 
   const GrowthRateDrivers: CardPropType = {

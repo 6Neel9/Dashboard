@@ -14,6 +14,7 @@ import { ColoredMap } from "../components/Charts/ColoredMap";
 import heatMap from "../data/assets/heatMap.png";
 import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
+import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
 import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
 
@@ -45,6 +46,10 @@ const TripAnalytics = () => {
     tripData,
     driverData,
   } = useStateContext();
+
+  const CalvulatedValues = AnalyticsCalculation();
+
+
   type CardPropType = {
     title?: string;
     duration?: string;
@@ -126,22 +131,23 @@ const TripAnalytics = () => {
   var allFilteredTrips = filteredTrips(selectedDuration, tripData);
 
   //number format function
-  function numberFormat(x: string) {
-    x = x.toString();
-    var lastThree = x.substring(x.length - 3);
-    var otherNumbers = x.substring(0, x.length - 3);
-    if (otherNumbers !== "") lastThree = "," + lastThree;
-    var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
-    return res;
+  function numberFormat(x: string | number): string {
+    if (typeof x === 'number') {
+      return x.toLocaleString(undefined, { maximumFractionDigits: 1 });
+    }
+    if (typeof x === 'string') {
+      const parts = x.split('.');
+      const formattedInteger = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      if (parts.length === 2) {
+        const decimalPart = parts[1].substring(0, 1); // Limit decimal to 1 digit
+        return `${formattedInteger}.${decimalPart}`;
+      }
+      return formattedInteger;
+    }
+    return '';
   }
 
-  let tripChange = calculatePercentChangeUsingCount(tripData, mapOfPeriods.get(selectedDuration))
-  let tripDurationChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDuration")
-  let tripDurationValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDuration")
-  let tripLengthValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDistance")
-  let tripLengthChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDistance")
-  let tripSpeedValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripSpeed")
-  let tripSpeedChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripSpeed")
+ 
 
   const SmallCardProps1: CardPropType = {
     title: "AVERAGE TRIP DURATION",
@@ -204,7 +210,7 @@ const TripAnalytics = () => {
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
-    percent: String(tripChange),
+    percent: String(CalvulatedValues.tripChange),
   };
 
   const ChartCardProps: CardPropType = {
@@ -224,23 +230,23 @@ const TripAnalytics = () => {
   const CardWithChartProps: CardPropType = {
     title: "TRIP DURATION",
     duration: selectedDuration,
-    value: numberFormat(String(tripDurationValue)),
+    value: numberFormat(String(CalvulatedValues.tripDurationValue)),
     icon: "positive",
-    percent: String(tripDurationChange),
+    percent: String(CalvulatedValues.tripDurationChange),
   };
   const CardWithChartProps4: CardPropType = {
     title: "TRIP LENGTH",
     duration: selectedDuration,
-    value: numberFormat(String(Math.round(tripLengthValue))),
+    value: numberFormat(String(Math.round(CalvulatedValues.tripLengthValue))),
     icon: "positive",
-    percent: String(tripLengthChange),
+    percent: String(CalvulatedValues.tripLengthChange),
   };
   const CardWithChartProps2: CardPropType = {
     title: "TRIP SPEED",
     duration: selectedDuration,
-    value: numberFormat(String(Math.round(tripSpeedValue))),
+    value: numberFormat(String(Math.round(CalvulatedValues.tripSpeedValue))),
     icon: "positive",
-    percent: String(tripSpeedChange),
+    percent: String(CalvulatedValues.tripSpeedChange),
   };
 
 

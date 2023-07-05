@@ -26,6 +26,8 @@ import { driverGrid } from "../data/meiroData";
 import { Header } from "../components";
 import { ClickEventArgs } from "@syncfusion/ej2-react-navigations";
 import "../Styles.scss";
+import { useStateContext } from "../contexts/ContextProvider";
+
 
 //redux
 import { useSelector, useDispatch } from "react-redux"
@@ -80,8 +82,12 @@ type DataType = {
 }
 
 const Drivers = ({ data }: any) => {
+  const {
+    driverData,
 
-  const [driverTableData, setDriverTableData] = useState<DataType[]>([]);
+  } = useStateContext();
+
+  // const [driverData, setDriverTableData] = useState<DataType[]>([]);
 
 
   // const [driverData, setDriverData] = useState<any[]>([]);
@@ -105,8 +111,8 @@ const Drivers = ({ data }: any) => {
     })
       .then((res) => res.json())
       .then((i) => {
-        setDriverTableData(i);
-       setDriverData(i);
+        // setDriverTableData(i);
+      //  setDriverData(i);
       })
       // .then(() => {
       //   var dvr_data: object[] = [];
@@ -136,7 +142,7 @@ const Drivers = ({ data }: any) => {
 
   const toolbarOptions: ToolbarItems[] = ['Search', 'ExcelExport'];
   // const editing: EditSettingsModel = {  allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Normal' };
-  const [driverData, setDriverData] = useState<DriverDataType>([]);
+  // const [driverData, setDriverData] = useState<DriverDataType>([]);
   const pageSettings: PageSettingsModel = { pageSize: 10, pageCount: 5 }
   const filterOptions: FilterSettingsModel = { type: "Menu" }
 

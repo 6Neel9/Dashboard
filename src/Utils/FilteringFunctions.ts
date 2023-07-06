@@ -204,7 +204,7 @@ function calculatePercentChangeOfAverage(trips: Trip[], period: number, tripElem
     // const previousRevenue = calculateTotalRevenue(trips, previousDate, period, "previous");
     const previousCount = calculateAverageUsingValue(trips, previousDate, period, periodTypes.PREVIOUS, tripElement);
 
-    if (previousCount != 0) {
+    if (previousCount !== 0) {
         return ((currentCount - previousCount) / Math.abs(previousCount)) * 100;
 
     } else {
@@ -231,4 +231,4 @@ function calculateAverageUsingValue(trips: Trip[], endDate: Date, filterDuration
 
 
 
-export { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue }
+export { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue ,calculateAverageUsingValue }

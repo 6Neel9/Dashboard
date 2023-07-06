@@ -6,6 +6,7 @@ import {
   calculatePercentChangeUsingCount,
   calculatePercentChangeOfAverage,
   calculateTotalValue,
+  calculateAverageUsingValue
 } from "./FilteringFunctions";
 import { periodTypes, tripElements, mapOfPeriods } from "./Constants";
 
@@ -62,8 +63,7 @@ const AnalyticsCalculation = () => {
     mapOfPeriods.get(selectedDuration),
     "tripDistance"
   );
-
-  // percentage change in average trips per hour for average trips per hour card
+ // percentage change in average trips per hour for average trips per hour card
   let averageTripsPerHour = allFilteredTrips.length / 24;
 
   // percentage change in average revenue per driver for average revenue per driver card
@@ -74,11 +74,7 @@ const AnalyticsCalculation = () => {
 
   // percentage change in average trip duration for average trip duration card
   let tripDurationChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDuration")
-  
-  // total value of trip duration for trip duration card
   let tripDurationValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDuration")
-  
-  // total value of trip length for trip length card
   let tripLengthValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDistance")
   
   // percentage change in average trip length for trip length card

@@ -6,6 +6,7 @@ import {
   calculatePercentChangeUsingCount,
   calculatePercentChangeOfAverage,
   calculateTotalValue,
+  calculateAverageUsingValue
 } from "./FilteringFunctions";
 import { periodTypes, tripElements, mapOfPeriods } from "./Constants";
 
@@ -55,14 +56,14 @@ const AnalyticsCalculation = () => {
     mapOfPeriods.get(selectedDuration),
     "tripDistance"
   );
-
+//
   let averageTripsPerHour = allFilteredTrips.length / 24;
 
   let driverRevenueChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   let  avgRevenuePerTrip = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration),'TripFare');
 
   let tripDurationChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDuration")
-  let tripDurationValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDuration")
+  let tripDurationValue = calculateAverageUsingValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDuration")
   let tripLengthValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDistance")
   let tripLengthChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDistance")
   let tripSpeedValue = calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripSpeed")

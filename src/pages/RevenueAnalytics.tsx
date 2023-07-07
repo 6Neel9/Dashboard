@@ -310,7 +310,7 @@ const RevenueAnalytics = () => {
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
     icon: "positive",
-    percent: "1.5",
+    percent: String(CalvulatedValues.avgRevenuePerTrip),
   };
 
   const RevenuePerOperatingHour: CardPropType = {

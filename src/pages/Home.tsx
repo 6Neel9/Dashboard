@@ -760,7 +760,10 @@ const Home = () => {
     if(selectedDuration === "Today"){
       let revDataToday: any[]=[] ;
       CalvulatedValues.allFilteredTrips.forEach((trip) => {
-        revDataToday.push({ x: new Date(trip.startTime.split("T")[0]), y: trip.tripFare });
+        let date = new Date(trip.startTime.split("T")[0])
+        let date2 = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0))
+        date2.setHours(0,0,0,0)
+        revDataToday.push({ x: date2, y: trip.tripFare });
         revDataToday.sort((a, b) => a.x - b.x); // Sort the array by date
       });
       return revDataToday;
@@ -769,6 +772,50 @@ const Home = () => {
     }
 
   }
+
+  //Calculate max and min of the calculateTotalRevenue revenue
+  const maxMinCount = calculateTotalRevenue(allFilteredTrips);
+//   const mins = maxMinCount.reduce((prev, curr) => prev.revenue < curr.revenue ? prev : curr);
+//   const maxs = maxMinCount.reduce((prev, curr) => prev.revenue > curr.revenue ? curr : prev);
+// console.log(mins,maxs)
+function findMinMaxY(data: any[]) {
+  const revenueMap: Map<string, number> = new Map();
+
+  // Calculate total revenue for each unique date
+  for (const item of data) {
+    const date: Date = item["x"];
+    const revenue: number = item["y"];
+
+
+    const dateString: string = date.toDateString();
+    console.log(dateString)
+
+    if (revenueMap.has(dateString)) {
+      const currentRevenue: number = revenueMap.get(dateString)!;
+      revenueMap.set(dateString, currentRevenue + revenue);
+    } else {
+      revenueMap.set(dateString, revenue);
+    }
+  }
+
+  // Get an array of revenue values
+  const revenueValues: number[] = Array.from(revenueMap.values());
+
+  // Find the minimum and maximum revenue values
+  const minY: number = Math.min(...revenueValues);
+  const maxY: number = Math.max(...revenueValues);
+
+  return { min: minY, max: maxY };
+}
+
+
+  
+const minMaxVal = findMinMaxY(maxMinCount)
+
+
+
+console.log(calculateTotalRevenue(allFilteredTrips))
+console.log(minMaxVal)
 
 
 
@@ -791,7 +838,7 @@ const Home = () => {
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)}/>}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)} props={minMaxVal}/>}
         />
       </div>
 

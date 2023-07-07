@@ -225,7 +225,7 @@ const TripAnalytics = () => {
 
   const ChartCardProps2: CardPropType = {
     title: "TRIP DURATION",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   };
 
   const CardWithChartProps: CardPropType = {
@@ -292,19 +292,20 @@ const TripAnalytics = () => {
     // { TripLength: 'Mega Long', trips: 78000 }
   ];
 
-  const TripDurationChartData = [
-    { TripDuration: 'Short', trips: 24000 },
-    { TripDuration: 'Medium', trips: 66000 },
-    { TripDuration: 'Average', trips: 41000 },
-    { TripDuration: 'Long', trips: 54000 },
-    { TripDuration: 'Extended', trips: 31000 },
-    // { TripDuration: 'Very Long', trips: 37000},
-    // { TripDuration: 'Extra Long', trips: 84000 },
-    // { TripDuration: 'Super Long', trips: 92000 },
-    // { TripDuration: 'Ultra Long', trips: 99000 },
-    // { TripDuration: 'Mega Long', trips: 78000 }
-  ];
+  // const TripDurationChartData = [
+  //   { TripDuration: 'Short', trips: 24000 },
+  //   { TripDuration: 'Medium', trips: 66000 },
+  //   { TripDuration: 'Average', trips: 41000 },
+  //   { TripDuration: 'Long', trips: 54000 },
+  //   { TripDuration: 'Extended', trips: 31000 },
+  //   // { TripDuration: 'Very Long', trips: 37000},
+  //   // { TripDuration: 'Extra Long', trips: 84000 },
+  //   // { TripDuration: 'Super Long', trips: 92000 },
+  //   // { TripDuration: 'Ultra Long', trips: 99000 },
+  //   // { TripDuration: 'Mega Long', trips: 78000 }
+  // ];
 
+ 
 
 
   const TestChartData = ()=>{
@@ -344,6 +345,42 @@ const TripAnalytics = () => {
   //   setSelectedDuration("Till Date");
   //   setSelectedState("All");
   // }, []);
+
+  const generateHistoData = (field: any)=>{
+    let data: any[] = [];
+    CalvulatedValues.allFilteredTrips.forEach((trip) => {
+      if(field === 'TripDuration'){
+        data.push({ TripDuration: trip.tripDuration});
+      }else if( field === 'TripLength'){
+        data.push({ TripLength: trip.tripDistance});
+      }else if( field === 'TripSpeed'){
+        data.push({ TripSpeed: trip.tripSpeed});
+      }
+    });
+    return data;
+  }
+  const TripDurationChartProps={
+    chartData: generateHistoData('TripDuration'),
+    yName: "TripDuration",
+    chartName: "TripDuration",
+    xAxisTitle: "Trip Duration",
+    yAxisTitle: "No. of Trips",
+  }
+  const TripLengthChartProps={
+    chartData: generateHistoData('TripLength'),
+    yName: "TripLength",
+    chartName: "TripLength",
+    xAxisTitle: "Trip Length",
+    yAxisTitle: "No. of Trips",
+  }
+  const TripSpeedChartProps={
+    chartData: generateHistoData('TripSpeed'),
+    yName: "TripSpeed",
+    chartName: "TripSpeed",
+    xAxisTitle: "Trip Speed",
+    yAxisTitle: "No. of Trips",
+  }
+
   return (
     <div className="extraSmallMargin">
       <div className="displayFlex">
@@ -391,22 +428,25 @@ const TripAnalytics = () => {
         <CardWithChart
           prop1={ChartCardProps2}
           prop2={CardWithChartProps}
-          chart={<Bar columnData={TripDurationChartData} xTitle="TripDuration" yTitle="trips" />}
+          chart={<HistogramLine histogramProps={TripDurationChartProps} />}
         />
+        {/* <Bar columnData={TripDurationChartData} xTitle="TripDuration" yTitle="trips" /> */}
       </div>
       <div>
         <CardWithChart
           prop1={ChartCardProps4}
           prop2={CardWithChartProps4}
-          chart={<Bar columnData={TripLengthChartData} xTitle="TripLength" yTitle="trips" />}
+          chart={<HistogramLine histogramProps={TripLengthChartProps} />}
         />
+        {/* <Bar columnData={TripLengthChartData} xTitle="TripLength" yTitle="trips" /> */}
       </div>
       <div>
         <CardWithChart
           prop1={ChartCardProps}
           prop2={CardWithChartProps2}
-          chart={<Bar columnData={TripSpeedChartData} xTitle="tripSpeed" yTitle="trips" />}
+          chart={<HistogramLine histogramProps={TripSpeedChartProps} />}
         />
+        {/* <Bar columnData={TripSpeedChartData} xTitle="tripSpeed" yTitle="trips" /> */}
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">
         <p className="text-2xl extraBoldWeightText  mainText grayText">

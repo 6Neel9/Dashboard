@@ -66,7 +66,8 @@ interface Props {
   }
 
 const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
-    const [screenSize, setScreenSize] = useState<number | undefined>(undefined);    const [currentColor, setCurrentColor] = useState<string>('#2C1F39');
+    const [screenSize, setScreenSize] = useState<number | undefined>(undefined);    
+    const [currentColor, setCurrentColor] = useState<string>('#2C1F39');
     const [currentMode, setCurrentMode] = useState<string>('Dark');
     const [themeSettings, setThemeSettings] = useState<boolean>(false);
     const [activeMenu, setActiveMenu] = useState<boolean>(true);

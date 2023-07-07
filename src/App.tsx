@@ -67,20 +67,31 @@ function App() {
     activeMenu,
     themeSettings,
     setThemeSettings,
+    setTripData,
+    tripData,
+    driverData,
+    setDriverData
   } = useStateContext();
 
 
 
-  const [data, setData] = useState<any>([]);
-
-
   useEffect(() => {
-    fetch("http://localhost:5000/test", {
+    fetch("http://localhost:5000/yuja-sm/v1/drivers", {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((i) => {
-        setData(i.data);
+      .then((data) => {
+        // setDrivers(data);
+        setDriverData(data);
+      });
+    fetch("http://localhost:5000/yuja-sm/v1/trips", {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((e) => {
+        // setTrips(e);
+        setTripData(e)
+
       });
   }, []);
 
@@ -135,16 +146,16 @@ function App() {
 
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={<Home data={data} />} />
-                <Route path="/home" element={<Home data={data} />} />
+                <Route path="/" element={<Home  />} />
+                <Route path="/home" element={<Home  />} />
 
 
                 {/* pages  */}
-                <Route path="/drivers" element={<Drivers data={data} />} />
+                <Route path="/drivers" element={<Drivers  />} />
                 <Route path="/driverUpdate" element={<DriverUpdate  />} />
-                <Route path="/driverView/:id" element={<ViewDriver data={data} />} />
+                <Route path="/driverView/:id" element={<ViewDriver  />} />
                 <Route path="/addNewDriver" element={<AddNewDriver />} />
-                <Route path="/trips" element={<Trips data={data} />} />
+                <Route path="/trips" element={<Trips  />} />
                 <Route path="/tripView/:id" element={<ViewTrip />} />
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
                 <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />

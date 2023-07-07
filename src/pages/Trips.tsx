@@ -29,7 +29,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 
 
 
-const Trips = ({ data }: any) => {
+const Trips = () => {
     const navigate = useNavigate();
 
     // type DriverDataType = {
@@ -71,11 +71,7 @@ const Trips = ({ data }: any) => {
     //         },
 
     //     }[];
-    const {
-
-        tripData,
-
-      } = useStateContext();
+    const {tripData} = useStateContext();
 
     const toolbarOptions: ToolbarItems[] = ['Search', 'ExcelExport'];
     // const [tripData, setTripData] = useState<any[]>([]);

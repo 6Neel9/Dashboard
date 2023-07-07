@@ -38,7 +38,7 @@ type TempObjType = {
     dob: String,
 };
 
-const ViewDriver = ({ data }: any) => {
+const ViewDriver = () => {
 
     const { currentColor, currentMode } = useStateContext();
     const navigate = useNavigate();

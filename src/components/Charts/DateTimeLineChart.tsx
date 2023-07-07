@@ -10,7 +10,7 @@ import {
 
 const DateTimeLineChart = ({chartData}: any) => {
     const { currentMode } = useStateContext();
-    const primaryxAxis: AxisModel = { valueType: 'DateTime', zoomFactor: 0.1, zoomPosition: 0.9 };
+    const primaryxAxis: AxisModel = { valueType: 'DateTime', zoomFactor:0.2 };
     const legendSettings: LegendSettingsModel = { visible: false };
     const zoomSettings: ZoomSettingsModel = {  enablePan: true ,enableMouseWheelZooming: true};
     const border = { width: 0.5, color: '#00bdae' };
@@ -30,13 +30,13 @@ const DateTimeLineChart = ({chartData}: any) => {
         dataLabel: { visible: false ,font: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" } }
       };
     return (
-        <div>
+        <div className='w-full p-1'>
             <ChartComponent 
                 primaryXAxis={primaryxAxis}
                 legendSettings={legendSettings}
                 zoomSettings={zoomSettings}
                 tooltip={tooltip}
-                width='700vw'
+                // width='800vw'
                 height='50%'
                 >
                 <Inject services={[ColumnSeries, LineSeries, Legend, Tooltip, DataLabel, Zoom, DateTime]} />

@@ -42,7 +42,7 @@ import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
 
-const Home = ({ data }: any) => {
+const Home = () => {
   const {
     currentColor,
     currentMode,
@@ -139,25 +139,25 @@ const Home = ({ data }: any) => {
     // var date_trip: any[] = [];
     // var revenue_trip: any[] =[];
     // var revenue_trip_temp: any[] =[];
-    data.forEach((element: any) => {
-      const temp = element.trips;
-      temp.forEach((e: any) => {
-        // date_trip.push(new Date(e.etime))
-        // revenue_trip_temp.push({date: new Date(e.etime), revenue: e.revenue})
-        new_dateTimeData.push({ x: new Date(e.etime), y: e.revenue });
-      });
-    });
-    for (var j = 0; j < new_dateTimeData.length - 1; j++) {
-      var i = j;
-      var e1 = new_dateTimeData[i];
-      var e2 = new_dateTimeData[i + 1];
-      while (e1.x > e2.x) {
-        const t = new_dateTimeData[i];
-        new_dateTimeData[i] = new_dateTimeData[i + 1];
-        new_dateTimeData[i + 1] = t;
-        i++;
-      }
-    }
+    // data.forEach((element: any) => {
+    //   const temp = element.trips;
+    //   temp.forEach((e: any) => {
+    //     // date_trip.push(new Date(e.etime))
+    //     // revenue_trip_temp.push({date: new Date(e.etime), revenue: e.revenue})
+    //     new_dateTimeData.push({ x: new Date(e.etime), y: e.revenue });
+    //   });
+    // });
+    // for (var j = 0; j < new_dateTimeData.length - 1; j++) {
+    //   var i = j;
+    //   var e1 = new_dateTimeData[i];
+    //   var e2 = new_dateTimeData[i + 1];
+    //   while (e1.x > e2.x) {
+    //     const t = new_dateTimeData[i];
+    //     new_dateTimeData[i] = new_dateTimeData[i + 1];
+    //     new_dateTimeData[i + 1] = t;
+    //     i++;
+    //   }
+    // }
 
     // date_trip.sort();
     // date_trip.forEach((e:any)=>{
@@ -239,25 +239,7 @@ const Home = ({ data }: any) => {
 
 
 
-  useEffect(() => {
-    fetch("http://localhost:5000/yuja-sm/v1/drivers", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // setDrivers(data);
-        setDriverData(data);
-      });
-    fetch("http://localhost:5000/yuja-sm/v1/trips", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((e) => {
-        // setTrips(e);
-        setTripData(e)
-
-      });
-  }, []);
+ 
 
 
   let allFilteredTrips = filteredTrips(selectedDuration, tripData);

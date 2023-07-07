@@ -31,15 +31,18 @@ function filterTripsByPeriod(trips: Trip[], filterEnd: Date, filterDuration: num
 
     switch (period) {
         case "current":
+            filterStart.setUTCHours(0, 0, 0, 0);
+
             if (filterDuration === -1) {
                 filterStart = new Date(1970, 1, 1, 0, 0, 0);
             } else {
                 filterStart.setDate(filterEnd.getDate() - filterDuration);
             }
-            filterStart.setHours(0, 0, 0, 0);
             break
 
         case "previous":
+            filterStart.setUTCHours(0, 0, 0, 0);
+
             if (filterDuration === 0) {
                 filterStart.setDate(filterEnd.getDate() - 1);
             } else if (filterDuration === -1) {
@@ -47,7 +50,6 @@ function filterTripsByPeriod(trips: Trip[], filterEnd: Date, filterDuration: num
             } else {
                 filterStart.setDate(filterEnd.getDate() - filterDuration);
             }
-            filterStart.setHours(0, 0, 0, 0);
 
             break
     }

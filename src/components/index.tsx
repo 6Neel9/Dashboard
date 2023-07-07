@@ -22,5 +22,5 @@ export {default as ExtraSmallCard} from './Cards/ExtraSmallCard';
 
 export {default as Histogram} from './Charts/Histogram';
 export {default as HistogramLine} from './Charts/HistogramLine';
-
+export {default as DateTimeLineChart} from './Charts/DateTimeLineChart';
 

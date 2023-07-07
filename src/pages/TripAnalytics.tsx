@@ -17,6 +17,7 @@ import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
 import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
+import LineChartTremor from "../components/Charts/LineChartTremor";
 
 
 
@@ -249,6 +250,8 @@ const TripAnalytics = () => {
     percent: String(CalvulatedValues.tripSpeedChange),
   };
 
+  
+
 
   const TotalTripsChartData = [
     { state: 'Maharashtra', trips: 62000 },
@@ -304,6 +307,37 @@ const TripAnalytics = () => {
 
 
 
+  const TestChartData = ()=>{
+    function getLast7DaysArray() {
+      const today = new Date();
+      const last7DaysArray = [];
+
+      for (let i = 6; i >= 0; i--) {
+        const currentDate = new Date(today);
+        currentDate.setDate(today.getDate() - i);
+        last7DaysArray.push(currentDate.toISOString().split('T')[0]);
+      }
+
+      return last7DaysArray;
+    }
+
+    const last7Days = getLast7DaysArray();
+    var data: any[] = [];
+
+    CalvulatedValues.allFilteredTrips.forEach((driver) => {
+      var totalRevenue = 0;
+      allFilteredTrips.forEach((trip) => {
+        if (last7Days.includes(driver.startTime.split("T")[0])) {
+          totalRevenue += trip.tripFare;
+        }
+      });
+      data.push({ Date: new Date(driver.startTime.split("T")[0]), Revenue: driver.tripFare });
+    });
+
+    console.log(data);
+    return data;
+  }
+  // console.log(TestChartData());
 
 
   // useEffect(() => {
@@ -394,6 +428,8 @@ const TripAnalytics = () => {
       </div>
       {/* <Histogram />
       <HistogramLine /> */}
+      {/* <LineChartTremor chartData={TestChartData()}/> */}
+     
     </div>
   );
 };

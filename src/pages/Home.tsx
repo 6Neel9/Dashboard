@@ -17,7 +17,7 @@ import {
   EdgeLabelPlacement,
   ChartRangePadding,
 } from "@syncfusion/ej2-react-charts";
-import { Bar, Histogram, HistogramLine, LineChart, Pie } from "../components";
+import { Bar, DateTimeLineChart, Histogram, HistogramLine, LineChart, Pie } from "../components";
 import { dropdownData } from "../data/dummy";
 import { useStateContext } from "../contexts/ContextProvider";
 import {
@@ -40,6 +40,7 @@ import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
 import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
+import LineChartTremor from "../components/Charts/LineChartTremor";
 
 const Home = ({ data }: any) => {
   const {
@@ -715,11 +716,47 @@ const Home = ({ data }: any) => {
     percent: "1.65",
   };
 
+  
+  function calculateTotalRevenue(data: any[]) {
+    const revenueMap: Map<string, number> = new Map();
+  
+    // Iterate over the dataset
+    for (const item of data) {
+      const startTime: any = item["startTime"].split("T")[0]; // Extract the date from the start time
+      const tripFare: any = item["tripFare"]; // Get the trip fare
+  
+      if (revenueMap.has(startTime)) {
+        // If the date is already in the map, add the trip fare to the existing revenue
+        const currentRevenue: number = revenueMap.get(startTime)!;
+        revenueMap.set(startTime, currentRevenue + tripFare);
+      } else {
+        // If the date is not in the map, initialize the revenue with the trip fare
+        revenueMap.set(startTime, tripFare);
+      }
+    }
+  
+    // Convert the revenue map to an array of objects
+    const revenueData: any[] = Array.from(revenueMap, ([date, revenue]) => ({ x: new Date(date), y: revenue }));
+    revenueData.sort((a, b) => a.x - b.x); // Sort the array by date
+
+    if(selectedDuration === "Today"){
+      let revDataToday: any[]=[] ;
+      CalvulatedValues.allFilteredTrips.forEach((trip) => {
+        revDataToday.push({ x: new Date(trip.startTime.split("T")[0]), y: trip.tripFare });
+        revDataToday.sort((a, b) => a.x - b.x); // Sort the array by date
+      });
+      return revDataToday;
+    }else{
+      return revenueData;
+    }
+
+  }
+
 
 
 
   return (
-    <div className="extraSmallMargin">
+    <div className="extraSmallMargin overflow-x-hidden">
       <div className="displayFlex">
         <Filters />
       </div>
@@ -736,7 +773,7 @@ const Home = ({ data }: any) => {
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DriverRevenueChart />}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)}/>}
         />
       </div>
 
@@ -776,6 +813,10 @@ const Home = ({ data }: any) => {
       <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<TripDurationChart />} />
       </div>
+      {/* <div className="displayFlex textLeft flexJustifyCenter widthFull">
+        <ChartCard prop={ChartCardProps} chart={<LineChartTremor />} />
+      </div>
+      <LineChartTremor /> */}
       {/* <div className="displayFlex textLeft flexJustifyCenter widthFull">
         <ChartCard prop={ChartCardProps} chart={<Histogram />} />
       </div>

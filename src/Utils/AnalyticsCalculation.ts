@@ -70,7 +70,7 @@ const AnalyticsCalculation = () => {
   let driverRevenueChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
 
   // percentage change in average revenue per trip for average revenue per trip card
-  let  avgRevenuePerTrip = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration),'TripFare');
+  let  avgRevenuePerTrip = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration),"tripFare");
 
   // percentage change in average trip duration for average trip duration card
   let tripDurationChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDuration")

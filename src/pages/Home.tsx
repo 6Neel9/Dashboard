@@ -82,21 +82,21 @@ const Home = ({ data }: any) => {
 
 
 
-  // Filter function
-  // interface Trip {
-  //   _id: string;
-  //   driverId: number;
-  //   tripId: number;
-  //   startLocation: string;
-  //   tripDistance: number;
-  //   tripSpeed: number;
-  //   tripDuration: number;
-  //   endLocation: string;
-  //   startTime: string;
-  //   tripFare: number;
-  //   paymentType: string;
-  //   endTime: string;
-  // }
+  // interface
+  interface Trip {
+    _id: string;
+    driverId: number;
+    tripId: number;
+    startLocation: string;
+    tripDistance: number;
+    tripSpeed: number;
+    tripDuration: number;
+    endLocation: string;
+    startTime: string;
+    tripFare: number;
+    paymentType: string;
+    endTime: string;
+  }
 
 
 
@@ -260,7 +260,20 @@ const Home = ({ data }: any) => {
   }, []);
 
 
- 
+  let allFilteredTrips = filteredTrips(selectedDuration, tripData);
+  // console.log(allFilteredTrips)
+  //revenue updown
+  // let allFilterRevenueUpDown = filteredRevenueUpDown(selectedDuration,trips);
+  // console.log(allFilterRevenueUpDown)
+  let revenueChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
+  // console.log(revenueChange);
+  // console.log(filterTripsByPeriod(trips, 0))
+  let tripChange = calculatePercentChangeUsingCount(tripData,mapOfPeriods.get(selectedDuration))
+
+  let DriverChange = calculatePercentChangeUsingValue(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
+  let averageTripLengthChange = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
+  let distanceCovered = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
+  let averageTripsPerHour =(allFilteredTrips.length)/24
 
   
 
@@ -339,6 +352,29 @@ const Home = ({ data }: any) => {
     //   data.push({ Date: driver.startTime.split("T")[0], Revenue: driver.tripFare });
     // });
 
+    interface ConvertedData {
+      Date: string;
+      Revenue: number;
+    }
+    
+    function convertDataFormat(trips: Trip[]): ConvertedData[] {
+      const dataMap: Map<string, number> = new Map();
+    
+      trips.forEach((trip) => {
+        const date = trip.startTime.slice(0, 10);
+        const revenue = dataMap.get(date) || 0;
+        dataMap.set(date, revenue + trip.tripFare);
+      });
+    
+      const data: ConvertedData[] = Array.from(dataMap, ([Date, Revenue]) => ({ Date, Revenue }));
+      return data;
+    }
+    
+    
+    const convertedData = convertDataFormat(allFilteredTrips);
+    console.log(convertedData);
+    
+
 
 
     const data = [
@@ -359,7 +395,7 @@ const Home = ({ data }: any) => {
     return (
       <LineChart
         primary_XAxis={primaryxAxis}
-        data={data}
+        data={convertedData}
         x_name="Date"
         y_name="Revenue"
         chart_name="Driver Revenue"

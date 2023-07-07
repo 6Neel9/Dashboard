@@ -234,7 +234,7 @@ const RevenueAnalytics = () => {
       const parts = x.split('.');
       const formattedInteger = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       if (parts.length === 2) {
-        const decimalPart = parts[1].substring(0, 1); // Limit decimal to 1 digit
+        const decimalPart = parts[1].substring(0, 2); // Limit decimal to 1 digit
         return `${formattedInteger}.${decimalPart}`;
       }
       return formattedInteger;
@@ -295,7 +295,7 @@ const RevenueAnalytics = () => {
   const AvgDriverRevenue: CardPropType = {
     title: "AVG DRIVER REVENUE / TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length*mapOfPeriods.get(selectedDuration))),
+    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalvulatedValues.avgRevenuePerTrip),
   }

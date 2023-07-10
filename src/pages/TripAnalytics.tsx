@@ -187,23 +187,23 @@ const TripAnalytics = () => {
   };
   const SmallCardProps6: CardPropType = {
     title: "Peak hour (cumulative)",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "5:43 PM",
   };
   const SmallCardProps7: CardPropType = {
     title: "Morning peak",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "10:12 AM",
   };
   const SmallCardProps8: CardPropType = {
     title: "Evening peak",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "7:13 PM",
   };
 
   const CardWithChartProp1: CardPropType = {
     title: "TOTAL TRIPS",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   };
 
   const CardWithChartProp2: CardPropType = {
@@ -216,11 +216,11 @@ const TripAnalytics = () => {
 
   const ChartCardProps: CardPropType = {
     title: "TRIP SPEED",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   };
   const ChartCardProps4: CardPropType = {
     title: "TRIP LENGTH",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   };
 
   const ChartCardProps2: CardPropType = {

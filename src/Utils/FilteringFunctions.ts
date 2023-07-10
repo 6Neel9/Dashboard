@@ -15,6 +15,11 @@ interface Trip {
     endTime: string;
 }
 
+interface DriverRevenue {
+    driverId: number;
+    revenue: number;
+  }
+
 
 
 /**
@@ -223,6 +228,34 @@ function calculateAverageUsingValue(trips: Trip[], endDate: Date, filterDuration
     return averageValue;
 }
 
+// Top 10 driver list data
+
+  
+  function getTop10Drivers(data: Trip[]): DriverRevenue[] {
+    const driverRevenueMap = new Map<number, number>();
+  
+    data.forEach((trip) => {
+      const driverId = trip.driverId;
+      const tripFare = trip.tripFare;
+  
+      if (driverRevenueMap.has(driverId)) {
+        const currentRevenue = driverRevenueMap.get(driverId) as number;
+        driverRevenueMap.set(driverId, currentRevenue + tripFare);
+      } else {
+        driverRevenueMap.set(driverId, tripFare);
+      }
+    });
+  
+    const sortedDrivers = Array.from(driverRevenueMap.entries()).sort(
+      (a, b) => b[1] - a[1]
+    );
+  
+    const top10Drivers = sortedDrivers
+      .slice(0, 10)
+      .map(([driverId, revenue]) => ({ driverId, revenue }));
+  
+    return top10Drivers;
+  }
 
 
 
@@ -233,4 +266,5 @@ function calculateAverageUsingValue(trips: Trip[], endDate: Date, filterDuration
 
 
 
-export { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue ,calculateAverageUsingValue }
+
+export { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue ,calculateAverageUsingValue ,getTop10Drivers}

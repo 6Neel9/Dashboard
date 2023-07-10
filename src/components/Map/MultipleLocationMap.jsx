@@ -17,7 +17,7 @@ const MultipleLocationMap = ({locations, height, customIcon}) => {
       {locations.map((location, index) => (
         <Marker key={index} position={location.latlng} icon={customIcon}>
           <Popup>Location: {location.name} <br/>
-          Diver: {location.driver}<br/>
+          Driver: {location.driver}<br/>
           Auto No: {location.autoNo}
           </Popup>
         </Marker>

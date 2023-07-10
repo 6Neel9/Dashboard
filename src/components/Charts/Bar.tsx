@@ -7,7 +7,7 @@ import "../../Styles.scss"
 
 
 
-const Bar = ({xTitle, yTitle ,columnData } : any) => {
+const Bar = ({xTitle, yTitle ,columnData ,minMax} : any) => {
   const { currentMode } = useStateContext();
 
   // return (
@@ -32,7 +32,7 @@ const Bar = ({xTitle, yTitle ,columnData } : any) => {
 
   const primaryxAxis: AxisModel = { valueType: 'Category', title: xTitle ,  titleStyle: {
     size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" }};
-  const primaryyAxis: AxisModel = {  title: yTitle ,titleStyle: {
+  const primaryyAxis: AxisModel = { minimum:minMax.min, maximum:minMax.max, title: yTitle ,titleStyle: {
     size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" }};
 
   //  const columnData = [

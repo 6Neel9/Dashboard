@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, topTenMinMax, totalDriversMinMax } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
@@ -788,7 +788,7 @@ function findMinMaxY(data: any[]) {
 
 
     const dateString: string = date.toDateString();
-    console.log(dateString)
+    // console.log(dateString)
 
     if (revenueMap.has(dateString)) {
       const currentRevenue: number = revenueMap.get(dateString)!;
@@ -818,8 +818,10 @@ const minMaxVal = findMinMaxY(maxMinCount)
 // console.log(minMaxVal)
 
 
-const top10Drivers = getTop10Drivers(allFilteredTrips);
-console.log(top10Drivers);
+const top10Drivers = getTop10Drivers(allFilteredTrips,driverData);
+const topTenMinMaxVal= topTenMinMax(top10Drivers)
+const totalDriversMinMaxVal= totalDriversMinMax(columnTotalDriver)
+// console.log(top10Drivers);
 
 
 
@@ -850,7 +852,7 @@ console.log(top10Drivers);
         <CardWithChart
           prop1={TotalDrivers}
           prop2={NewDrivers}
-          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" />}
+          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} />}
         />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">
@@ -865,7 +867,7 @@ console.log(top10Drivers);
         />
       </div>
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={TopTenDriversChartData} xTitle="driver" yTitle="revenue" />} />
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" minMax={topTenMinMaxVal}/>} />
       </div>
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LineSeries, DateTime, Legend, Tooltip, AxisModel, ColumnSeries, Category, ChartSeriesType, DataLabel } from '@syncfusion/ej2-react-charts';
+import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LineSeries, DateTime, Legend, Tooltip, AxisModel, ColumnSeries, Category, ChartSeriesType, DataLabel, LegendSettingsModel } from '@syncfusion/ej2-react-charts';
 
 // import { lineCustomSeries, LinePrimaryXAxis, LinePrimaryYAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
@@ -8,6 +8,8 @@ const LineChart = ({ primary_XAxis, primary_YAxis, data, x_name, y_name, chart_n
   const { currentMode } = useStateContext();
   // const primaryXAxis = {...LinePrimaryXAxis};
   // const primaryYAxis = {...LinePrimaryYAxis};
+
+  // const legendSettings:LegendSettingsModel = { visible: true, position: 'Top' };
 
   const marker = {
     visible: true,
@@ -33,8 +35,8 @@ const LineChart = ({ primary_XAxis, primary_YAxis, data, x_name, y_name, chart_n
     //   </SeriesCollectionDirective>
     // </ChartComponent>
 
-    <ChartComponent primaryXAxis={primary_XAxis}  height="50%" width='800vw'>
-      <Inject services={[ColumnSeries, Tooltip, LineSeries, Category, DataLabel, DateTime]} />
+    <ChartComponent primaryXAxis={primary_XAxis}   height="50%" width='800vw'>
+      <Inject services={[ColumnSeries, Tooltip, LineSeries, Category, DataLabel, DateTime, Legend]} />
       <SeriesCollectionDirective>
         <SeriesDirective dataSource={data} xName={x_name} yName={y_name} name={chart_name} width={3} type='Line' fill='#D6CDE9' marker={marker} />
       </SeriesCollectionDirective>

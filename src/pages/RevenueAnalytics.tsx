@@ -367,21 +367,21 @@ const RevenueAnalytics = () => {
 
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={DriverRevenue} />
-        <SmallCardWithChart props={PaymentType} chart={<Pie h='30%' w='30%' data={PieChartData} />} />
+        <SmallCardWithChart props={PaymentType} chart={<Pie h='30%' w='30%' data={PieChartData} Chart_name="Payment Mode: Online/Offline" />} />
         <SmallCard props={AvgDriverRevenue} />
       </div>
       <div>
         <CardWithChart
           prop1={RevenuePerTrips}
           prop2={RevenuePerTrips2}
-          chart={<Bar columnData={RevenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" minMax={minMax(RevenuePerTripChart,'revenuePerTrip')}/>}
+          chart={<Bar columnData={RevenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" Chart_name="Revenue/trip per month" minMax={minMax(RevenuePerTripChart,'revenuePerTrip')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={RevenuePerOperatingHour}
           prop2={RevenuePerOperatingHour2}
-          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" minMax={minMax(RevenuePerHourChart,'revenuePerHour')}/>}
+          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" Chart_name="Revenue/hr per state" minMax={minMax(RevenuePerHourChart,'revenuePerHour')}/>}
         />
       </div>
 

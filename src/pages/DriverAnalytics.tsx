@@ -400,33 +400,33 @@ const topTenMinMaxVal= minMax(top10Drivers, 'revenue')
 
       <div className="displayFlex  textLeft flexJustifyBetween widthFull">
         <SmallCard props={TotalDrivers} />
-        <SmallCardWithChart props={ActiveInactive} chart={<Pie h='30%' w='30%' data={PieChartData} />} />
+        <SmallCardWithChart props={ActiveInactive} chart={<Pie h='30%' w='30%' data={PieChartData} Chart_name="Driver Status: Active/Inactive" />} />
         <SmallCard props={PendingApproval} />
       </div>
 
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue"  minMax={topTenMinMaxVal}/>} />
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" Chart_name="Revenue per driver"  minMax={topTenMinMaxVal}/>} />
       </div>
 
       <div>
         <CardWithChart
           prop1={ActiveHoursPerDay}
           prop2={ActiveHoursPerDay2}
-          chart={<Bar  columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" minMax={minMax(ActiveHoursChartData,'activeHours')}/>}
+          chart={<Bar  columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" Chart_name="Active Hours per state" minMax={minMax(ActiveHoursChartData,'activeHours')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TripsPerDay}
           prop2={TripsPerDay2}
-          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" minMax={minMax(TripsPerDayChartData,'trips')}/>}
+          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TripsPerDayChartData,'trips')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TimeBetweenTrips}
           prop2={TimeBetweenTrips2}
-          chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips" minMax={minMax(TimeBetweenTripsChartData,"trips")}/>}
+          chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips" Chart_name="No. pf Trips per Time between Trips " minMax={minMax(TimeBetweenTripsChartData,"trips")}/>}
         />
       </div>
 

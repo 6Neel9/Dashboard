@@ -362,7 +362,7 @@ const TripAnalytics = () => {
   const TripDurationChartProps={
     chartData: generateHistoData('TripDuration'),
     yName: "TripDuration",
-    chartName: "TripDuration",
+    chartName: "Trips by Duration",
     xAxisTitle: "Trip Duration",
     yAxisTitle: "No. of Trips",
     
@@ -370,14 +370,14 @@ const TripAnalytics = () => {
   const TripLengthChartProps={
     chartData: generateHistoData('TripLength'),
     yName: "TripLength",
-    chartName: "TripLength",
+    chartName: "Trips by Length",
     xAxisTitle: "Trip Length",
     yAxisTitle: "No. of Trips",
   }
   const TripSpeedChartProps={
     chartData: generateHistoData('TripSpeed'),
     yName: "TripSpeed",
-    chartName: "TripSpeed",
+    chartName: "Trips by Speed",
     xAxisTitle: "Trip Speed",
     yAxisTitle: "No. of Trips",
   }
@@ -402,7 +402,7 @@ const TripAnalytics = () => {
         <CardWithChart
           prop1={CardWithChartProp1}
           prop2={CardWithChartProp2}
-          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" minMax={minMax(TotalTripsChartData,'trips')}/>}
+          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TotalTripsChartData,'trips')}/>}
         />
       </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">

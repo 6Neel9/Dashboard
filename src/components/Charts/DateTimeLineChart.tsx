@@ -8,14 +8,14 @@ import {
 
 
 
-const DateTimeLineChart = ({chartData,props}: any) => {
+const DateTimeLineChart = ({chartData,props,chart_name}: any) => {
     const { currentMode } = useStateContext();
     const primaryxAxis: AxisModel = { valueType: 'DateTime', zoomFactor: 0.1, zoomPosition: 0.9 };
     var primaryyAxis:AxisModel={   
         minimum: props.min/1.05, maximum: props.max*1.05    
  
      };
-    const legendSettings: LegendSettingsModel = { visible: false };
+    const legendSettings: LegendSettingsModel = { visible: true, position:'Bottom',alignment: 'Center', textStyle: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" } };
     const zoomSettings: ZoomSettingsModel = {  enablePan: true ,enableMouseWheelZooming: true};
     const border = { width: 0.5, color: '#00bdae' };
     const tooltip = { enable: true };
@@ -38,7 +38,7 @@ const DateTimeLineChart = ({chartData,props}: any) => {
                 >
                 <Inject services={[ColumnSeries, LineSeries, Legend, Tooltip, DataLabel, Zoom, DateTime]} />
                 <SeriesCollectionDirective>
-                    <SeriesDirective dataSource={chartData} xName='x' yName='y'  width={1} type='Line' fill='#D6CDE9' marker={marker}
+                    <SeriesDirective dataSource={chartData} xName='x' yName='y'  width={1} type='Line' fill='#D6CDE9' marker={marker} name={chart_name}
                         border={border} animation={animation}>
                     </SeriesDirective>
                 </SeriesCollectionDirective>

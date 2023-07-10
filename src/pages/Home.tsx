@@ -844,7 +844,7 @@ const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)} props={minMaxVal}/>}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"}/>}
         />
       </div>
 
@@ -852,7 +852,7 @@ const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
         <CardWithChart
           prop1={TotalDrivers}
           prop2={NewDrivers}
-          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} />}
+          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} Chart_name={"Drivers per State"}/>}
         />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">
@@ -863,11 +863,11 @@ const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
         <SmallCard props={DistanceCovered} />
         <SmallCardWithChart
           props={PaymentType}
-          chart={<Pie h="30%" w="30%" data={PieChartData} />}
+          chart={<Pie h="30%" w="30%" data={PieChartData} Chart_name="Payment Mode: Online/Offline" />}
         />
       </div>
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" minMax={topTenMinMaxVal}/>} />
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" minMax={topTenMinMaxVal}/>} Chart_name={"Revenue per driver"}/>
       </div>
 
 

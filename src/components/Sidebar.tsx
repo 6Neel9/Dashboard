@@ -20,9 +20,9 @@ const Sidebar = () => {
 
 
   const activeLink =
-    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium extraSmallMargin dark:text-gray-700 dark:bg-light-gray bg-black text-white ";
+    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium extraSmallMargin dark:text-white dark:bg-[#584F9D] bg-[#584F9D] text-white ";
   const normalLink =
-    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium mainText dark:hover:text-black hover:bg-light-gray extraSmallMargin";
+    "displayFlex flexAlignCenter gapMedium paddingLeftMedium paddingTopSmall paddingBottomSmall roundedLarge textMedium text-white dark:hover:text-black hover:bg-light-gray extraSmallMargin";
 
   return (
     <div className="marginLeftSmall heightScreen md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10">
@@ -56,7 +56,7 @@ const Sidebar = () => {
           <div className="mt-4 ">
             {links.map((item) => (
               <div key={item.title}>
-                <p className="text-gray-600 dark:text-gray-400 m-3 mt-4 uppercase">
+                <p className="text-gray-400 dark:text-gray-400 m-3 mt-4 uppercase">
                   {item.title}
                 </p>
                 {item.links.map((link) => (

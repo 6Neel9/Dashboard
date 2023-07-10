@@ -15,6 +15,7 @@ module.exports = {
       backgroundColor: {
         "main-bg": "#FAFBFB",
         "flow_blue":"#2C1F39",
+        "meiro_flow_blue":"#584F9D",
         "salmon_tulip":"#FFD2CB",
         "periwinkle":"#D6CDE9",
         "black_plum":"#110C16",

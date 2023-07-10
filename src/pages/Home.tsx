@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, topTenMinMax, totalDriversMinMax } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
@@ -819,8 +819,8 @@ const minMaxVal = findMinMaxY(maxMinCount)
 
 
 const top10Drivers = getTop10Drivers(allFilteredTrips,driverData);
-const topTenMinMaxVal= topTenMinMax(top10Drivers)
-const totalDriversMinMaxVal= totalDriversMinMax(columnTotalDriver)
+const topTenMinMaxVal= minMax(top10Drivers, 'revenue');
+const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
 // console.log(top10Drivers);
 
 

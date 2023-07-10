@@ -12,7 +12,7 @@ import {
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
 import heatMap from "../data/assets/heatMap.png";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, calculateTotalValue, minMax } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
@@ -365,6 +365,7 @@ const TripAnalytics = () => {
     chartName: "TripDuration",
     xAxisTitle: "Trip Duration",
     yAxisTitle: "No. of Trips",
+    
   }
   const TripLengthChartProps={
     chartData: generateHistoData('TripLength'),
@@ -401,7 +402,7 @@ const TripAnalytics = () => {
         <CardWithChart
           prop1={CardWithChartProp1}
           prop2={CardWithChartProp2}
-          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" />}
+          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" minMax={minMax(TotalTripsChartData,'trips')}/>}
         />
       </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">

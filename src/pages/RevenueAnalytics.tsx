@@ -11,7 +11,7 @@ import {
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,minMax } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
@@ -374,14 +374,14 @@ const RevenueAnalytics = () => {
         <CardWithChart
           prop1={RevenuePerTrips}
           prop2={RevenuePerTrips2}
-          chart={<Bar columnData={RevenuePerTripChart} xTitle="months" yTitle="revenuePerTrip"/>}
+          chart={<Bar columnData={RevenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" minMax={minMax(RevenuePerTripChart,'revenuePerTrip')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={RevenuePerOperatingHour}
           prop2={RevenuePerOperatingHour2}
-          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" />}
+          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" minMax={minMax(RevenuePerHourChart,'revenuePerHour')}/>}
         />
       </div>
 

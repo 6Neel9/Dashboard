@@ -11,6 +11,7 @@ import {
 import { useStateContext } from "../contexts/ContextProvider";
 import { select } from "@syncfusion/ej2-base";
 import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
+import { filteredTrips, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
 
 type CardPropType = {
   title?: string;
@@ -260,6 +261,8 @@ const DriverAnalytics = () => {
     selectedState,
     setSelectedDuration,
     setSelectedState,
+    tripData,
+    driverData
   } = useStateContext();
 
   const TotalDrivers: CardPropType = {
@@ -383,6 +386,10 @@ const DriverAnalytics = () => {
   // setSelectedDuration("Till Date");
   //   setSelectedState("All");
   // }, []);
+  let allFilteredTrips = filteredTrips(selectedDuration, tripData);
+
+  const top10Drivers = getTop10Drivers(allFilteredTrips,driverData);
+const topTenMinMaxVal= minMax(top10Drivers, 'revenue')
   
   return (
     <div className="extraSmallMargin">
@@ -397,28 +404,28 @@ const DriverAnalytics = () => {
       </div>
 
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={TopTenDriversChartData} xTitle="driver" yTitle="revenue" />} />
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue"  minMax={topTenMinMaxVal}/>} />
       </div>
 
       <div>
         <CardWithChart
           prop1={ActiveHoursPerDay}
           prop2={ActiveHoursPerDay2}
-          chart={<Bar  columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" />}
+          chart={<Bar  columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" minMax={minMax(ActiveHoursChartData,'activeHours')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TripsPerDay}
           prop2={TripsPerDay2}
-          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips"/>}
+          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" minMax={minMax(TripsPerDayChartData,'trips')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TimeBetweenTrips}
           prop2={TimeBetweenTrips2}
-          chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips"/>}
+          chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips" minMax={minMax(TimeBetweenTripsChartData,"trips")}/>}
         />
       </div>
 

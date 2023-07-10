@@ -32,7 +32,7 @@ const Bar = ({xTitle, yTitle ,columnData ,minMax} : any) => {
 
   const primaryxAxis: AxisModel = { valueType: 'Category', title: xTitle ,  titleStyle: {
     size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" }};
-  const primaryyAxis: AxisModel = { minimum:minMax.min, maximum:minMax.max, title: yTitle ,titleStyle: {
+  const primaryyAxis: AxisModel = { minimum:minMax.min*0.99, maximum:minMax.max*1.01, title: yTitle ,titleStyle: {
     size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" }};
 
   //  const columnData = [

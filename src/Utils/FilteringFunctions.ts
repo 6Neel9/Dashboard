@@ -340,17 +340,66 @@ function getTop10Drivers(data: Trip[], driverData: any[]): DriverRevenue[] {
   return top10Drivers;
 }
 
-function topTenMinMax(data: DriverRevenue[]): { min: number; max: number } {
-  const min = Math.min(...data.map((item) => item.revenue));
-  const max = Math.max(...data.map((item) => item.revenue));
+// function topTenMinMax(data: DriverRevenue[]): { min: number; max: number } {
+//   const min = Math.min(...data.map((item) => item.revenue));
+//   const max = Math.max(...data.map((item) => item.revenue));
+//   return { min, max };
+// }
+
+function minMax(data: any, field: string) {
+  var min, max;
+  if (field === "drivers") {
+    min = Math.min(...data.map((item: any) => item.drivers));
+    max = Math.max(...data.map((item: any) => item.drivers));
+  } else if (field === "trips") {
+    min = Math.min(...data.map((item: any) => item.trips));
+    max = Math.max(...data.map((item: any) => item.trips));
+  } else if (field === "revenue") {
+    min = Math.min(...data.map((item: any) => item.revenue));
+    max = Math.max(...data.map((item: any) => item.revenue));
+  } else if (field === "activeHours") {
+    min = Math.min(...data.map((item: any) => item.activeHours));
+    max = Math.max(...data.map((item: any) => item.activeHours));
+  } else if (field === "revenuePerTrip") {
+    min = Math.min(...data.map((item: any) => item.revenuePerTrip));
+    max = Math.max(...data.map((item: any) => item.revenuePerTrip));
+  } else if (field === "revenuePerHour") {
+    min = Math.min(...data.map((item: any) => item.revenuePerHour));
+    max = Math.max(...data.map((item: any) => item.revenuePerHour));
+  } else if (field === "tripsPerHour") {
+    min = Math.min(...data.map((item: any) => item.tripsPerHour));
+    max = Math.max(...data.map((item: any) => item.tripsPerHour));
+  } else if (field === "tripsPerDriver") {
+    min = Math.min(...data.map((item: any) => item.tripsPerDriver));
+    max = Math.max(...data.map((item: any) => item.tripsPerDriver));
+  } else if (field === "revenuePerDriver") {
+    min = Math.min(...data.map((item: any) => item.revenuePerDriver));
+    max = Math.max(...data.map((item: any) => item.revenuePerDriver));
+  } else if (field === "TripDuration") {
+    min = Math.min(...data.map((item: any) => item.TripDuration));
+    max = Math.max(...data.map((item: any) => item.TripDuration));
+  } else if (field === "TripLength") {
+    min = Math.min(...data.map((item: any) => item.TripLength));
+    max = Math.max(...data.map((item: any) => item.TripLength));
+  } else if (field === "TripSpeed") {
+    min = Math.min(...data.map((item: any) => item.TripSpeed));
+    max = Math.max(...data.map((item: any) => item.TripSpeed));
+  }
+
   return { min, max };
 }
 
-function totalDriversMinMax(data: any[]){
-    const min = Math.min(...data.map((item) => item.drivers));
-    const max = Math.max(...data.map((item) => item.drivers));
-    return { min, max };
-}
+// function totalDriversMinMax(data: any[]) {
+//   const min = Math.min(...data.map((item) => item.drivers));
+//   const max = Math.max(...data.map((item) => item.drivers));
+//   return { min, max };
+// }
+
+// function tripsMinMax(data: any[]) {
+//   const min = Math.min(...data.map((item) => item.trips));
+//   const max = Math.max(...data.map((item) => item.trips));
+//   return { min, max };
+// }
 
 export {
   filterTripsByPeriod,
@@ -362,5 +411,5 @@ export {
   calculateTotalValue,
   calculateAverageUsingValue,
   getTop10Drivers,
-  topTenMinMax,totalDriversMinMax
+  minMax,
 };

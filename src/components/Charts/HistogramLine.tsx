@@ -28,7 +28,7 @@ const HistogramLine = ({histogramProps}: any) => {
     //     });
     // }
     const primaryxAxis: AxisModel = { majorGridLines: { width: 0 }, title: xAxisTitle, titleStyle: {size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" }};
-    const primaryyAxis: AxisModel = { title: yAxisTitle , majorTickLines: { width: 0 }, lineStyle: { width: 0 }, titleStyle: {size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" } };
+    const primaryyAxis: AxisModel = {  title: yAxisTitle , majorTickLines: { width: 0 }, lineStyle: { width: 0 }, titleStyle: {size: '16px', color: currentMode==="Dark"? "white": "black", fontWeight: "500" } };
     const legendSettings: LegendSettingsModel = { visible: false };
     const tooltipsettings: TooltipSettingsModel = { enable: true };
     const marker = { dataLabel: { visible: false ,font: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" }} };

@@ -138,13 +138,7 @@ const RevenuePerTripwrtTime: CardPropType = {
   percent: "1.65",
 };
 
-const TopTenDrivers: CardPropType = {
-    title: "TOP 10 DRIVERS",
-    value: "₹25",
-    duration: "Last 7 days",
-    icon: "positive",
-    percent: "1.65",
-  };
+
 
 const RevenuePerTripwrtCityStates: CardPropType = {
   title: "REVENUE PER TRIP",
@@ -315,6 +309,13 @@ const DriverAnalytics = () => {
   const TimeBetweenTrips: CardPropType = {
     title: "TIME BETWEEN TRIPS",
     duration: selectedDuration,
+  };
+  const TopTenDrivers: CardPropType = {
+    title: "TOP 10 DRIVERS",
+    value: "₹25",
+    duration: selectedDuration,
+    icon: "positive",
+    percent: "1.65",
   };
 
   const TimeBetweenTrips2: CardPropType = {

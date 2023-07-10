@@ -565,7 +565,7 @@ const Home = () => {
 
   const NewDrivers: CardPropType = {
     title: "TOTAL NEW DRIVERS",
-    duration: "Last 7 Days",
+    duration: selectedDuration,
     value: "143",
     icon: "positive",
     percent: "7.35",
@@ -597,7 +597,7 @@ const Home = () => {
 
   const LiveTrips: CardPropType = {
     title: "LIVE TRIPS",
-    duration: "Currently",
+    duration: selectedDuration,
     value: "122",
     icon: "positive",
     percent: "0.11",
@@ -674,18 +674,18 @@ const Home = () => {
   };
   const SmallCardProps7: CardPropType = {
     title: "Morning peak",
-    duration: "1075 average trips per hour",
+    duration: selectedDuration,
     value: "10:12 AM",
   };
   const SmallCardProps8: CardPropType = {
     title: "Evening peak",
-    duration: "1075 average trips per hour",
+    duration: selectedDuration,
     value: "7:13 PM",
   };
 
   const ChartCardProps: CardPropType = {
     title: "TRIP DURATION",
-    duration: "Last 7 days",
+    duration: selectedDuration,
   };
 
   const PaymentType: CardPropType = {

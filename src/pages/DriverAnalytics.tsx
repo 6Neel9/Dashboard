@@ -290,24 +290,24 @@ const DriverAnalytics = () => {
 
   const ActiveHoursPerDay: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
-    duration: "24 Hrs",
+    duration: selectedDuration,
   };
 
   const ActiveHoursPerDay2: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
-    duration: "24 Hrs",
+    duration: selectedDuration,
     value: "6.5 Hrs",
     icon: "positive",
     percent: "0.3",
   };
   const TripsPerDay: CardPropType = {
     title: "TRIPS PER DAY",
-    duration: "24 Hrs",
+    duration: selectedDuration,
   };
 
   const TripsPerDay2: CardPropType = {
     title: "TRIPS PER DAY",
-    duration: "24 Hrs",
+    duration: selectedDuration,
     value: "405",
     icon: "positive",
     percent: "3.5",

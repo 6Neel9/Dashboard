@@ -152,35 +152,35 @@ const TripAnalytics = () => {
 
   const SmallCardProps1: CardPropType = {
     title: "AVERAGE TRIP DURATION",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "14 min",
     icon: "positive",
     percent: "2.45",
   };
   const SmallCardProps2: CardPropType = {
     title: "Average fuel consumption per vehicle",
-    duration: "Last 7 days",
+    duration:selectedDuration,
     value: "35.26 KG",
     icon: "positive",
     percent: "2.45",
   };
   const SmallCardProps3: CardPropType = {
     title: "Average fuel consumption per kilometer",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "0.253 KG",
     icon: "negative",
     percent: "0.25",
   };
   const SmallCardProps4: CardPropType = {
     title: "Average fuel consumption per vehicle",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "35.26 KG",
     icon: "positive",
     percent: "2.45",
   };
   const SmallCardProps5: CardPropType = {
     title: "Average Trip speed",
-    duration: "Last 7 days",
+    duration: selectedDuration,
     value: "35.26 km/hr",
     icon: "positive",
     percent: "2.45",

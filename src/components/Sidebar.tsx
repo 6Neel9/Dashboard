@@ -82,7 +82,7 @@ const Sidebar = () => {
           </div>
         </>
       )}
-      <img src={Logo_Dark} className="h-14 w-auto" />
+      <img src={Logo_Dark} className="h-14 w-auto" alt="Meiro Logo"/>
     </div>
   );
 };

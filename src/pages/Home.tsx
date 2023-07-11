@@ -37,10 +37,11 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
+import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 const Home = () => {
   const {
@@ -120,8 +121,8 @@ const Home = () => {
     }
     return '';
   }
-  
-  
+
+
 
 
 
@@ -239,7 +240,7 @@ const Home = () => {
 
 
 
- 
+
 
 
   let allFilteredTrips = filteredTrips(selectedDuration, tripData);
@@ -250,14 +251,14 @@ const Home = () => {
   let revenueChange = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripFare");
   // console.log(revenueChange);
   // console.log(filterTripsByPeriod(trips, 0))
-  let tripChange = calculatePercentChangeUsingCount(tripData,mapOfPeriods.get(selectedDuration))
+  let tripChange = calculatePercentChangeUsingCount(tripData, mapOfPeriods.get(selectedDuration))
 
   let DriverChange = calculatePercentChangeUsingValue(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
   let averageTripLengthChange = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
   let distanceCovered = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
-  let averageTripsPerHour =(allFilteredTrips.length)/24
+  let averageTripsPerHour = (allFilteredTrips.length) / 24
 
-  
+
 
   const Revenue = (data: any) => {
     var temp = 0;
@@ -287,7 +288,7 @@ const Home = () => {
 
   //Avg Trip Length
   let totalFilteredTripLength = 0;
-  
+
   CalvulatedValues.allFilteredTrips.forEach(element => {
     totalFilteredTripLength += element.tripDistance
   });
@@ -338,24 +339,24 @@ const Home = () => {
       Date: string;
       Revenue: number;
     }
-    
+
     function convertDataFormat(trips: Trip[]): ConvertedData[] {
       const dataMap: Map<string, number> = new Map();
-    
+
       trips.forEach((trip) => {
         const date = trip.startTime.slice(0, 10);
         const revenue = dataMap.get(date) || 0;
         dataMap.set(date, revenue + trip.tripFare);
       });
-    
+
       const data: ConvertedData[] = Array.from(dataMap, ([Date, Revenue]) => ({ Date, Revenue }));
       return data;
     }
-    
-    
+
+
     const convertedData = convertDataFormat(allFilteredTrips);
     console.log(convertedData);
-    
+
 
 
 
@@ -413,16 +414,6 @@ const Home = () => {
     );
   }
 
-  type EarningDataType = {
-    icon: JSX.Element;
-    amount: string;
-    percentage: string;
-    title: string;
-    iconColor: string;
-    iconBg: string;
-    pcColor: string;
-  };
-
   type CardPropType = {
     title?: string;
     duration?: string;
@@ -430,267 +421,244 @@ const Home = () => {
     icon?: string;
     percent?: string;
     height?: string;
+    content?: any;
+    position?: string;
   };
 
+  const DriverRevenueToolTip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of all driver's revenue</p>
+        <p className="text-white">Drivers Revenue ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips)))}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const MediumCardProps: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips))),
     icon: "positive",
     percent: String(CalvulatedValues.revenueChange),
+    content: DriverRevenueToolTip,
+    position: "RightBottom"
   };
 
+  const DriversTooltip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Drivers getting added to the Meiro family</p>
+        <p className="text-white">Total Drivers ---- {numberFormat(String(driverData.length))}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const SmallCardOneProps: CardPropType = {
     title: "DRIVERS",
     duration: selectedDuration,
     value: numberFormat(String(driverData.length)),
     icon: "positive",
     percent: String(CalvulatedValues.DriverChange),
-  };
-  const SmallCardTwoProps: CardPropType = {
-    title: "ACTIVE USERS",
-    duration: selectedDuration,
-    value: numberFormat(String(driverData.length)),
-    icon: "Negative",
-    percent: "3.75",
+    content: DriversTooltip,
+    position: "RightBottom"
   };
 
-  const AttritionedDrivers: CardPropType = {
-    title: "TOTAL ATTRITIONED DRIVERS",
-    duration: selectedDuration,
-    value: "576",
-    icon: "Negative",
-    percent: "1.75",
-  };
-
-  const ActiveDrivers: CardPropType = {
-    title: "TOTAL ACTIVE DRIVERS",
-    duration: selectedDuration,
-    value: "8990",
-    icon: "Positive",
-    percent: "1.67",
-  };
-
-  const PercentActiveDrivers: CardPropType = {
-    title: "TOTAL ACTIVE DRIVERS",
-    duration: selectedDuration,
-    value: "9.1%",
-    icon: "positive",
-    percent: "1.69",
-  };
-  const VehiclePercent: CardPropType = {
-    title: "TOTAL VEHICLES",
-    duration: selectedDuration,
-    value: "6.87%",
-    icon: "positive",
-    percent: "1.69",
-  };
-
-  const UnactivatedDrivers: CardPropType = {
-    title: "TOTAL UNACTIVE DRIVERS",
-    duration: selectedDuration,
-    value: "678",
-    icon: "positive",
-    percent: "2.79",
-  };
-
-  const TotalVehicles: CardPropType = {
-    title: "TOTAL VEHICLES",
-    duration: selectedDuration,
-    value: "1056",
-    icon: "positive",
-    percent: "7.79",
-  };
-  const CardWithChartProp1: CardPropType = {
-    title: "DRIVER REVENUE",
-    duration: selectedDuration,
-  };
-
-  const ReveneMeiro: CardPropType = {
-    title: "CHANGE OVER MEIRO REVENUE",
-    duration: selectedDuration,
-  };
-
-  const AvgDistPerUser: CardPropType = {
-    title: "AVG DISTANCE PER USER",
-    duration: selectedDuration,
-  };
-
-  const ReveneDriver: CardPropType = {
-    title: "CHANGE OVER DRIVER REVENUE",
-    duration: selectedDuration,
-  };
-
-  const AvgTripDuration: CardPropType = {
-    title: "AVG TRIP DURATION",
-    duration: `${selectedDuration} km`,
-  };
-
-  const CashFreeUsers2: CardPropType = {
-    title: "CASH FREE USERS",
-    duration: selectedDuration,
-  };
-
+  const TotalDriverChartTooltip=()=> {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Chart for the total number of drivers per state </p>
+      </div>
+    )
+  }
   const TotalDrivers: CardPropType = {
     title: "TOTAL DRIVERS",
     duration: selectedDuration,
+    content: TotalDriverChartTooltip,
+    position: "RightBottom"
   };
+
+  const TotalTripsChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Line chart for the total number of trips per date </p>      </div>
+    )
+  }
   const TotalTripsChart: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
-  };
-  const CardWithChartProp2: CardPropType = {
-    title: "MRR",
-    duration: selectedDuration,
-    value: "₹ 28,07,653",
-    icon: "positive",
-    percent: "7.35",
+    content: TotalTripsChartTooltip,
+    position: "RightBottom"
   };
 
-  const MeiroRevenuePercentChange: CardPropType = {
-    title: "CHANGE OVER MEIRO REVENUE",
-    duration: selectedDuration,
-    value: "28%",
-    icon: "positive",
-    percent: "5.32",
-  };
-
-  const DriverRevenuePercentChange: CardPropType = {
-    title: "CHANGE OVER DRIVER REVENUE",
-    duration: selectedDuration,
-    value: "17%",
-    icon: "positive",
-    percent: "1.52",
-  };
-
+  const NewDriversTooltip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Drivers getting added to the Meiro family in the selected duration</p>
+        <p className="text-white">New Drivers added ---- 143</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const NewDrivers: CardPropType = {
     title: "TOTAL NEW DRIVERS",
     duration: selectedDuration,
     value: "143",
     icon: "positive",
     percent: "7.35",
+    content: NewDriversTooltip,
+    position: "RightBottom"
   };
 
+  const TotalTripsTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of number of trips</p>
+        <p className="text-white">Total Trips ---- {numberFormat(String(CalvulatedValues.allFilteredTrips.length))}</p>
+      </div>
+    )
+  }
   const TotalTrips: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
     value: numberFormat(String(CalvulatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalvulatedValues.tripChange),
+    content: TotalTripsTooltip,
+    position: "RightBottom"
   };
 
-  const TotalDownloads: CardPropType = {
-    title: "TOTAL DOWNLOADS",
-    duration: selectedDuration,
-    value: "1,00,043",
-    icon: "positive",
-    percent: "0.31",
-  };
-
-  const TotalTripsAtTheTime: CardPropType = {
-    title: "TOTAL TRIPS",
-    duration: "For this particular day",
-    value: "1032",
-    icon: "negative",
-    percent: "0.12",
-  };
-
+  const LiveTripsToolTip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Total number of trips live</p>
+        <p className="text-white">Total Live Trips ---- {numberFormat(String(2500))}</p>
+      </div>
+    )
+  }
   const LiveTrips: CardPropType = {
     title: "LIVE TRIPS",
     duration: selectedDuration,
-    value: "122",
+    value: "2,500",
     icon: "positive",
     percent: "0.11",
+    content: LiveTripsToolTip,
+    position: "RightBottom"
   };
 
+  const  DistanceCoveredTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of distance covered by all drivers</p>
+        <p className="text-white">Total Distance Covered ---- {`${numberFormat(String(totalDistance))} km`}</p>
+      </div>
+    )
+  }
   const DistanceCovered: CardPropType = {
     title: "DISTANCE COVERED",
     duration: selectedDuration,
     value: `${numberFormat(String(totalDistance))} km`,
     icon: "positive",
     percent: String(CalvulatedValues.distanceCovered),
+    content: DistanceCoveredTooltip,
+    position: "RightBottom"
   };
 
+  const AvgTripLengthTooltip =()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average value of the trip length</p>
+        <p className="text-white">Average Trip Length ---- {String(Number(averageTripLength).toFixed(2))} km</p>
+      </div>
+    )
+  }
   const AvgTripLength: CardPropType = {
     title: "AVG TRIP LENGTH",
     duration: selectedDuration,
     value: String(Number(averageTripLength).toFixed(2)),
     icon: "negative",
     percent: String(CalvulatedValues.averageTripLengthChange),
+    content: AvgTripLengthTooltip,
+    position: "RightBottom"
   };
 
-  const GrowthRateDrivers: CardPropType = {
-    title: "GROWTH RATE OF DRIVERS",
-    duration: selectedDuration,
-    value: "2.7%",
-    icon: "negative",
-    percent: "0.36",
-  };
 
-  const ComplementCashFreeUsers: CardPropType = {
-    title: "COMPLEMENT OF CASH FREE USERS",
-    duration: selectedDuration,
-    value: "25,997",
-    icon: "negative",
-    percent: "0.3",
-  };
-
-  const ConversionRate: CardPropType = {
-    title: "ACTIVE DRIVERS AS AGAINST DOWNLOADS",
-    duration: selectedDuration,
-    value: "25,876",
-    icon: "positive",
-    percent: "2.46",
-  };
-
-  const TotalRevenueMeiro: CardPropType = {
-    title: "TOTAL REVENUE FOR MEIRO",
-    duration: selectedDuration,
-    value: "₹ 50,589",
-    icon: "positive",
-    percent: "2.46",
-  };
-
-  const AvgRevenuePerUser: CardPropType = {
-    title: "AVG REVENUE / USER",
-    duration: selectedDuration,
-    value: "₹ 3489",
-    icon: "positive",
-    percent: "2.45",
-  };
-
-  const TopDrivers: CardPropType = {
-    title: "TOP 10 DRIVERS",
-    value: "₹25",
-    duration: "Last 7 days",
-    icon: "positive",
-    percent: "1.65",
-  };
-
+  const AvgTripsPerHourTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average number of trips per hour</p>
+        <p className="text-white">Average Trips / Hour ---- {numberFormat(String(CalvulatedValues.averageTripsPerHour))}</p>
+      </div>
+    )
+  }
   const SmallCardProps6: CardPropType = {
     title: "Avg trips / hour",
     duration: "",
     value: numberFormat(String(CalvulatedValues.averageTripsPerHour)),
+    content: AvgTripsPerHourTooltip,
+    position: "LeftBottom"
   };
+
+
+  const MorningPeakTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Morning Peak time of the day</p>
+        <p className="text-white">Peak Time ---- 10:12 AM</p>
+      </div>
+    )
+  }
   const SmallCardProps7: CardPropType = {
     title: "Morning peak",
     duration: selectedDuration,
     value: "10:12 AM",
+    content: MorningPeakTooltip,
+    position: "RightBottom"
   };
+
+  const EveningPeakTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Evening Peak time of the day</p>
+        <p className="text-white">Peak Time ---- 7:13 PM</p>
+      </div>
+    )
+  }
   const SmallCardProps8: CardPropType = {
     title: "Evening peak",
     duration: selectedDuration,
     value: "7:13 PM",
+    content: EveningPeakTooltip,
+    position: "RightBottom"
   };
 
+  const TripDurationChartTooltip =()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of the trip duration per date</p>
+        </div>
+    )
+  }
   const ChartCardProps: CardPropType = {
     title: "TRIP DURATION",
     duration: selectedDuration,
+    content: TripDurationChartTooltip,
+    position: "RightBottom"
   };
 
+   const PaymentTypeToolTip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Ratio of all the payment type Online/Offline </p>
+        <p className="text-white">Ratio ---- 75/25</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+   }
   const PaymentType: CardPropType = {
-    title: "ACTIVE / INACTIVE",
+    title: "Payment Type: Online / Offline",
     duration: "",
+    content: PaymentTypeToolTip,
+    position: "LeftBottom"
   };
 
   const PieChartData = [
@@ -726,23 +694,29 @@ const Home = () => {
   ];
 
 
+  const TopTenDriversChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Top 10 drivers with highest revenue</p>
+      </div>
+    )
+  }
   const TopTenDrivers: CardPropType = {
     title: "TOP 10 DRIVERS",
-    value: "₹25",
-    duration: "Last 7 days",
-    icon: "positive",
-    percent: "1.65",
+    duration: selectedDuration,
+    content: TopTenDriversChartTooltip,
+    position: "RightBottom"
   };
 
-  
+
   function calculateTotalRevenue(data: any[]) {
     const revenueMap: Map<string, number> = new Map();
-  
+
     // Iterate over the dataset
     for (const item of data) {
       const startTime: any = item["startTime"].split("T")[0]; // Extract the date from the start time
       const tripFare: any = item["tripFare"]; // Get the trip fare
-  
+
       if (revenueMap.has(startTime)) {
         // If the date is already in the map, add the trip fare to the existing revenue
         const currentRevenue: number = revenueMap.get(startTime)!;
@@ -752,22 +726,22 @@ const Home = () => {
         revenueMap.set(startTime, tripFare);
       }
     }
-  
+
     // Convert the revenue map to an array of objects
     const revenueData: any[] = Array.from(revenueMap, ([date, revenue]) => ({ x: new Date(date), y: revenue }));
     revenueData.sort((a, b) => a.x - b.x); // Sort the array by date
 
-    if(selectedDuration === "Today"){
-      let revDataToday: any[]=[] ;
+    if (selectedDuration === "Today") {
+      let revDataToday: any[] = [];
       CalvulatedValues.allFilteredTrips.forEach((trip) => {
         let date = new Date(trip.startTime.split("T")[0])
         let date2 = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0))
-        date2.setHours(0,0,0,0)
+        date2.setHours(0, 0, 0, 0)
         revDataToday.push({ x: date2, y: trip.tripFare });
         revDataToday.sort((a, b) => a.x - b.x); // Sort the array by date
       });
       return revDataToday;
-    }else{
+    } else {
       return revenueData;
     }
 
@@ -775,54 +749,53 @@ const Home = () => {
 
   //Calculate max and min of the calculateTotalRevenue revenue
   const maxMinCount = calculateTotalRevenue(allFilteredTrips);
-//   const mins = maxMinCount.reduce((prev, curr) => prev.revenue < curr.revenue ? prev : curr);
-//   const maxs = maxMinCount.reduce((prev, curr) => prev.revenue > curr.revenue ? curr : prev);
-// console.log(mins,maxs)
-function findMinMaxY(data: any[]) {
-  const revenueMap: Map<string, number> = new Map();
+  //   const mins = maxMinCount.reduce((prev, curr) => prev.revenue < curr.revenue ? prev : curr);
+  //   const maxs = maxMinCount.reduce((prev, curr) => prev.revenue > curr.revenue ? curr : prev);
+  // console.log(mins,maxs)
+  function findMinMaxY(data: any[]) {
+    const revenueMap: Map<string, number> = new Map();
 
-  // Calculate total revenue for each unique date
-  for (const item of data) {
-    const date: Date = item["x"];
-    const revenue: number = item["y"];
+    // Calculate total revenue for each unique date
+    for (const item of data) {
+      const date: Date = item["x"];
+      const revenue: number = item["y"];
 
 
-    const dateString: string = date.toDateString();
-    // console.log(dateString)
+      const dateString: string = date.toDateString();
+      // console.log(dateString)
 
-    if (revenueMap.has(dateString)) {
-      const currentRevenue: number = revenueMap.get(dateString)!;
-      revenueMap.set(dateString, currentRevenue + revenue);
-    } else {
-      revenueMap.set(dateString, revenue);
+      if (revenueMap.has(dateString)) {
+        const currentRevenue: number = revenueMap.get(dateString)!;
+        revenueMap.set(dateString, currentRevenue + revenue);
+      } else {
+        revenueMap.set(dateString, revenue);
+      }
     }
+
+    // Get an array of revenue values
+    const revenueValues: number[] = Array.from(revenueMap.values());
+
+    // Find the minimum and maximum revenue values
+    const minY: number = Math.min(...revenueValues);
+    const maxY: number = Math.max(...revenueValues);
+
+    return { min: minY, max: maxY };
   }
 
-  // Get an array of revenue values
-  const revenueValues: number[] = Array.from(revenueMap.values());
-
-  // Find the minimum and maximum revenue values
-  const minY: number = Math.min(...revenueValues);
-  const maxY: number = Math.max(...revenueValues);
-
-  return { min: minY, max: maxY };
-}
 
 
-  
-const minMaxVal = findMinMaxY(maxMinCount)
+  const minMaxVal = findMinMaxY(maxMinCount)
 
 
 
-// console.log(calculateTotalRevenue(allFilteredTrips))
-// console.log(minMaxVal)
+  // console.log(calculateTotalRevenue(allFilteredTrips))
+  // console.log(minMaxVal)
 
 
-const top10Drivers = getTop10Drivers(allFilteredTrips,driverData);
-const topTenMinMaxVal= minMax(top10Drivers, 'revenue');
-const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
-// console.log(top10Drivers);
-
+  const top10Drivers = getTop10Drivers(allFilteredTrips, driverData);
+  const topTenMinMaxVal = minMax(top10Drivers, 'revenue');
+  const totalDriversMinMaxVal = minMax(columnTotalDriver, "drivers");
+  // console.log(top10Drivers);
 
 
 
@@ -836,7 +809,6 @@ const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
       </div>
       <div className="displayFlex textLeft flexJustifyBetween ">
         <SmallCard props={SmallCardOneProps} />
-        {/* <SmallCard props={SmallCardTwoProps}/> */}
         <SmallCard props={LiveTrips} />
         <MediumCard props={MediumCardProps} />
       </div>
@@ -844,15 +816,14 @@ const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"}/>}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} />}
         />
       </div>
-
       <div>
         <CardWithChart
           prop1={TotalDrivers}
           prop2={NewDrivers}
-          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} Chart_name={"Drivers per State"}/>}
+          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} Chart_name={"Drivers per State"} />}
         />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">
@@ -867,7 +838,7 @@ const totalDriversMinMaxVal= minMax(columnTotalDriver, "drivers");
         />
       </div>
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" minMax={topTenMinMaxVal}/>} Chart_name={"Revenue per driver"}/>
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" minMax={topTenMinMaxVal} />} Chart_name={"Revenue per driver"} />
       </div>
 
 

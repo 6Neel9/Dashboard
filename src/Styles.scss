@@ -507,6 +507,7 @@
   @extend .normalText;
   @extend .smallPadding;
   @extend .extraSmallText;
+  @apply inline-block;
 }
 /* Small card duration inner text style */
 .smallCardDurationText{

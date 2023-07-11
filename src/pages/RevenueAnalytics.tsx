@@ -11,7 +11,7 @@ import {
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,minMax } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,minMax ,getRevenuePerTripChart} from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
@@ -338,6 +338,10 @@ const RevenueAnalytics = () => {
     { months: 'September', revenuePerTrip: getRandomNumber(50, 160) },
     { months: 'October', revenuePerTrip: getRandomNumber(50, 160) }
   ];
+  //Revenue per trip data
+  const revenuePerTripChart = getRevenuePerTripChart(CalvulatedValues.allFilteredTrips);
+  // console.log(revenuePerTripChart)
+
   const RevenuePerHourChart = [
     { states: 'Maharashtra', revenuePerHour: getRandomNumber(5000, 16000) },
     { states: 'Uttar Pradesh', revenuePerHour: getRandomNumber(5000, 16000) },
@@ -374,7 +378,7 @@ const RevenueAnalytics = () => {
         <CardWithChart
           prop1={RevenuePerTrips}
           prop2={RevenuePerTrips2}
-          chart={<Bar columnData={RevenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" Chart_name="Revenue/trip per month" minMax={minMax(RevenuePerTripChart,'revenuePerTrip')}/>}
+          chart={<Bar columnData={revenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" Chart_name="Revenue/trip per month" minMax={minMax(RevenuePerTripChart,'revenuePerTrip')}/>}
         />
       </div>
       <div>

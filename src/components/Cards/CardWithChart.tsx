@@ -1,10 +1,16 @@
 import React from 'react'
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import "../../Styles.scss"
+import { TooltipComponent } from '@syncfusion/ej2-react-popups';
+import { BsInfoCircle } from 'react-icons/bs';
 
 
 
 const CardWithChart = ({ prop1, prop2, chart }: any) => {
+    let style: object = {
+        display: 'inline-block',
+        padding: '5px'
+    };
     return (
         <div className='cardWithChartContainer'>
             <div className="cardWithChartSecondaryContainer">
@@ -12,7 +18,7 @@ const CardWithChart = ({ prop1, prop2, chart }: any) => {
                     <div className='cardWithChartTertiaryContainer'>
                         <div className="cardWithChartQuaternaryContainer">
                             <div className="cardWithChartTitleText" >
-                                {prop2.title}
+                                {prop2.title}<TooltipComponent width="300px" isSticky={false} content={prop2.content} position={prop2.position} opensOn='Click' style={style} ><BsInfoCircle className='m-0 p-0' /></TooltipComponent>
                             </div>
                             <div className="cardWithChartDurationText" >
                                 {prop2.duration.toLowerCase()}
@@ -34,7 +40,7 @@ const CardWithChart = ({ prop1, prop2, chart }: any) => {
                 </div>
                 <div className="cardWithChartPrimaryContainer">
                     <div className="cardWithChartSecondaryChartContainer">
-                        <h1 className="cardWithChartChartTitleText">{prop1.title}</h1>
+                        <h1 className="cardWithChartChartTitleText">{prop1.title}<TooltipComponent width="300px" isSticky={false} content={prop1.content} position={prop1.position} opensOn='Click' style={style} ><BsInfoCircle className='m-0 p-0' /></TooltipComponent></h1>
                         <h4 className="cardWithChartChartDurationText" >
                             {prop1.duration.toLowerCase()}
                         </h4>

@@ -12,6 +12,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { select } from "@syncfusion/ej2-base";
 import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
 import { filteredTrips, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
+import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
 type CardPropType = {
   title?: string;
@@ -20,6 +21,8 @@ type CardPropType = {
   icon?: string;
   percent?: string;
   height?: string;
+  content?: any;
+  position?: string;
 };
 
 const AvgDriverRevenueperTrip: CardPropType = {
@@ -259,71 +262,198 @@ const DriverAnalytics = () => {
     driverData
   } = useStateContext();
 
+  const CalculatedValues = AnalyticsCalculation();
+
+
+  function numberFormat(x: string | number): string {
+    if (typeof x === 'number') {
+      return x.toLocaleString(undefined, { maximumFractionDigits: 1 });
+    }
+    if (typeof x === 'string') {
+      const parts = x.split('.');
+      const formattedInteger = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      if (parts.length === 2) {
+        const decimalPart = parts[1].substring(0, 1); // Limit decimal to 1 digit
+        return `${formattedInteger}.${decimalPart}`;
+      }
+      return formattedInteger;
+    }
+    return '';
+  }
+
+
+  const DriversTooltip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Drivers getting added to the Meiro family</p>
+        <p className="text-white">Total Drivers ---- {numberFormat(String(driverData.length))}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const TotalDrivers: CardPropType = {
     title: "TOTAL DRIVERS",
     duration: selectedDuration,
-    value: "10,000",
+    value: numberFormat(String(driverData.length)),
     icon: "positive",
-    percent: "1.65",
+    percent: String(CalculatedValues.DriverChange),
+    content: DriversTooltip,
+    position: "RightBottom"
   }
 
+  const DriverStatusTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Ratio of the drivers in Active/Inactive state</p>
+        <p className="text-white">Ratio ---- 75/25</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const ActiveInactive : CardPropType = {
     title: "ACTIVE / INACTIVE DRIVERS",
     duration: selectedDuration,
+    content: DriverStatusTooltip,
+    position: "RightBottom"
   }
 
   const PieChartData = [
     { x: 'Active', y: 75, text: 'Active', fill:"#D6CDE9" }, { x: 'Inactive', y: 25, text: 'Inactive', fill:"#F7F7F7" },
   ];
 
+  const PendingApprovalTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Drivers waiting for approval</p>
+        <p className="text-white">Total ---- 35</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const PendingApproval: CardPropType = {
     title: "PENDING APPROVAL",
     duration: selectedDuration,
     value: "35",
+    content: PendingApprovalTooltip,
+    position: "LeftBottom"
   }
 
+
+  const ActiveHoursPerDayChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average active hours per day per state</p>
+      </div>
+    )
+  }
   const ActiveHoursPerDay: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
     duration: selectedDuration,
+    content: ActiveHoursPerDayChartTooltip,
+    position: "RightBottom"
   };
 
+  const ActiveHoursPerDayTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average active hours per day</p>
+        <p className="text-white">Avg active hours per day ---- 6.5Hrs</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const ActiveHoursPerDay2: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
     duration: selectedDuration,
     value: "6.5 Hrs",
     icon: "positive",
     percent: "0.3",
+    content: ActiveHoursPerDayTooltip,
+    position: "RightBottom"
   };
+
+  const AvgTripPerDayChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average trips per day per state</p>
+      </div>
+    )
+  }
   const TripsPerDay: CardPropType = {
     title: "TRIPS PER DAY",
     duration: selectedDuration,
+    content: AvgTripPerDayChartTooltip,
+    position: "RightBottom"
   };
 
+  const AvgTripPerDayTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average trips per day</p>
+        <p className="text-white">Avg trips per day ---- 405</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const TripsPerDay2: CardPropType = {
     title: "TRIPS PER DAY",
     duration: selectedDuration,
     value: "405",
     icon: "positive",
     percent: "3.5",
+    content: AvgTripPerDayTooltip,
+    position: "RightBottom"
   };
+
+  const AvgTimeBetweenTripsChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average time between trips Chart</p>
+      </div>
+    )
+  }
   const TimeBetweenTrips: CardPropType = {
     title: "TIME BETWEEN TRIPS",
     duration: selectedDuration,
+    content: AvgTimeBetweenTripsChartTooltip,
+    position: "RightBottom"
   };
+
+  const Top10DriversTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Top 10 drivers based on the revenue generated  by them</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const TopTenDrivers: CardPropType = {
     title: "TOP 10 DRIVERS",
     value: "₹25",
     duration: selectedDuration,
     icon: "positive",
     percent: "1.65",
+    content: Top10DriversTooltip,
+    position: "RightBottom"
   };
 
+  const AvgTimeBetweenTripsTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average time between trips</p>
+        <p className="text-white">Avg time between trips ---- 16min</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const TimeBetweenTrips2: CardPropType = {
     title: "TIME BETWEEN TRIPS",
     duration: selectedDuration,
     value: "16 min",
     icon: "negative",
     percent: "0.3",
+    content: AvgTimeBetweenTripsTooltip,
+    position: "RightBottom"
   };
   const TopTenDriversChartData = [
     { driver: 'Rajesh', revenue: 35000 },

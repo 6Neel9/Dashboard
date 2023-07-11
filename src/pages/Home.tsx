@@ -60,7 +60,7 @@ const Home = () => {
   } = useStateContext();
   // const [driverData, setDrivers] = useState<any[]>([]);
   // const [tripData, setTrips] = useState<any[]>([]);
-  const CalvulatedValues = AnalyticsCalculation();
+  const CalculatedValues = AnalyticsCalculation();
 
 
   // useEffect(()=>{
@@ -290,15 +290,15 @@ const Home = () => {
   //Avg Trip Length
   let totalFilteredTripLength = 0;
 
-  CalvulatedValues.allFilteredTrips.forEach(element => {
+  CalculatedValues.allFilteredTrips.forEach(element => {
     totalFilteredTripLength += element.tripDistance
   });
-  var averageTripLength = String(totalFilteredTripLength / CalvulatedValues.allFilteredTrips.length)
+  var averageTripLength = String(totalFilteredTripLength / CalculatedValues.allFilteredTrips.length)
 
 
   //Distance Covered
   let totalDistance = 0;
-  CalvulatedValues.allFilteredTrips.forEach(elem => {
+  CalculatedValues.allFilteredTrips.forEach(elem => {
     totalDistance += Math.round(elem.tripDistance)
   })
 
@@ -402,7 +402,7 @@ const Home = () => {
       { "Date": "2023-06-10", "Time": 20 }
     ]
 
-    const dataset = calculateAverageTripDuration(CalvulatedValues.allFilteredTrips);
+    const dataset = calculateAverageTripDuration(CalculatedValues.allFilteredTrips);
     console.log(dataset)
 
 
@@ -433,7 +433,7 @@ const Home = () => {
     return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of all driver's revenue</p>
-        <p className="text-white">Drivers Revenue ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips)))}</p>
+        <p className="text-white">Drivers Revenue ---- {"₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips)))}</p>
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
@@ -441,9 +441,9 @@ const Home = () => {
   const MediumCardProps: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips))),
+    value: "₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips))),
     icon: "positive",
-    percent: String(CalvulatedValues.revenueChange),
+    percent: String(CalculatedValues.revenueChange),
     content: DriverRevenueToolTip,
     position: "RightBottom"
   };
@@ -462,7 +462,7 @@ const Home = () => {
     duration: selectedDuration,
     value: numberFormat(String(driverData.length)),
     icon: "positive",
-    percent: String(CalvulatedValues.DriverChange),
+    percent: String(CalculatedValues.DriverChange),
     content: DriversTooltip,
     position: "RightBottom"
   };
@@ -517,16 +517,16 @@ const Home = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of number of trips</p>
-        <p className="text-white">Total Trips ---- {numberFormat(String(CalvulatedValues.allFilteredTrips.length))}</p>
+        <p className="text-white">Total Trips ---- {numberFormat(String(CalculatedValues.allFilteredTrips.length))}</p>
       </div>
     )
   }
   const TotalTrips: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
-    value: numberFormat(String(CalvulatedValues.allFilteredTrips.length)),
+    value: numberFormat(String(CalculatedValues.allFilteredTrips.length)),
     icon: "positive",
-    percent: String(CalvulatedValues.tripChange),
+    percent: String(CalculatedValues.tripChange),
     content: TotalTripsTooltip,
     position: "RightBottom"
   };
@@ -562,7 +562,7 @@ const Home = () => {
     duration: selectedDuration,
     value: `${numberFormat(String(totalDistance))} km`,
     icon: "positive",
-    percent: String(CalvulatedValues.distanceCovered),
+    percent: String(CalculatedValues.distanceCovered),
     content: DistanceCoveredTooltip,
     position: "RightBottom"
   };
@@ -580,7 +580,7 @@ const Home = () => {
     duration: selectedDuration,
     value: String(Number(averageTripLength).toFixed(2)),
     icon: "negative",
-    percent: String(CalvulatedValues.averageTripLengthChange),
+    percent: String(CalculatedValues.averageTripLengthChange),
     content: AvgTripLengthTooltip,
     position: "RightBottom"
   };
@@ -590,14 +590,14 @@ const Home = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average number of trips per hour</p>
-        <p className="text-white">Average Trips / Hour ---- {numberFormat(String(CalvulatedValues.averageTripsPerHour))}</p>
+        <p className="text-white">Average Trips / Hour ---- {numberFormat(String(CalculatedValues.averageTripsPerHour))}</p>
       </div>
     )
   }
   const SmallCardProps6: CardPropType = {
     title: "Avg trips / hour",
     duration: "",
-    value: numberFormat(String(CalvulatedValues.averageTripsPerHour)),
+    value: numberFormat(String(CalculatedValues.averageTripsPerHour)),
     content: AvgTripsPerHourTooltip,
     position: "LeftBottom"
   };
@@ -737,7 +737,7 @@ const Home = () => {
 
     if (selectedDuration === "Today") {
       let revDataToday: any[] = [];
-      CalvulatedValues.allFilteredTrips.forEach((trip) => {
+      CalculatedValues.allFilteredTrips.forEach((trip) => {
         let date = new Date(trip.startTime.split("T")[0])
         let date2 = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0))
         date2.setHours(0, 0, 0, 0)
@@ -820,7 +820,7 @@ const Home = () => {
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalvulatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} />}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalculatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} />}
         />
       </div>
       <div>

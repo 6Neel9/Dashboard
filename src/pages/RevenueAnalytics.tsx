@@ -157,7 +157,7 @@ const RevenueAnalytics = () => {
     driverData
   } = useStateContext();
 
-  const CalvulatedValues = AnalyticsCalculation();
+  const CalculatedValues = AnalyticsCalculation();
 
   interface Trip {
     _id: string;
@@ -254,7 +254,7 @@ const RevenueAnalytics = () => {
   const PaymentModeCalculate = () => {
     var online = 0;
     var offline = 0;
-    CalvulatedValues.allFilteredTrips.forEach((element: any) => {
+    CalculatedValues.allFilteredTrips.forEach((element: any) => {
       if (element.paymentType === "cash") {
         offline += 1;
       }
@@ -270,7 +270,7 @@ const RevenueAnalytics = () => {
     return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of all driver's revenue</p>
-        <p className="text-white">Drivers Revenue ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips)))}</p>
+        <p className="text-white">Drivers Revenue ---- {"₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips)))}</p>
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
@@ -278,9 +278,9 @@ const RevenueAnalytics = () => {
   const DriverRevenue: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips))),
+    value: "₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips))),
     icon: "positive",
-    percent: String(CalvulatedValues.driverRevenueChange),
+    percent: String(CalculatedValues.driverRevenueChange),
     content: DriverRevenueToolTip,
     position: "RightBottom"
   }
@@ -321,7 +321,7 @@ const RevenueAnalytics = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average of driver's revenue per trip</p>
-        <p className="text-white">Avg Drivers Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length))}</p>
+        <p className="text-white">Avg Drivers Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length))}</p>
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
@@ -329,9 +329,9 @@ const RevenueAnalytics = () => {
   const AvgDriverRevenue: CardPropType = {
     title: "AVG DRIVER REVENUE / TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
+    value: "₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length)),
     icon: "positive",
-    percent: String(CalvulatedValues.avgRevenuePerTrip),
+    percent: String(CalculatedValues.avgRevenuePerTrip),
     content:AvgDriverRevenueTooltip,
     position:"RightBottom"
   }
@@ -354,7 +354,7 @@ const RevenueAnalytics = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average Revenue per trip</p>
-        <p className="text-white">Avg Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length))}</p>
+        <p className="text-white">Avg Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length))}</p>
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
@@ -362,9 +362,9 @@ const RevenueAnalytics = () => {
   const RevenuePerTrips2: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
-    value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
+    value: "₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length)),
     icon: "positive",
-    percent: String(CalvulatedValues.avgRevenuePerTrip),
+    percent: String(CalculatedValues.avgRevenuePerTrip),
     content:RevenuePerTripTooltip,
     position:"RightBottom"
   };
@@ -415,7 +415,7 @@ const RevenueAnalytics = () => {
     { months: 'October', revenuePerTrip: getRandomNumber(50, 160) }
   ];
   //Revenue per trip data
-  const revenuePerTripChart = getRevenuePerTripChart(CalvulatedValues.allFilteredTrips);
+  const revenuePerTripChart = getRevenuePerTripChart(CalculatedValues.allFilteredTrips);
   // console.log(revenuePerTripChart)
 
   const RevenuePerHourChart = [

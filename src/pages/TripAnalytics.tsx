@@ -48,7 +48,7 @@ const TripAnalytics = () => {
     driverData,
   } = useStateContext();
 
-  const CalvulatedValues = AnalyticsCalculation();
+  const CalculatedValues = AnalyticsCalculation();
 
 
   type CardPropType = {
@@ -265,7 +265,7 @@ const TripAnalytics = () => {
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
-    percent: String(CalvulatedValues.tripChange),
+    percent: String(CalculatedValues.tripChange),
     content:TotalTripTooltip,
     position:"RightBottom"
   };
@@ -316,7 +316,7 @@ const TripAnalytics = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the trip duration</p>
-        <p className="text-white">Total Trips ---- {numberFormat(String(CalvulatedValues.tripDurationValue))}</p>
+        <p className="text-white">Total Trips ---- {numberFormat(String(CalculatedValues.tripDurationValue))}</p>
         <p className="text-white">{selectedDuration}</p>
         </div>
     )
@@ -324,9 +324,9 @@ const TripAnalytics = () => {
   const CardWithChartProps: CardPropType = {
     title: "TRIP DURATION",
     duration: selectedDuration,
-    value: numberFormat(String(CalvulatedValues.tripDurationValue)),
+    value: numberFormat(String(CalculatedValues.tripDurationValue)),
     icon: "positive",
-    percent: String(CalvulatedValues.tripDurationChange),
+    percent: String(CalculatedValues.tripDurationChange),
     content: TripDurationTooltip,
     position: "RightBottom"
   };
@@ -335,7 +335,7 @@ const TripAnalytics = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the trip Length</p>
-        <p className="text-white">Trip Length ---- {numberFormat(String(Math.round(CalvulatedValues.tripLengthValue)))}</p>
+        <p className="text-white">Trip Length ---- {numberFormat(String(Math.round(CalculatedValues.tripLengthValue)))}</p>
         <p className="text-white">{selectedDuration}</p>
         </div>
     )
@@ -343,9 +343,9 @@ const TripAnalytics = () => {
   const CardWithChartProps4: CardPropType = {
     title: "TRIP LENGTH",
     duration: selectedDuration,
-    value: numberFormat(String(Math.round(CalvulatedValues.tripLengthValue))),
+    value: numberFormat(String(Math.round(CalculatedValues.tripLengthValue))),
     icon: "positive",
-    percent: String(CalvulatedValues.tripLengthChange),
+    percent: String(CalculatedValues.tripLengthChange),
     content: TripLengthTooltip,
     position: "RightBottom"
   };
@@ -355,7 +355,7 @@ const TripAnalytics = () => {
     return(
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average of the trip speed</p>
-        <p className="text-white">Trip Speed ---- {numberFormat(String(Math.round(CalvulatedValues.tripSpeedValue)))}</p>
+        <p className="text-white">Trip Speed ---- {numberFormat(String(Math.round(CalculatedValues.tripSpeedValue)))}</p>
         <p className="text-white">{selectedDuration}</p>
         </div>
     )
@@ -363,9 +363,9 @@ const TripAnalytics = () => {
   const CardWithChartProps2: CardPropType = {
     title: "TRIP SPEED",
     duration: selectedDuration,
-    value: numberFormat(String(Math.round(CalvulatedValues.tripSpeedValue))),
+    value: numberFormat(String(Math.round(CalculatedValues.tripSpeedValue))),
     icon: "positive",
-    percent: String(CalvulatedValues.tripSpeedChange),
+    percent: String(CalculatedValues.tripSpeedChange),
     content: TripSpeedTooltip,
     position: "RightBottom"
   };
@@ -445,7 +445,7 @@ const TripAnalytics = () => {
     const last7Days = getLast7DaysArray();
     var data: any[] = [];
 
-    CalvulatedValues.allFilteredTrips.forEach((driver) => {
+    CalculatedValues.allFilteredTrips.forEach((driver) => {
       var totalRevenue = 0;
       allFilteredTrips.forEach((trip) => {
         if (last7Days.includes(driver.startTime.split("T")[0])) {
@@ -468,7 +468,7 @@ const TripAnalytics = () => {
 
   const generateHistoData = (field: any)=>{
     let data: any[] = [];
-    CalvulatedValues.allFilteredTrips.forEach((trip) => {
+    CalculatedValues.allFilteredTrips.forEach((trip) => {
       if(field === 'TripDuration'){
         data.push({ TripDuration: trip.tripDuration});
       }else if( field === 'TripLength'){

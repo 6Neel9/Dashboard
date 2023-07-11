@@ -652,14 +652,14 @@ const Home = () => {
    const PaymentTypeToolTip = () => {
     return (
       <div className="px-2 py-2 text-sm">
-        <p className="text-white">Ratio of all the payment type Online/Offline </p>
+        <p className="text-white">Ratio of all the payment Mode Online/Offline </p>
         <p className="text-white">Ratio ---- 75/25</p>
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
    }
   const PaymentType: CardPropType = {
-    title: "Payment Type: Online / Offline",
+    title: "Payment Mode: Online / Offline",
     duration: "",
     content: PaymentTypeToolTip,
     position: "LeftBottom"

@@ -23,6 +23,8 @@ type CardPropType = {
   icon?: string;
   percent?: string;
   height?: string;
+  content?: any;
+  position?: string;
 };
 
 const AvgDriverRevenueperTrip: CardPropType = {
@@ -264,17 +266,39 @@ const RevenueAnalytics = () => {
     return pt;
   }
 
+  const DriverRevenueToolTip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of all driver's revenue</p>
+        <p className="text-white">Drivers Revenue ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips)))}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const DriverRevenue: CardPropType = {
     title: "DRIVER REVENUE",
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips))),
     icon: "positive",
     percent: String(CalvulatedValues.driverRevenueChange),
+    content: DriverRevenueToolTip,
+    position: "RightBottom"
   }
 
+  const PaymentTypeToolTip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Ratio of all the payment type Online/Offline </p>
+        <p className="text-white">Ratio ---- {Math.round(PaymentModeCalculate().online / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)}/{Math.round(PaymentModeCalculate().offline / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+   }
   const PaymentType: CardPropType = {
     title: "PAYMENT MODE",
     duration: selectedDuration,
+    content: PaymentTypeToolTip,
+    position: "LeftBottom"
   }
 
   const PieChartData = [
@@ -292,38 +316,90 @@ const RevenueAnalytics = () => {
     },
   ];
 
+
+  const AvgDriverRevenueTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average of driver's revenue per trip</p>
+        <p className="text-white">Avg Drivers Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length))}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const AvgDriverRevenue: CardPropType = {
     title: "AVG DRIVER REVENUE / TRIP",
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalvulatedValues.avgRevenuePerTrip),
+    content:AvgDriverRevenueTooltip,
+    position:"RightBottom"
   }
 
+  const RevenuePerTripChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Revenue per trip per state</p>
+      </div>
+    )
+  }
   const RevenuePerTrips: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
+    content:RevenuePerTripChartTooltip,
+    position:"RightBottom"
   };
 
+  const RevenuePerTripTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average Revenue per trip</p>
+        <p className="text-white">Avg Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length))}</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const RevenuePerTrips2: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
     value: "₹ " + numberFormat(String(Revenue(CalvulatedValues.allFilteredTrips) / CalvulatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalvulatedValues.avgRevenuePerTrip),
+    content:RevenuePerTripTooltip,
+    position:"RightBottom"
   };
 
+  const RevenuePerOperatingHoursChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Revenue per operating hour per state</p>
+      </div>
+    )
+  }
   const RevenuePerOperatingHour: CardPropType = {
     title: "REVENUE PER OPERATING HOUR",
     duration: selectedDuration,
+    content:RevenuePerOperatingHoursChartTooltip,
+    position:"RightBottom"
   };
 
+  const RevenuePerOperatingHourTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average Revenue per operating hour</p>
+        <p className="text-white">Avg Revenue per Operating Hour ---- ₹ 8,300</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
   const RevenuePerOperatingHour2: CardPropType = {
     title: "REVENUE PER OPERATING HOUR",
     duration: selectedDuration,
     value: "₹ 8,300",
     icon: "positive",
     percent: "0.6",
+    content:RevenuePerOperatingHourTooltip,
+    position:"RightBottom"
   };
 
   const RevenuePerTripChart = [

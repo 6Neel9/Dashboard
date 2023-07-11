@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax,calculateAverageTripDuration } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
@@ -400,12 +400,15 @@ const Home = () => {
       { "Date": "2023-06-10", "Time": 20 }
     ]
 
+    const dataset = calculateAverageTripDuration(CalvulatedValues.allFilteredTrips);
+    console.log(dataset)
+
 
 
     return (
       <LineChart
         primary_XAxis={primaryxAxis}
-        data={data}
+        data={dataset}
         x_name="Date"
         y_name="Time"
         chart_name="Driver Revenue"

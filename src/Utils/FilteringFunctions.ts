@@ -401,6 +401,109 @@ function minMax(data: any, field: string) {
 //   return { min, max };
 // }
 
+//Number format decimal value till 2
+function numberFormat(x: string | number): string {
+  if (typeof x === 'number') {
+    return x.toLocaleString(undefined, { maximumFractionDigits: 1 });
+  }
+  if (typeof x === 'string') {
+    const parts = x.split('.');
+    const formattedInteger = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    if (parts.length === 2) {
+      const decimalPart = parts[1].substring(0, 1); // Limit decimal to 1 digit
+      return `${formattedInteger}.${decimalPart}`;
+    }
+    return formattedInteger;
+  }
+  return '';
+}
+
+// Revenue Per Trip chart Data according to months
+
+interface RevenuePerTripChartItem {
+  months: string;
+  revenuePerTrip: number;
+}
+
+const getRevenuePerTripChart = (trips: Trip[]): RevenuePerTripChartItem[] => {
+  const revenuePerMonth: { [key: string]: { totalFare: number; tripCount: number } } = {};
+
+  trips.forEach(trip => {
+    const startTime = new Date(trip.startTime);
+    const month = startTime.toLocaleString('en-US', { month: 'long' });
+
+    if (!revenuePerMonth[month]) {
+      revenuePerMonth[month] = {
+        totalFare: 0,
+        tripCount: 0
+      };
+    }
+
+    revenuePerMonth[month].totalFare += trip.tripFare;
+    revenuePerMonth[month].tripCount++;
+  });
+
+  const sortedMonths = Object.keys(revenuePerMonth).sort((a, b) => {
+    const monthA = new Date(Date.parse('01 ' + a));
+    const monthB = new Date(Date.parse('01 ' + b));
+    return monthA.getMonth() - monthB.getMonth();
+  });
+
+  const RevenuePerTripChart: RevenuePerTripChartItem[] = sortedMonths.map(month => {
+    const { totalFare, tripCount } = revenuePerMonth[month];
+    const revenuePerTrip = (totalFare / tripCount).toFixed(2);
+    return {
+      months: month,
+      revenuePerTrip: Number(revenuePerTrip)
+    };
+  });
+
+  return RevenuePerTripChart;
+};
+
+
+//Trip Duration / Driver revenue chart data homepage
+interface AverageTripDuration {
+  Date: string;
+  Time: number;
+}
+
+function calculateAverageTripDuration(dataset: Trip[]): AverageTripDuration[] {
+  const dateMap = new Map<string, { totalDuration: number; tripCount: number }>();
+  const tripsByDate: AverageTripDuration[] = [];
+
+  for (const trip of dataset) {
+    const startDate = trip.startTime.substr(0, 10); // Extract date from startTime
+    const tripDuration = trip.tripDuration;
+
+    if (dateMap.has(startDate)) {
+      dateMap.set(startDate, {
+        totalDuration: dateMap.get(startDate)!.totalDuration + tripDuration,
+        tripCount: dateMap.get(startDate)!.tripCount + 1,
+      });
+    } else {
+      dateMap.set(startDate, {
+        totalDuration: tripDuration,
+        tripCount: 1,
+      });
+    }
+  }
+
+  const dateArray = Array.from(dateMap.entries());
+
+  for (const [date, { totalDuration, tripCount }] of dateArray) {
+    const averageDuration = (totalDuration / tripCount).toFixed(1); // Round to one decimal place
+
+    tripsByDate.push({
+      Date: date,
+      Time: Number(averageDuration), // Convert back to number
+    });
+  }
+
+  return tripsByDate;
+}
+
+
 export {
   filterTripsByPeriod,
   filteredTrips,
@@ -412,4 +515,7 @@ export {
   calculateAverageUsingValue,
   getTop10Drivers,
   minMax,
+  getRevenuePerTripChart,
+  numberFormat,
+  calculateAverageTripDuration
 };

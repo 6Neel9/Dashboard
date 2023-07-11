@@ -58,6 +58,8 @@ const TripAnalytics = () => {
     icon?: string;
     percent?: string;
     height?: string;
+    content?: any;
+    position?: string;
   };
   // const [driverData, setDrivers] = useState<any[]>([]);
   // const [tripData, setTrips] = useState<any[]>([]);
@@ -185,69 +187,187 @@ const TripAnalytics = () => {
     icon: "positive",
     percent: "2.45",
   };
+
+  const CumulativePeakTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Cumulative Peak time of the day</p>
+        <p className="text-white">Peak Time ---- 5:43 PM</p>
+      </div>
+    )
+  }
   const SmallCardProps6: CardPropType = {
     title: "Peak hour (cumulative)",
     duration: selectedDuration,
-    value: "5:43 PM",
+    value: "5:43 PM", 
+    content:CumulativePeakTooltip,
+    position:"RightBottom"
   };
+
+  
+  const MorningPeakTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Morning Peak time of the day</p>
+        <p className="text-white">Peak Time ---- 10:12 AM</p>
+      </div>
+    )
+  }
   const SmallCardProps7: CardPropType = {
     title: "Morning peak",
     duration: selectedDuration,
     value: "10:12 AM",
+    content:MorningPeakTooltip,
+    position:"RightBottom"
   };
+
+  const EveningPeakTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Evening Peak time of the day</p>
+        <p className="text-white">Peak Time ---- 7:13 PM</p>
+      </div>
+    )
+  }
   const SmallCardProps8: CardPropType = {
     title: "Evening peak",
     duration: selectedDuration,
     value: "7:13 PM",
+    content: EveningPeakTooltip,
+    position: "RightBottom"
   };
 
+  const TotalTripsChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of the number of trips per state</p>
+        </div>
+    )
+  }
   const CardWithChartProp1: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
+    content:TotalTripsChartTooltip,
+    position:"RightBottom"
   };
 
+  const TotalTripTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of the number of trips</p>
+        <p className="text-white">Total Trips ---- {numberFormat(String(allFilteredTrips.length))}</p>
+        <p className="text-white">{selectedDuration}</p>
+        </div>
+    )
+  }
   const CardWithChartProp2: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalvulatedValues.tripChange),
+    content:TotalTripTooltip,
+    position:"RightBottom"
   };
 
+  const TripSpeedChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Histogram of the trip speed values with its noraml distribution and mean</p>
+        </div>
+    )
+  }
   const ChartCardProps: CardPropType = {
     title: "TRIP SPEED",
     duration: selectedDuration,
+    content:TripSpeedChartTooltip,
+    position:"RightBottom"
   };
+
+  const TripLengthChartTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Histogram of the trip length values with its noraml distribution and mean</p>
+        </div>
+    )
+  }
   const ChartCardProps4: CardPropType = {
     title: "TRIP LENGTH",
     duration: selectedDuration,
+    content: TripLengthChartTooltip,
+    position: "RightBottom"
   };
 
+  const TripDurationChartTooltip =()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Histogram of the trip duration values with its noraml distribution and mean </p>
+        </div>
+    )
+  }
   const ChartCardProps2: CardPropType = {
     title: "TRIP DURATION",
     duration: selectedDuration,
+    content: TripDurationChartTooltip,
+    position: "RightBottom"
   };
 
+  const TripDurationTooltip=()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of the trip duration</p>
+        <p className="text-white">Total Trips ---- {numberFormat(String(CalvulatedValues.tripDurationValue))}</p>
+        <p className="text-white">{selectedDuration}</p>
+        </div>
+    )
+  }
   const CardWithChartProps: CardPropType = {
     title: "TRIP DURATION",
     duration: selectedDuration,
     value: numberFormat(String(CalvulatedValues.tripDurationValue)),
     icon: "positive",
     percent: String(CalvulatedValues.tripDurationChange),
+    content: TripDurationTooltip,
+    position: "RightBottom"
   };
+
+  const TripLengthTooltip =()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Aggregate of the trip Length</p>
+        <p className="text-white">Trip Length ---- {numberFormat(String(Math.round(CalvulatedValues.tripLengthValue)))}</p>
+        <p className="text-white">{selectedDuration}</p>
+        </div>
+    )
+  }
   const CardWithChartProps4: CardPropType = {
     title: "TRIP LENGTH",
     duration: selectedDuration,
     value: numberFormat(String(Math.round(CalvulatedValues.tripLengthValue))),
     icon: "positive",
     percent: String(CalvulatedValues.tripLengthChange),
+    content: TripLengthTooltip,
+    position: "RightBottom"
   };
+
+
+  const TripSpeedTooltip =()=>{
+    return(
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average of the trip speed</p>
+        <p className="text-white">Trip Speed ---- {numberFormat(String(Math.round(CalvulatedValues.tripSpeedValue)))}</p>
+        <p className="text-white">{selectedDuration}</p>
+        </div>
+    )
+  }
   const CardWithChartProps2: CardPropType = {
     title: "TRIP SPEED",
     duration: selectedDuration,
     value: numberFormat(String(Math.round(CalvulatedValues.tripSpeedValue))),
     icon: "positive",
     percent: String(CalvulatedValues.tripSpeedChange),
+    content: TripSpeedTooltip,
+    position: "RightBottom"
   };
 
   

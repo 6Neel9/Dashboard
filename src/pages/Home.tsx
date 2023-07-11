@@ -37,11 +37,12 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax ,calculateAverageTripDuration} from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+
 
 const Home = () => {
   const {

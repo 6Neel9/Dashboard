@@ -33,6 +33,7 @@ import {
 import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Loading from './components/Loading';
 
 
 

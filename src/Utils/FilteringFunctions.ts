@@ -384,6 +384,9 @@ function minMax(data: any, field: string) {
   } else if (field === "TripSpeed") {
     min = Math.min(...data.map((item: any) => item.TripSpeed));
     max = Math.max(...data.map((item: any) => item.TripSpeed));
+  }else if(field==="duration"){
+    min = Math.min(...data.map((item: any) => item.y));
+    max = Math.max(...data.map((item: any) => item.y));
   }
 
   return { min, max };
@@ -464,8 +467,8 @@ const getRevenuePerTripChart = (trips: Trip[]): RevenuePerTripChartItem[] => {
 
 //Trip Duration / Driver revenue chart data homepage
 interface AverageTripDuration {
-  Date: string;
-  Time: number;
+  x: Date;
+  y: number;
 }
 
 function calculateAverageTripDuration(dataset: Trip[]): AverageTripDuration[] {
@@ -493,13 +496,12 @@ function calculateAverageTripDuration(dataset: Trip[]): AverageTripDuration[] {
 
   for (const [date, { totalDuration, tripCount }] of dateArray) {
     const averageDuration = (totalDuration / tripCount).toFixed(1); // Round to one decimal place
-
     tripsByDate.push({
-      Date: date,
-      Time: Number(averageDuration), // Convert back to number
+      x: new Date(date),
+      y: Number(averageDuration), // Convert back to number
     });
+    tripsByDate.sort((a, b) => a.x.getTime() - b.x.getTime());
   }
-
   return tripsByDate;
 }
 

@@ -36,10 +36,12 @@
     "react-icons": "^4.10.1",
     "react-leaflet": "^4.2.1",
     "react-leaflet-google-layer": "^2.2.0",
+    "react-loading": "^2.0.3",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
     "sass": "^1.62.0",
+    "tachyons-components": "^1.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

@@ -402,18 +402,13 @@ const Home = () => {
       { "Date": "2023-06-10", "Time": 20 }
     ]
 
-    const dataset = calculateAverageTripDuration(CalculatedValues.allFilteredTrips);
-    console.log(dataset)
-
-
+    // console.log(calculateAverageTripDuration(CalculatedValues.allFilteredTrips))
 
     return (
-      <LineChart
-        primary_XAxis={primaryxAxis}
-        data={dataset}
-        x_name="Date"
-        y_name="Time"
-        chart_name="Driver Revenue"
+      <DateTimeLineChart
+        chartData={calculateAverageTripDuration(CalculatedValues.allFilteredTrips)}
+        chart_name="Trip duration"
+        props={minMax(calculateAverageTripDuration(CalculatedValues.allFilteredTrips),"duration")}
       />
     );
   }

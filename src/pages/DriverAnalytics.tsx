@@ -515,21 +515,49 @@ const DriverAnalytics = () => {
   //   var sub = d2.getTime() - d1.getTime();
   //   return sub / (1000 * 60 * 60 * 24);
   // }
-  const generateHistoData = () => {
-    let data: any[] = CalculatedValues.allFilteredTrips;
-    // Sort the data based on end time
-    let ans: any[] = [];
-    for (let i = 1; i < data.length; i++) {
-      // const timeBtwTrips = DiffDate(data[i - 1].endTime, data[i].startTime)
-      let timeBtwTrips =  new Date(data[i].startTime).getTime()- new Date(data[i - 1].endTime).getTime();
-      ans.push({ TimeBtwTrips: Math.round(timeBtwTrips/60000) });
-    }
-    return ans;
-  }
+  // const generateHistoData = () => {
+  //   let data: any[] = CalculatedValues.allFilteredTrips;
+  //   // Sort the data based on end time
+  //   let ans: any[] = [];
+  //   for (let i = 1; i < data.length; i++) {
+  //     // const timeBtwTrips = DiffDate(data[i - 1].endTime, data[i].startTime)
+  //     let timeBtwTrips =  new Date(data[i].startTime).getTime()- new Date(data[i - 1].endTime).getTime();
+  //     // console.log(new Date(data[i].startTime).getTime(),new Date(data[i - 1].endTime).getTime())
+  //     ans.push({ TimeBtwTrips: Math.round(timeBtwTrips/60000) });
+  //   }
+  //   return ans;
+  // }
 
-console.log(generateHistoData())
+  function getTimeBetweenTrips(trips: any[]): { TimeBtwTrips: number }[] {
+    const timeDifferences: { TimeBtwTrips: number }[] = [];
+  
+    for (let i = 0; i < trips.length - 1; i++) {
+      const currentTrip = trips[i];
+      const nextTrip = trips[i + 1];
+      const endTime = new Date(currentTrip.endTime);
+      const startTime = new Date(nextTrip.startTime);
+  
+      if (startTime > endTime) {
+        const timeDifference = startTime.getTime() - endTime.getTime();
+        const timeDifferenceInMinutes = Math.floor(timeDifference / 60000); // Convert milliseconds to minutes and round down
+        timeDifferences.push({ TimeBtwTrips: timeDifferenceInMinutes });
+      }
+    }
+  
+    // Sort the time differences in ascending order
+    timeDifferences.sort((a, b) => a.TimeBtwTrips - b.TimeBtwTrips);
+  
+    return timeDifferences;
+  }
+  
+  
+
+  const timeDifferences = getTimeBetweenTrips(CalculatedValues.allFilteredTrips);
+console.log(timeDifferences);
+
+// console.log(generateHistoData());
   const TimeBetweenTripsChartProps = {
-    chartData: generateHistoData(),
+    chartData: timeDifferences,
     yName: "TimeBtwTrips",
     chartName: "Time Between Trips",
     xAxisTitle: "Time Between Trips",

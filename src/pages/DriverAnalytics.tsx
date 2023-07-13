@@ -518,19 +518,16 @@ const DriverAnalytics = () => {
   const generateHistoData = () => {
     let data: any[] = CalculatedValues.allFilteredTrips;
     // Sort the data based on end time
-    data.sort((a, b) => a.endTime - b.endTime);
     let ans: any[] = [];
     for (let i = 1; i < data.length; i++) {
       // const timeBtwTrips = DiffDate(data[i - 1].endTime, data[i].startTime)
       let timeBtwTrips =  new Date(data[i].startTime).getTime()- new Date(data[i - 1].endTime).getTime();
-      // data[i].startTime - data[i - 1].endTime;
-      timeBtwTrips = Math.abs(Math.round(timeBtwTrips/1000*60*60))
-      ans.push({ TimeBtwTrips: timeBtwTrips });
+      ans.push({ TimeBtwTrips: Math.round(timeBtwTrips/60000) });
     }
     return ans;
   }
 
-
+console.log(generateHistoData())
   const TimeBetweenTripsChartProps = {
     chartData: generateHistoData(),
     yName: "TimeBtwTrips",

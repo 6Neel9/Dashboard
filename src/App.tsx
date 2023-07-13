@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import "./App.css";
 
 import { FiSettings } from "react-icons/fi";
@@ -34,6 +34,8 @@ import "./maincss/index.css";
 import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Loading from './components/Loading';
+import axios from 'axios';
+
 
 
 
@@ -76,25 +78,31 @@ function App() {
 
 
 
-  useEffect(() => {
-    fetch("http://localhost:5000/yuja-sm/v1/drivers", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // setDrivers(data);
-        setDriverData(data);
-      });
-    fetch("http://localhost:5000/yuja-sm/v1/trips", {
-      method: "GET",
-    })
-      .then((res) => res.json())
-      .then((e) => {
-        // setTrips(e);
-        setTripData(e)
 
+  const fetchData = useCallback(() => {
+    const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
+    const tripsRequest = axios.get("http://localhost:5000/yuja-sm/v1/trips");
+  
+    axios.all([driversRequest, tripsRequest])
+      .then(axios.spread((driversRes, tripsRes) => {
+        // Handle drivers response
+        // setDrivers(driversRes.data);
+        setDriverData(driversRes.data);
+  
+        // Handle trips response
+        // setTrips(tripsRes.data);
+        setTripData(tripsRes.data);
+      }))
+      .catch((error) => {
+        // Handle error
+        console.error(error);
       });
   }, []);
+
+  useEffect(()=>{
+    fetchData()
+  },[])
+  
 
 
 

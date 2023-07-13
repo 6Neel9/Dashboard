@@ -297,7 +297,7 @@ const DriverAnalytics = () => {
     duration: selectedDuration,
     value: numberFormat(String(driverData.length)),
     icon: "positive",
-    percent: String(CalculatedValues.DriverChange),
+    percent: String(CalculatedValues.driverChange),
     content: DriversTooltip,
     position: "RightBottom"
   }

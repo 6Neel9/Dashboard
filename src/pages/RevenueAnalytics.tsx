@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useMemo, Suspense, lazy } from "react";
 import {
   Filters,
   SmallCard,
@@ -11,7 +11,7 @@ import {
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,minMax ,getRevenuePerTripChart} from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, minMax, getRevenuePerTripChart } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
@@ -173,60 +173,12 @@ const RevenueAnalytics = () => {
     paymentType: string;
     endTime: string;
   }
-  // const [tripData, setTrips] = useState<Trip[]>([]);
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/yuja-sm/v1/trips", {
-  //     method: "GET",
-  //   })
-  //     .then((res) => res.json())
-  //     .then((e) => {
-  //       setTrips(e);
-  //     });
-  // }, [selectedDuration, selectedState]);
 
-  // function filterTripsByPeriod(trips: Trip[], period: number): Trip[] {
-  //   const filterEnd = new Date();
-
-  //   let filterStart = new Date();
-  //   if (period === 0) {
-  //     filterStart.setHours(0, 0, 0, 0);
-  //   } else {
-  //     filterStart = new Date(filterEnd.getTime() - period * 24 * 60 * 60 * 1000);
-  //   }
-
-  //   const todayTrips = trips.filter((trip) => {
-  //     const startTime = new Date(trip.startTime);
-  //     return startTime >= filterStart && startTime <= filterEnd;
-  //   });
-
-  //   return todayTrips;
-  // }
-
-  // function filteredTrips() {
-  //   let totalTrips: any[] = trips
-  //   if (selectedDuration === "Today") {
-  //     totalTrips = filterTripsByPeriod(trips, 0);
-  //   } else if (selectedDuration === "Till Date") {
-  //     totalTrips = trips
-  //   } else if (selectedDuration === "Last 7 Days") {
-  //     totalTrips = filterTripsByPeriod(trips, 7);
-
-  //   } else if (selectedDuration === "Last 30 Days") {
-  //     totalTrips = filterTripsByPeriod(trips, 30);
-
-  //   } else if (selectedDuration === "Last 6 Months") {
-  //     totalTrips = filterTripsByPeriod(trips, 180);
-
-  //   } else if (selectedDuration === "Last Year") {
-  //     totalTrips = filterTripsByPeriod(trips, 365);
-  //   }
-  //   return totalTrips;
-
-  // }
-
+  //
+  const LazyLoader = lazy(() => import("../components/Charts/Bar"))
   //Filter Function
- 
+
 
   function numberFormat(x: string | number): string {
     if (typeof x === 'number') {
@@ -243,28 +195,30 @@ const RevenueAnalytics = () => {
     }
     return '';
   }
-  const Revenue = (data: any) => {
-    var temp = 0;
-    data.forEach((element: any) => {
-      temp += element.tripFare;
-    });
-    return temp;
-  };
+  const Revenue = useMemo(() => {
+    return (data: any) => {
+      var totalRevenue = 0;
+      data.forEach((element: any) => {
+        totalRevenue += element.tripFare;
+      });
+      return totalRevenue;
+    };
+  }, []);
 
-  const PaymentModeCalculate = () => {
+  const PaymentModeCalculate = useCallback(() => {
     var online = 0;
     var offline = 0;
     CalculatedValues.allFilteredTrips.forEach((element: any) => {
       if (element.paymentType === "cash") {
         offline += 1;
-      }
-      else {
+      } else {
         online += 1;
       }
     });
-    const pt = { online, offline }
+    const pt = { online, offline };
     return pt;
-  }
+  }, [CalculatedValues.allFilteredTrips]);
+
 
   const DriverRevenueToolTip = () => {
     return (
@@ -293,7 +247,7 @@ const RevenueAnalytics = () => {
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
-   }
+  }
   const PaymentType: CardPropType = {
     title: "PAYMENT MODE",
     duration: selectedDuration,
@@ -306,7 +260,7 @@ const RevenueAnalytics = () => {
       x: 'Online',
       y: PaymentModeCalculate().online,
       text: `Online (${Math.round(PaymentModeCalculate().online / (PaymentModeCalculate().offline + PaymentModeCalculate().online) * 100)} %)`
-      ,fill: "#D6CDE9"
+      , fill: "#D6CDE9"
     },
     {
       x: 'Offline',
@@ -317,8 +271,8 @@ const RevenueAnalytics = () => {
   ];
 
 
-  const AvgDriverRevenueTooltip=()=>{
-    return(
+  const AvgDriverRevenueTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average of driver's revenue per trip</p>
         <p className="text-white">Avg Drivers Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length))}</p>
@@ -332,12 +286,12 @@ const RevenueAnalytics = () => {
     value: "₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalculatedValues.avgRevenuePerTrip),
-    content:AvgDriverRevenueTooltip,
-    position:"RightBottom"
+    content: AvgDriverRevenueTooltip,
+    position: "RightBottom"
   }
 
-  const RevenuePerTripChartTooltip=()=>{
-    return(
+  const RevenuePerTripChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Revenue per trip per state</p>
       </div>
@@ -346,12 +300,12 @@ const RevenueAnalytics = () => {
   const RevenuePerTrips: CardPropType = {
     title: "REVENUE PER TRIP",
     duration: selectedDuration,
-    content:RevenuePerTripChartTooltip,
-    position:"RightBottom"
+    content: RevenuePerTripChartTooltip,
+    position: "RightBottom"
   };
 
-  const RevenuePerTripTooltip=()=>{
-    return(
+  const RevenuePerTripTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average Revenue per trip</p>
         <p className="text-white">Avg Revenue per Trip ---- {"₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length))}</p>
@@ -365,12 +319,12 @@ const RevenueAnalytics = () => {
     value: "₹ " + numberFormat(String(Revenue(CalculatedValues.allFilteredTrips) / CalculatedValues.allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalculatedValues.avgRevenuePerTrip),
-    content:RevenuePerTripTooltip,
-    position:"RightBottom"
+    content: RevenuePerTripTooltip,
+    position: "RightBottom"
   };
 
-  const RevenuePerOperatingHoursChartTooltip=()=>{
-    return(
+  const RevenuePerOperatingHoursChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Revenue per operating hour per state</p>
       </div>
@@ -379,12 +333,12 @@ const RevenueAnalytics = () => {
   const RevenuePerOperatingHour: CardPropType = {
     title: "REVENUE PER OPERATING HOUR",
     duration: selectedDuration,
-    content:RevenuePerOperatingHoursChartTooltip,
-    position:"RightBottom"
+    content: RevenuePerOperatingHoursChartTooltip,
+    position: "RightBottom"
   };
 
-  const RevenuePerOperatingHourTooltip=()=>{
-    return(
+  const RevenuePerOperatingHourTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average Revenue per operating hour</p>
         <p className="text-white">Avg Revenue per Operating Hour ---- ₹ 8,300</p>
@@ -398,8 +352,8 @@ const RevenueAnalytics = () => {
     value: "₹ 8,300",
     icon: "positive",
     percent: "0.6",
-    content:RevenuePerOperatingHourTooltip,
-    position:"RightBottom"
+    content: RevenuePerOperatingHourTooltip,
+    position: "RightBottom"
   };
 
   const RevenuePerTripChart = [
@@ -415,7 +369,10 @@ const RevenueAnalytics = () => {
     { months: 'October', revenuePerTrip: getRandomNumber(50, 160) }
   ];
   //Revenue per trip data
-  const revenuePerTripChart = getRevenuePerTripChart(CalculatedValues.allFilteredTrips);
+  const revenuePerTripChart = useMemo(() => {
+    return getRevenuePerTripChart(CalculatedValues.allFilteredTrips);
+  }, [CalculatedValues.allFilteredTrips]);
+
   // console.log(revenuePerTripChart)
 
   const RevenuePerHourChart = [
@@ -430,7 +387,7 @@ const RevenueAnalytics = () => {
     { states: 'Madhya Pradesh', revenuePerHour: getRandomNumber(5000, 16000) },
     { states: 'Bihar', revenuePerHour: getRandomNumber(5000, 16000) }
   ];
-    
+
   function getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
@@ -454,14 +411,18 @@ const RevenueAnalytics = () => {
         <CardWithChart
           prop1={RevenuePerTrips}
           prop2={RevenuePerTrips2}
-          chart={<Bar columnData={revenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" Chart_name="Revenue/trip per month" minMax={minMax(RevenuePerTripChart,'revenuePerTrip')}/>}
+          // chart={<Suspense fallback={<div>Please  wait ....</div>}>
+          //   <LazyLoader columnData={revenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" Chart_name="Revenue/trip per month" minMax={minMax(RevenuePerTripChart, 'revenuePerTrip')} />
+          // </Suspense>
+          // }
+          chart={<Bar columnData={revenuePerTripChart} xTitle="months" yTitle="revenuePerTrip" Chart_name="Revenue/trip per month" minMax={minMax(RevenuePerTripChart, 'revenuePerTrip')}/>}
         />
       </div>
       <div>
         <CardWithChart
           prop1={RevenuePerOperatingHour}
           prop2={RevenuePerOperatingHour2}
-          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" Chart_name="Revenue/hr per state" minMax={minMax(RevenuePerHourChart,'revenuePerHour')}/>}
+          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" Chart_name="Revenue/hr per state" minMax={minMax(RevenuePerHourChart, 'revenuePerHour')} />}
         />
       </div>
 

@@ -7,11 +7,12 @@ import {
   LineChart,
   Bar,
   Pie,
+  HistogramLine,
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 import { select } from "@syncfusion/ej2-base";
 import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
-import { filteredTrips, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
+import { calculateAverageTripDuration, filteredTrips, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
 type CardPropType = {
@@ -301,8 +302,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   }
 
-  const DriverStatusTooltip=()=>{
-    return(
+  const DriverStatusTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Ratio of the drivers in Active/Inactive state</p>
         <p className="text-white">Ratio ---- 75/25</p>
@@ -310,7 +311,7 @@ const DriverAnalytics = () => {
       </div>
     )
   }
-  const ActiveInactive : CardPropType = {
+  const ActiveInactive: CardPropType = {
     title: "ACTIVE / INACTIVE DRIVERS",
     duration: selectedDuration,
     content: DriverStatusTooltip,
@@ -318,11 +319,11 @@ const DriverAnalytics = () => {
   }
 
   const PieChartData = [
-    { x: 'Active', y: 75, text: 'Active', fill:"#D6CDE9" }, { x: 'Inactive', y: 25, text: 'Inactive', fill:"#F7F7F7" },
+    { x: 'Active', y: 75, text: 'Active', fill: "#D6CDE9" }, { x: 'Inactive', y: 25, text: 'Inactive', fill: "#F7F7F7" },
   ];
 
-  const PendingApprovalTooltip=()=>{
-    return(
+  const PendingApprovalTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Drivers waiting for approval</p>
         <p className="text-white">Total ---- 35</p>
@@ -339,8 +340,8 @@ const DriverAnalytics = () => {
   }
 
 
-  const ActiveHoursPerDayChartTooltip=()=>{
-    return(
+  const ActiveHoursPerDayChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average active hours per day per state</p>
       </div>
@@ -353,8 +354,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const ActiveHoursPerDayTooltip=()=>{
-    return(
+  const ActiveHoursPerDayTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average active hours per day</p>
         <p className="text-white">Avg active hours per day ---- 6.5Hrs</p>
@@ -372,8 +373,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const AvgTripPerDayChartTooltip=()=>{
-    return(
+  const AvgTripPerDayChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average trips per day per state</p>
       </div>
@@ -386,8 +387,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const AvgTripPerDayTooltip=()=>{
-    return(
+  const AvgTripPerDayTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average trips per day</p>
         <p className="text-white">Avg trips per day ---- 405</p>
@@ -405,8 +406,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const AvgTimeBetweenTripsChartTooltip=()=>{
-    return(
+  const AvgTimeBetweenTripsChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average time between trips Chart</p>
       </div>
@@ -419,8 +420,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const Top10DriversTooltip=()=>{
-    return(
+  const Top10DriversTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Top 10 drivers based on the revenue generated  by them</p>
         <p className="text-white">{selectedDuration}</p>
@@ -437,8 +438,8 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const AvgTimeBetweenTripsTooltip=()=>{
-    return(
+  const AvgTimeBetweenTripsTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average time between trips</p>
         <p className="text-white">Avg time between trips ---- 16min</p>
@@ -467,51 +468,81 @@ const DriverAnalytics = () => {
     { driver: 'Manish', revenue: 27500 },
     { driver: 'Pooja', revenue: 27000 }
   ];
-  
-  
 
-   const ActiveHoursChartData = [
-    { states: 'Maharashtra', activeHours: getRandomNumber(2,12) },
-    { states: 'Uttar Pradesh', activeHours: getRandomNumber(2,12) },
-    { states: 'Karnataka', activeHours: getRandomNumber(2,12) },
-    { states: 'Gujarat', activeHours: getRandomNumber(2,12) },
-    { states: 'Tamil Nadu', activeHours: getRandomNumber(2,12) },
-    { states: 'Rajasthan', activeHours: getRandomNumber(2,12) },
-    { states: 'West Bengal', activeHours: getRandomNumber(2,12) },
-    { states: 'Punjab', activeHours: getRandomNumber(2,12) },
-    { states: 'Madhya Pradesh', activeHours: getRandomNumber(2,12) },
-    { states: 'Bihar', activeHours: getRandomNumber(2,12) }
+
+
+  const ActiveHoursChartData = [
+    { states: 'Maharashtra', activeHours: getRandomNumber(2, 12) },
+    { states: 'Uttar Pradesh', activeHours: getRandomNumber(2, 12) },
+    { states: 'Karnataka', activeHours: getRandomNumber(2, 12) },
+    { states: 'Gujarat', activeHours: getRandomNumber(2, 12) },
+    { states: 'Tamil Nadu', activeHours: getRandomNumber(2, 12) },
+    { states: 'Rajasthan', activeHours: getRandomNumber(2, 12) },
+    { states: 'West Bengal', activeHours: getRandomNumber(2, 12) },
+    { states: 'Punjab', activeHours: getRandomNumber(2, 12) },
+    { states: 'Madhya Pradesh', activeHours: getRandomNumber(2, 12) },
+    { states: 'Bihar', activeHours: getRandomNumber(2, 12) }
   ];
-   const TripsPerDayChartData = [
-    { states: 'Maharashtra', trips: getRandomNumber(1000,12000) },
-    { states: 'Uttar Pradesh', trips: getRandomNumber(1000,12000) },
-    { states: 'Karnataka', trips: getRandomNumber(1000,12000) },
-    { states: 'Gujarat', trips: getRandomNumber(1000,12000) },
-    { states: 'Tamil Nadu', trips: getRandomNumber(1000,12000) },
-    { states: 'Rajasthan', trips: getRandomNumber(1000,12000) },
-    { states: 'West Bengal', trips: getRandomNumber(1000,12000) },
-    { states: 'Punjab', trips: getRandomNumber(1000,12000) },
-    { states: 'Madhya Pradesh', trips: getRandomNumber(1000,12000) },
-    { states: 'Bihar', trips: getRandomNumber(1000,12000) }
+  const TripsPerDayChartData = [
+    { states: 'Maharashtra', trips: getRandomNumber(1000, 12000) },
+    { states: 'Uttar Pradesh', trips: getRandomNumber(1000, 12000) },
+    { states: 'Karnataka', trips: getRandomNumber(1000, 12000) },
+    { states: 'Gujarat', trips: getRandomNumber(1000, 12000) },
+    { states: 'Tamil Nadu', trips: getRandomNumber(1000, 12000) },
+    { states: 'Rajasthan', trips: getRandomNumber(1000, 12000) },
+    { states: 'West Bengal', trips: getRandomNumber(1000, 12000) },
+    { states: 'Punjab', trips: getRandomNumber(1000, 12000) },
+    { states: 'Madhya Pradesh', trips: getRandomNumber(1000, 12000) },
+    { states: 'Bihar', trips: getRandomNumber(1000, 12000) }
   ];
 
-  const TimeBetweenTripsChartData  = [
-    { TimeBwtTrips: 'Short', trips: getRandomNumber(500,1200) },
-    { TimeBwtTrips: 'Medium', trips: getRandomNumber(500,1200) },
-    { TimeBwtTrips: 'Average', trips: getRandomNumber(500,1200) },
-    { TimeBwtTrips: 'Long', trips: getRandomNumber(500,1200) },
-    { TimeBwtTrips: 'Extended', trips: getRandomNumber(500,1200) },
+  const TimeBetweenTripsChartData = [
+    { TimeBwtTrips: 'Short', trips: getRandomNumber(500, 1200) },
+    { TimeBwtTrips: 'Medium', trips: getRandomNumber(500, 1200) },
+    { TimeBwtTrips: 'Average', trips: getRandomNumber(500, 1200) },
+    { TimeBwtTrips: 'Long', trips: getRandomNumber(500, 1200) },
+    { TimeBwtTrips: 'Extended', trips: getRandomNumber(500, 1200) },
     // { TimeBwtTrips: 'Very Long', trips: getRandomNumber(500,1200) },
     // { TimeBwtTrips: 'Extra Long', trips: getRandomNumber(500,1200) },
     // { TimeBwtTrips: 'Super Long', trips: getRandomNumber(500,1200) },
     // { TimeBwtTrips: 'Ultra Long', trips: getRandomNumber(500,1200) },
     // { TimeBwtTrips: 'Mega Long', trips: getRandomNumber(500,1200) }
   ];
-  
+
+  // const DiffDate = (d1: any, d2: any) => {
+  //   d1 = new Date(d1);
+  //   d2 = new Date(d2);
+  //   var sub = d2.getTime() - d1.getTime();
+  //   return sub / (1000 * 60 * 60 * 24);
+  // }
+  const generateHistoData = () => {
+    let data: any[] = CalculatedValues.allFilteredTrips;
+    // Sort the data based on end time
+    data.sort((a, b) => a.endTime - b.endTime);
+    let ans: any[] = [];
+    for (let i = 1; i < data.length; i++) {
+      // const timeBtwTrips = DiffDate(data[i - 1].endTime, data[i].startTime)
+      let timeBtwTrips =  new Date(data[i].startTime).getTime()- new Date(data[i - 1].endTime).getTime();
+      // data[i].startTime - data[i - 1].endTime;
+      timeBtwTrips = Math.abs(Math.round(timeBtwTrips/1000*60*60))
+      ans.push({ TimeBtwTrips: timeBtwTrips });
+    }
+    return ans;
+  }
+
+
+  const TimeBetweenTripsChartProps = {
+    chartData: generateHistoData(),
+    yName: "TimeBtwTrips",
+    chartName: "Time Between Trips",
+    xAxisTitle: "Time Between Trips",
+    yAxisTitle: "No. of Trips",
+  }
+
   function getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-  
+
 
   // useEffect(() => {
   // setSelectedDuration("Till Date");
@@ -519,9 +550,9 @@ const DriverAnalytics = () => {
   // }, []);
   let allFilteredTrips = filteredTrips(selectedDuration, tripData);
 
-  const top10Drivers = getTop10Drivers(allFilteredTrips,driverData);
-const topTenMinMaxVal= minMax(top10Drivers, 'revenue')
-  
+  const top10Drivers = getTop10Drivers(allFilteredTrips, driverData);
+  const topTenMinMaxVal = minMax(top10Drivers, 'revenue')
+
   return (
     <div className="extraSmallMargin">
       <div className="displayFlex">
@@ -535,28 +566,29 @@ const topTenMinMaxVal= minMax(top10Drivers, 'revenue')
       </div>
 
       <div className=" displayFlex textLeft flexJustifyBetween widthFull">
-        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" Chart_name="Revenue per driver"  minMax={topTenMinMaxVal}/>} />
+        <ChartCard prop={TopTenDrivers} chart={<Bar columnData={top10Drivers} xTitle="driverName" yTitle="revenue" Chart_name="Revenue per driver" minMax={topTenMinMaxVal} />} />
       </div>
 
       <div>
         <CardWithChart
           prop1={ActiveHoursPerDay}
           prop2={ActiveHoursPerDay2}
-          chart={<Bar  columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" Chart_name="Active Hours per state" minMax={minMax(ActiveHoursChartData,'activeHours')}/>}
+          chart={<Bar columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" Chart_name="Active Hours per state" minMax={minMax(ActiveHoursChartData, 'activeHours')} />}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TripsPerDay}
           prop2={TripsPerDay2}
-          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TripsPerDayChartData,'trips')}/>}
+          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TripsPerDayChartData, 'trips')} />}
         />
       </div>
       <div>
         <CardWithChart
           prop1={TimeBetweenTrips}
           prop2={TimeBetweenTrips2}
-          chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips" Chart_name="No. pf Trips per Time between Trips " minMax={minMax(TimeBetweenTripsChartData,"trips")}/>}
+          chart={<HistogramLine histogramProps={TimeBetweenTripsChartProps} />}
+        // chart={<Bar columnData={TimeBetweenTripsChartData} xTitle="TimeBwtTrips" yTitle="trips" Chart_name="No. pf Trips per Time between Trips " minMax={minMax(TimeBetweenTripsChartData,"trips")}/>}
         />
       </div>
 

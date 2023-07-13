@@ -1,7 +1,7 @@
 import React from 'react'
 import {
     AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, ChartTheme, LegendSettingsModel, TooltipSettingsModel,
-    Legend, Category, Tooltip, ColumnSeries, ILoadedEventArgs, DataLabel, HistogramSeries
+    Legend, Category, Tooltip, ColumnSeries, ILoadedEventArgs, DataLabel, HistogramSeries, ZoomSettingsModel
 } from '@syncfusion/ej2-react-charts';
 import { useStateContext } from '../../contexts/ContextProvider';
 
@@ -32,6 +32,7 @@ const HistogramLine = ({histogramProps}: any) => {
     const legendSettings: LegendSettingsModel = { visible: true, position: 'Bottom' ,alignment: 'Center', textStyle: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" }};
     const tooltipsettings: TooltipSettingsModel = { enable: true };
     const marker = { dataLabel: { visible: false ,font: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" }} };
+
 
     return (
         <div className='widthFull mainBackground'>

@@ -36,7 +36,7 @@ export const links: LinksType = [
     links: [
       {
         name: "Home",
-        route: "home",
+        route: "",
         icon: <FiHome />,
       },
       {

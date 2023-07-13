@@ -550,10 +550,53 @@ const DriverAnalytics = () => {
     return timeDifferences;
   }
   
+  //
+  function getTimeBetweenTrip(trips: any[]): { driverId: number, averageTime: number }[] {
+    const timeDifferences: { driverId: number, averageTime: number }[] = [];
+    
+    // Extract unique driver IDs from trips
+    const uniqueDriverIds: number[] = [];
+    trips.forEach(trip => {
+      if (!uniqueDriverIds.includes(trip.driverId)) {
+        uniqueDriverIds.push(trip.driverId);
+      }
+    });
+    
+    // Calculate average time difference for each driver
+    for (const driverId of uniqueDriverIds) {
+      const driverTrips = trips.filter(trip => trip.driverId === driverId);
+      const driverTimeDifferences: number[] = [];
+  
+      for (let i = 0; i < driverTrips.length - 1; i++) {
+        const currentTrip = driverTrips[i];
+        const nextTrip = driverTrips[i + 1];
+        const endTime = new Date(currentTrip.endTime);
+        const startTime = new Date(nextTrip.startTime);
+  
+        if (startTime > endTime) {
+          const timeDifference = startTime.getTime() - endTime.getTime();
+          const timeDifferenceInMinutes = Math.floor(timeDifference / 60000); // Convert milliseconds to minutes and round down
+          driverTimeDifferences.push(timeDifferenceInMinutes);
+        }
+      }
+  
+      // Calculate the average time difference for the driver
+      const averageTime = driverTimeDifferences.length > 0 ? driverTimeDifferences.reduce((a, b) => a + b) / driverTimeDifferences.length : 0;
+  
+      timeDifferences.push({ driverId, averageTime });
+    }
+  
+    // Sort the time differences by driverId
+    timeDifferences.sort((a, b) => a.driverId - b.driverId);
+  
+    return timeDifferences;
+  }
+  console.log(getTimeBetweenTrip(CalculatedValues.allFilteredTrips))
+  
   
 
   const timeDifferences = getTimeBetweenTrips(CalculatedValues.allFilteredTrips);
-console.log(timeDifferences);
+// console.log(timeDifferences);
 
 // console.log(generateHistoData());
   const TimeBetweenTripsChartProps = {

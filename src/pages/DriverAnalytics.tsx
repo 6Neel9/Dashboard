@@ -551,52 +551,92 @@ const DriverAnalytics = () => {
   }
   
   //
-  function getTimeBetweenTrip(trips: any[]): { driverId: number, averageTime: number }[] {
-    const timeDifferences: { driverId: number, averageTime: number }[] = [];
+  // function getTimeBetweenTrip(trips: any[]): { driverId: number, averageTime: number }[] {
+  //   const timeDifferences: { driverId: number, averageTime: number }[] = [];
     
-    // Extract unique driver IDs from trips
-    const uniqueDriverIds: number[] = [];
-    trips.forEach(trip => {
-      if (!uniqueDriverIds.includes(trip.driverId)) {
-        uniqueDriverIds.push(trip.driverId);
-      }
-    });
+  //   // Extract unique driver IDs from trips
+  //   const uniqueDriverIds: number[] = [];
+  //   trips.forEach(trip => {
+  //     if (!uniqueDriverIds.includes(trip.driverId)) {
+  //       uniqueDriverIds.push(trip.driverId);
+  //     }
+  //   });
     
-    // Calculate average time difference for each driver
-    for (const driverId of uniqueDriverIds) {
-      const driverTrips = trips.filter(trip => trip.driverId === driverId);
-      const driverTimeDifferences: number[] = [];
+  //   // Calculate average time difference for each driver
+  //   for (const driverId of uniqueDriverIds) {
+  //     const driverTrips = trips.filter(trip => trip.driverId === driverId);
+  //     const driverTimeDifferences: number[] = [];
   
-      for (let i = 0; i < driverTrips.length - 1; i++) {
-        const currentTrip = driverTrips[i];
-        const nextTrip = driverTrips[i + 1];
-        const endTime = new Date(currentTrip.endTime);
-        const startTime = new Date(nextTrip.startTime);
+  //     for (let i = 0; i < driverTrips.length - 1; i++) {
+  //       const currentTrip = driverTrips[i];
+  //       const nextTrip = driverTrips[i + 1];
+  //       const endTime = new Date(currentTrip.endTime);
+  //       const startTime = new Date(nextTrip.startTime);
   
-        if (startTime > endTime) {
+  //       if (startTime > endTime) {
+  //         const timeDifference = startTime.getTime() - endTime.getTime();
+  //         const timeDifferenceInMinutes = Math.floor(timeDifference / 60000); // Convert milliseconds to minutes and round down
+  //         driverTimeDifferences.push(timeDifferenceInMinutes);
+  //       }
+  //     }
+  
+  //     // Calculate the average time difference for the driver
+  //     const averageTime = driverTimeDifferences.length > 0 ? driverTimeDifferences.reduce((a, b) => a + b) / driverTimeDifferences.length : 0;
+  
+  //     timeDifferences.push({ driverId, averageTime });
+  //   }
+  
+  //   // Sort the time differences by driverId
+  //   timeDifferences.sort((a, b) => a.driverId - b.driverId);
+  
+  //   return timeDifferences;
+  // }
+  // console.log(getTimeBetweenTrip(CalculatedValues.allFilteredTrips));
+
+  //
+  function getTimeBetweenTripDetail(trips: any[]): { timeBtwnTrips: number }[] {
+    const timeDifferences: { timeBtwnTrips: number }[] = [];
+  
+    // Sort trips by driverId
+    trips.sort((a, b) => a.driverId - b.driverId);
+  
+    // Calculate time differences for each driver
+    let currentDriverId = -1;
+  
+    for (const trip of trips) {
+      if (trip.driverId !== currentDriverId) {
+        // Reset driver ID for the new driver
+        currentDriverId = trip.driverId;
+      } else {
+        // Calculate time difference with the previous trip
+        const prevTrip = trips.find(t => t.tripId === trip.tripId - 1);
+        if (prevTrip) {
+          const endTime = new Date(prevTrip.endTime);
+          const startTime = new Date(trip.startTime);
           const timeDifference = startTime.getTime() - endTime.getTime();
-          const timeDifferenceInMinutes = Math.floor(timeDifference / 60000); // Convert milliseconds to minutes and round down
-          driverTimeDifferences.push(timeDifferenceInMinutes);
+          if (timeDifference > 0) {
+            const timeDifferenceInMinutes = Math.floor(timeDifference / 60000); // Convert milliseconds to minutes and round down
+            timeDifferences.push({ timeBtwnTrips: timeDifferenceInMinutes });
+          }
         }
       }
-  
-      // Calculate the average time difference for the driver
-      const averageTime = driverTimeDifferences.length > 0 ? driverTimeDifferences.reduce((a, b) => a + b) / driverTimeDifferences.length : 0;
-  
-      timeDifferences.push({ driverId, averageTime });
     }
-  
-    // Sort the time differences by driverId
-    timeDifferences.sort((a, b) => a.driverId - b.driverId);
   
     return timeDifferences;
   }
-  console.log(getTimeBetweenTrip(CalculatedValues.allFilteredTrips))
+  
+  
+  
+  
+
+  const details = getTimeBetweenTripDetail(CalculatedValues.allFilteredTrips);
+  console.log(details);
+  
   
   
 
   const timeDifferences = getTimeBetweenTrips(CalculatedValues.allFilteredTrips);
-// console.log(timeDifferences);
+console.log(timeDifferences);
 
 // console.log(generateHistoData());
   const TimeBetweenTripsChartProps = {

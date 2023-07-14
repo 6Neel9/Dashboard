@@ -679,7 +679,7 @@ console.log(timeDifferences);
     chartData: calculateTripsPerDay(CalculatedValues.allFilteredTrips),
     yName: "TripsPerDay",
     chartName: "Trips Per Day",
-    xAxisTitle: "Total Trips Per Day",
+    xAxisTitle: "No. of Trips",
     yAxisTitle: "No. of Days",
   }
 

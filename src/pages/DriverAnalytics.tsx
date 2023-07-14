@@ -527,6 +527,35 @@ const DriverAnalytics = () => {
   //   }
   //   return ans;
   // }
+  function getTotalTripsByDay(trips: any[], date: { getFullYear: () => number; getMonth: () => number; getDate: () => number; }) {
+    const tripsByDay = trips.filter((trip: { startTime: string | number | Date; }) => {
+      const tripDate = new Date(trip.startTime);
+      return (
+        tripDate.getFullYear() === date.getFullYear() &&
+        tripDate.getMonth() === date.getMonth() &&
+        tripDate.getDate() === date.getDate()
+      );
+    });
+    
+    return tripsByDay.length;
+  }
+  
+
+  function calculateTripsPerDay(data: any[]) {
+    let Dates: any[] = [];
+    let output :any[]= [];
+    data.forEach((d: any) => {
+      Dates.push(d["startTime"].split("T")[0]);
+    });
+    let uniqueDates : Set<any>= new Set(Dates);
+    uniqueDates.forEach((value, valueAgain, set) => {
+      const totalTrips = getTotalTripsByDay(data, new Date(value));
+      output.push({TripsPerDay: totalTrips})
+    });
+
+    return output;
+  }
+
 
   function getTimeBetweenTrips(trips: any[]): { TimeBtwTrips: number }[] {
     const timeDifferences: { TimeBtwTrips: number }[] = [];
@@ -646,6 +675,13 @@ console.log(timeDifferences);
     xAxisTitle: "Time Between Trips",
     yAxisTitle: "No. of Trips",
   }
+  const TotalTripsPerDayChartProps = {
+    chartData: calculateTripsPerDay(CalculatedValues.allFilteredTrips),
+    yName: "TripsPerDay",
+    chartName: "Trips Per Day",
+    xAxisTitle: "Total Trips Per Day",
+    yAxisTitle: "No. of Days",
+  }
 
   function getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -688,7 +724,8 @@ console.log(timeDifferences);
         <CardWithChart
           prop1={TripsPerDay}
           prop2={TripsPerDay2}
-          chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TripsPerDayChartData, 'trips')} />}
+          chart={<HistogramLine histogramProps={TotalTripsPerDayChartProps} />}
+          // chart={<Bar columnData={TripsPerDayChartData} xTitle="states" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TripsPerDayChartData, 'trips')} />}
         />
       </div>
       <div>

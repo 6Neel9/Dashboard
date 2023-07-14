@@ -14,6 +14,8 @@ import { useStateContext } from "../contexts/ContextProvider";
 import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, minMax, getRevenuePerTripChart } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
+import { Trip } from "../contexts/ContextProvider";
+
 
 
 type CardPropType = {
@@ -158,21 +160,6 @@ const RevenueAnalytics = () => {
   } = useStateContext();
 
   const CalculatedValues = AnalyticsCalculation();
-
-  interface Trip {
-    _id: string;
-    driverId: number;
-    tripId: number;
-    startLocation: string;
-    tripDistance: number;
-    tripSpeed: number;
-    tripDuration: number;
-    endLocation: string;
-    startTime: string;
-    tripFare: number;
-    paymentType: string;
-    endTime: string;
-  }
 
 
   //

@@ -14,7 +14,7 @@ const initialState: MyInitialStateType = {
     notification: false,
 }
 
-interface Trip {
+export interface Trip {
     _id: string;
     driverId: number;
     tripId: number;
@@ -127,7 +127,7 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
                 setTripData,
                 tripData,
                 setDriverData,
-                driverData
+                driverData,
             }}
         >
             {children}

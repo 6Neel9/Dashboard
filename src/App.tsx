@@ -35,6 +35,7 @@ import { useStateContext } from "./contexts/ContextProvider";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Loading from './components/Loading';
 import axios from 'axios';
+import { Trip } from './contexts/ContextProvider';
 
 
 
@@ -81,7 +82,7 @@ function App() {
 
   const fetchData = useCallback(() => {
     const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
-    const tripsRequest = axios.get("http://localhost:5000/yuja-sm/v1/trips");
+    const tripsRequest = axios.get<Trip[]>("http://localhost:5000/yuja-sm/v1/trips");
   
     axios.all([driversRequest, tripsRequest])
       .then(axios.spread((driversRes, tripsRes) => {

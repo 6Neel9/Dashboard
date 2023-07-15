@@ -1,9 +1,9 @@
-import React, { useState, useEffect,useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import "./App.css";
 
 import { FiSettings } from "react-icons/fi";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
-import { Navbar, Footer, Sidebar, ThemeSettings } from "./components";
+import { Navbar, Footer, Sidebar, ThemeSettings, Filters } from "./components";
 import {
   Home,
   Drivers,
@@ -83,13 +83,13 @@ function App() {
   const fetchData = useCallback(() => {
     const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
     const tripsRequest = axios.get<Trip[]>("http://localhost:5000/yuja-sm/v1/trips");
-  
+
     axios.all([driversRequest, tripsRequest])
       .then(axios.spread((driversRes, tripsRes) => {
         // Handle drivers response
         // setDrivers(driversRes.data);
         setDriverData(driversRes.data);
-  
+
         // Handle trips response
         // setTrips(tripsRes.data);
         setTripData(tripsRes.data);
@@ -100,10 +100,10 @@ function App() {
       });
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchData()
-  },[])
-  
+  }, [])
+
 
 
 
@@ -148,24 +148,26 @@ function App() {
                 : "bg-main-bg dark:bg-black  w-full min-h-screen flex-2 "
             }
           >
-            <div className="fixed md:static bg-main-bg dark:bg-[#110C16] navbar w-full ">
+            <div className="relative navbar w-full ">
               <Navbar />
             </div>
-            <div>
+            <div className=' mt-12'>
               {themeSettings && <ThemeSettings />}
-
+              {/* <div className={ activeMenu? "displayFlex fixed w-4/5" : "displayFlex fixed w-full"}>
+                <Filters />
+              </div> */}
               <Routes>
                 {/* dashboard  */}
-                <Route path="/" element={<Home  />} />
-                <Route path="/home" element={<Home  />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/home" element={<Home />} />
 
 
                 {/* pages  */}
-                <Route path="/drivers" element={<Drivers  />} />
-                <Route path="/driverUpdate" element={<DriverUpdate  />} />
-                <Route path="/driverView/:id" element={<ViewDriver  />} />
+                <Route path="/drivers" element={<Drivers />} />
+                <Route path="/driverUpdate" element={<DriverUpdate />} />
+                <Route path="/driverView/:id" element={<ViewDriver />} />
                 <Route path="/addNewDriver" element={<AddNewDriver />} />
-                <Route path="/trips" element={<Trips  />} />
+                <Route path="/trips" element={<Trips />} />
                 <Route path="/tripView/:id" element={<ViewTrip />} />
                 <Route path="/tripAnalytics" element={<TripAnalytics />} />
                 <Route path="/RevenueAnalytics" element={<RevenueAnalytics />} />
@@ -174,8 +176,8 @@ function App() {
                 <Route path="/driverAnalytics" element={<DriverAnalytics />} />
                 <Route path='/issueManagement' element={<IssueManagement />} />
                 <Route path="/pricing" element={<Pricing />} />
-                
-              
+
+
 
 
                 {/* apps  */}

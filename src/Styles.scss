@@ -755,9 +755,10 @@
   @extend .largeText;
 }
 
+
 /* Filters */
 .filtersContainer{
-  @extend .mainBackground ,.primaryTextColor ,.mainShadow ,.mainBorder ,.roundedExtraXLarge ,.averageMargin ,.averagePadding ,.flexWrap ,.extraSmallMargin ,.widthFull;
+  @extend .mainBackground ,.primaryTextColor ,.mainShadow ,.mainBorder ,.roundedExtraXLarge  ,.averagePadding ,.flexWrap ,.extraSmallMargin ,.widthFull;
 }
 .filtersSecondaryContainer{
   @extend .displayFlex ,.flexJustifyEnd ;

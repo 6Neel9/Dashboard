@@ -801,9 +801,9 @@ const Home = () => {
 
   return (
     <div className="extraSmallMargin overflow-x-hidden">
-      <div className="displayFlex">
+      {/* <div className="displayFlex">
         <Filters />
-      </div>
+      </div> */}
       <div className=" marginLeftSmall">
         <p className="text-2xl extraBoldWeightText  mainText grayText">Overview</p>
       </div>

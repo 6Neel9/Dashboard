@@ -504,9 +504,9 @@ const TripAnalytics = () => {
 
   return (
     <div className="extraSmallMargin">
-      <div className="displayFlex">
+      {/* <div className="displayFlex">
         <Filters />
-      </div>
+      </div> */}
       {/* <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
 
                 <SmallCard props={SmallCardProps6} />

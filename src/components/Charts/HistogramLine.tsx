@@ -47,7 +47,7 @@ const HistogramLine = ({histogramProps}: any) => {
                 <SeriesCollectionDirective>
                     <SeriesDirective dataSource={chartData} yName={yName} name={chartName} type='Histogram'
                         marker={marker}
-                        showNormalDistribution={true}  showMean={true} fill='#D6CDE9'>
+                        showNormalDistribution={true}  showMean={true} fill='#D6CDE9' >
                     </SeriesDirective>
                 </SeriesCollectionDirective>
             </ChartComponent>

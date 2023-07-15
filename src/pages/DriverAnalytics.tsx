@@ -387,24 +387,7 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const AvgTripPerDayTooltip = () => {
-    return (
-      <div className="px-2 py-2 text-sm">
-        <p className="text-white">Average trips per day</p>
-        <p className="text-white">Avg trips per day ---- 405</p>
-        <p className="text-white">{selectedDuration}</p>
-      </div>
-    )
-  }
-  const TripsPerDay2: CardPropType = {
-    title: "TRIPS PER DAY",
-    duration: selectedDuration,
-    value: "405",
-    icon: "positive",
-    percent: "3.5",
-    content: AvgTripPerDayTooltip,
-    position: "RightBottom"
-  };
+ 
 
   const AvgTimeBetweenTripsChartTooltip = () => {
     return (
@@ -438,24 +421,7 @@ const DriverAnalytics = () => {
     position: "RightBottom"
   };
 
-  const AvgTimeBetweenTripsTooltip = () => {
-    return (
-      <div className="px-2 py-2 text-sm">
-        <p className="text-white">Average time between trips</p>
-        <p className="text-white">Avg time between trips ---- 16min</p>
-        <p className="text-white">{selectedDuration}</p>
-      </div>
-    )
-  }
-  const TimeBetweenTrips2: CardPropType = {
-    title: "TIME BETWEEN TRIPS",
-    duration: selectedDuration,
-    value: "16 min",
-    icon: "negative",
-    percent: "0.3",
-    content: AvgTimeBetweenTripsTooltip,
-    position: "RightBottom"
-  };
+ 
   const TopTenDriversChartData = [
     { driver: 'Rajesh', revenue: 35000 },
     { driver: 'Amit', revenue: 34000 },
@@ -554,6 +520,16 @@ const DriverAnalytics = () => {
     });
 
     return output;
+  }
+
+  const calculateTripsPerDayValue=()=>{
+    let data = calculateTripsPerDay(CalculatedValues.allFilteredTrips);
+    let length = data.length;
+    let sum = 0;
+    data.forEach((d: any) => {
+      sum += d["TripsPerDay"];
+    });
+    return sum / length;
   }
 
 
@@ -656,16 +632,22 @@ const DriverAnalytics = () => {
   
   
   
-  
+  const CalculateTimeBetweenTripsValue=()=>{
+    const data = getTimeBetweenTripDetail(CalculatedValues.allFilteredTrips);
+    let length = data.length;
+    let sum = 0;
+    data.forEach((d: any) => {
+      sum += d["timeBtwnTrips"];
+    });
+    return sum / length;
+  }
 
-  const details = getTimeBetweenTripDetail(CalculatedValues.allFilteredTrips);
-  console.log(details);
+  
   
   
   
 
   const timeDifferences = getTimeBetweenTrips(CalculatedValues.allFilteredTrips);
-console.log(timeDifferences);
 
 // console.log(generateHistoData());
   const TimeBetweenTripsChartProps = {
@@ -683,10 +665,47 @@ console.log(timeDifferences);
     yAxisTitle: "No. of Days",
   }
 
+  const AvgTripPerDayTooltip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average trips per day</p>
+        <p className="text-white">Avg trips per day ---- 405</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
+  const TripsPerDay2: CardPropType = {
+    title: "TRIPS PER DAY",
+    duration: selectedDuration,
+    value: String(calculateTripsPerDayValue()),
+    icon: "positive",
+    percent: "3.5",
+    content: AvgTripPerDayTooltip,
+    position: "RightBottom"
+  };
+
+  const AvgTimeBetweenTripsTooltip = () => {
+    return (
+      <div className="px-2 py-2 text-sm">
+        <p className="text-white">Average time between trips</p>
+        <p className="text-white">Avg time between trips ---- 16min</p>
+        <p className="text-white">{selectedDuration}</p>
+      </div>
+    )
+  }
+  const TimeBetweenTrips2: CardPropType = {
+    title: "TIME BETWEEN TRIPS",
+    duration: selectedDuration,
+    value: String(CalculateTimeBetweenTripsValue()) + " min",
+    icon: "negative",
+    percent: "0.3",
+    content: AvgTimeBetweenTripsTooltip,
+    position: "RightBottom"
+  };
+
   function getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
 
   // useEffect(() => {
   // setSelectedDuration("Till Date");

@@ -60,13 +60,13 @@ const AnalyticsCalculation = () => {
   const tripDurationValue = useMemo(() => calculateAverageUsingValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDuration"), [tripData, selectedDuration]);
 
   // Calculate total value of trip length for trip length card
-  const tripLengthValue = useMemo(() => calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDistance"), [tripData, selectedDuration]);
+  const tripLengthValue = useMemo(() => calculateAverageUsingValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripDistance"), [tripData, selectedDuration]);
 
   // Percentage change in average trip length for trip length card
   const tripLengthChange = useMemo(() => calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripDistance"), [tripData, selectedDuration]);
 
   // Calculate total value of trip speed for trip speed card
-  const tripSpeedValue = useMemo(() => calculateTotalValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripSpeed"), [tripData, selectedDuration]);
+  const tripSpeedValue = useMemo(() => calculateAverageUsingValue(tripData, new Date(), mapOfPeriods.get(selectedDuration), "current", "tripSpeed"), [tripData, selectedDuration]);
 
   // Percentage change in average trip speed for trip speed card
   const tripSpeedChange = useMemo(() => calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), "tripSpeed"), [tripData, selectedDuration]);

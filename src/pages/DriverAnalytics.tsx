@@ -438,16 +438,16 @@ const DriverAnalytics = () => {
 
 
   const ActiveHoursChartData = [
-    { states: 'Maharashtra', activeHours: getRandomNumber(2, 12) },
-    { states: 'Uttar Pradesh', activeHours: getRandomNumber(2, 12) },
-    { states: 'Karnataka', activeHours: getRandomNumber(2, 12) },
-    { states: 'Gujarat', activeHours: getRandomNumber(2, 12) },
-    { states: 'Tamil Nadu', activeHours: getRandomNumber(2, 12) },
-    { states: 'Rajasthan', activeHours: getRandomNumber(2, 12) },
-    { states: 'West Bengal', activeHours: getRandomNumber(2, 12) },
-    { states: 'Punjab', activeHours: getRandomNumber(2, 12) },
-    { states: 'Madhya Pradesh', activeHours: getRandomNumber(2, 12) },
-    { states: 'Bihar', activeHours: getRandomNumber(2, 12) }
+    {  activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) },
+    { activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) },
+    { activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) },
+    {  activeHours: getRandomNumber(2, 12) }
   ];
   const TripsPerDayChartData = [
     { states: 'Maharashtra', trips: getRandomNumber(1000, 12000) },
@@ -665,6 +665,16 @@ const DriverAnalytics = () => {
     yAxisTitle: "No. of Days",
   }
 
+// Check da
+  const AverageHoursPerDayProps = {
+    chartData: ActiveHoursChartData,
+    yName: "Active Hours",
+    chartName: "Trips Per Day",
+    xAxisTitle: "Total ActiveHours",
+    yAxisTitle: "No. of Trips",
+  }
+
+
   const AvgTripPerDayTooltip = () => {
     return (
       <div className="px-2 py-2 text-sm">
@@ -714,7 +724,8 @@ const DriverAnalytics = () => {
   let allFilteredTrips = filteredTrips(selectedDuration, tripData);
 
   const top10Drivers = getTop10Drivers(allFilteredTrips, driverData);
-  const topTenMinMaxVal = minMax(top10Drivers, 'revenue')
+  const topTenMinMaxVal = minMax(top10Drivers, 'revenue');
+
 
   return (
     <div className="extraSmallMargin">
@@ -736,7 +747,8 @@ const DriverAnalytics = () => {
         <CardWithChart
           prop1={ActiveHoursPerDay}
           prop2={ActiveHoursPerDay2}
-          chart={<Bar columnData={ActiveHoursChartData} xTitle="states" yTitle="activeHours" Chart_name="Active Hours per state" minMax={minMax(ActiveHoursChartData, 'activeHours')} />}
+          // chart={<HistogramLine histogramProps={AverageHoursPerDayProps} />}
+          chart={<HistogramLine histogramProps={TotalTripsPerDayChartProps} />}
         />
       </div>
       <div>

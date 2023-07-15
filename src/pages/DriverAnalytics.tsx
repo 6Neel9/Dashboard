@@ -677,7 +677,7 @@ const DriverAnalytics = () => {
   const TripsPerDay2: CardPropType = {
     title: "TRIPS PER DAY",
     duration: selectedDuration,
-    value: String(calculateTripsPerDayValue()),
+    value: String(calculateTripsPerDayValue().toFixed(2)),
     icon: "positive",
     percent: "3.5",
     content: AvgTripPerDayTooltip,
@@ -696,7 +696,7 @@ const DriverAnalytics = () => {
   const TimeBetweenTrips2: CardPropType = {
     title: "TIME BETWEEN TRIPS",
     duration: selectedDuration,
-    value: String(CalculateTimeBetweenTripsValue()) + " min",
+    value: String(CalculateTimeBetweenTripsValue().toFixed(2)) + " min",
     icon: "negative",
     percent: "0.3",
     content: AvgTimeBetweenTripsTooltip,

@@ -151,7 +151,7 @@ function App() {
             <div className="relative navbar w-full ">
               <Navbar />
             </div>
-            <div className=' mt-12'>
+            <div className='mt-14'>
               {themeSettings && <ThemeSettings />}
               {/* <div className={ activeMenu? "displayFlex fixed w-4/5" : "displayFlex fixed w-full"}>
                 <Filters />

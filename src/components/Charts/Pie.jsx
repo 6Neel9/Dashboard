@@ -1,21 +1,23 @@
 
-import * as React from 'react';
-import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, Inject , AccumulationDataLabel, AccumulationTooltip,AccumulationLegend   } from '@syncfusion/ej2-react-charts';
-import "../../Styles.scss"
+import React from 'react';
+import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, Inject, AccumulationDataLabel, AccumulationTooltip, AccumulationLegend } from '@syncfusion/ej2-react-charts';
+import "../../Styles.scss";
 import { useStateContext } from '../../contexts/ContextProvider';
 
-const Pie = ({h, w, data, Chart_name}) => {
-  const {currentMode} = useStateContext();
-  const legendSettings = { visible: true, position: 'Bottom', alignment: 'Center', textStyle: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" } };
-  const datalabel = { visible: true, name: 'text', position: 'Outside',font: { color: currentMode==="Dark"? "white": "black", fontWeight: "500" } };
+const Pie = ({ h, w, data, Chart_name }) => {
+  const { currentMode } = useStateContext();
+  const legendSettings = { visible: true, position: 'Bottom', alignment: 'Center', textStyle: { color: currentMode === "Dark" ? "white" : "black", fontWeight: "500" } };
+  const datalabel = { visible: true, name: 'text', position: 'Outside', font: { color: currentMode === "Dark" ? "white" : "black", fontWeight: "500" } };
+  
   return (
     <AccumulationChartComponent height={h} width={w} className='mainText' tooltip={{ enable: true }} legendSettings={legendSettings}>
-      <Inject services={[AccumulationDataLabel,AccumulationLegend,AccumulationTooltip]}/>
-      <AccumulationSeriesCollectionDirective >
-        <AccumulationSeriesDirective dataSource={data} xName='x' yName='y' radius='100%'  pointColorMapping='fill' dataLabel={datalabel} name={Chart_name}  />
+      <Inject services={[AccumulationDataLabel, AccumulationLegend, AccumulationTooltip]} />
+      <AccumulationSeriesCollectionDirective>
+        <AccumulationSeriesDirective dataSource={data} xName='x' yName='y' radius='100%' pointColorMapping='fill' dataLabel={datalabel} name={Chart_name} />
       </AccumulationSeriesCollectionDirective>
-    </AccumulationChartComponent>)
-}
+    </AccumulationChartComponent>
+  );
+};
 
 export default Pie;
 

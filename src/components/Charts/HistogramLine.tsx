@@ -33,26 +33,6 @@ const HistogramLine = React.memo(({ histogramProps }: any) => {
 
   const marker = { dataLabel: { visible: false, font: { color: currentMode === "Dark" ? "white" : "black", fontWeight: "500" } } };
 
-    return (
-        <div className='widthFull mainBackground'>
-            <ChartComponent
-                primaryXAxis={primaryxAxis}
-                primaryYAxis={primaryyAxis}
-                tooltip={tooltipsettings}
-                legendSettings={legendSettings}
-                height='50%'
-                >
-                <Inject services={[HistogramSeries, Legend, Tooltip, Category, DataLabel]} />
-                <SeriesCollectionDirective>
-                    <SeriesDirective dataSource={chartData} yName={yName} name={chartName} type='Histogram'
-                        marker={marker}
-                        showNormalDistribution={true}  showMean={true} fill='#D6CDE9' >
-                    </SeriesDirective>
-                </SeriesCollectionDirective>
-            </ChartComponent>
-        </div>
-    );
-}
   return (
     <div className='widthFull mainBackground'>
       <ChartComponent
@@ -64,20 +44,16 @@ const HistogramLine = React.memo(({ histogramProps }: any) => {
       >
         <Inject services={[HistogramSeries, Legend, Tooltip, Category, DataLabel]} />
         <SeriesCollectionDirective>
-          <SeriesDirective
-            dataSource={chartData}
-            yName={yName}
-            name={chartName}
-            type='Histogram'
+          <SeriesDirective dataSource={chartData} yName={yName} name={chartName} type='Histogram'
             marker={marker}
-            showNormalDistribution={true}
-            showMean={true}
-            fill='#D6CDE9'
-          />
+            showNormalDistribution={true} showMean={true} fill='#D6CDE9' >
+          </SeriesDirective>
         </SeriesCollectionDirective>
       </ChartComponent>
     </div>
   );
-});
+}
+
+);
 
 export default HistogramLine;

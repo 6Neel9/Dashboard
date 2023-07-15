@@ -42,6 +42,7 @@ import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
+import { Trip } from "../contexts/ContextProvider";
 
 
 const Home = () => {
@@ -85,20 +86,20 @@ const Home = () => {
 
 
   // interface
-  interface Trip {
-    _id: string;
-    driverId: number;
-    tripId: number;
-    startLocation: string;
-    tripDistance: number;
-    tripSpeed: number;
-    tripDuration: number;
-    endLocation: string;
-    startTime: string;
-    tripFare: number;
-    paymentType: string;
-    endTime: string;
-  }
+  // interface Trip {
+  //   _id: string;
+  //   driverId: number;
+  //   tripId: number;
+  //   startLocation: string;
+  //   tripDistance: number;
+  //   tripSpeed: number;
+  //   tripDuration: number;
+  //   endLocation: string;
+  //   startTime: string;
+  //   tripFare: number;
+  //   paymentType: string;
+  //   endTime: string;
+  // }
 
 
 

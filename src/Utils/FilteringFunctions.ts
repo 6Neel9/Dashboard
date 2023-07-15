@@ -1,19 +1,7 @@
 import { periodTypes, tripElements } from "./Constants";
 
-interface Trip {
-  _id: string;
-  driverId: number;
-  tripId: number;
-  startLocation: string;
-  tripDistance: number;
-  tripSpeed: number;
-  tripDuration: number;
-  endLocation: string;
-  startTime: string;
-  tripFare: number;
-  paymentType: string;
-  endTime: string;
-}
+import { Trip } from "../contexts/ContextProvider";
+
 
 interface DriverRevenue {
   driverId: number;

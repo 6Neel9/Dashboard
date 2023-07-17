@@ -56,6 +56,30 @@ function filterTripsByPeriod(
     return startTime >= filterStart && startTime <= filterEnd;
   });
 
+   // Ensure there's at least one trip with the same date as filterEnd
+  //  const hasTodayTrip = todayTrips.some(
+  //   (trip) => new Date(trip.startTime).toDateString() === filterEnd.toDateString()
+  // );
+
+  // if (!hasTodayTrip) {
+  //   const defaultTrip: Trip = {
+  //     _id: `default_${Date.now()}`, // Unique and dynamic id using timestamp
+  //     driverId: 0,
+  //     tripId: 0,
+  //     startLocation: 'null',
+  //     tripDistance: 0,
+  //     tripSpeed: 0,
+  //     tripDuration: 0,
+  //     endLocation: 'null',
+  //     startTime: filterEnd.toISOString(),
+  //     tripFare: 0,
+  //     paymentType: 'null',
+  //     endTime: filterEnd.toISOString(),
+  //   };
+
+  //   todayTrips.push(defaultTrip);
+  // }
+
   return todayTrips;
 }
 
@@ -455,44 +479,82 @@ const getRevenuePerTripChart = (trips: Trip[]): RevenuePerTripChartItem[] => {
 
 
 //Trip Duration / Driver revenue chart data homepage
-interface AverageTripDuration {
-  x: Date;
-  y: number;
+// interface AverageTripDuration {
+//   x: Date;
+//   y: number;
+// }
+
+// function calculateAverageTripDuration(dataset: Trip[]): AverageTripDuration[] {
+//   const dateMap = new Map<string, { totalDuration: number; tripCount: number }>();
+//   const tripsByDate: AverageTripDuration[] = [];
+
+//   for (const trip of dataset) {
+//     const startDate = trip.startTime.substr(0, 10); // Extract date from startTime
+//     const tripDuration = trip.tripDuration;
+
+//     if (dateMap.has(startDate)) {
+//       dateMap.set(startDate, {
+//         totalDuration: dateMap.get(startDate)!.totalDuration + tripDuration,
+//         tripCount: dateMap.get(startDate)!.tripCount + 1,
+//       });
+//     } else {
+//       dateMap.set(startDate, {
+//         totalDuration: tripDuration,
+//         tripCount: 1,
+//       });
+//     }
+//   }
+
+//   const dateArray = Array.from(dateMap.entries());
+
+//   for (const [date, { totalDuration, tripCount }] of dateArray) {
+//     const averageDuration = (totalDuration / tripCount).toFixed(1); // Round to one decimal place
+//     tripsByDate.push({
+//       x: new Date(date),
+//       y: Number(averageDuration), // Convert back to number
+//     });
+//     tripsByDate.sort((a, b) => a.x.getTime() - b.x.getTime());
+//   }
+//   return tripsByDate;
+// }
+interface HourlyTripData {
+  x: string; // Hour in "HH:00" format
+  y: number; // Trip count for the hour
 }
 
-function calculateAverageTripDuration(dataset: Trip[]): AverageTripDuration[] {
-  const dateMap = new Map<string, { totalDuration: number; tripCount: number }>();
-  const tripsByDate: AverageTripDuration[] = [];
+function calculateAverageTripDuration(dataset: Trip[] , duration: number): HourlyTripData[] {
+  const hourlyMap = new Map<string, number>();
 
   for (const trip of dataset) {
-    const startDate = trip.startTime.substr(0, 10); // Extract date from startTime
-    const tripDuration = trip.tripDuration;
+    const startDate = new Date(trip.startTime);
+    const startHour = startDate.getHours();
+    const formattedStartHour = startHour.toString().padStart(2, "0");
+    const key = `${formattedStartHour}:00 - ${formattedStartHour}:59`;
 
-    if (dateMap.has(startDate)) {
-      dateMap.set(startDate, {
-        totalDuration: dateMap.get(startDate)!.totalDuration + tripDuration,
-        tripCount: dateMap.get(startDate)!.tripCount + 1,
-      });
+    if (hourlyMap.has(key)) {
+      hourlyMap.set(key, hourlyMap.get(key)! + 1);
     } else {
-      dateMap.set(startDate, {
-        totalDuration: tripDuration,
-        tripCount: 1,
-      });
+      hourlyMap.set(key, 1);
     }
   }
 
-  const dateArray = Array.from(dateMap.entries());
+  const hourlyData: HourlyTripData[] = [];
 
-  for (const [date, { totalDuration, tripCount }] of dateArray) {
-    const averageDuration = (totalDuration / tripCount).toFixed(1); // Round to one decimal place
-    tripsByDate.push({
-      x: new Date(date),
-      y: Number(averageDuration), // Convert back to number
+  for (let hour = 0; hour < 24; hour++) {
+    const formattedHour = hour.toString().padStart(2, "0");
+    const key = `${formattedHour}:00 - ${formattedHour}:59`;
+    const tripCount = hourlyMap.get(key) || 0;
+
+    hourlyData.push({
+      x: `${formattedHour}:00`,
+      y: tripCount/duration,
     });
-    tripsByDate.sort((a, b) => a.x.getTime() - b.x.getTime());
   }
-  return tripsByDate;
+
+  return hourlyData;
 }
+
+
 
 
 export {

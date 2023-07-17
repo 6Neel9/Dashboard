@@ -14,6 +14,7 @@ import { select } from "@syncfusion/ej2-base";
 import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
 import { calculateAverageTripDuration, filteredTrips, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
+import { time } from "console";
 
 type CardPropType = {
   title?: string;
@@ -363,10 +364,27 @@ const DriverAnalytics = () => {
       </div>
     )
   }
+
+  // Card Value
+  function calculateAverageTripDurationCard(trips: any[]): number {
+    const totalTrips = trips.length;
+  
+    if (totalTrips === 0) {
+      return 0; // Return 0 if the array is empty to avoid division by zero.
+    }
+  
+    const sumOfTripDurations = trips.reduce((acc, trip) => {
+      return acc + trip.tripDuration;
+    }, 0);
+  
+    const averageTripDuration = sumOfTripDurations / totalTrips;
+    return averageTripDuration;
+  }
+
   const ActiveHoursPerDay2: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
     duration: selectedDuration,
-    value: "6.5 Hrs",
+    value: `${numberFormat(calculateAverageTripDurationCard(CalculatedValues.allFilteredTrips))} Hrs`,
     icon: "positive",
     percent: "0.3",
     content: ActiveHoursPerDayTooltip,
@@ -598,7 +616,7 @@ const DriverAnalytics = () => {
   // }
   // console.log(getTimeBetweenTrip(CalculatedValues.allFilteredTrips));
 
-  //
+  //if Next day calculate daywise
   function getTimeBetweenTripDetail(trips: any[]): { timeBtwnTrips: number }[] {
     const timeDifferences: { timeBtwnTrips: number }[] = [];
   
@@ -615,6 +633,8 @@ const DriverAnalytics = () => {
       } else {
         // Calculate time difference with the previous trip
         const prevTrip = trips.find(t => t.tripId === trip.tripId - 1);
+
+        //Trip Id dynamic , it wont work , need change
         if (prevTrip) {
           const endTime = new Date(prevTrip.endTime);
           const startTime = new Date(trip.startTime);
@@ -626,21 +646,25 @@ const DriverAnalytics = () => {
         }
       }
     }
-  
+console.log(timeDifferences)
     return timeDifferences;
   }
+
+  
   
   
   
   const CalculateTimeBetweenTripsValue=()=>{
     const data = getTimeBetweenTripDetail(CalculatedValues.allFilteredTrips);
-    let length = data.length;
+    // let length = data.length;
     let sum = 0;
     data.forEach((d: any) => {
       sum += d["timeBtwnTrips"];
     });
-    return sum / length;
+    return sum / CalculatedValues.allFilteredTrips.length;
   }
+
+  // console.log(getTimeBetweenTripDetail(CalculatedValues.allFilteredTrips))
 
   
   

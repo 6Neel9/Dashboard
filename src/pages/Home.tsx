@@ -357,7 +357,7 @@ const Home = () => {
 
 
     const convertedData = convertDataFormat(allFilteredTrips);
-    console.log(convertedData);
+    // console.log(convertedData);
 
 
 
@@ -407,10 +407,12 @@ const Home = () => {
 
     return (
       <DateTimeLineChart
-        chartData={calculateAverageTripDuration(CalculatedValues.allFilteredTrips)}
+        chartType = 'Category'
+        chartData={calculateAverageTripDuration(CalculatedValues.allFilteredTrips ,mapOfPeriods.get(selectedDuration))}
         chart_name="Trip duration"
-        props={minMax(calculateAverageTripDuration(CalculatedValues.allFilteredTrips),"duration")}
+        props={minMax(calculateAverageTripDuration(CalculatedValues.allFilteredTrips ,mapOfPeriods.get(selectedDuration)),"duration")}
       />
+      // <div>hi</div>
     );
   }
 
@@ -797,6 +799,11 @@ const Home = () => {
   const totalDriversMinMaxVal = minMax(columnTotalDriver, "drivers");
   // console.log(top10Drivers);
 
+  // console.log(calculateTotalRevenue(CalculatedValues.allFilteredTrips))
+
+
+
+
 
 
   return (
@@ -816,7 +823,7 @@ const Home = () => {
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalculatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} />}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalculatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} chartType = "Null" />}
         />
       </div>
       <div>

@@ -72,7 +72,7 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
     const [themeSettings, setThemeSettings] = useState<boolean>(false);
     const [activeMenu, setActiveMenu] = useState<boolean>(true);
     const [isClicked, setIsClicked] = useState<MyInitialStateType>(initialState);
-    const [selectedDuration, setSelectedDuration] = useState<string>('Today');
+    const [selectedDuration, setSelectedDuration] = useState<string>('Last 7 Days');
     const [selectedState, setSelectedState] = useState<string>('All');
     const [tripData, setTripData] = useState<Trip[]>([]);    
     const [driverData, setDriverData] = useState<any[]>([]);

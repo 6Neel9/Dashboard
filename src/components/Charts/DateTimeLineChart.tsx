@@ -1,14 +1,16 @@
 import React from 'react';
 import {
   AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LegendSettingsModel, ZoomSettingsModel,
-  Legend, DateTime, Tooltip, DataLabel, AreaSeries, Zoom, ColumnSeries, LineSeries
+  Legend, DateTime, Tooltip, DataLabel, AreaSeries, Zoom, ColumnSeries, LineSeries ,Category
 } from '@syncfusion/ej2-react-charts';
 import { useStateContext } from '../../contexts/ContextProvider';
 import Loading from '../Loading';
 
-const DateTimeLineChart = React.memo(({ chartData, props, chart_name }: any) => {
+const DateTimeLineChart = React.memo(({ chartData, props, chart_name ,chartType }: any) => {
   const { currentMode } = useStateContext();
-  const primaryxAxis: AxisModel = { valueType: 'DateTime', zoomFactor: 0.1, zoomPosition: 0.9 };
+  const typeAll = (chartType === 'Category' ?'Category' : 'DateTime');
+  const injectServiceChartType =  (chartType === 'Category' ? Category : DateTime);
+  const primaryxAxis: AxisModel = { valueType:typeAll, zoomFactor: 0.1, zoomPosition: 0.9,intervalType: 'Days' };
   const primaryyAxis: AxisModel = {
     minimum: props.min / 1.05, maximum: props.max * 1.05
   };
@@ -33,7 +35,7 @@ const DateTimeLineChart = React.memo(({ chartData, props, chart_name }: any) => 
         tooltip={tooltip}
         height='50%'
       >
-        <Inject services={[ColumnSeries, LineSeries, Legend, Tooltip, DataLabel, Zoom, DateTime]} />
+        <Inject services={[ColumnSeries, LineSeries, Legend, Tooltip, DataLabel, Zoom, injectServiceChartType]} />
         <SeriesCollectionDirective>
           <SeriesDirective dataSource={chartData} xName='x' yName='y' width={1} type='Line' fill='#D6CDE9' marker={marker} name={chart_name}
             border={border} animation={animation}>

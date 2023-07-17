@@ -80,25 +80,26 @@ function App() {
 
 
 
-  const fetchData = useCallback(() => {
-    const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
-    const tripsRequest = axios.get<Trip[]>("http://localhost:5000/yuja-sm/v1/trips");
-
-    axios.all([driversRequest, tripsRequest])
-      .then(axios.spread((driversRes, tripsRes) => {
-        // Handle drivers response
-        // setDrivers(driversRes.data);
-        setDriverData(driversRes.data);
-
-        // Handle trips response
-        // setTrips(tripsRes.data);
-        setTripData(tripsRes.data);
-      }))
-      .catch((error) => {
-        // Handle error
-        console.error(error);
-      });
+  const fetchData = useCallback(async () => {
+    try {
+      const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
+      const tripsRequest = axios.get<Trip[]>("http://localhost:5000/yuja-sm/v1/trips");
+  
+      const [driversRes, tripsRes] = await axios.all([driversRequest, tripsRequest]);
+  
+      // Handle drivers response
+      // setDrivers(driversRes.data);
+      setDriverData(driversRes.data);
+  
+      // Handle trips response
+      // setTrips(tripsRes.data);
+      setTripData(tripsRes.data);
+    } catch (error) {
+      // Handle error
+      console.error(error);
+    }
   }, []);
+  
 
   useEffect(() => {
     fetchData()

@@ -7,10 +7,12 @@ import Logo_Dark from "../data/assets/meiro_no_bg_for_dark - Tight Crop.png";
 import { links } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
 import smartCity from "../data/assets/smartCity.png"
+import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
 
 const Sidebar = () => {
-  const { currentColor, activeMenu, setActiveMenu, screenSize, currentMode } =
+  const { screenSize } =
     useStateContext();
+  const { currentColor, activeMenu, setActiveMenu, currentMode } = useStateContextDisplay();
 
   const handleCloseSideBar = () => {
     if (activeMenu !== undefined && Number(screenSize) <= 900) {
@@ -67,7 +69,7 @@ const Sidebar = () => {
                     // style={({ isActive }) => ({
                     //   backgroundColor: isActive ? currentColor : "",
                     // })}
-                    
+
                     className={({ isActive }) =>
                       isActive ? activeLink : normalLink
                     }
@@ -82,7 +84,7 @@ const Sidebar = () => {
           </div>
         </>
       )}
-      <img src={Logo_Dark} className="h-14 w-auto" alt="Meiro Logo"/>
+      <img src={Logo_Dark} className="h-14 w-auto" alt="Meiro Logo" />
     </div>
   );
 };

@@ -34,19 +34,19 @@ type MyContextType = {
     initialState: MyInitialStateType,
     screenSize: number | undefined,
     setScreenSize: React.Dispatch<React.SetStateAction<number | undefined>>,
-    currentColor: string,
-    setCurrentColor: React.Dispatch<React.SetStateAction<string>>,
-    currentMode: string,
-    setCurrentMode: React.Dispatch<React.SetStateAction<string>>,
-    themeSettings: boolean,
-    setThemeSettings: React.Dispatch<React.SetStateAction<boolean>>,
-    activeMenu: boolean,
-    setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>,
+    // currentColor: string,
+    // setCurrentColor: React.Dispatch<React.SetStateAction<string>>,
+    // currentMode: string,
+    // setCurrentMode: React.Dispatch<React.SetStateAction<string>>,
+    // themeSettings: boolean,
+    // setThemeSettings: React.Dispatch<React.SetStateAction<boolean>>,
+    // activeMenu: boolean,
+    // setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>,
     isClicked: MyInitialStateType,
     setIsClicked: React.Dispatch<React.SetStateAction<MyInitialStateType>>,
     handleClick: (clicked: string) => void,
-    setMode: (e: any) => void,
-    setColor: (color: string) => void
+    // setMode: (e: any) => void,
+    // setColor: (color: string) => void
     selectedDuration: string,
     setSelectedDuration: React.Dispatch<React.SetStateAction<string>>,
     selectedState: string,
@@ -67,10 +67,10 @@ interface Props {
 
 const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
     const [screenSize, setScreenSize] = useState<number | undefined>(undefined);    
-    const [currentColor, setCurrentColor] = useState<string>('#2C1F39');
-    const [currentMode, setCurrentMode] = useState<string>('Dark');
-    const [themeSettings, setThemeSettings] = useState<boolean>(false);
-    const [activeMenu, setActiveMenu] = useState<boolean>(true);
+    // const [currentColor, setCurrentColor] = useState<string>('#2C1F39');
+    // const [currentMode, setCurrentMode] = useState<string>('Dark');
+    // const [themeSettings, setThemeSettings] = useState<boolean>(false);
+    // const [activeMenu, setActiveMenu] = useState<boolean>(true);
     const [isClicked, setIsClicked] = useState<MyInitialStateType>(initialState);
     const [selectedDuration, setSelectedDuration] = useState<string>('Last 7 Days');
     const [selectedState, setSelectedState] = useState<string>('All');
@@ -87,37 +87,37 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
         setSelectedState(event.target.value);
     };
 
-    const setMode = (e : any) => {
-        setCurrentMode(e.target.value);
-        localStorage.setItem('themeMode', e.target.value);
-    };
+    // const setMode = (e : any) => {
+    //     setCurrentMode(e.target.value);
+    //     localStorage.setItem('themeMode', e.target.value);
+    // };
 
-    const setColor = (color : string) => {
-        setCurrentColor(color);
-        localStorage.setItem('colorMode', color);
-    };
+    // const setColor = (color : string) => {
+    //     setCurrentColor(color);
+    //     localStorage.setItem('colorMode', color);
+    // };
 
     const handleClick = (clicked: string) => setIsClicked({ ...initialState, [clicked]: true });
 
     return (
         <Context.Provider
             value={{
-                currentColor,
-                currentMode,
-                activeMenu,
+                // currentColor,
+                // currentMode,
+                // activeMenu,
                 screenSize,
                 setScreenSize,
                 handleClick,
                 isClicked,
                 initialState,
                 setIsClicked,
-                setActiveMenu,
-                setCurrentColor,
-                setCurrentMode,
-                setMode,
-                setColor,
-                themeSettings,
-                setThemeSettings,
+                // setActiveMenu,
+                // setCurrentColor,
+                // setCurrentMode,
+                // setMode,
+                // setColor,
+                // themeSettings,
+                // setThemeSettings,
                 selectedDuration,
                 setSelectedDuration,
                 selectedState,

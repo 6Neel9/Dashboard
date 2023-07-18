@@ -43,12 +43,11 @@ import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
 import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 import { Trip } from "../contexts/ContextProvider";
+import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
 
 
 const Home = () => {
   const {
-    currentColor,
-    currentMode,
     selectedDuration,
     selectedState,
     setSelectedDuration,
@@ -59,6 +58,8 @@ const Home = () => {
     driverData,
     setDriverData
   } = useStateContext();
+  const {currentColor,
+    currentMode,}=useStateContextDisplay();
   // const [driverData, setDrivers] = useState<any[]>([]);
   // const [tripData, setTrips] = useState<any[]>([]);
   const CalculatedValues = AnalyticsCalculation();

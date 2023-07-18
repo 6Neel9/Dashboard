@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./driverDetails.scss";
 import { Button } from "../../components";
-import { useStateContext } from "../../contexts/ContextProvider";
 import { GrClose } from "react-icons/gr";
+import { useStateContextDisplay } from "../../contexts/DisplayContextProvider";
 
 type DriverDataType = {
     _id: string;
@@ -40,7 +40,7 @@ type TempObjType = {
 
 const ViewDriver = () => {
 
-    const { currentColor, currentMode } = useStateContext();
+    const { currentColor, currentMode } = useStateContextDisplay();
     const navigate = useNavigate();
     const location = useLocation();
     // const [allData, setAllData] = useState([]);

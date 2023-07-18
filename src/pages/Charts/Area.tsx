@@ -3,10 +3,10 @@ import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, Dat
 
 import { ChartsHeader } from '../../components';
 import { areaCustomSeries, areaPrimaryXAxis, areaPrimaryYAxis } from '../../data/dummy';
-import { useStateContext } from '../../contexts/ContextProvider';
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const Area = () => {
-  const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
 
   return (
     <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">

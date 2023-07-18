@@ -2,10 +2,10 @@
 import React from 'react';
 import { AccumulationChartComponent, AccumulationSeriesCollectionDirective, AccumulationSeriesDirective, Inject, AccumulationDataLabel, AccumulationTooltip, AccumulationLegend } from '@syncfusion/ej2-react-charts';
 import "../../Styles.scss";
-import { useStateContext } from '../../contexts/ContextProvider';
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const Pie = ({ h, w, data, Chart_name }) => {
-  const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
   const legendSettings = { visible: true, position: 'Bottom', alignment: 'Center', textStyle: { color: currentMode === "Dark" ? "white" : "black", fontWeight: "500" } };
   const datalabel = { visible: true, name: 'text', position: 'Outside', font: { color: currentMode === "Dark" ? "white" : "black", fontWeight: "500" } };
   

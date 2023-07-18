@@ -2,11 +2,11 @@ import React from "react";
 import "./driverUpdate.scss"
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from "../../components/Button";
-import { useStateContext } from "../../contexts/ContextProvider";
 import { GrClose } from "react-icons/gr";
+import { useStateContextDisplay } from "../../contexts/DisplayContextProvider";
 
 const DriverUpdate = () => {
-  const { currentColor, currentMode } = useStateContext();
+  const { currentColor, currentMode } = useStateContextDisplay();
 
   const location = useLocation();
   const navigate = useNavigate();

@@ -3,11 +3,11 @@ import {
   AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LegendSettingsModel, ZoomSettingsModel,
   Legend, DateTime, Tooltip, DataLabel, AreaSeries, Zoom, ColumnSeries, LineSeries ,Category
 } from '@syncfusion/ej2-react-charts';
-import { useStateContext } from '../../contexts/ContextProvider';
 import Loading from '../Loading';
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const DateTimeLineChart = React.memo(({ chartData, props, chart_name ,chartType }: any) => {
-  const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
   const typeAll = (chartType === 'Category' ?'Category' : 'DateTime');
   const injectServiceChartType =  (chartType === 'Category' ? Category : DateTime);
   const primaryxAxis: AxisModel = { valueType:typeAll, zoomFactor: 0.1, zoomPosition: 0.9,intervalType: 'Days' };

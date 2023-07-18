@@ -36,6 +36,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Loading from './components/Loading';
 import axios from 'axios';
 import { Trip } from './contexts/ContextProvider';
+import { useStateContextDisplay } from './contexts/DisplayContextProvider';
 
 
 
@@ -65,17 +66,18 @@ import { Trip } from './contexts/ContextProvider';
 // }
 function App() {
   const {
-    setCurrentColor,
-    setCurrentMode,
-    currentMode,
-    activeMenu,
-    themeSettings,
-    setThemeSettings,
     setTripData,
     tripData,
     driverData,
     setDriverData
   } = useStateContext();
+
+  const { setCurrentColor,
+    setCurrentMode,
+    currentMode,
+    activeMenu,
+    themeSettings,
+    setThemeSettings, } = useStateContextDisplay();
 
 
 
@@ -84,13 +86,13 @@ function App() {
     try {
       const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
       const tripsRequest = axios.get<Trip[]>("http://localhost:5000/yuja-sm/v1/trips");
-  
+
       const [driversRes, tripsRes] = await axios.all([driversRequest, tripsRequest]);
-  
+
       // Handle drivers response
       // setDrivers(driversRes.data);
       setDriverData(driversRes.data);
-  
+
       // Handle trips response
       // setTrips(tripsRes.data);
       setTripData(tripsRes.data);
@@ -99,7 +101,7 @@ function App() {
       console.error(error);
     }
   }, []);
-  
+
 
   useEffect(() => {
     fetchData()

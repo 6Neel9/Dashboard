@@ -3,11 +3,10 @@ import Button from "./Button";
 import { useStateContext } from "../contexts/ContextProvider";
 import { Months, States, FilterDuration } from "../data/meiroData";
 import "../Styles.scss";
+import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
 
 const Filters = () => {
   const {
-    currentColor,
-    currentMode,
     handleDurationChange,
     handleStateChange,
     selectedDuration,
@@ -15,6 +14,8 @@ const Filters = () => {
     setSelectedDuration,
     setSelectedState,
   } = useStateContext();
+  // const {currentColor,
+  //   currentMode,} = useStateContextDisplay();
   // const [selectedDuration, setSelectedDuration] = useState<IntrinsicAttributes>('none');
   // const [selectedState, setSelectedState] = useState<IntrinsicAttributes>('none');
 
@@ -26,7 +27,7 @@ const Filters = () => {
   //     setSelectedState(event.target.value);
   // };
 
-  const handleApplyFilters = () => {};
+  const handleApplyFilters = () => { };
 
   const handleResetFilters = () => {
     setSelectedDuration("Till Date");
@@ -42,7 +43,7 @@ const Filters = () => {
             value={selectedDuration}
             onChange={handleDurationChange}
           >
-            
+
             {FilterDuration.map((ele, index) => (
               <option key={`duration-${index}`} value={ele.duration}>
                 {ele.duration}

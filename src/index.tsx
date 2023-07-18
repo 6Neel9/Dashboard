@@ -6,7 +6,7 @@ import { registerLicense } from "@syncfusion/ej2-base";
 import "./Styles.scss"
 
 import ContextProvider from "./contexts/ContextProvider";
-
+import DisplayContextProvider from "./contexts/DisplayContextProvider";
 import { Provider } from "react-redux";
 import store from "./store/store";
 
@@ -22,9 +22,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ContextProvider>
-        <App />
-      </ContextProvider>
+      <DisplayContextProvider>
+        <ContextProvider>
+          <App />
+        </ContextProvider>
+      </DisplayContextProvider>
     </Provider>
   </React.StrictMode>
 );

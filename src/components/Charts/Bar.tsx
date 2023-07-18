@@ -3,9 +3,13 @@ import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, Leg
 import { barCustomSeries, barPrimaryXAxis, barPrimaryYAxis } from '../../data/dummy';
 import { useStateContext } from '../../contexts/ContextProvider';
 import "../../Styles.scss"
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const Bar = React.memo(({ xTitle, yTitle, columnData, minMax, Chart_name }: any) => {
-  const { currentMode } = useStateContext();
+  
+  // const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
+
 
   const primaryxAxis: AxisModel = {
     valueType: 'Category', title: xTitle, titleStyle: {

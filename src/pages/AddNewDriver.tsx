@@ -5,7 +5,6 @@ import "../Styles.scss";
 
 
 const AddNewDriver = () => {
-    const { currentColor, currentMode } = useStateContext();
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();

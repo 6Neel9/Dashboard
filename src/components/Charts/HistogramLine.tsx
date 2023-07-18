@@ -3,10 +3,10 @@ import {
   AxisModel, ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, ChartTheme, LegendSettingsModel, TooltipSettingsModel,
   Legend, Category, Tooltip, ColumnSeries, ILoadedEventArgs, DataLabel, HistogramSeries, ZoomSettingsModel
 } from '@syncfusion/ej2-react-charts';
-import { useStateContext } from '../../contexts/ContextProvider';
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const HistogramLine = React.memo(({ histogramProps }: any) => {
-  const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
   const { chartData, yName, chartName, xAxisTitle, yAxisTitle } = histogramProps;
 
   const primaryxAxis: AxisModel = {

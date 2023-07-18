@@ -18,6 +18,7 @@ import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
 import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
 import LineChartTremor from "../components/Charts/LineChartTremor";
+import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
 
 
 // this is for testing commit
@@ -38,8 +39,6 @@ import LineChartTremor from "../components/Charts/LineChartTremor";
 
 const TripAnalytics = () => {
   const {
-    currentColor,
-    currentMode,
     selectedDuration,
     selectedState,
     setSelectedDuration,
@@ -150,7 +149,7 @@ const TripAnalytics = () => {
     return '';
   }
 
- 
+
 
   const SmallCardProps1: CardPropType = {
     title: "AVERAGE TRIP DURATION",
@@ -161,7 +160,7 @@ const TripAnalytics = () => {
   };
   const SmallCardProps2: CardPropType = {
     title: "Average fuel consumption per vehicle",
-    duration:selectedDuration,
+    duration: selectedDuration,
     value: "35.26 KG",
     icon: "positive",
     percent: "2.45",
@@ -188,8 +187,8 @@ const TripAnalytics = () => {
     percent: "2.45",
   };
 
-  const CumulativePeakTooltip=()=>{
-    return(
+  const CumulativePeakTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Cumulative Peak time of the day</p>
         <p className="text-white">Peak Time ---- 5:43 PM</p>
@@ -199,14 +198,14 @@ const TripAnalytics = () => {
   const SmallCardProps6: CardPropType = {
     title: "Peak hour (cumulative)",
     duration: selectedDuration,
-    value: "5:43 PM", 
-    content:CumulativePeakTooltip,
-    position:"RightBottom"
+    value: "5:43 PM",
+    content: CumulativePeakTooltip,
+    position: "RightBottom"
   };
 
-  
-  const MorningPeakTooltip=()=>{
-    return(
+
+  const MorningPeakTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Morning Peak time of the day</p>
         <p className="text-white">Peak Time ---- 10:12 AM</p>
@@ -217,12 +216,12 @@ const TripAnalytics = () => {
     title: "Morning peak",
     duration: selectedDuration,
     value: "10:12 AM",
-    content:MorningPeakTooltip,
-    position:"RightBottom"
+    content: MorningPeakTooltip,
+    position: "RightBottom"
   };
 
-  const EveningPeakTooltip=()=>{
-    return(
+  const EveningPeakTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Evening Peak time of the day</p>
         <p className="text-white">Peak Time ---- 7:13 PM</p>
@@ -237,27 +236,27 @@ const TripAnalytics = () => {
     position: "RightBottom"
   };
 
-  const TotalTripsChartTooltip=()=>{
-    return(
+  const TotalTripsChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the number of trips per state</p>
-        </div>
+      </div>
     )
   }
   const CardWithChartProp1: CardPropType = {
     title: "TOTAL TRIPS",
     duration: selectedDuration,
-    content:TotalTripsChartTooltip,
-    position:"RightBottom"
+    content: TotalTripsChartTooltip,
+    position: "RightBottom"
   };
 
-  const TotalTripTooltip=()=>{
-    return(
+  const TotalTripTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the number of trips</p>
         <p className="text-white">Total Trips ---- {numberFormat(String(allFilteredTrips.length))}</p>
         <p className="text-white">{selectedDuration}</p>
-        </div>
+      </div>
     )
   }
   const CardWithChartProp2: CardPropType = {
@@ -266,29 +265,29 @@ const TripAnalytics = () => {
     value: numberFormat(String(allFilteredTrips.length)),
     icon: "positive",
     percent: String(CalculatedValues.tripChange),
-    content:TotalTripTooltip,
-    position:"RightBottom"
+    content: TotalTripTooltip,
+    position: "RightBottom"
   };
 
-  const TripSpeedChartTooltip=()=>{
-    return(
+  const TripSpeedChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Histogram of the trip speed values with its noraml distribution and mean</p>
-        </div>
+      </div>
     )
   }
   const ChartCardProps: CardPropType = {
     title: "TRIP SPEED",
     duration: selectedDuration,
-    content:TripSpeedChartTooltip,
-    position:"RightBottom"
+    content: TripSpeedChartTooltip,
+    position: "RightBottom"
   };
 
-  const TripLengthChartTooltip=()=>{
-    return(
+  const TripLengthChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Histogram of the trip length values with its noraml distribution and mean</p>
-        </div>
+      </div>
     )
   }
   const ChartCardProps4: CardPropType = {
@@ -298,11 +297,11 @@ const TripAnalytics = () => {
     position: "RightBottom"
   };
 
-  const TripDurationChartTooltip =()=>{
-    return(
+  const TripDurationChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Histogram of the trip duration values with its noraml distribution and mean </p>
-        </div>
+      </div>
     )
   }
   const ChartCardProps2: CardPropType = {
@@ -312,13 +311,13 @@ const TripAnalytics = () => {
     position: "RightBottom"
   };
 
-  const TripDurationTooltip=()=>{
-    return(
+  const TripDurationTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the trip duration</p>
         <p className="text-white">Total Trips ---- {numberFormat(String(CalculatedValues.tripDurationValue))}</p>
         <p className="text-white">{selectedDuration}</p>
-        </div>
+      </div>
     )
   }
   const CardWithChartProps: CardPropType = {
@@ -331,13 +330,13 @@ const TripAnalytics = () => {
     position: "RightBottom"
   };
 
-  const TripLengthTooltip =()=>{
-    return(
+  const TripLengthTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the trip Length</p>
         <p className="text-white">Trip Length ---- {numberFormat(String(Math.round(CalculatedValues.tripLengthValue)))}</p>
         <p className="text-white">{selectedDuration}</p>
-        </div>
+      </div>
     )
   }
   const CardWithChartProps4: CardPropType = {
@@ -351,13 +350,13 @@ const TripAnalytics = () => {
   };
 
 
-  const TripSpeedTooltip =()=>{
-    return(
+  const TripSpeedTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average of the trip speed</p>
         <p className="text-white">Trip Speed ---- {numberFormat(String(Math.round(CalculatedValues.tripSpeedValue)))}</p>
         <p className="text-white">{selectedDuration}</p>
-        </div>
+      </div>
     )
   }
   const CardWithChartProps2: CardPropType = {
@@ -370,7 +369,7 @@ const TripAnalytics = () => {
     position: "RightBottom"
   };
 
-  
+
 
 
   const TotalTripsChartData = [
@@ -425,10 +424,10 @@ const TripAnalytics = () => {
   //   // { TripDuration: 'Mega Long', trips: 78000 }
   // ];
 
- 
 
 
-  const TestChartData = ()=>{
+
+  const TestChartData = () => {
     function getLast7DaysArray() {
       const today = new Date();
       const last7DaysArray = [];
@@ -466,35 +465,35 @@ const TripAnalytics = () => {
   //   setSelectedState("All");
   // }, []);
 
-  const generateHistoData = (field: any)=>{
+  const generateHistoData = (field: any) => {
     let data: any[] = [];
     CalculatedValues.allFilteredTrips.forEach((trip) => {
-      if(field === 'TripDuration'){
-        data.push({ TripDuration: trip.tripDuration});
-      }else if( field === 'TripLength'){
-        data.push({ TripLength: trip.tripDistance});
-      }else if( field === 'TripSpeed'){
-        data.push({ TripSpeed: trip.tripSpeed});
+      if (field === 'TripDuration') {
+        data.push({ TripDuration: trip.tripDuration });
+      } else if (field === 'TripLength') {
+        data.push({ TripLength: trip.tripDistance });
+      } else if (field === 'TripSpeed') {
+        data.push({ TripSpeed: trip.tripSpeed });
       }
     });
     return data;
   }
-  const TripDurationChartProps={
+  const TripDurationChartProps = {
     chartData: generateHistoData('TripDuration'),
     yName: "TripDuration",
     chartName: "Trips by Duration",
     xAxisTitle: "Trip Duration",
     yAxisTitle: "No. of Trips",
-    
+
   }
-  const TripLengthChartProps={
+  const TripLengthChartProps = {
     chartData: generateHistoData('TripLength'),
     yName: "TripLength",
     chartName: "Trips by Length",
     xAxisTitle: "Trip Length",
     yAxisTitle: "No. of Trips",
   }
-  const TripSpeedChartProps={
+  const TripSpeedChartProps = {
     chartData: generateHistoData('TripSpeed'),
     yName: "TripSpeed",
     chartName: "Trips by Speed",
@@ -522,7 +521,7 @@ const TripAnalytics = () => {
         <CardWithChart
           prop1={CardWithChartProp1}
           prop2={CardWithChartProp2}
-          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TotalTripsChartData,'trips')}/>}
+          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TotalTripsChartData, 'trips')} />}
         />
       </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">
@@ -590,7 +589,7 @@ const TripAnalytics = () => {
       {/* <Histogram />
       <HistogramLine /> */}
       {/* <LineChartTremor chartData={TestChartData()}/> */}
-     
+
     </div>
   );
 };

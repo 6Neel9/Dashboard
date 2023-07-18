@@ -2,8 +2,8 @@ import React from 'react';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, HiloSeries, Tooltip, DateTime, Zoom, Logarithmic, Crosshair } from '@syncfusion/ej2-react-charts';
 
 import { financialChartData, FinancialPrimaryXAxis, FinancialPrimaryYAxis } from '../../data/dummy';
-import { useStateContext } from '../../contexts/ContextProvider';
 import { ChartsHeader } from '../../components';
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const date1 = new Date('2017, 1, 1');
 
@@ -17,7 +17,7 @@ function filterValue(value: any) {
 const returnValue = financialChartData.filter(filterValue);
 
 const Financial = () => {
-  const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
 
   return (
     <div className="m-4 md:m-10 mt-24 p-10 bg-white dark:bg-secondary-dark-bg rounded-3xl">

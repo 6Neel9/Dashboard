@@ -254,8 +254,6 @@ const ActiveHoursPerDay: CardPropType = {
 
 const DriverAnalytics = () => {
   const {
-    currentColor,
-    currentMode,
     selectedDuration,
     selectedState,
     setSelectedDuration,

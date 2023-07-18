@@ -5,10 +5,10 @@ import { TooltipComponent } from "@syncfusion/ej2-react-popups";
 
 import { themeColors } from "../data/meiroData";
 import { useStateContext } from "../contexts/ContextProvider";
+import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
 
 const ThemeSettings = () => {
-  const { setColor, setMode, currentMode, currentColor, setThemeSettings } =
-    useStateContext();
+    const { setColor, setMode, currentMode, currentColor, setThemeSettings }= useStateContextDisplay();
 
   return (
     <div className="bg-half-transparent w-screen fixed nav-item top-0 right-0">

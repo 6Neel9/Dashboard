@@ -149,8 +149,6 @@ const RevenuePerTripwrtCityStates: CardPropType = {
 const RevenueAnalytics = () => {
 
   const {
-    currentColor,
-    currentMode,
     selectedDuration,
     selectedState,
     setSelectedDuration,

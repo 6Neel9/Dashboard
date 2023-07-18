@@ -1,9 +1,9 @@
 import React from 'react';
 import { ChartComponent, SeriesCollectionDirective, SeriesDirective, Inject, LineSeries, DateTime, Legend, Tooltip, AxisModel, ColumnSeries, Category, ChartSeriesType, DataLabel, LegendSettingsModel } from '@syncfusion/ej2-react-charts';
-import { useStateContext } from '../../contexts/ContextProvider';
+import { useStateContextDisplay } from '../../contexts/DisplayContextProvider';
 
 const LineChart = React.memo(({ primary_XAxis, primary_YAxis, data, x_name, y_name, chart_name }: { primary_XAxis?: AxisModel | undefined, primary_YAxis?: AxisModel | undefined, data?: any[] | undefined, x_name?: string, y_name?: string, chart_name?: string }) => {
-  const { currentMode } = useStateContext();
+  const { currentMode } = useStateContextDisplay();
 
   const marker = {
     visible: true,

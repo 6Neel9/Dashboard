@@ -18,11 +18,11 @@ export interface Trip {
     _id: string;
     driverId: number;
     tripId: number;
-    startLocation: string;
+    startLocation: number[];
     tripDistance: number;
     tripSpeed: number;
     tripDuration: number;
-    endLocation: string;
+    endLocation: number[];
     startTime: string;
     tripFare: number;
     paymentType: string;

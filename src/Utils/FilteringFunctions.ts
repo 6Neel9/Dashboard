@@ -56,29 +56,6 @@ function filterTripsByPeriod(
     return startTime >= filterStart && startTime <= filterEnd;
   });
 
-   // Ensure there's at least one trip with the same date as filterEnd
-  //  const hasTodayTrip = todayTrips.some(
-  //   (trip) => new Date(trip.startTime).toDateString() === filterEnd.toDateString()
-  // );
-
-  // if (!hasTodayTrip) {
-  //   const defaultTrip: Trip = {
-  //     _id: `default_${Date.now()}`, // Unique and dynamic id using timestamp
-  //     driverId: 0,
-  //     tripId: 0,
-  //     startLocation: 'null',
-  //     tripDistance: 0,
-  //     tripSpeed: 0,
-  //     tripDuration: 0,
-  //     endLocation: 'null',
-  //     startTime: filterEnd.toISOString(),
-  //     tripFare: 0,
-  //     paymentType: 'null',
-  //     endTime: filterEnd.toISOString(),
-  //   };
-
-  //   todayTrips.push(defaultTrip);
-  // }
 
   return todayTrips;
 }
@@ -170,7 +147,7 @@ function calculateTotalValue(
   trips: Trip[],
   endDate: Date,
   filterDuration: number,
-  period: String,
+  period: string,
   tripElement: string
 ): number {
   const filteredTrips = filterTripsByPeriod(
@@ -295,7 +272,7 @@ function calculateAverageUsingValue(
   trips: Trip[],
   endDate: Date,
   filterDuration: number,
-  period: String,
+  period: string,
   tripElement: string
 ): number {
   const filteredTrips = filterTripsByPeriod(
@@ -555,6 +532,179 @@ function calculateAverageTripDuration(dataset: Trip[] , duration: number): Hourl
 }
 
 
+//Extra Missing trips generate for chart data
+
+function generateUniqueId(existingIds: number[]): number {
+  let newId = Math.floor(Math.random() * 1000) + 1;
+  while (existingIds.includes(newId)) {
+    newId = Math.floor(Math.random() * 1000) + 1;
+  }
+  return newId;
+}
+function getDateString(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+// function addMissingTrips(trips: Trip[]): Trip[] {
+//   if (trips.length === 0) {
+//     return trips;
+//   }
+
+//   const today = new Date();
+//   const lastTripStartTime = new Date(trips[trips.length - 1].startTime);
+//   const daysDiff = Math.floor((today.getTime() - lastTripStartTime.getTime()) / (1000 * 60 * 60 * 24));
+
+//   if (daysDiff <= 0) {
+//     return trips;
+//   }
+
+//   let nextTripId = trips[trips.length - 1].tripId + 1;
+//   const newTrips: Trip[] = [];
+
+//   //
+//   const existingTripIds = trips.map((trip) => trip.tripId);
+// const existingDriverIds = trips.map((trip) => trip.driverId);
+// const newDriverId = generateUniqueId(existingDriverIds);
+// const newTripId = generateUniqueId(existingTripIds);
+
+//   // Include today's trip if it doesn't already exist
+//   const lastTripDate = new Date(lastTripStartTime).toISOString().slice(0, 10);
+//   const todayDate = getDateString(today);
+//   if (lastTripDate !== todayDate) {
+//     const todayEndTime = new Date(today);
+//     todayEndTime.setMinutes(todayEndTime.getMinutes() + trips[0].tripDuration);
+
+//     const todayTrip: Trip = {
+//       _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
+//       driverId: newDriverId, // You can set the appropriate driverId here.
+//       tripId: newTripId,
+//       startLocation: trips[0].startLocation,
+//       tripDistance: 0,
+//       tripSpeed: 0,
+//       tripDuration: trips[0].tripDuration,
+//       endLocation: trips[0].endLocation,
+//       startTime: todayDate + 'T00:00:00',
+//       tripFare: 0,
+//       paymentType: "",
+//       endTime: getDateString(todayEndTime) + 'T00:00:00',
+//     };
+
+//     newTrips.push(todayTrip);
+//     nextTripId++;
+//   }
+
+//   // Add missing trips for the days in between last trip and today
+//   for (let i = 1; i < daysDiff; i++) {
+//     const nextStartTime = new Date(lastTripStartTime);
+//     nextStartTime.setDate(nextStartTime.getDate() + i);
+//     const nextEndTime = new Date(nextStartTime);
+//     nextEndTime.setMinutes(nextEndTime.getMinutes() + trips[0].tripDuration);
+
+//     const newTrip: Trip = {
+//       _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
+//       driverId: 0, // You can set the appropriate driverId here.
+//       tripId: nextTripId,
+//       startLocation: trips[0].startLocation,
+//       tripDistance: 0,
+//       tripSpeed: 0,
+//       tripDuration: trips[0].tripDuration,
+//       endLocation: trips[0].endLocation,
+//       startTime: getDateString(nextStartTime) + 'T00:00:00',
+//       tripFare: 0,
+//       paymentType: "",
+//       endTime: getDateString(nextEndTime) + 'T00:00:00',
+//     };
+
+//     newTrips.push(newTrip);
+//     nextTripId++;
+//   }
+
+//   return [...trips, ...newTrips];
+// }
+
+
+
+function addMissingTrips(trips: Trip[]): Trip[] {
+  if (trips.length === 0) {
+    return trips;
+  }
+
+  const today = new Date();
+  const lastTripStartTime = new Date(trips[trips.length - 1].startTime);
+  const daysDiff = Math.floor((today.getTime() - lastTripStartTime.getTime()) / (1000 * 60 * 60 * 24));
+
+  if (daysDiff <= 0) {
+    return trips;
+  }
+
+  let nextTripId = trips[trips.length - 1].tripId + 1;
+  const newTrips: Trip[] = [];
+
+
+  //
+  //   const existingTripIds = trips.map((trip) => trip.tripId);
+// const existingDriverIds = trips.map((trip) => trip.driverId);
+// const newDriverId = generateUniqueId(existingDriverIds);
+// const newTripId = generateUniqueId(existingTripIds);
+  // Include today's trip if it doesn't already exist
+  const lastTripDate = new Date(lastTripStartTime).toISOString().slice(0, 10);
+  const todayDate = getDateString(today);
+  if (lastTripDate !== todayDate) {
+    const todayEndTime = new Date(today);
+    todayEndTime.setMinutes(todayEndTime.getMinutes() + trips[0].tripDuration);
+
+    const todayTrip: Trip = {
+      _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
+      driverId: 0, // You can set the appropriate driverId here.
+      tripId: nextTripId,
+      startLocation: trips[0].startLocation,
+      tripDistance: 0,
+      tripSpeed: 0,
+      tripDuration: trips[0].tripDuration,
+      endLocation: trips[0].endLocation,
+      startTime: todayDate + 'T00:00:00',
+      tripFare: 0,
+      paymentType: "",
+      endTime: getDateString(todayEndTime) + 'T00:00:00',
+    };
+
+    newTrips.push(todayTrip);
+    nextTripId++;
+  }
+
+  // Add missing trips for the days in between last trip and today
+  for (let i = 1; i < daysDiff; i++) {
+    const nextStartTime = new Date(lastTripStartTime);
+    nextStartTime.setDate(nextStartTime.getDate() + i);
+    const nextEndTime = new Date(nextStartTime);
+    nextEndTime.setMinutes(nextEndTime.getMinutes() + trips[0].tripDuration);
+
+    const newTrip: Trip = {
+      _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
+      driverId: 0, // You can set the appropriate driverId here.
+      tripId: nextTripId,
+      startLocation: trips[0].startLocation,
+      tripDistance: 0,
+      tripSpeed: 0,
+      tripDuration: trips[0].tripDuration,
+      endLocation: trips[0].endLocation,
+      startTime: getDateString(nextStartTime) + 'T00:00:00',
+      tripFare: 0,
+      paymentType: "",
+      endTime: getDateString(nextEndTime) + 'T00:00:00',
+    };
+
+    newTrips.push(newTrip);
+    nextTripId++;
+  }
+
+  return [...trips, ...newTrips];
+}
+
+
 
 
 export {
@@ -570,5 +720,6 @@ export {
   minMax,
   getRevenuePerTripChart,
   numberFormat,
-  calculateAverageTripDuration
+  calculateAverageTripDuration,
+  addMissingTrips
 };

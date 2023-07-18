@@ -15,6 +15,7 @@ import SmallCardWithChart from "../components/Cards/SmallCardWithChart";
 import { calculateAverageTripDuration, filteredTrips, getTop10Drivers, minMax } from "../Utils/FilteringFunctions";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import { time } from "console";
+import { mapOfPeriods } from "../Utils/Constants";
 
 type CardPropType = {
   title?: string;
@@ -379,12 +380,51 @@ const DriverAnalytics = () => {
     return averageTripDuration;
   }
 
+  //Percent Change
+  function calculateAverageHoursPerDayChangePercentage(trips: any[]): number {
+    // Group trips by their date (day) using a dictionary.
+    const tripGroups: { [date: string]: any[] } = {};
+    trips.forEach((trip) => {
+      const date = trip.startTime.substr(0, 10); // Extract the date part (YYYY-MM-DD).
+      if (!tripGroups[date]) {
+        tripGroups[date] = [];
+      }
+      tripGroups[date].push(trip);
+    });
+  
+    // Calculate the average trip duration per day.
+    const averageTripDurations: number[] = [];
+    for (const date in tripGroups) {
+      const tripsOnDate = tripGroups[date];
+      const totalDuration = tripsOnDate.reduce((acc, trip) => acc + trip.tripDuration, 0);
+      const averageDuration = totalDuration / tripsOnDate.length;
+      averageTripDurations.push(averageDuration);
+    }
+  
+    // Calculate the percentage change in average trip duration between consecutive days.
+    let percentageChange = 0;
+    for (let i = 1; i < averageTripDurations.length; i++) {
+      const currentDayAvg = averageTripDurations[i];
+      const previousDayAvg = averageTripDurations[i - 1];
+      const dayChange = currentDayAvg - previousDayAvg;
+      const percentageDayChange = (dayChange / previousDayAvg) * 100;
+      percentageChange += percentageDayChange;
+    }
+  
+    // Calculate the average percentage change.
+    percentageChange /= averageTripDurations.length - 1;
+  
+    return percentageChange;
+  }
+
+console.log(calculateAverageHoursPerDayChangePercentage(CalculatedValues.allFilteredTrips));
+
   const ActiveHoursPerDay2: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
     duration: selectedDuration,
     value: `${numberFormat(calculateAverageTripDurationCard(CalculatedValues.allFilteredTrips))} Hrs`,
     icon: "positive",
-    percent: "0.3",
+    percent: String(calculateAverageHoursPerDayChangePercentage(CalculatedValues.allFilteredTrips)),
     content: ActiveHoursPerDayTooltip,
     position: "RightBottom"
   };
@@ -644,7 +684,7 @@ const DriverAnalytics = () => {
         }
       }
     }
-console.log(timeDifferences)
+// console.log(timeDifferences)
     return timeDifferences;
   }
 

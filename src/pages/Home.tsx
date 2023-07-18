@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown,calculatePercentChangeUsingCount,calculatePercentChangeOfAverage,getTop10Drivers, minMax ,calculateAverageTripDuration} from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, getTop10Drivers, minMax, calculateAverageTripDuration, addMissingTrips } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
@@ -104,7 +104,9 @@ const Home = () => {
 
 
 
-
+  // console.log(CalculatedValues.allFilteredTrips);
+ const ChartData = addMissingTrips(CalculatedValues.allFilteredTrips);
+ console.log(ChartData)
 
 
   // todo : Check wheather its working for all numbers or not(large numbers).
@@ -257,9 +259,11 @@ const Home = () => {
   let tripChange = calculatePercentChangeUsingCount(tripData, mapOfPeriods.get(selectedDuration))
 
   let DriverChange = calculatePercentChangeUsingValue(driverData, mapOfPeriods.get(selectedDuration), 'driverId');
+
   let averageTripLengthChange = calculatePercentChangeOfAverage(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
   let distanceCovered = calculatePercentChangeUsingValue(tripData, mapOfPeriods.get(selectedDuration), 'tripDistance');
-  let averageTripsPerHour = (allFilteredTrips.length) / 24
+  let averageTripsPerHour = (allFilteredTrips.length) / 24;
+
 
 
 
@@ -408,10 +412,10 @@ const Home = () => {
 
     return (
       <DateTimeLineChart
-        chartType = 'Category'
-        chartData={calculateAverageTripDuration(CalculatedValues.allFilteredTrips ,mapOfPeriods.get(selectedDuration))}
+        chartType='Category'
+        chartData={calculateAverageTripDuration(CalculatedValues.allFilteredTrips, mapOfPeriods.get(selectedDuration))}
         chart_name="Trip duration"
-        props={minMax(calculateAverageTripDuration(CalculatedValues.allFilteredTrips ,mapOfPeriods.get(selectedDuration)),"duration")}
+        props={minMax(calculateAverageTripDuration(CalculatedValues.allFilteredTrips, mapOfPeriods.get(selectedDuration)), "duration")}
       />
       // <div>hi</div>
     );
@@ -466,7 +470,7 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const TotalDriverChartTooltip=()=> {
+  const TotalDriverChartTooltip = () => {
     return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Chart for the total number of drivers per state </p>
@@ -480,8 +484,8 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const TotalTripsChartTooltip=()=>{
-    return(
+  const TotalTripsChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Line chart for the total number of trips per date </p>      </div>
     )
@@ -512,8 +516,8 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const TotalTripsTooltip=()=>{
-    return(
+  const TotalTripsTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of number of trips</p>
         <p className="text-white">Total Trips ---- {numberFormat(String(CalculatedValues.allFilteredTrips.length))}</p>
@@ -548,8 +552,8 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const  DistanceCoveredTooltip=()=>{
-    return(
+  const DistanceCoveredTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of distance covered by all drivers</p>
         <p className="text-white">Total Distance Covered ---- {`${numberFormat(String(totalDistance))} km`}</p>
@@ -566,8 +570,8 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const AvgTripLengthTooltip =()=>{
-    return(
+  const AvgTripLengthTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average value of the trip length</p>
         <p className="text-white">Average Trip Length ---- {String(Number(averageTripLength).toFixed(2))} km</p>
@@ -585,8 +589,8 @@ const Home = () => {
   };
 
 
-  const AvgTripsPerHourTooltip=()=>{
-    return(
+  const AvgTripsPerHourTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Average number of trips per hour</p>
         <p className="text-white">Average Trips / Hour ---- {numberFormat(String(CalculatedValues.averageTripsPerHour))}</p>
@@ -602,8 +606,8 @@ const Home = () => {
   };
 
 
-  const MorningPeakTooltip=()=>{
-    return(
+  const MorningPeakTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Morning Peak time of the day</p>
         <p className="text-white">Peak Time ---- 10:12 AM</p>
@@ -618,8 +622,8 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const EveningPeakTooltip=()=>{
-    return(
+  const EveningPeakTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Evening Peak time of the day</p>
         <p className="text-white">Peak Time ---- 7:13 PM</p>
@@ -634,11 +638,11 @@ const Home = () => {
     position: "RightBottom"
   };
 
-  const TripDurationChartTooltip =()=>{
-    return(
+  const TripDurationChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Aggregate of the trip duration per date</p>
-        </div>
+      </div>
     )
   }
   const ChartCardProps: CardPropType = {
@@ -648,7 +652,7 @@ const Home = () => {
     position: "RightBottom"
   };
 
-   const PaymentTypeToolTip = () => {
+  const PaymentTypeToolTip = () => {
     return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Ratio of all the payment Mode Online/Offline </p>
@@ -656,7 +660,7 @@ const Home = () => {
         <p className="text-white">{selectedDuration}</p>
       </div>
     )
-   }
+  }
   const PaymentType: CardPropType = {
     title: "Payment Mode: Online / Offline",
     duration: "",
@@ -697,8 +701,8 @@ const Home = () => {
   ];
 
 
-  const TopTenDriversChartTooltip=()=>{
-    return(
+  const TopTenDriversChartTooltip = () => {
+    return (
       <div className="px-2 py-2 text-sm">
         <p className="text-white">Top 10 drivers with highest revenue</p>
       </div>
@@ -824,7 +828,7 @@ const Home = () => {
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalculatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} chartType = "Null" />}
+          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalculatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} chartType="Null" />}
         />
       </div>
       <div>

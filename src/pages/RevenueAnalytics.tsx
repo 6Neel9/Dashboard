@@ -8,6 +8,7 @@ import {
   Bar,
   Pie,
   SmallCardWithChart,
+  HistogramLine
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
@@ -381,11 +382,90 @@ const RevenueAnalytics = () => {
   function getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+  //Histodate
+  const generateHistoData = (field: any) => {
+    let data: any[] = [];
+    CalculatedValues.allFilteredTrips.forEach((trip) => {
+      if (field === 'TripDuration') {
+        data.push({ TripDuration: trip.tripDuration });
+      } else if (field === 'TripLength') {
+        data.push({ TripLength: trip.tripDistance });
+      } else if (field === 'TripSpeed') {
+        data.push({ TripSpeed: trip.tripSpeed });
+      }
+    });
+    return data;
+  }
 
-  // useEffect(() => {
-  //   setSelectedDuration("Till Date");
-  //   setSelectedState("All");
-  // }, []);
+
+  interface Trip {
+    driverId: number;
+    tripFare: number;
+    tripDuration: number;
+  }
+  
+  interface RevenuePerOperatingHour {
+    // driverId: number;
+    revenuePerOperatingHour: number;
+  }
+  
+  function calculateAverageRevenuePerOperatingHour(dataset: any[]): RevenuePerOperatingHour[] {
+    const driverData: { [driverId: number]: Trip[] } = {};
+  
+    // Group trips by driverId
+    dataset.forEach((trip: any) => {
+      const driverId = trip.driverId;
+      const { tripFare, tripDuration } = trip;
+      const tripData: Trip = { driverId, tripFare, tripDuration };
+  
+      if (!driverData[driverId]) {
+        driverData[driverId] = [tripData];
+      } else {
+        driverData[driverId].push(tripData);
+      }
+    });
+    
+  
+    // Calculate total tripFare and total tripDuration for each driver
+    const revenuePerOperatingHourData: RevenuePerOperatingHour[] = [];
+    for (const driverId in driverData) {
+      const trips = driverData[driverId];
+      const totalFare = trips.reduce((acc, trip) => acc + trip.tripFare, 0);
+      const totalDuration = trips.reduce((acc, trip) => acc + trip.tripDuration, 0);
+  
+      if (totalDuration > 0) {
+        const revenuePerOperatingHour = totalFare / (totalDuration/60);
+        revenuePerOperatingHourData.push({
+          // driverId: parseInt(driverId),
+          revenuePerOperatingHour,
+        });
+      }
+    }
+  
+    return revenuePerOperatingHourData;
+  }
+  
+  
+  const result = calculateAverageRevenuePerOperatingHour(CalculatedValues.allFilteredTrips);
+  // console.log(result);
+  
+  
+  
+  
+
+
+  const TripDurationChartProps = {
+    chartData: result,
+    yName: "revenuePerOperatingHour",
+    chartName: "Revenue Per Operating Hour",
+    xAxisTitle: "Revenue Per Operating Hour",
+    yAxisTitle: "Number Of Drivers",
+
+  }
+
+  // console.log(generateHistoData('TripDuration'))
+
+
   return (
     <div className="extraSmallMargin">
       {/* <div className="displayFlex">
@@ -412,7 +492,7 @@ const RevenueAnalytics = () => {
         <CardWithChart
           prop1={RevenuePerOperatingHour}
           prop2={RevenuePerOperatingHour2}
-          chart={<Bar columnData={RevenuePerHourChart} xTitle="states" yTitle="revenuePerHour" Chart_name="Revenue/hr per state" minMax={minMax(RevenuePerHourChart, 'revenuePerHour')} />}
+          chart={<HistogramLine histogramProps={TripDurationChartProps} />}
         />
       </div>
 

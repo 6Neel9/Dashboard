@@ -463,7 +463,51 @@ const RevenueAnalytics = () => {
 
   }
 
-  // console.log(generateHistoData('TripDuration'))
+
+  ///Data for REVENUE PER TRIP
+
+  interface RevenuePerTrip {
+    // driverId: number;
+    revenuePerTrip: number;
+  }
+
+  function calculateAverageRevenuePerTrip(dataset: any[]): RevenuePerTrip[] {
+    const driverData: { [driverId: number]: Trip[] } = {};
+  
+    // Group trips by driverId
+    dataset.forEach((trip: any) => {
+      const driverId = trip.driverId;
+      const { tripFare, tripDuration } = trip;
+      const tripData: Trip = { driverId, tripFare, tripDuration };
+  
+      if (!driverData[driverId]) {
+        driverData[driverId] = [tripData];
+      } else {
+        driverData[driverId].push(tripData);
+      }
+    });
+    
+  
+    // Calculate total tripFare and total tripDuration for each driver
+    const revenuePerTripData: any[] = [];
+    for (const driverId in driverData) {
+      const trips = driverData[driverId];
+      const totalFare = trips.reduce((acc, trip) => acc + trip.tripFare, 0);
+      // const totalDuration = trips.reduce((acc, trip) => acc + trip.tripDuration, 0);
+  
+      if (dataset.length > 0) {
+        const revenuePerTrip = totalFare / dataset.length;
+        revenuePerTripData.push({
+          // driverId: parseInt(driverId),
+          revenuePerTrip,
+        });
+      }
+    }
+  
+    return revenuePerTripData;
+  }
+
+  const revenuePerTripData = calculateAverageRevenuePerTrip(CalculatedValues.allFilteredTrips);
 
 
   return (
@@ -476,6 +520,14 @@ const RevenueAnalytics = () => {
         <SmallCard props={DriverRevenue} />
         <SmallCardWithChart props={PaymentType} chart={<Pie h='30%' w='30%' data={PieChartData} Chart_name="Payment Mode: Online/Offline" />} />
         <SmallCard props={AvgDriverRevenue} />
+      </div>
+      <div>
+        <CardWithChart
+          prop1={RevenuePerTrips}
+          prop2={RevenuePerTrips2}
+
+          chart={<HistogramLine histogramProps={revenuePerTripData} />}
+        />
       </div>
       <div>
         <CardWithChart

@@ -686,6 +686,38 @@ const Home = () => {
     { state: 'Rajasthan', drivers: 52000 },
     { state: 'West Bengal', drivers: 45000 }
   ];
+
+  //
+  interface Driver {
+    signedUpDate: string;
+  }
+  
+  interface DateWithCount {
+    x: Date;
+    y: number;
+  }
+  
+  function getTotalDriversByDate(dataset: Driver[], duration: number): DateWithCount[] {
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getTime() - (duration-1) * 24 * 60 * 60 * 1000); // Subtracts the duration from the current date
+  
+    const dateWithCount: DateWithCount[] = [];
+  
+    for (let date = startDate; date <= currentDate; date.setDate(date.getDate() + 1)) {
+      const formattedDate = date.toISOString().slice(0, 10);
+      const y = dataset.filter((driver) => driver.signedUpDate <= formattedDate).length;
+      dateWithCount.push({ x: new Date(formattedDate), y });
+    }
+  
+    return dateWithCount;
+  }
+  
+  
+  
+  const result = getTotalDriversByDate(driverData, mapOfPeriods.get(selectedDuration));
+  // console.log(result);
+  
+  
   const TopTenDriversChartData = [
     { driver: 'Rajesh', revenue: 35000 },
     { driver: 'Amit', revenue: 34000 },
@@ -740,7 +772,7 @@ const Home = () => {
   }
   
 
-  console.log(calculateTotalTrips(CalculatedValues.allFilteredTrips))
+  // console.log(calculateTotalTrips(CalculatedValues.allFilteredTrips));
 
   // Datafiller Chartinterface DataPoint 
   interface DataPoint {
@@ -838,7 +870,8 @@ const Home = () => {
 
 
 
-
+const val = {min:0,max:10000};
+console.log(totalTripsChartData)
 
 
   return (
@@ -866,6 +899,7 @@ const Home = () => {
           prop1={TotalDrivers}
           prop2={NewDrivers}
           chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} Chart_name={"Drivers per State"} />}
+          // chart={<DateTimeLineChart chartData={result}  props={val}  chart_name={"Drivers per State"} chartType="Null" />}
         />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">

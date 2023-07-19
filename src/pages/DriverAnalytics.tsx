@@ -365,7 +365,7 @@ const DriverAnalytics = () => {
   }
 
   // Card Value
-  function calculateAverageTripDurationCard(trips: any[] , duration : number): number {
+  function calculateActiveHoursPerDayValue(trips: any[] , duration : number): number {
     const totalTrips = trips.length;
   
     if (totalTrips === 0) {
@@ -417,12 +417,12 @@ const DriverAnalytics = () => {
     return percentageChange;
   }
 
-console.log(calculateAverageHoursPerDayChangePercentage(CalculatedValues.allFilteredTrips));
+// console.log(calculateAverageHoursPerDayChangePercentage(CalculatedValues.allFilteredTrips));
 
   const ActiveHoursPerDay2: CardPropType = {
     title: "ACTIVE HOURS PER DAY",
     duration: selectedDuration,
-    value: `${numberFormat(calculateAverageTripDurationCard(CalculatedValues.allFilteredTrips , mapOfPeriods.get(selectedDuration)))} Hrs`,
+    value: `${numberFormat(calculateActiveHoursPerDayValue(CalculatedValues.allFilteredTrips , mapOfPeriods.get(selectedDuration)))} Hrs`,
     icon: "positive",
     percent: String(calculateAverageHoursPerDayChangePercentage(CalculatedValues.allFilteredTrips)),
     content: ActiveHoursPerDayTooltip,

@@ -37,7 +37,7 @@ import { fetchTrips } from "../store/tripSlice";
 //
 import AreaCharts from "../components/Charts/AreaCharts";
 import SmallCardFormatter from "../components/Cards/SmallCardFormatter";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, getTop10Drivers, minMax, calculateAverageTripDuration, addMissingTrips } from "../Utils/FilteringFunctions";
+import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, getTop10Drivers, minMax, calculateAverageTripDuration } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import LineChartTremor from "../components/Charts/LineChartTremor";
@@ -58,8 +58,8 @@ const Home = () => {
     driverData,
     setDriverData
   } = useStateContext();
-  const {currentColor,
-    currentMode,}=useStateContextDisplay();
+  const { currentColor,
+    currentMode, } = useStateContextDisplay();
   // const [driverData, setDrivers] = useState<any[]>([]);
   // const [tripData, setTrips] = useState<any[]>([]);
   const CalculatedValues = AnalyticsCalculation();
@@ -105,8 +105,7 @@ const Home = () => {
 
 
   // console.log(CalculatedValues.allFilteredTrips);
- const ChartData = addMissingTrips(CalculatedValues.allFilteredTrips);
- console.log(ChartData)
+
 
 
   // todo : Check wheather its working for all numbers or not(large numbers).
@@ -716,49 +715,79 @@ const Home = () => {
   };
 
 
-  function calculateTotalRevenue(data: any[]) {
-    const revenueMap: Map<string, number> = new Map();
-
+  function calculateTotalTrips(data: any[]) {
+    const tripsMap: Map<string, number> = new Map();
+  
     // Iterate over the dataset
     for (const item of data) {
       const startTime: any = item["startTime"].split("T")[0]; // Extract the date from the start time
-      const tripFare: any = item["tripFare"]; // Get the trip fare
-
-      if (revenueMap.has(startTime)) {
-        // If the date is already in the map, add the trip fare to the existing revenue
-        const currentRevenue: number = revenueMap.get(startTime)!;
-        revenueMap.set(startTime, currentRevenue + tripFare);
+  
+      if (tripsMap.has(startTime)) {
+        // If the date is already in the map, increment the trip count
+        const currentTrips: number = tripsMap.get(startTime)!;
+        tripsMap.set(startTime, currentTrips + 1);
       } else {
-        // If the date is not in the map, initialize the revenue with the trip fare
-        revenueMap.set(startTime, tripFare);
+        // If the date is not in the map, initialize the trip count with 1
+        tripsMap.set(startTime, 1);
       }
     }
+  
+    // Convert the trips map to an array of objects
+    const tripsData: any[] = Array.from(tripsMap, ([date, tripCount]) => ({ x: new Date(date), y: tripCount }));
+    tripsData.sort((a, b) => a.x - b.x); // Sort the array by date
+  
+    return tripsData;
+  }
+  
 
-    // Convert the revenue map to an array of objects
-    const revenueData: any[] = Array.from(revenueMap, ([date, revenue]) => ({ x: new Date(date), y: revenue }));
-    revenueData.sort((a, b) => a.x - b.x); // Sort the array by date
+  console.log(calculateTotalTrips(CalculatedValues.allFilteredTrips))
 
-    if (selectedDuration === "Today") {
-      let revDataToday: any[] = [];
-      CalculatedValues.allFilteredTrips.forEach((trip) => {
-        let date = new Date(trip.startTime.split("T")[0])
-        let date2 = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0, 0))
-        date2.setHours(0, 0, 0, 0)
-        revDataToday.push({ x: date2, y: trip.tripFare });
-        revDataToday.sort((a, b) => a.x - b.x); // Sort the array by date
-      });
-      return revDataToday;
-    } else {
-      return revenueData;
-    }
-
+  // Datafiller Chartinterface DataPoint 
+  interface DataPoint {
+    x: Date; // Date object
+    y: number; // Value (in this case, 0)
   }
 
+  function dataFiller(duration: number, dataset: any[]): DataPoint[] {
+    const currentDate = new Date();
+    const arraySize = duration;
+
+    // Create an array of DataPoint objects with default y value of 0
+    const dataArray: DataPoint[] = [];
+    for (let i = 0; i < arraySize; i++) {
+      const date = new Date(currentDate);
+      date.setUTCDate(currentDate.getUTCDate() - i);
+      dataArray.push({ x: date, y: 0 });
+    }
+
+    // Create a Map to associate dates with their corresponding data points in the dataset
+    const datasetMap = new Map<string, number>();
+    dataset.forEach((data) => {
+      const dateString = new Date(data.x).toISOString().slice(0, 10); // Format to 'YYYY-MM-DD'
+      datasetMap.set(dateString, data.y);
+    });
+
+    // Sort the dataArray in descending order based on dates
+    dataArray.sort((a, b) => b.x.getTime() - a.x.getTime())
+
+    // Merge the dataArray with dataset if the dates are present in the dataset
+    dataArray.forEach((dataPoint, index) => {
+      const dateString = dataPoint.x.toISOString().slice(0, 10); // Format to 'YYYY-MM-DD'
+      const existingData = datasetMap.get(dateString);
+
+      if (existingData !== undefined) {
+        dataArray[index].y = existingData;
+      }
+    });
+
+    return dataArray;
+  }
+
+
+
+  const totalTripsChartData = dataFiller(mapOfPeriods.get(selectedDuration), calculateTotalTrips(CalculatedValues.allFilteredTrips));
+
   //Calculate max and min of the calculateTotalRevenue revenue
-  const maxMinCount = calculateTotalRevenue(allFilteredTrips);
-  //   const mins = maxMinCount.reduce((prev, curr) => prev.revenue < curr.revenue ? prev : curr);
-  //   const maxs = maxMinCount.reduce((prev, curr) => prev.revenue > curr.revenue ? curr : prev);
-  // console.log(mins,maxs)
   function findMinMaxY(data: any[]) {
     const revenueMap: Map<string, number> = new Map();
 
@@ -791,7 +820,8 @@ const Home = () => {
 
 
 
-  const minMaxVal = findMinMaxY(maxMinCount)
+  const minMaxVal = findMinMaxY(totalTripsChartData);
+  // console.log(minMaxVal)
 
 
 
@@ -828,7 +858,7 @@ const Home = () => {
         <CardWithChart
           prop1={TotalTripsChart}
           prop2={TotalTrips}
-          chart={<DateTimeLineChart chartData={calculateTotalRevenue(CalculatedValues.allFilteredTrips)} props={minMaxVal} chart_name={"No. of Trips"} chartType="Null" />}
+          chart={<DateTimeLineChart chartData={totalTripsChartData} props={minMaxVal} chart_name={"No. of Trips"} chartType="Null" />}
         />
       </div>
       <div>

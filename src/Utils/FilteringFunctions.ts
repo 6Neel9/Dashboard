@@ -224,6 +224,8 @@ function calculatePercentChangeUsingCount(
     periodTypes.PREVIOUS
   ).length;
 
+
+
   if (previousCount != 0) {
     return ((currentCount - previousCount) / Math.abs(previousCount)) * 100;
   } else {
@@ -531,178 +533,48 @@ function calculateAverageTripDuration(dataset: Trip[] , duration: number): Hourl
   return hourlyData;
 }
 
+//Driver Analytics
+function calculateRevenuePerOperatingHour(trips: any[]): number {
+  let totalTripFare = 0;
+  let totalTripDurationMinutes = 0;
 
-//Extra Missing trips generate for chart data
-
-function generateUniqueId(existingIds: number[]): number {
-  let newId = Math.floor(Math.random() * 1000) + 1;
-  while (existingIds.includes(newId)) {
-    newId = Math.floor(Math.random() * 1000) + 1;
+  for (const trip of trips) {
+    totalTripFare += trip.tripFare;
+    totalTripDurationMinutes += trip.tripDuration;
   }
-  return newId;
+
+  const totalTripDurationHours = totalTripDurationMinutes / 60; // Convert total trip duration from minutes to hours
+
+  if (totalTripDurationHours === 0) {
+    return 0; // Return 0 if the total trip duration is 0 to avoid division by zero.
+  }
+
+  const revenuePerOperatingHour = totalTripFare / totalTripDurationHours;
+  return revenuePerOperatingHour;
 }
-function getDateString(date: Date): string {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return `${year}-${month}-${day}`;
-}
 
-function addMissingTrips(trips: Trip[]): Trip[] {
-  if (trips.length === 0) {
-    return trips;
-  }
+function CalculatePercentChangePerOperatingHour(dataset: Trip[], duration: number): number {
+  let currentDate = new Date();
+  const previousDate = new Date();
+  previousDate.setDate(currentDate.getDate() - duration);
+  previousDate.setHours(0, 0, 0, 0);
 
-  const today = new Date();
-  const lastTripStartTime = new Date(trips[trips.length - 1].startTime);
-  const daysDiff = Math.floor((today.getTime() - lastTripStartTime.getTime()) / (1000 * 60 * 60 * 24));
 
-  if (daysDiff <= 0) {
-    return trips;
-  }
+  const currentTotalTrips = filterTripsByPeriod(dataset, currentDate, duration, "current");
+  const previousTotalTrips = filterTripsByPeriod(dataset, previousDate, duration, "previous");
 
-  let nextTripId = trips[trips.length - 1].tripId + 1;
-  const newTrips: Trip[] = [];
 
-  //
-  const existingTripIds = trips.map((trip) => trip.tripId);
-const existingDriverIds = trips.map((trip) => trip.driverId);
-const newDriverId = generateUniqueId(existingDriverIds);
-const newTripId = generateUniqueId(existingTripIds);
+  const currentRevenuePerOperatingHour = calculateRevenuePerOperatingHour(currentTotalTrips);
+  const previousRevenuePerOperatingHour = calculateRevenuePerOperatingHour(previousTotalTrips);
 
-  // Include today's trip if it doesn't already exist
-  const lastTripDate = new Date(lastTripStartTime).toISOString().slice(0, 10);
-  const todayDate = getDateString(today);
-  if (lastTripDate !== todayDate) {
-    const todayEndTime = new Date(today);
-    todayEndTime.setMinutes(todayEndTime.getMinutes() + trips[0].tripDuration);
+  // Calculate the percentage change
+  const percentChange = ((currentRevenuePerOperatingHour - previousRevenuePerOperatingHour) / previousRevenuePerOperatingHour) * 100;
 
-    const todayTrip: Trip = {
-      _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
-      driverId: newDriverId, // You can set the appropriate driverId here.
-      tripId: newTripId,
-      startLocation: trips[0].startLocation,
-      tripDistance: 0,
-      tripSpeed: 0,
-      tripDuration: trips[0].tripDuration,
-      endLocation: trips[0].endLocation,
-      startTime: todayDate + 'T00:00:00',
-      tripFare: 0,
-      paymentType: "",
-      endTime: getDateString(todayEndTime) + 'T00:00:00',
-    };
-
-    newTrips.push(todayTrip);
-    nextTripId++;
-  }
-
-  // Add missing trips for the days in between last trip and today
-  for (let i = 1; i < daysDiff; i++) {
-    const nextStartTime = new Date(lastTripStartTime);
-    nextStartTime.setDate(nextStartTime.getDate() + i);
-    const nextEndTime = new Date(nextStartTime);
-    nextEndTime.setMinutes(nextEndTime.getMinutes() + trips[0].tripDuration);
-
-    const newTrip: Trip = {
-      _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
-      driverId: 0, // You can set the appropriate driverId here.
-      tripId: nextTripId,
-      startLocation: trips[0].startLocation,
-      tripDistance: 0,
-      tripSpeed: 0,
-      tripDuration: trips[0].tripDuration,
-      endLocation: trips[0].endLocation,
-      startTime: getDateString(nextStartTime) + 'T00:00:00',
-      tripFare: 0,
-      paymentType: "",
-      endTime: getDateString(nextEndTime) + 'T00:00:00',
-    };
-
-    newTrips.push(newTrip);
-    nextTripId++;
-  }
-
-  return [...trips, ...newTrips];
+  return percentChange;
 }
 
 
 
-// function addMissingTrips(trips: Trip[]): Trip[] {
-//   if (trips.length === 0) {
-//     return trips;
-//   }
-
-//   const today = new Date();
-//   const lastTripStartTime = new Date(trips[trips.length - 1].startTime);
-//   const daysDiff = Math.floor((today.getTime() - lastTripStartTime.getTime()) / (1000 * 60 * 60 * 24));
-
-//   if (daysDiff <= 0) {
-//     return trips;
-//   }
-
-//   let nextTripId = trips[trips.length - 1].tripId + 1;
-//   const newTrips: Trip[] = [];
-
-
-//   //
-//   //   const existingTripIds = trips.map((trip) => trip.tripId);
-// // const existingDriverIds = trips.map((trip) => trip.driverId);
-// // const newDriverId = generateUniqueId(existingDriverIds);
-// // const newTripId = generateUniqueId(existingTripIds);
-//   // Include today's trip if it doesn't already exist
-//   const lastTripDate = new Date(lastTripStartTime).toISOString().slice(0, 10);
-//   const todayDate = getDateString(today);
-//   if (lastTripDate !== todayDate) {
-//     const todayEndTime = new Date(today);
-//     todayEndTime.setMinutes(todayEndTime.getMinutes() + trips[0].tripDuration);
-
-//     const todayTrip: Trip = {
-//       _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
-//       driverId: 0, // You can set the appropriate driverId here.
-//       tripId: nextTripId,
-//       startLocation: trips[0].startLocation,
-//       tripDistance: 0,
-//       tripSpeed: 0,
-//       tripDuration: trips[0].tripDuration,
-//       endLocation: trips[0].endLocation,
-//       startTime: todayDate + 'T00:00:00',
-//       tripFare: 0,
-//       paymentType: "",
-//       endTime: getDateString(todayEndTime) + 'T00:00:00',
-//     };
-
-//     newTrips.push(todayTrip);
-//     nextTripId++;
-//   }
-
-//   // Add missing trips for the days in between last trip and today
-//   for (let i = 1; i < daysDiff; i++) {
-//     const nextStartTime = new Date(lastTripStartTime);
-//     nextStartTime.setDate(nextStartTime.getDate() + i);
-//     const nextEndTime = new Date(nextStartTime);
-//     nextEndTime.setMinutes(nextEndTime.getMinutes() + trips[0].tripDuration);
-
-//     const newTrip: Trip = {
-//       _id: `64a4f311fb78d8f7ec2d3ff${nextTripId}`,
-//       driverId: 0, // You can set the appropriate driverId here.
-//       tripId: nextTripId,
-//       startLocation: trips[0].startLocation,
-//       tripDistance: 0,
-//       tripSpeed: 0,
-//       tripDuration: trips[0].tripDuration,
-//       endLocation: trips[0].endLocation,
-//       startTime: getDateString(nextStartTime) + 'T00:00:00',
-//       tripFare: 0,
-//       paymentType: "",
-//       endTime: getDateString(nextEndTime) + 'T00:00:00',
-//     };
-
-//     newTrips.push(newTrip);
-//     nextTripId++;
-//   }
-
-//   return [...trips, ...newTrips];
-// }
 
 
 
@@ -721,5 +593,7 @@ export {
   getRevenuePerTripChart,
   numberFormat,
   calculateAverageTripDuration,
-  addMissingTrips
+  CalculatePercentChangePerOperatingHour,
+  calculateRevenuePerOperatingHour
+
 };

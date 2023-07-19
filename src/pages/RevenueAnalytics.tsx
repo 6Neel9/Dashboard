@@ -11,7 +11,7 @@ import {
 } from "../components";
 import "../Styles.scss";
 import { useStateContext } from "../contexts/ContextProvider";
-import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, filteredRevenueUpDown, calculatePercentChangeUsingCount, calculatePercentChangeOfAverage, minMax, getRevenuePerTripChart } from "../Utils/FilteringFunctions";
+import { minMax, getRevenuePerTripChart ,calculateRevenuePerOperatingHour,CalculatePercentChangePerOperatingHour } from "../Utils/FilteringFunctions";
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import { Trip } from "../contexts/ContextProvider";
@@ -331,12 +331,17 @@ const RevenueAnalytics = () => {
       </div>
     )
   }
+
+  //Function for the Down value
+
+
+
   const RevenuePerOperatingHour2: CardPropType = {
     title: "REVENUE PER OPERATING HOUR",
     duration: selectedDuration,
-    value: "₹ 8,300",
+    value: "₹ "+String(numberFormat(calculateRevenuePerOperatingHour(CalculatedValues.allFilteredTrips))),
     icon: "positive",
-    percent: "0.6",
+    percent: String(CalculatePercentChangePerOperatingHour(tripData,mapOfPeriods.get(selectedDuration))),
     content: RevenuePerOperatingHourTooltip,
     position: "RightBottom"
   };

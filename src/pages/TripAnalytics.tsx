@@ -7,7 +7,7 @@ import {
   LineChart,
   Bar,
   Histogram,
-  HistogramLine
+  HistogramLine,DateTimeLineChart
 } from "../components";
 import { useStateContext } from "../contexts/ContextProvider";
 import { ColoredMap } from "../components/Charts/ColoredMap";
@@ -501,6 +501,115 @@ const TripAnalytics = () => {
     yAxisTitle: "No. of Trips",
   }
 
+
+  //Total trips chartdate
+  function calculateTotalTrips(data: any[]) {
+    const tripsMap: Map<string, number> = new Map();
+  
+    // Iterate over the dataset
+    for (const item of data) {
+      const startTime: any = item["startTime"].split("T")[0]; // Extract the date from the start time
+  
+      if (tripsMap.has(startTime)) {
+        // If the date is already in the map, increment the trip count
+        const currentTrips: number = tripsMap.get(startTime)!;
+        tripsMap.set(startTime, currentTrips + 1);
+      } else {
+        // If the date is not in the map, initialize the trip count with 1
+        tripsMap.set(startTime, 1);
+      }
+    }
+  
+    // Convert the trips map to an array of objects
+    const tripsData: any[] = Array.from(tripsMap, ([date, tripCount]) => ({ x: new Date(date), y: tripCount }));
+    tripsData.sort((a, b) => a.x - b.x); // Sort the array by date
+  
+    return tripsData;
+  }
+  
+
+  console.log(calculateTotalTrips(CalculatedValues.allFilteredTrips))
+
+  // Datafiller Chartinterface DataPoint 
+  interface DataPoint {
+    x: Date; // Date object
+    y: number; // Value (in this case, 0)
+  }
+
+  function dataFiller(duration: number, dataset: any[]): DataPoint[] {
+    const currentDate = new Date();
+    const arraySize = duration;
+
+    // Create an array of DataPoint objects with default y value of 0
+    const dataArray: DataPoint[] = [];
+    for (let i = 0; i < arraySize; i++) {
+      const date = new Date(currentDate);
+      date.setUTCDate(currentDate.getUTCDate() - i);
+      dataArray.push({ x: date, y: 0 });
+    }
+
+    // Create a Map to associate dates with their corresponding data points in the dataset
+    const datasetMap = new Map<string, number>();
+    dataset.forEach((data) => {
+      const dateString = new Date(data.x).toISOString().slice(0, 10); // Format to 'YYYY-MM-DD'
+      datasetMap.set(dateString, data.y);
+    });
+
+    // Sort the dataArray in descending order based on dates
+    dataArray.sort((a, b) => b.x.getTime() - a.x.getTime())
+
+    // Merge the dataArray with dataset if the dates are present in the dataset
+    dataArray.forEach((dataPoint, index) => {
+      const dateString = dataPoint.x.toISOString().slice(0, 10); // Format to 'YYYY-MM-DD'
+      const existingData = datasetMap.get(dateString);
+
+      if (existingData !== undefined) {
+        dataArray[index].y = existingData;
+      }
+    });
+
+    return dataArray;
+  }
+
+
+
+  const totalTripsChartData = dataFiller(mapOfPeriods.get(selectedDuration), calculateTotalTrips(CalculatedValues.allFilteredTrips));
+
+  //Calculate max and min of the calculateTotalRevenue revenue
+  function findMinMaxY(data: any[]) {
+    const revenueMap: Map<string, number> = new Map();
+
+    // Calculate total revenue for each unique date
+    for (const item of data) {
+      const date: Date = item["x"];
+      const revenue: number = item["y"];
+
+
+      const dateString: string = date.toDateString();
+      // console.log(dateString)
+
+      if (revenueMap.has(dateString)) {
+        const currentRevenue: number = revenueMap.get(dateString)!;
+        revenueMap.set(dateString, currentRevenue + revenue);
+      } else {
+        revenueMap.set(dateString, revenue);
+      }
+    }
+
+    // Get an array of revenue values
+    const revenueValues: number[] = Array.from(revenueMap.values());
+
+    // Find the minimum and maximum revenue values
+    const minY: number = Math.min(...revenueValues);
+    const maxY: number = Math.max(...revenueValues);
+
+    return { min: minY, max: maxY };
+  }
+
+
+
+  const minMaxVal = findMinMaxY(totalTripsChartData);
+
   return (
     <div className="extraSmallMargin">
       {/* <div className="displayFlex">
@@ -521,7 +630,7 @@ const TripAnalytics = () => {
         <CardWithChart
           prop1={CardWithChartProp1}
           prop2={CardWithChartProp2}
-          chart={<Bar columnData={TotalTripsChartData} xTitle="state" yTitle="trips" Chart_name="Trips per state" minMax={minMax(TotalTripsChartData, 'trips')} />}
+          chart={<DateTimeLineChart chartData={totalTripsChartData} props={minMaxVal} chart_name={"No. of Trips"} chartType="Null" />}
         />
       </div>
       <div className=" displayFlex  textLeft flexJustifyBetween widthFull">

@@ -19,6 +19,7 @@ import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
 import LineChartTremor from "../components/Charts/LineChartTremor";
 import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
+import MapWithHeatmapLayer from "../components/HeatMap/HeatMapReact";
 
 
 // this is for testing commit
@@ -689,10 +690,11 @@ const TripAnalytics = () => {
       </div> */}
       {/* <ColoredMap /> */}
       <div className="flex justify-center">
-        <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
+        {/* <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
 
           <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} />
-        </div>
+        </div> */}
+        <MapWithHeatmapLayer/>
         {/* <MapWithHeatmap />   */}
       </div>
       {/* <Histogram />

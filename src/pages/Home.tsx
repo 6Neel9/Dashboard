@@ -715,7 +715,7 @@ const Home = () => {
   
   
   const result = getTotalDriversByDate(driverData, mapOfPeriods.get(selectedDuration));
-  // console.log(result);
+  console.log(result);
   
   
   const TopTenDriversChartData = [
@@ -863,15 +863,18 @@ const Home = () => {
 
   const top10Drivers = getTop10Drivers(allFilteredTrips, driverData);
   const topTenMinMaxVal = minMax(top10Drivers, 'revenue');
-  const totalDriversMinMaxVal = minMax(columnTotalDriver, "drivers");
+  const totalDriversMinMaxVal = minMax(result, "drivers");
+
   // console.log(top10Drivers);
 
   // console.log(calculateTotalRevenue(CalculatedValues.allFilteredTrips))
 
 
-
-const val = {min:0,max:10000};
-console.log(totalTripsChartData)
+//MinMax Val for total drivers
+const minMaxTotalDrivers = findMinMaxY(result);
+console.log(minMaxTotalDrivers)
+// const val = {min:0,max:10000};
+// console.log(totalTripsChartData)
 
 
   return (
@@ -898,8 +901,8 @@ console.log(totalTripsChartData)
         <CardWithChart
           prop1={TotalDrivers}
           prop2={NewDrivers}
-          chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} Chart_name={"Drivers per State"} />}
-          // chart={<DateTimeLineChart chartData={result}  props={val}  chart_name={"Drivers per State"} chartType="Null" />}
+          // chart={<Bar columnData={columnTotalDriver} xTitle="state" yTitle="drivers" minMax={totalDriversMinMaxVal} Chart_name={"Drivers per State"} />}
+          chart={<DateTimeLineChart chartData={result}  props={minMaxTotalDrivers}  chart_name={"Total Drivers"} chartType="Null" />}
         />
       </div>
       <div className=" marginLeftSmall marginTopMoreMedium">

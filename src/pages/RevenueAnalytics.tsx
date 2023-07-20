@@ -447,7 +447,7 @@ const RevenueAnalytics = () => {
   
   
   const result = calculateAverageRevenuePerOperatingHour(CalculatedValues.allFilteredTrips);
-  // console.log(result);
+  console.log(result);
   
   
   
@@ -508,6 +508,15 @@ const RevenueAnalytics = () => {
   }
 
   const revenuePerTripData = calculateAverageRevenuePerTrip(CalculatedValues.allFilteredTrips);
+  const RevenuePerTripProps = {
+    chartData: revenuePerTripData,
+    yName: "revenuePerTrip",
+    chartName: "Revenue Per Trip",
+    xAxisTitle: "Revenue Per Trip",
+    yAxisTitle: "Number Of Drivers",
+
+  }
+  // console.log(revenuePerTripData)
 
 
   return (
@@ -526,7 +535,7 @@ const RevenueAnalytics = () => {
           prop1={RevenuePerTrips}
           prop2={RevenuePerTrips2}
 
-          chart={<HistogramLine histogramProps={revenuePerTripData} />}
+          chart={<HistogramLine histogramProps={RevenuePerTripProps} />}
         />
       </div>
       <div>

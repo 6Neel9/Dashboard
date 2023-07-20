@@ -690,11 +690,11 @@ const TripAnalytics = () => {
       </div> */}
       {/* <ColoredMap /> */}
       <div className="flex justify-center">
-        {/* <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
+        <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
 
           <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} />
-        </div> */}
-        <MapWithHeatmapLayer/>
+        </div>
+        {/* <MapWithHeatmapLayer/> */}
         {/* <MapWithHeatmap />   */}
       </div>
       {/* <Histogram />

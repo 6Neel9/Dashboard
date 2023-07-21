@@ -496,7 +496,7 @@ const RevenueAnalytics = () => {
       // const totalDuration = trips.reduce((acc, trip) => acc + trip.tripDuration, 0);
   
       if (dataset.length > 0) {
-        const revenuePerTrip = totalFare / dataset.length;
+        const revenuePerTrip = totalFare / trips.length;
         revenuePerTripData.push({
           // driverId: parseInt(driverId),
           revenuePerTrip,

@@ -1,16 +1,7 @@
 import  {  useState } from 'react';
-import { MapContainer as Map, TileLayer } from 'react-leaflet';
+import { MapContainer , TileLayer } from 'react-leaflet';
 import HeatmapLayer from './HeatmapLayer';
-// import { map } from 'leaflet';
 import { LatLngTuple } from 'leaflet';
-
-
-// Define the interface for the AddressPoint
-interface AddressPoint {
-    latitude: number;
-    longitude: number;
-    intensity: number;
-  }
 
 const addressPointsData: [number, number, number][] = [
     [40.7128, -74.0060, 0.6], // New York City, NY, USA
@@ -29,15 +20,6 @@ const addressPointsData: [number, number, number][] = [
     [37.7749, -122.4194, 0.3], // San Francisco, CA, USA
   ];
 
-
-  // Convert the data to the AddressPoint format
-const addressPoints: AddressPoint[] = addressPointsData.map(
-    ([latitude, longitude, intensity]) => ({
-      latitude,
-      longitude,
-      intensity,
-    })
-  );
   
 
 
@@ -47,14 +29,14 @@ const HeatmapOnMap = () => {
 
   return (
     <div>
-      <Map center={mapCenter} zoom={2} style={{ height: '500px' }}>
+      <MapContainer center={mapCenter} zoom={2} style={{ height: '500px' }}>
         <HeatmapLayer
           maxZoom={10} // Limit the heatmap intensity at higher zoom levels
           opacity={0.8} // Set the heatmap opacity (adjust as needed)
           radius={20}
           fitBoundsOnLoad
           fitBoundsOnUpdate
-          points={addressPoints}
+          points={addressPointsData}
           longitudeExtractor={(m:any) => m[1]}
           latitudeExtractor={(m:any) => m[0]}
           intensityExtractor={(m:any) => parseFloat(m[2])}
@@ -63,7 +45,7 @@ const HeatmapOnMap = () => {
           url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         />
-      </Map>
+      </MapContainer>
     </div>
   );
 };

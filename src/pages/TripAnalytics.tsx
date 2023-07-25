@@ -695,7 +695,8 @@ const TripAnalytics = () => {
       <div className="flex justify-center">
         <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
 
-          <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} />
+          {/* <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} /> */}
+          {/* <HeatmapOnMap/> */}
         </div>
         {/* <MapWithHeatmapLayer/> */}
         {/* <MapWithHeatmap />   */}
@@ -703,7 +704,7 @@ const TripAnalytics = () => {
       {/* <Histogram />
       <HistogramLine /> */}
       {/* <LineChartTremor chartData={TestChartData()}/> */}
-
+      <HeatmapOnMap/>
     </div>
   );
 };

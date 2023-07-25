@@ -22,6 +22,9 @@ import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
 import MapWithHeatmapLayer from "../components/HeatMap/HeatMapReact";
 
 
+import HeatmapOnMap from "../components/HeatmapLayer/HeatmapOnMap";
+
+
 // this is for testing commit
 
 

@@ -10,8 +10,7 @@ import DisplayContextProvider from "./contexts/DisplayContextProvider";
 import { Provider } from "react-redux";
 import store from "./store/store";
 
-//Added for heatmaplayer
-import 'leaflet/dist/leaflet.css'
+
 
 // Registering Syncfusion license key
 // const key = process.env.SYNCFUSION_LICENSE_KEY

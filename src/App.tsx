@@ -37,6 +37,8 @@ import Loading from './components/Loading';
 import axios from 'axios';
 import { Trip } from './contexts/ContextProvider';
 import { useStateContextDisplay } from './contexts/DisplayContextProvider';
+//Added for heatmaplayer
+import 'leaflet/dist/leaflet.css'
 
 
 

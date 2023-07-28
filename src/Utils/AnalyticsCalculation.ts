@@ -14,6 +14,7 @@ import { periodTypes, tripElements, mapOfPeriods } from "./Constants";
 import { useStateContext } from "../contexts/ContextProvider";
 import { useDispatch } from "react-redux";
 
+
 const AnalyticsCalculation = () => {
   const {
     selectedDuration,

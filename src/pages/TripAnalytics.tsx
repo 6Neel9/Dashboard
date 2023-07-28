@@ -16,13 +16,14 @@ import { filterTripsByPeriod, filteredTrips, calculatePercentChangeUsingValue, f
 import { mapOfPeriods } from "../Utils/Constants";
 import AnalyticsCalculation from "../Utils/AnalyticsCalculation";
 
-import MapWithHeatmap from "../components/HeatMap/MapWithHeatmap";
 import LineChartTremor from "../components/Charts/LineChartTremor";
 import { useStateContextDisplay } from "../contexts/DisplayContextProvider";
-import MapWithHeatmapLayer from "../components/HeatMap/HeatMapReact";
+
 
 
 import HeatmapOnMap from "../components/HeatmapLayer/HeatmapOnMap";
+
+import jDBSCAN from "../components/HeatmapLayer/jDBScan";
 
 
 // this is for testing commit
@@ -458,7 +459,7 @@ const TripAnalytics = () => {
       data.push({ Date: new Date(driver.startTime.split("T")[0]), Revenue: driver.tripFare });
     });
 
-    console.log(data);
+    // console.log(data);
     return data;
   }
   // console.log(TestChartData());
@@ -532,7 +533,7 @@ const TripAnalytics = () => {
   }
   
 
-  console.log(calculateTotalTrips(CalculatedValues.allFilteredTrips))
+  // console.log(calculateTotalTrips(CalculatedValues.allFilteredTrips));
 
   // Datafiller Chartinterface DataPoint 
   interface DataPoint {
@@ -614,6 +615,128 @@ const TripAnalytics = () => {
 
   const minMaxVal = findMinMaxY(totalTripsChartData);
 
+  const resultArr:any[] = []
+
+  function heatmapData (dataset:any[]){
+    dataset.map((data):any=>{
+      resultArr.push([data.startLocation[0], data.startLocation[1], Number(Math.random().toFixed(1))])
+    });
+
+    return resultArr.slice(0,3000);
+  }
+
+  // console.log(heatmapData(tripData));
+
+  function gps_data (dataset:any[]){
+    dataset.map((data):any=>{
+      resultArr.push({location:{
+        accuracy:30,
+        latitude: data.startLocation[0],
+        longitude: data.startLocation[1]
+      }})
+    });
+
+    return resultArr.slice(0,3000);
+  }
+
+  
+
+
+  // console.log()
+  const gpsData = gps_data(tripData);
+  // console.log(gpsData)
+
+  var gps_point_data = [
+    {
+      location: {
+        accuracy: 30,
+        latitude: 55.7858667,
+        longitude: 12.5233995
+      }
+    },
+    {
+      location: {
+        accuracy: 10,
+        latitude: 45.4238667,
+        longitude: 12.5233995
+      }
+    },
+    {
+      location: {
+        accuracy: 5,
+        latitude: 25.3438667,
+        longitude: 11.6533995
+      }
+    }
+  ];
+  //Data generate
+  const dbscanner = jDBSCAN()
+	.eps(0.075)
+	.minPts(1)
+	.distance('HAVERSINE')
+	.data(gpsData);
+  var point_assignment_result = dbscanner();
+  var cluster_centers = dbscanner.getClusters();
+  function countArrayValues(arr: any[]): { [key: string]: number }[] {
+    const countMap: { [key: string]: number } = {};
+    const totalValues = arr.length;
+  
+    arr.forEach((item) => {
+      const key = JSON.stringify(item);
+      countMap[key] = (countMap[key] || 0) + 1;
+    });
+  
+    const result: { [key: string]: number }[] = [];
+    for (const key in countMap) {
+      const parsedKey = JSON.parse(key);
+      result.push({ [parsedKey]: countMap[key] / totalValues });
+    }
+  
+    return result;
+  }
+
+  
+  // Example usage:
+ console.log(point_assignment_result)
+  const resultArrays = countArrayValues(point_assignment_result);
+  // console.log(resultArrays)
+  interface Location {
+    latitude: number;
+    longitude: number;
+  }
+  
+  interface DataObject {
+    intensity: number;
+    location: Location;
+  }
+  
+  function mergeArrays(
+    intensityArray: { [key: string]: number }[],
+    locationArray: { location: Location; dimension: number; parts: number[] }[]
+  ): [Number, Number, number][] {
+    const totalValues = intensityArray.length;
+  
+    const mergedArray: [Number, Number, number][] = [];
+  
+    for (let i = 0; i < Math.min(intensityArray.length, locationArray.length); i++) {
+      const locationObj = locationArray[i].location;
+      // const intensityValue = intensityArray[i][i.toString()] / totalValues;
+      const intensityValue = 0.9
+  
+      mergedArray.push([Number((locationObj.latitude).toFixed(5)), Number(locationObj.longitude.toFixed(5)), intensityValue]);
+    }
+  
+    return mergedArray;
+  }
+
+  const final = mergeArrays(resultArrays,cluster_centers);
+  console.log(final)
+  
+
+
+
+  // console.log(point_assignment_result,cluster_centers)
+
   return (
     <div className="extraSmallMargin">
       {/* <div className="displayFlex">
@@ -692,21 +815,22 @@ const TripAnalytics = () => {
         <ChartCard prop={ChartCardProps2} chart={<Bar />} />
       </div> */}
       {/* <ColoredMap /> */}
-      <div className="flex justify-center">
-        <div className="container mediumContainer smallMargin mediumPadding mainShadow flex justify-center" >
+      {/* <div className="flex justify-center"> */}
+        <div className="container largeContainer smallMargin mediumPadding mainShadow " >
 
           {/* <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} /> */}
-          {/* <HeatmapOnMap/> */}
+          <HeatmapOnMap addressPointsData={final}/>
+
         </div>
-        {/* <MapWithHeatmapLayer/> */}
-        {/* <MapWithHeatmap />   */}
-      </div>
+ 
+
+      {/* </div> */}
       {/* <Histogram />
       <HistogramLine /> */}
       {/* <LineChartTremor chartData={TestChartData()}/> */}
-      <HeatmapOnMap/>
     </div>
   );
 };
 
 export default TripAnalytics;
+

@@ -25,6 +25,7 @@ import HeatmapOnMap from "../components/HeatmapLayer/HeatmapOnMap";
 
 import jDBSCAN from "../components/HeatmapLayer/jDBScan";
 
+import Loading from "../components/Loading";
 
 // this is for testing commit
 
@@ -50,6 +51,7 @@ const TripAnalytics = () => {
     setSelectedState,
     tripData,
     driverData,
+    calculatedData
   } = useStateContext();
 
   const CalculatedValues = AnalyticsCalculation();
@@ -644,7 +646,7 @@ const TripAnalytics = () => {
 
   // console.log()
   const gpsData = gps_data(tripData);
-  // console.log(gpsData)
+  console.log(gpsData)
 
   var gps_point_data = [
     {
@@ -730,7 +732,8 @@ const TripAnalytics = () => {
   }
 
   const final = mergeArrays(resultArrays,cluster_centers);
-  console.log(final)
+  // console.log(final)
+
   
 
 
@@ -820,6 +823,8 @@ const TripAnalytics = () => {
 
           {/* <img src={heatMap} alt="heatMap" style={{ height: "50vh" }} /> */}
           <HeatmapOnMap addressPointsData={final}/>
+          {/* {calculatedData==undefined?<HeatmapOnMap addressPointsData={calculatedData}/>:<Loading/>} */}
+          {/* <HeatmapOnMap addressPointsData={calculatedData}/> */}
 
         </div>
  

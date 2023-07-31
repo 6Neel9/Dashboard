@@ -71,7 +71,8 @@ function App() {
     setTripData,
     tripData,
     driverData,
-    setDriverData
+    setDriverData,
+    setCalculatedData
   } = useStateContext();
 
   const { setCurrentColor,
@@ -88,8 +89,8 @@ function App() {
     try {
       const driversRequest = axios.get("http://localhost:5000/yuja-sm/v1/drivers");
       const tripsRequest = axios.get<Trip[]>("http://localhost:5000/yuja-sm/v1/trips");
-
-      const [driversRes, tripsRes] = await axios.all([driversRequest, tripsRequest]);
+      // const calculatedDataReq = axios.get("http://localhost:5000/yuja-sm/v1/cdata");
+      const [driversRes, tripsRes ] = await axios.all([driversRequest, tripsRequest ]);
 
       // Handle drivers response
       // setDrivers(driversRes.data);
@@ -98,6 +99,7 @@ function App() {
       // Handle trips response
       // setTrips(tripsRes.data);
       setTripData(tripsRes.data);
+      setCalculatedData([])
     } catch (error) {
       // Handle error
       console.error(error);

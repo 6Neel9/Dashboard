@@ -56,7 +56,9 @@ type MyContextType = {
     setTripData: React.Dispatch<React.SetStateAction<Trip[]>>,
     tripData:any[],
     setDriverData: React.Dispatch<React.SetStateAction<any[]>>,
-    driverData: any[]
+    driverData: any[],
+    calculatedData:any[],
+    setCalculatedData:React.Dispatch<React.SetStateAction<any[]>>
 }
 
 const Context = React.createContext<MyContextType>({} as MyContextType)
@@ -76,6 +78,7 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
     const [selectedState, setSelectedState] = useState<string>('All');
     const [tripData, setTripData] = useState<Trip[]>([]);    
     const [driverData, setDriverData] = useState<any[]>([]);
+    const [calculatedData, setCalculatedData] = useState<any[]>([]);
 
 
 
@@ -128,6 +131,8 @@ const ContextProvider: React.FC<Props> = ({ children } ) : JSX.Element => {
                 tripData,
                 setDriverData,
                 driverData,
+                calculatedData,
+                setCalculatedData
             }}
         >
             {children}
